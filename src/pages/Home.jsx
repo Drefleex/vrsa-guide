@@ -138,11 +138,11 @@ function getDailyTip() {
 }
 
 const TR = {
-  PT:{ qa:'Guia do Município', routes:'Roteiros', gallery:'Galeria de VRSA', history:'Sobre VRSA', seeAll:'Ver todos →', noFerry:'Sem mais hoje', ferryTo:'Próximo ferry para Ayamonte', histText:'Fundada em 1776 pelo Marquês de Pombal numa forma de urbanismo pioneira. Vila Real de Santo António é construída em grelha perfeita, com a Praça Marquês de Pombal como coração. Situada na foz do Guadiana, na fronteira com Espanha, é uma das cidades mais singulares do Algarve.',greet:h=>h<12?'Bom dia':h<19?'Boa tarde':'Boa noite',steps:'paradas' },
-  EN:{ qa:'Municipal Guide',   routes:'Itineraries', gallery:'VRSA Gallery', history:'About VRSA', seeAll:'See all →', noFerry:'No more today', ferryTo:'Next ferry to Ayamonte', histText:'Founded in 1776 by the Marquis of Pombal using pioneering urban planning. Vila Real de Santo António is built on a perfect grid, with Praça Marquês de Pombal at its heart. Located at the Guadiana estuary on the Spanish border, it is one of the most unique towns in the Algarve.',greet:h=>h<12?'Good morning':h<19?'Good afternoon':'Good evening',steps:'stops' },
-  ES:{ qa:'Guía Municipal',  routes:'Itinerarios', gallery:'Galería de VRSA', history:'Sobre VRSA', seeAll:'Ver todos →', noFerry:'Sin más hoy', ferryTo:'Próximo ferry a Ayamonte', histText:'Fundada en 1776 por el Marqués de Pombal con un urbanismo pionero. Vila Real de Santo António está construida en cuadrícula perfecta, con la Plaza Marqués de Pombal como corazón. En la desembocadura del Guadiana, en la frontera con España.',greet:h=>h<12?'Buenos días':h<19?'Buenas tardes':'Buenas noches',steps:'paradas' },
-  FR:{ qa:'Guide Municipal',   routes:'Itinéraires', gallery:'Galerie de VRSA', history:'À propos de VRSA', seeAll:'Voir tout →', noFerry:'Plus de ferry aujourd\'hui', ferryTo:'Prochain ferry pour Ayamonte', histText:'Fondée en 1776 par le Marquis de Pombal avec un urbanisme pionnier. Vila Real de Santo António est construite en quadrillage parfait, avec la Praça Marquês de Pombal en son coeur. Située à l\'embouchure du Guadiana, à la frontière espagnole.',greet:h=>h<12?'Bonjour':h<19?'Bonne après-midi':'Bonsoir',steps:'étapes' },
-  DE:{ qa:'Stadtführer',  routes:'Routen',      gallery:'VRSA Galerie', history:'Über VRSA', seeAll:'Alle anzeigen →', noFerry:'Keine Fähre mehr heute', ferryTo:'Nächste Fähre nach Ayamonte', histText:'1776 von Marquis de Pombal mit pionierem Städtebau gegründet. Vila Real de Santo António ist auf einem perfekten Raster gebaut, mit dem Praça Marquês de Pombal als Herzstück. An der Guadiana-Mündung, an der spanischen Grenze.',greet:h=>h<12?'Guten Morgen':h<19?'Guten Tag':'Guten Abend',steps:'Stops' },
+  PT:{ qa:'Guia do Município', routes:'Roteiros', gallery:'Galeria de VRSA', history:'Sobre VRSA', seeAll:'Ver todos →', noFerry:'Sem mais hoje', ferryTo:'Próximo ferry para Ayamonte', histText:'Fundada em 1776 pelo Marquês de Pombal numa forma de urbanismo pioneira. Vila Real de Santo António é construída em grelha perfeita, com a Praça Marquês de Pombal como coração. Situada na foz do Guadiana, na fronteira com Espanha, é uma das cidades mais singulares do Algarve.',greet:h=>h<12?'Bom dia':h<19?'Boa tarde':'Boa noite',steps:'paradas',modeRio:'Rio/Centro',modePraia:'Praia',suggested:'SUGESTÕES PARA SI' },
+  EN:{ qa:'Municipal Guide',   routes:'Itineraries', gallery:'VRSA Gallery', history:'About VRSA', seeAll:'See all →', noFerry:'No more today', ferryTo:'Next ferry to Ayamonte', histText:'Founded in 1776 by the Marquis of Pombal using pioneering urban planning. Vila Real de Santo António is built on a perfect grid, with Praça Marquês de Pombal at its heart. Located at the Guadiana estuary on the Spanish border, it is one of the most unique towns in the Algarve.',greet:h=>h<12?'Good morning':h<19?'Good afternoon':'Good evening',steps:'stops',modeRio:'River/Centre',modePraia:'Beach',suggested:'SUGGESTED FOR YOU' },
+  ES:{ qa:'Guía Municipal',  routes:'Itinerarios', gallery:'Galería de VRSA', history:'Sobre VRSA', seeAll:'Ver todos →', noFerry:'Sin más hoy', ferryTo:'Próximo ferry a Ayamonte', histText:'Fundada en 1776 por el Marqués de Pombal con un urbanismo pionero. Vila Real de Santo António está construida en cuadrícula perfecta, con la Plaza Marqués de Pombal como corazón. En la desembocadura del Guadiana, en la frontera con España.',greet:h=>h<12?'Buenos días':h<19?'Buenas tardes':'Buenas noches',steps:'paradas',modeRio:'Río/Centro',modePraia:'Playa',suggested:'SUGERENCIAS PARA TI' },
+  FR:{ qa:'Guide Municipal',   routes:'Itinéraires', gallery:'Galerie de VRSA', history:'À propos de VRSA', seeAll:'Voir tout →', noFerry:'Plus de ferry aujourd\'hui', ferryTo:'Prochain ferry pour Ayamonte', histText:'Fondée en 1776 par le Marquis de Pombal avec un urbanisme pionnier. Vila Real de Santo António est construite en quadrillage parfait, avec la Praça Marquês de Pombal en son coeur. Située à l\'embouchure du Guadiana, à la frontière espagnole.',greet:h=>h<12?'Bonjour':h<19?'Bonne après-midi':'Bonsoir',steps:'étapes',modeRio:'Rivière/Centre',modePraia:'Plage',suggested:'SUGGESTIONS POUR VOUS' },
+  DE:{ qa:'Stadtführer',  routes:'Routen',      gallery:'VRSA Galerie', history:'Über VRSA', seeAll:'Alle anzeigen →', noFerry:'Keine Fähre mehr heute', ferryTo:'Nächste Fähre nach Ayamonte', histText:'1776 von Marquis de Pombal mit pionierem Städtebau gegründet. Vila Real de Santo António ist auf einem perfekten Raster gebaut, mit dem Praça Marquês de Pombal als Herzstück. An der Guadiana-Mündung, an der spanischen Grenze.',greet:h=>h<12?'Guten Morgen':h<19?'Guten Tag':'Guten Abend',steps:'Stops',modeRio:'Fluss/Zentrum',modePraia:'Strand',suggested:'VORSCHLÄGE FÜR SIE' },
 }
 
 export default function Home({ lang, pins, loading, favs, onNav }) {
@@ -158,6 +158,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
   const [checked, setChecked] = useState(() => {
     try { return JSON.parse(localStorage.getItem('vrsa_routes') || '{}') } catch { return {} }
   })
+  const [mode, setMode] = useState(() => localStorage.getItem('vrsa_mode') || 'rio')
 
   const DAY = {PT:['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ES:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],FR:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],DE:['So','Mo','Di','Mi','Do','Fr','Sa']}
 
@@ -193,6 +194,9 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
 
     return () => clearInterval(iv)
   }, [])
+
+  // Persist mode
+  useEffect(() => { try { localStorage.setItem('vrsa_mode', mode) } catch {} }, [mode])
 
   // Persist route progress
   useEffect(() => {
@@ -333,15 +337,41 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
 
   const restaurantPins = (pins||[]).filter(p => p.cat === 'restaurante').slice(0,4)
 
+  // ── ES timezone helper ────────────────────────────────────────
+  function getEsTime() {
+    const now = new Date()
+    const h = (now.getHours() + 1) % 24
+    const m = now.getMinutes()
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`
+  }
+  function esHint(esTime) {
+    const h = parseInt(esTime.split(':')[0])
+    if (h >= 12 && h < 16) return { PT:`🇪🇸 Ayamonte: ${esTime} — hora de tapas! 🍤`, EN:`🇪🇸 Ayamonte: ${esTime} — tapas time! 🍤`, ES:`🇪🇸 Ayamonte: ${esTime} — ¡tapas! 🍤`, FR:`🇪🇸 Ayamonte: ${esTime} — tapas ! 🍤`, DE:`🇪🇸 Ayamonte: ${esTime} — Tapas! 🍤` }
+    if (h >= 20 && h < 23) return { PT:`🇪🇸 Ayamonte: ${esTime} — hora de jantar! 🍽️`, EN:`🇪🇸 Ayamonte: ${esTime} — dinner time! 🍽️`, ES:`🇪🇸 Ayamonte: ${esTime} — ¡a cenar! 🍽️`, FR:`🇪🇸 Ayamonte: ${esTime} — dîner ! 🍽️`, DE:`🇪🇸 Ayamonte: ${esTime} — Abendessen! 🍽️` }
+    return { PT:`🇪🇸 Ayamonte agora: ${esTime}`, EN:`🇪🇸 Ayamonte now: ${esTime}`, ES:`🇪🇸 Ayamonte ahora: ${esTime}`, FR:`🇪🇸 Ayamonte: ${esTime}`, DE:`🇪🇸 Ayamonte jetzt: ${esTime}` }
+  }
+  const esTime = getEsTime()
+  const esHintText = esHint(esTime)[L]
+
+  // ── Sugestões baseadas no modo ────────────────────────────────
+  const suggestedPins = (() => {
+    if (!pins || pins.length === 0) return []
+    if (mode === 'praia') return pins.filter(p => p.cat === 'praia').slice(0, 5)
+    return pins.filter(p =>
+      p.lat > 37.190 && p.lat < 37.199 && p.lng > -7.420 && p.lng < -7.411 &&
+      ['restaurante','cultura','natureza'].includes(p.cat)
+    ).slice(0, 5)
+  })()
+
   return (
     <>
     <div className="page">
 
       {/* ── Hero ── */}
-      <div className="home-hero">
+      <div className="home-hero" style={mode==='praia' ? {background:'linear-gradient(160deg,#0277BD,#00838F)'} : {}}>
 
         {/* Top row: brasão + name */}
-        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:14 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:10 }}>
           <img
             src="/brasao-vrsa.png"
             alt="Brasão VRSA"
@@ -352,6 +382,18 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
             <div style={{ fontSize:'clamp(18px,5vw,23px)', fontWeight:700, color:'#fff', lineHeight:1.15, letterSpacing:'-.3px' }}>Vila Real de<br/>Santo António</div>
             <div style={{ fontSize:9, color:'rgba(255,255,255,.28)', letterSpacing:1.5, textTransform:'uppercase', marginTop:3 }}>Guia Turístico Oficial</div>
           </div>
+        </div>
+
+        {/* Mode toggle: Rio/Centro ↔ Praia */}
+        <div style={{ display:'flex', gap:2, background:'rgba(0,0,0,.18)', borderRadius:50, padding:3, marginBottom:12 }}>
+          <button
+            onClick={() => setMode('rio')}
+            style={{ flex:1, padding:'6px 0', borderRadius:50, border:'none', background:mode==='rio'?'#fff':'transparent', color:mode==='rio'?'var(--primary)':'rgba(255,255,255,.75)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation' }}
+          >⛵ {t.modeRio}</button>
+          <button
+            onClick={() => setMode('praia')}
+            style={{ flex:1, padding:'6px 0', borderRadius:50, border:'none', background:mode==='praia'?'#fff':'transparent', color:mode==='praia'?'#0277BD':'rgba(255,255,255,.75)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation' }}
+          >🏖️ {t.modePraia}</button>
         </div>
 
         {/* Weather + Ferry strip */}
@@ -407,6 +449,11 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
             </div>
           )}
         </button>
+
+        {/* ES timezone hint */}
+        <div style={{ marginTop:8, display:'flex', alignItems:'center', gap:6, padding:'5px 10px', background:'rgba(0,0,0,.15)', borderRadius:8 }}>
+          <span style={{ fontSize:11, color:'rgba(255,255,255,.6)', fontWeight:600, lineHeight:1.4 }}>{esHintText}</span>
+        </div>
       </div>
 
       <div style={{ padding:'16px 16px 40px' }}>
@@ -436,6 +483,28 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
             </button>
           ))}
         </div>
+
+        {/* ── Sugestões baseadas no modo ── */}
+        {suggestedPins.length > 0 && (
+          <>
+            <div className="sec-label" style={{ marginBottom:10 }}>{t.suggested}</div>
+            <div className="h-scroll" style={{ marginBottom:20 }}>
+              {suggestedPins.map(p => (
+                <a key={p.id}
+                  href={`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`}
+                  target="_blank" rel="noopener noreferrer"
+                  style={{ flexShrink:0, display:'flex', alignItems:'center', gap:10, padding:'10px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:14, boxShadow:'var(--sh-xs)', textDecoration:'none', minWidth:160, maxWidth:200 }}
+                >
+                  <span style={{ fontSize:22, flexShrink:0 }}>{p.emoji}</span>
+                  <div style={{ minWidth:0 }}>
+                    <div style={{ fontSize:12, fontWeight:700, color:'var(--ink)', lineHeight:1.3, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{p.name}</div>
+                    <div style={{ fontSize:10, color:'var(--ink-40)', marginTop:2 }}>📍 Maps</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </>
+        )}
 
         {/* ── 7-day forecast ── */}
         {wx7 && (
@@ -564,7 +633,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
         <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gridTemplateRows:'140px 140px', gap:5, marginBottom:24, borderRadius:16, overflow:'hidden' }}>
           {/* Grande à esquerda */}
           <div onClick={() => setLb(0)} style={{ gridRow:'1 / 3', position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
-            <img src={GALLERY[0].url} alt={GALLERY[0].cap} loading="eager"
+            <img src={GALLERY[0].url} alt={GALLERY[0].cap} loading="eager" decoding="async"
               style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', transition:'transform .3s' }}
               onMouseEnter={e=>e.currentTarget.style.transform='scale(1.04)'}
               onMouseLeave={e=>e.currentTarget.style.transform='scale(1)'}
@@ -576,7 +645,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
           {/* Pequenas à direita */}
           {[1,2].map(i => (
             <div key={i} onClick={() => setLb(i)} style={{ position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
-              <img src={GALLERY[i].url} alt={GALLERY[i].cap} loading="lazy"
+              <img src={GALLERY[i].url} alt={GALLERY[i].cap} loading="lazy" decoding="async"
                 style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', transition:'transform .3s' }}
                 onMouseEnter={e=>e.currentTarget.style.transform='scale(1.06)'}
                 onMouseLeave={e=>e.currentTarget.style.transform='scale(1)'}

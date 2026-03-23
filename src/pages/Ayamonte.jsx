@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 const SPOTS = [
   { id:1, emoji:'🏰', name:'Castillo de Ayamonte', desc:{PT:'Castelo árabe do século XII com vista panorâmica para o Guadiana e VRSA. Vale muito a subida.',EN:'12th century Moorish castle with panoramic views over the Guadiana and VRSA. Well worth the climb.',ES:'Castillo árabe del siglo XII con vistas panorámicas al Guadiana.',FR:'Château maure du XIIe siècle avec vue panoramique sur le Guadiana.',DE:'Maurische Burg aus dem 12. Jahrhundert mit Panoramablick auf den Guadiana.'}, walk:'20 min', free:true, lat:37.2128, lng:-7.4081 },
   { id:2, emoji:'🏛️', name:'Plaza de la Laguna',   desc:{PT:'A praça principal de Ayamonte rodeada de bares de tapas e restaurantes. Perfeita para um café.',EN:'Ayamonte\'s main square surrounded by tapas bars and restaurants. Perfect for a coffee.',ES:'La plaza principal de Ayamonte rodeada de bares de tapas.',FR:'La place principale d\'Ayamonte entourée de bars à tapas.',DE:'Der Hauptplatz von Ayamonte mit Tapas-Bars ringsum.'}, walk:'5 min', free:true, lat:37.2136, lng:-7.4072 },
@@ -29,6 +31,27 @@ export default function Ayamonte({ lang, onNav }) {
   const L = lang || 'PT'
   const t = TR[L] || TR.PT
 
+  const [esTime, setEsTime] = useState(() => {
+    const now = new Date()
+    const h = (now.getHours() + 1) % 24
+    const m = now.getMinutes()
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`
+  })
+
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date()
+      const h = (now.getHours() + 1) % 24
+      const m = now.getMinutes()
+      setEsTime(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`)
+    }
+    const iv = setInterval(tick, 60000)
+    return () => clearInterval(iv)
+  }, [])
+
+  const esH = parseInt(esTime.split(':')[0])
+  const esMoodEmoji = esH >= 12 && esH < 16 ? '🍤' : esH >= 20 && esH < 23 ? '🍽️' : '🕐'
+
   return (
     <div className="page">
       {/* Hero */}
@@ -42,8 +65,19 @@ export default function Ayamonte({ lang, onNav }) {
       </div>
 
       <div style={{ padding:'14px 16px 40px' }}>
-        {/* Ferry warning */}
-        <div style={{ background:'#FEF3C7', border:'1px solid #FDE68A', borderRadius:14, padding:'12px 14px', marginBottom:16, fontSize:12, color:'#92400E', fontWeight:600 }}>{t.tip}</div>
+        {/* Ferry warning + live ES time */}
+        <div style={{ background:'#FEF3C7', border:'1px solid #FDE68A', borderRadius:14, padding:'12px 14px', marginBottom:16 }}>
+          <div style={{ fontSize:12, color:'#92400E', fontWeight:600, marginBottom:8 }}>{t.tip}</div>
+          <div style={{ display:'flex', alignItems:'center', gap:6, paddingTop:8, borderTop:'1px solid #FDE68A' }}>
+            <span style={{ fontSize:16 }}>{esMoodEmoji}</span>
+            <div>
+              <div style={{ fontSize:10, fontWeight:700, color:'#B45309', letterSpacing:.5, textTransform:'uppercase' }}>
+                {L==='EN'?'Spain time now':L==='FR'?'Heure espagnole':L==='DE'?'Spanien jetzt':L==='ES'?'Hora española ahora':'Hora em Espanha agora'}
+              </div>
+              <div style={{ fontSize:20, fontWeight:800, color:'#92400E', lineHeight:1.1, marginTop:2 }}>{esTime}</div>
+            </div>
+          </div>
+        </div>
 
         {/* Essentials */}
         <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.2, textTransform:'uppercase', marginBottom:10 }}>{t.essentials}</div>
