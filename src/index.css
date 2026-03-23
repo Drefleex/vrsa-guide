@@ -1,0 +1,5 @@
+/* Global reset only — design tokens and typography live in App.css */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body, #root { height:100%; overflow:hidden; }
+::-webkit-scrollbar { display:none; }
+* { -ms-overflow-style:none; scrollbar-width:none; }

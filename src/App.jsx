@@ -1,0 +1,176 @@
+import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react'
+import BottomNav    from './components/BottomNav'
+import SplashScreen from './components/SplashScreen'
+import WelcomeModal    from './components/WelcomeModal'
+import InstallBanner  from './components/InstallBanner'
+import { trackEvent } from './pages/Analytics'
+import './App.css'
+
+const Map         = lazy(() => import('./components/Map'))
+const GlobalSearch = lazy(() => import('./components/GlobalSearch'))
+const Home        = lazy(() => import('./pages/Home'))
+const Restaurants = lazy(() => import('./pages/Restaurants'))
+const Events      = lazy(() => import('./pages/Events'))
+const Info        = lazy(() => import('./pages/Info'))
+const Beaches     = lazy(() => import('./pages/Beaches'))
+const Favorites   = lazy(() => import('./pages/Favorites'))
+const Hotels      = lazy(() => import('./pages/Hotels'))
+const Shopping    = lazy(() => import('./pages/Shopping'))
+const Ayamonte    = lazy(() => import('./pages/Ayamonte'))
+const Analytics   = lazy(() => import('./pages/Analytics'))
+const Report      = lazy(() => import('./pages/Report'))
+const Culture     = lazy(() => import('./pages/Culture'))
+const Health      = lazy(() => import('./pages/Health'))
+const Transport   = lazy(() => import('./pages/Transport'))
+
+import { DEFAULT_PINS } from './data/pins'
+
+
+function parseCSV(text) {
+  const rows = text.trim().split('\n').slice(1)
+  return rows.map(row => {
+    const parts = row.split(',')
+    const lat = parseFloat(parts[parts.length-2])
+    const lng = parseFloat(parts[parts.length-1])
+    if (isNaN(lat) || isNaN(lng) || Math.abs(lat) < 10) return null
+    return { id:parseInt(parts[0]), name:parts.slice(1,parts.length-5).join(',').trim(), emoji:parts[parts.length-5]?.trim()||'📍', cat:parts[parts.length-4]?.trim()||'compras', color:parts[parts.length-3]?.trim()||'#0E2B4A', lat, lng }
+  }).filter(Boolean)
+}
+
+function loadFavs() { try { return JSON.parse(localStorage.getItem('vrsa_favs')||'[]') } catch { return [] } }
+function saveFavs(a) { try { localStorage.setItem('vrsa_favs', JSON.stringify(a)) } catch {} }
+function loadTheme() { try { return localStorage.getItem('vrsa_theme')||'light' } catch { return 'light' } }
+
+export default function App() {
+  const [lang, setLang]     = useState(() => { try { return localStorage.getItem('vrsa_lang')||'PT' } catch { return 'PT' } })
+  const [page, setPage]     = useState('splash')
+  const [pins, setPins]     = useState(DEFAULT_PINS)
+  const [loading, setLoading] = useState(false)
+  const [favs, setFavs]       = useState(loadFavs)
+  const [theme, setTheme]     = useState(loadTheme)
+  const [welcome, setWelcome] = useState(() => {
+    try { return !localStorage.getItem('vrsa_welcomed') } catch { return true }
+  })
+  const [search, setSearch]   = useState(false)
+  const [toast, setToast]     = useState(null)
+  const toastTimer            = useRef(null)
+  const [isOnline, setIsOnline] = useState(() => navigator.onLine)
+
+  useEffect(() => {
+    const goOnline  = () => setIsOnline(true)
+    const goOffline = () => setIsOnline(false)
+    window.addEventListener('online',  goOnline)
+    window.addEventListener('offline', goOffline)
+    return () => { window.removeEventListener('online', goOnline); window.removeEventListener('offline', goOffline) }
+  }, [])
+
+  // Apply theme
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('vrsa_theme', theme)
+  }, [theme])
+
+  // Load from Google Sheets
+  useEffect(() => {
+    const SHEET_URL = import.meta.env.VITE_SHEET_URL
+    if (!SHEET_URL) return
+    setLoading(true)
+    fetch(SHEET_URL)
+      .then(r => r.text())
+      .then(csv => { const p = parseCSV(csv); if (p.length > 5) setPins(p) })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [])
+
+  // Persist favs
+  useEffect(() => { saveFavs(favs) }, [favs])
+
+  // Persist lang
+  useEffect(() => { try { localStorage.setItem('vrsa_lang', lang) } catch {} }, [lang])
+
+  // Track language changes
+  useEffect(() => { if (page !== 'splash') trackEvent('lang', lang) }, [lang])
+
+  // Track page views
+  useEffect(() => {
+    if (page !== 'splash') trackEvent('page', page)
+  }, [page])
+
+  const toggleFav = useCallback((id) => {
+    setFavs(prev => {
+      const adding = !prev.includes(id)
+      clearTimeout(toastTimer.current)
+      setToast(adding ? 'added' : 'removed')
+      toastTimer.current = setTimeout(() => setToast(null), 2200)
+      return adding ? [...prev, id] : prev.filter(x => x !== id)
+    })
+  }, [])
+
+  const toggleTheme = useCallback(() => {
+    setTheme(t => t === 'light' ? 'dark' : 'light')
+  }, [])
+
+  if (page === 'splash') {
+    return <SplashScreen lang={lang} setLang={setLang} onStart={() => setPage('home')} />
+  }
+
+  const cp = { lang, favs, toggleFav, onNav: setPage }
+
+  return (
+    <div className="app-shell">
+      <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
+        <div key={page} className="page-enter" style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }}>
+          {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} />}
+          {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} />}
+          {page === 'restaurants' && <Restaurants {...cp} pins={pins} />}
+          {page === 'events'      && <Events      {...cp} />}
+          {page === 'beaches'     && <Beaches     {...cp} />}
+          {page === 'hotels'      && <Hotels      {...cp} pins={pins} />}
+          {page === 'shopping'    && <Shopping    {...cp} pins={pins} />}
+          {page === 'ayamonte'    && <Ayamonte    lang={lang} onNav={setPage} />}
+          {page === 'favorites'   && <Favorites   {...cp} pins={pins} />}
+          {page === 'analytics'   && <Analytics   lang={lang} />}
+          {page === 'culture'     && <Culture     {...cp} />}
+          {page === 'health'      && <Health      lang={lang} onNav={setPage} />}
+          {page === 'transport'   && <Transport   lang={lang} onNav={setPage} />}
+          {page === 'report'      && <Report      lang={lang} />}
+          {page === 'info'        && <Info        lang={lang} />}
+        </div>
+      </Suspense>
+      {/* ── Offline banner ── */}
+      {!isOnline && (
+        <div className="offline-banner" role="status" aria-live="polite">
+          <span>{{PT:'Sem ligação — a mostrar dados guardados',EN:'Offline — showing cached data',ES:'Sin conexión — datos guardados',FR:'Hors ligne — données en cache',DE:'Offline — zwischengespeicherte Daten'}[lang] || 'Offline'}</span>
+        </div>
+      )}
+      {/* ── Fav toast ── */}
+      {toast && (
+        <div style={{
+          position:'fixed', top:'calc(12px + env(safe-area-inset-top,0px))',
+          left:'50%', transform:'translateX(-50%)',
+          zIndex:500, borderRadius:50, padding:'9px 18px',
+          background: toast === 'added' ? 'var(--green)' : 'var(--ink-70)',
+          color:'#fff', fontSize:13, fontWeight:700,
+          whiteSpace:'nowrap', boxShadow:'0 4px 20px rgba(0,0,0,.22)',
+          display:'flex', alignItems:'center', gap:7,
+          animation:'fade-in .18s ease',
+          pointerEvents:'none',
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill={toast==='added'?'#fff':'none'} stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          {{
+            added:   {PT:'Adicionado', EN:'Saved',   ES:'Guardado',  FR:'Sauvegardé', DE:'Gespeichert'},
+            removed: {PT:'Removido',   EN:'Removed', ES:'Eliminado', FR:'Retiré',     DE:'Entfernt'},
+          }[toast][lang] || (toast === 'added' ? 'Adicionado' : 'Removido')}
+        </div>
+      )}
+      <InstallBanner lang={lang} />
+      <WelcomeModal
+        lang={lang}
+        visible={welcome}
+        onClose={() => { localStorage.setItem('vrsa_welcomed','1'); setWelcome(false) }}
+      />
+      {search && <Suspense fallback={null}><GlobalSearch lang={lang} pins={pins} onNav={setPage} onClose={() => setSearch(false)} /></Suspense>}
+      <BottomNav page={page} setPage={setPage} lang={lang} setLang={setLang} theme={theme} toggleTheme={toggleTheme} onSearch={() => setSearch(true)} />
+    </div>
+  )
+}

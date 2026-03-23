@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VRSA Guide — Sem ligação</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(175deg, #002D55 0%, #003B6F 55%, #004F96 100%);
+      font-family: -apple-system, 'Inter', sans-serif;
+      padding: 40px 24px;
+      text-align: center;
+      color: #fff;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.1);
+      border: 1.5px solid rgba(255,255,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .logo img { width: 64px; height: 64px; object-fit: contain; }
+    .city { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.42); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+    h1 { font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 32px;
+    }
+    .icon { font-size: 32px; margin-bottom: 16px; }
+    .msg { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .sub { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.6; margin-bottom: 32px; }
+    button {
+      background: #C9A84C;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: .3px;
+    }
+    .footer { position: fixed; bottom: 24px; font-size: 9px; color: rgba(255,255,255,.16); letter-spacing: 2px; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <img src="/brasao-vrsa.png" alt="Brasão VRSA" onerror="this.style.display='none'" />
+  </div>
+  <div class="city">Câmara Municipal</div>
+  <h1>Vila Real de<br/>Santo António</h1>
+  <div class="badge">VRSA · GUIA TURÍSTICO</div>
+
+  <div class="icon">📡</div>
+  <div class="msg" id="msg">Sem ligação à internet</div>
+  <div class="sub" id="sub">Verifica a tua ligação e tenta novamente.</div>
+  <button id="btn" onclick="location.reload()">Tentar novamente</button>
+
+  <div class="footer">Algarve · Portugal · 2026</div>
+  <script>
+    var lang = (function(){ try { return localStorage.getItem('vrsa_lang') || 'PT' } catch(e) { return 'PT' } })()
+    var i18n = {
+      PT: { msg:'Sem ligação à internet', sub:'Verifica a tua ligação e tenta novamente.', btn:'Tentar novamente' },
+      EN: { msg:'No internet connection',  sub:'Check your connection and try again.',       btn:'Try again' },
+      ES: { msg:'Sin conexión a internet', sub:'Comprueba tu conexión e inténtalo de nuevo.', btn:'Reintentar' },
+      FR: { msg:'Pas de connexion internet', sub:'Vérifiez votre connexion et réessayez.',   btn:'Réessayer' },
+      DE: { msg:'Keine Internetverbindung', sub:'Überprüfe deine Verbindung und versuche es erneut.', btn:'Erneut versuchen' }
+    }
+    var t = i18n[lang] || i18n.PT
+    document.getElementById('msg').textContent = t.msg
+    document.getElementById('sub').textContent = t.sub
+    document.getElementById('btn').textContent = t.btn
+  </script>
+</body>
+</html>

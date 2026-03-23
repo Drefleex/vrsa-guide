@@ -1,0 +1,41 @@
+# Environment variables (API keys — NUNCA commitar)
+.env
+.env.*
+!.env.example
+
+# Claude Code settings (locais)
+.claude/
+
+# Playwright screenshots temporários
+.playwright-mcp/
+
+# Ficheiros temporários
+extracted_csv.txt
+
+# Pasta duplicada do projeto
+vrsa-guide/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

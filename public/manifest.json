@@ -1,0 +1,46 @@
+{
+  "name": "VRSA Guide — Vila Real de Santo António",
+  "short_name": "VRSA Guide",
+  "description": "O teu guia local de bolso para Vila Real de Santo António, Algarve, Portugal.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#06152B",
+  "theme_color": "#06152B",
+  "lang": "pt-PT",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "lifestyle", "tourism"],
+  "screenshots": [
+    { "src": "/screenshot-home.png", "sizes": "390x844", "type": "image/png", "form_factor": "narrow", "label": "Página inicial" },
+    { "src": "/screenshot-map.png",  "sizes": "390x844", "type": "image/png", "form_factor": "narrow", "label": "Mapa interativo" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mapa",
+      "short_name": "Mapa",
+      "description": "Ver mapa de VRSA",
+      "url": "/?page=map",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Restaurantes",
+      "short_name": "Comer",
+      "description": "Restaurantes em VRSA",
+      "url": "/?page=restaurants",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
