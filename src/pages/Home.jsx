@@ -378,6 +378,8 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
           <img
             src="/brasao-vrsa.png"
             alt="Brasão VRSA"
+            loading="eager"
+            decoding="async"
             style={{ width:52, height:58, objectFit:'contain', flexShrink:0 }}
           />
           <div style={{ flex:1, minWidth:0 }}>
@@ -712,6 +714,8 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
           <img
             src={GALLERY[lb].url}
             alt={GALLERY[lb].cap}
+            loading="lazy"
+            decoding="async"
             onClick={e => e.stopPropagation()}
             style={{ maxWidth:'92%', maxHeight:'75vh', objectFit:'contain', borderRadius:12, display:'block' }}
           />
