@@ -3,7 +3,7 @@ import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 
 
 
-const MONUMENTS = [
+export const MONUMENTS = [
   {
     id:1, emoji:'🏛️',
     name:'Praça Marquês de Pombal',
@@ -140,13 +140,13 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
   const [detail, setDetail]   = useState(null)
 
   if (detail) {
-    const isFav = favs.includes(detail.id)
+    const isFav = favs.includes('culture-' + detail.id)
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
         <div style={{ background:getAvatarColor(detail.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-            <button aria-label={t.fav} onClick={() => toggleFav(detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+            <button aria-label={t.fav} onClick={() => toggleFav('culture-' + detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:60, height:60, borderRadius:14, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -162,7 +162,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
           <p style={{ fontSize:14, color:'var(--ink-40)', lineHeight:1.8, marginBottom:20 }}>{detail.desc[L]||detail.desc.PT}</p>
           <div style={{ display:'flex', gap:8 }}>
             <button onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${detail.lat},${detail.lng}`,'_blank')} style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>📍 {t.navigate}</button>
-            <button aria-label={t.fav} onClick={() => toggleFav(detail.id)} style={{ width:50, height:50, background: isFav?'#FEE2E2':'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav?'❤️':'🤍'}</button>
+            <button aria-label={t.fav} onClick={() => toggleFav('culture-' + detail.id)} style={{ width:50, height:50, background: isFav?'#FEE2E2':'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav?'❤️':'🤍'}</button>
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
       <div style={{ flex:1, overflowY:'auto', padding:'14px 16px 40px' }}>
         <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
           {MONUMENTS.map(m => {
-            const isFav = favs.includes(m.id)
+            const isFav = favs.includes('culture-' + m.id)
                     return (
               <div key={m.id} onClick={() => setDetail(m)} className="card" style={{ cursor:'pointer', overflow:'hidden' }}>
                 <div style={{ height:90, background:getAvatarColor(m.name), display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 16px' }}>
@@ -187,7 +187,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
                     <span style={{ fontSize:32 }}>{m.emoji}</span>
                     <span style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.7)', background:'rgba(255,255,255,.15)', padding:'2px 8px', borderRadius:50 }}>{m.tag[L]||m.tag.PT}</span>
                   </div>
-                  <button aria-label={t.fav} onClick={e => { e.stopPropagation(); toggleFav(m.id) }} style={{ width:32, height:32, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:15, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav?'❤️':'🤍'}</button>
+                  <button aria-label={t.fav} onClick={e => { e.stopPropagation(); toggleFav('culture-' + m.id) }} style={{ width:32, height:32, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:15, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav?'❤️':'🤍'}</button>
                 </div>
                 <div style={{ padding:'12px 14px 14px' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>

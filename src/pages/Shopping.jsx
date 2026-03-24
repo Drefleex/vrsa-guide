@@ -80,7 +80,7 @@ export default function Shopping({ lang, pins, favs, toggleFav, onNav }) {
             </div>
           ) : filtered.map((p, i, arr) => {
             const d    = getDetails(p.id)
-            const isFav = favs.includes(p.id)
+            const isFav = favs.includes('pin-' + p.id)
             return (
               <div key={p.id} style={{ display:'flex', alignItems:'center', gap:12, padding:'13px 16px', borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none' }}>
                 <div style={{ width:50, height:50, borderRadius:12, flexShrink:0, background:getAvatarColor(p.name), display:'flex', alignItems:'center', justifyContent:'center' }}>
@@ -93,7 +93,7 @@ export default function Shopping({ lang, pins, favs, toggleFav, onNav }) {
                 </div>
                 <div style={{ display:'flex', flexDirection:'column', gap:4, flexShrink:0 }}>
                   <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination='+p.lat+','+p.lng,'_blank')} style={{ width:34, height:34, background:'var(--blue-lt)', border:'none', borderRadius:9, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🧭</button>
-                  <button aria-label={t.fav} onClick={() => toggleFav(p.id)} style={{ width:34, height:34, background: isFav ? '#FEE2E2' : 'var(--surface)', border:'1px solid var(--border)', borderRadius:9, fontSize:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+                  <button aria-label={t.fav} onClick={() => toggleFav('pin-' + p.id)} style={{ width:34, height:34, background: isFav ? '#FEE2E2' : 'var(--surface)', border:'1px solid var(--border)', borderRadius:9, fontSize:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
                 </div>
               </div>
             )

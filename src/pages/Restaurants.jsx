@@ -193,7 +193,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
   if (detail) {
     const r    = detail
     const rich = getRich(r.id)
-    const isFav = favs.includes(r.id)
+    const isFav = favs.includes('pin-' + r.id)
 
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
@@ -201,7 +201,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
         <div style={{ background:getAvatarColor(r.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-            <button aria-label={t.fav} onClick={() => toggleFav(r.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+            <button aria-label={t.fav} onClick={() => toggleFav('pin-' + r.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:64, height:64, borderRadius:16, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -335,7 +335,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
           <div className="card" style={{ overflow:'hidden' }}>
             {filtered.map((r, i) => {
               const rich  = getRich(r.id)
-              const isFav = favs.includes(r.id)
+              const isFav = favs.includes('pin-' + r.id)
                       return (
                 <div
                   key={r.id}
@@ -376,7 +376,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
                     )}
                     <button
                       aria-label={t.fav}
-                      onClick={e => { e.stopPropagation(); toggleFav(r.id) }}
+                      onClick={e => { e.stopPropagation(); toggleFav('pin-' + r.id) }}
                       style={{ background:'none', border:'none', fontSize:18, cursor:'pointer', padding:4 }}
                     >{isFav ? '❤️' : '🤍'}</button>
                   </div>
