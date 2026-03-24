@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Sun, Users, UtensilsCrossed, Landmark, Sunset, Leaf, MapPin as MapPinIcon } from 'lucide-react'
+import { tr } from '../utils/i18n'
 
 const FERRY = ['09:00','09:45','10:30','11:15','12:00','12:45','13:30','14:15','15:00','15:45','16:30','17:15','18:00','18:45','19:30']
 
@@ -147,17 +148,9 @@ function getDailyTip() {
   return DAILY_TIPS[dayOfYear % DAILY_TIPS.length]
 }
 
-const TR = {
-  PT:{ qa:'Guia do Município', routes:'Roteiros', gallery:'Galeria de VRSA', history:'Sobre VRSA', seeAll:'Ver todos →', noFerry:'Sem mais hoje', ferryTo:'Próximo ferry para Ayamonte', histText:'Fundada em 1776 pelo Marquês de Pombal numa forma de urbanismo pioneira. Vila Real de Santo António é construída em grelha perfeita, com a Praça Marquês de Pombal como coração. Situada na foz do Guadiana, na fronteira com Espanha, é uma das cidades mais singulares do Algarve.',greet:h=>h<12?'Bom dia':h<19?'Boa tarde':'Boa noite',steps:'paradas',modeRio:'Rio/Centro',modePraia:'Praia',suggested:'SUGESTÕES PARA SI' },
-  EN:{ qa:'Municipal Guide',   routes:'Itineraries', gallery:'VRSA Gallery', history:'About VRSA', seeAll:'See all →', noFerry:'No more today', ferryTo:'Next ferry to Ayamonte', histText:'Founded in 1776 by the Marquis of Pombal using pioneering urban planning. Vila Real de Santo António is built on a perfect grid, with Praça Marquês de Pombal at its heart. Located at the Guadiana estuary on the Spanish border, it is one of the most unique towns in the Algarve.',greet:h=>h<12?'Good morning':h<19?'Good afternoon':'Good evening',steps:'stops',modeRio:'River/Centre',modePraia:'Beach',suggested:'SUGGESTED FOR YOU' },
-  ES:{ qa:'Guía Municipal',  routes:'Itinerarios', gallery:'Galería de VRSA', history:'Sobre VRSA', seeAll:'Ver todos →', noFerry:'Sin más hoy', ferryTo:'Próximo ferry a Ayamonte', histText:'Fundada en 1776 por el Marqués de Pombal con un urbanismo pionero. Vila Real de Santo António está construida en cuadrícula perfecta, con la Plaza Marqués de Pombal como corazón. En la desembocadura del Guadiana, en la frontera con España.',greet:h=>h<12?'Buenos días':h<19?'Buenas tardes':'Buenas noches',steps:'paradas',modeRio:'Río/Centro',modePraia:'Playa',suggested:'SUGERENCIAS PARA TI' },
-  FR:{ qa:'Guide Municipal',   routes:'Itinéraires', gallery:'Galerie de VRSA', history:'À propos de VRSA', seeAll:'Voir tout →', noFerry:'Plus de ferry aujourd\'hui', ferryTo:'Prochain ferry pour Ayamonte', histText:'Fondée en 1776 par le Marquis de Pombal avec un urbanisme pionnier. Vila Real de Santo António est construite en quadrillage parfait, avec la Praça Marquês de Pombal en son coeur. Située à l\'embouchure du Guadiana, à la frontière espagnole.',greet:h=>h<12?'Bonjour':h<19?'Bonne après-midi':'Bonsoir',steps:'étapes',modeRio:'Rivière/Centre',modePraia:'Plage',suggested:'SUGGESTIONS POUR VOUS' },
-  DE:{ qa:'Stadtführer',  routes:'Routen',      gallery:'VRSA Galerie', history:'Über VRSA', seeAll:'Alle anzeigen →', noFerry:'Keine Fähre mehr heute', ferryTo:'Nächste Fähre nach Ayamonte', histText:'1776 von Marquis de Pombal mit pionierem Städtebau gegründet. Vila Real de Santo António ist auf einem perfekten Raster gebaut, mit dem Praça Marquês de Pombal als Herzstück. An der Guadiana-Mündung, an der spanischen Grenze.',greet:h=>h<12?'Guten Morgen':h<19?'Guten Tag':'Guten Abend',steps:'Stops',modeRio:'Fluss/Zentrum',modePraia:'Strand',suggested:'VORSCHLÄGE FÜR SIE' },
-}
-
 export default function Home({ lang, pins, loading, favs, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('home', L)
   const h = new Date().getHours()
   const [wx, setWx]       = useState(null)
   const [wx7, setWx7]     = useState(null)

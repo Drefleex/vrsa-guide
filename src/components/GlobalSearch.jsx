@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { EVENTS } from '../pages/Events'
 import { MONUMENTS } from '../pages/Culture'
+import { tr } from '../utils/i18n'
 import {
   Search, Ship, Waves, Calendar, Building2, Globe, Map,
   Plus, Bus, AlertCircle, Landmark, Clock,
@@ -8,13 +9,6 @@ import {
   ShoppingCart, Leaf, Building, Banknote, Fuel, ShoppingBag, MapPin,
 } from 'lucide-react'
 
-const TR = {
-  PT:{ placeholder:'Pesquisar em VRSA...', pages:'Páginas', places:'Locais', noResults:'Sem resultados para', tryAnother:'Tenta outra pesquisa', suggestions:'Sugestões', recents:'Pesquisas recentes' },
-  EN:{ placeholder:'Search in VRSA...', pages:'Pages', places:'Places', noResults:'No results for', tryAnother:'Try another search', suggestions:'Suggestions', recents:'Recent searches' },
-  ES:{ placeholder:'Buscar en VRSA...', pages:'Páginas', places:'Lugares', noResults:'Sin resultados para', tryAnother:'Intenta otra búsqueda', suggestions:'Sugerencias', recents:'Búsquedas recientes' },
-  FR:{ placeholder:'Rechercher à VRSA...', pages:'Pages', places:'Lieux', noResults:'Aucun résultat pour', tryAnother:'Essayez une autre recherche', suggestions:'Suggestions', recents:'Recherches récentes' },
-  DE:{ placeholder:'In VRSA suchen...', pages:'Seiten', places:'Orte', noResults:'Keine Ergebnisse für', tryAnother:'Andere Suche versuchen', suggestions:'Vorschläge', recents:'Letzte Suchen' },
-}
 
 const PAGE_SHORTCUTS = [
   { q:['ferry','barca','fähre'],                           page:'transport', Icon:Ship,         label:{PT:'Ferry para Ayamonte',EN:'Ferry to Ayamonte',ES:'Ferry a Ayamonte',FR:'Ferry pour Ayamonte',DE:'Fähre nach Ayamonte'} },
@@ -78,7 +72,7 @@ const SEC = { fontSize:10, fontWeight:700, color:'var(--ink-20)', letterSpacing:
 
 export default function GlobalSearch({ lang, pins, onNav, onClose }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('globalSearch', L)
   const [q, setQ] = useState('')
   const [debouncedQ, setDebouncedQ] = useState('')
   const [recents, setRecents] = useState(loadRecents)
