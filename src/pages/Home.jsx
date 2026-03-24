@@ -416,7 +416,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
                 <span style={{ fontSize:24, lineHeight:1 }}>{wIcon(wx.weathercode)}</span>
                 <div>
                   <div style={{ fontSize:20, fontWeight:700, color:'#fff', lineHeight:1 }}>{Math.round(wx.temperature_2m)}°C</div>
-                  <div style={{ fontSize:10, color:'rgba(255,255,255,.45)', marginTop:1 }}>{wDesc(wx.weathercode, L)}</div>
+                  <div style={{ fontSize:10, color:'rgba(255,255,255,.8)', marginTop:1 }}>{wDesc(wx.weathercode, L)}</div>
                 </div>
               </>
             ) : wxError ? (
@@ -445,7 +445,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
           <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 14px', flex:1 }}>
             <span style={{ fontSize:20 }}>⛴️</span>
             <div>
-              <div style={{ fontSize:9, color:'rgba(255,255,255,.38)', fontWeight:600, textTransform:'uppercase', letterSpacing:.8 }}>{t.ferry}</div>
+              <div style={{ fontSize:9, color:'rgba(255,255,255,.75)', fontWeight:600, textTransform:'uppercase', letterSpacing:.8 }}>{t.ferry}</div>
               <div style={{ fontSize:16, fontWeight:700, color:'#fff', lineHeight:1, marginTop:1 }}>{ferry || t.noFerry}</div>
             </div>
           </div>
@@ -643,10 +643,8 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
         <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gridTemplateRows:'140px 140px', gap:5, marginBottom:24, borderRadius:16, overflow:'hidden' }}>
           {/* Grande à esquerda */}
           <div onClick={() => setLb(0)} style={{ gridRow:'1 / 3', position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
-            <img src={GALLERY[0].url} alt={GALLERY[0].cap} loading="eager" decoding="async"
-              style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', transition:'transform .3s' }}
-              onMouseEnter={e=>e.currentTarget.style.transform='scale(1.04)'}
-              onMouseLeave={e=>e.currentTarget.style.transform='scale(1)'}
+            <img src={GALLERY[0].url} alt={GALLERY[0].cap} loading="eager" decoding="async" className="gallery-img"
+              style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
             />
             <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent,rgba(0,0,0,.65))', padding:'24px 12px 10px' }}>
               <div style={{ fontSize:11, color:'#fff', fontWeight:700 }}>{GALLERY[0].cap}</div>
@@ -655,10 +653,8 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
           {/* Pequenas à direita */}
           {[1,2].map(i => (
             <div key={i} onClick={() => setLb(i)} style={{ position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
-              <img src={GALLERY[i].url} alt={GALLERY[i].cap} loading="lazy" decoding="async"
-                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', transition:'transform .3s' }}
-                onMouseEnter={e=>e.currentTarget.style.transform='scale(1.06)'}
-                onMouseLeave={e=>e.currentTarget.style.transform='scale(1)'}
+              <img src={GALLERY[i].url} alt={GALLERY[i].cap} loading="lazy" decoding="async" className="gallery-img"
+                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
               />
               {i === 2 && GALLERY.length > 3 && (
                 <div onClick={e => { e.stopPropagation(); setLb(3) }}
