@@ -3,6 +3,9 @@ const STATIC = [
   '/',
   '/index.html',
   '/offline.html',
+  '/brasao-vrsa.png',
+  '/icon-192.png',
+  '/icon-512.png',
 ]
 
 // Install
