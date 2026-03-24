@@ -15,16 +15,26 @@ export default function InstallBanner({ lang }) {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    // Don't show if dismissed before
+    // Se o utilizador já dispensou o banner antes, não faz nada
     if (localStorage.getItem('vrsa_install_dismissed')) return
 
+    // Conta a visita no momento em que o componente é montado
+    const visits = parseInt(localStorage.getItem('vrsa_visits') || '0') + 1
+    localStorage.setItem('vrsa_visits', visits.toString())
+
     const handler = (e) => {
+      // Previne o mini-infobar default do mobile
       e.preventDefault()
+      // Guarda o evento para podermos acionar o prompt mais tarde
       setPrompt(e)
-      // Show after 2nd visit
-      const visits = parseInt(localStorage.getItem('vrsa_visits') || '0') + 1
-      localStorage.setItem('vrsa_visits', visits)
-      if (visits >= 2) setVisible(true)
+
+      // Se for pelo menos a segunda visita, mostra o banner com um atraso de 5 segundos
+      // Isto evita sobreposição com o onboarding inicial e melhora a UX
+      if (visits >= 2) {
+        setTimeout(() => {
+          setVisible(true)
+        }, 5000)
+      }
     }
 
     window.addEventListener('beforeinstallprompt', handler)
