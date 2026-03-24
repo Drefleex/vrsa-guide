@@ -104,7 +104,7 @@ button, input, textarea, select { font-family:var(--font); }
 .badge-gray   { background:var(--surface);    color:var(--ink-40); }
 .badge-navy   { background:var(--primary);    color:#fff; }
 
-.sec-label { font-size:10px; font-weight:700; color:var(--ink-20); letter-spacing:1.4px; text-transform:uppercase; margin-bottom:10px; }
+.sec-label { font-size:11px; font-weight:700; color:var(--ink-20); letter-spacing:1.4px; text-transform:uppercase; margin-bottom:10px; }
 
 .sheet-bg { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:200; display:flex; align-items:flex-end; justify-content:center; animation:fade-in .18s ease; }
 @keyframes fade-in { from{opacity:0} to{opacity:1} }
@@ -125,7 +125,7 @@ button, input, textarea, select { font-family:var(--font); }
 .nav-btn .nav-active-bar { position:absolute; top:0; left:50%; transform:translateX(-50%); height:2.5px; background:var(--primary); border-radius:0 0 4px 4px; transition:width .2s cubic-bezier(.22,.68,0,1.2); }
 .nav-btn .nav-icon { font-size:19px; color:var(--ink-20); transition:color .18s; }
 .nav-btn.active .nav-icon { color:var(--primary); }
-.nav-btn .nav-label { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-20); transition:color .18s; }
+.nav-btn .nav-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-20); transition:color .18s; }
 .nav-btn.active .nav-label { color:var(--primary); font-weight:700; }
 
 /* ── Info page ── */
@@ -154,7 +154,10 @@ button, input, textarea, select { font-family:var(--font); }
 .ferry-tile { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); border-radius:var(--r); padding:10px 14px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; margin-top:12px; }
 .qa-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
 .qa-btn { display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 6px 10px; background:var(--white); border-radius:var(--r); border:1px solid var(--border-lt); cursor:pointer; box-shadow:var(--sh-xs); touch-action:manipulation; transition:border-color .12s; }
-.qa-btn:active { border-color:var(--primary); }
+.qa-btn:active { border-color:var(--primary); transform:scale(0.95); }
+.route-card:active { opacity:.85; transform:scale(0.97); }
+.nav-btn { transition:background .12s, opacity .1s; }
+.nav-btn:active { opacity:.6; }
 .qa-icon-wrap { width:40px; height:40px; border-radius:var(--r-s); display:flex; align-items:center; justify-content:center; font-size:20px; }
 .qa-label { font-size:10px; font-weight:600; color:var(--ink-40); text-align:center; letter-spacing:.1px; line-height:1.2; }
 .h-scroll { display:flex; gap:10px; overflow-x:auto; padding-bottom:2px; }
@@ -176,6 +179,10 @@ button, input, textarea, select { font-family:var(--font); }
 
 .app-shell,.page,.card,.bottom-nav,.nav-btn,.input,.sheet,.badge,.qa-btn {
   transition:background-color .22s ease,border-color .22s ease,color .18s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
 }
 
 /* ── Page transitions ── */

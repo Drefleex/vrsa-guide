@@ -25,6 +25,9 @@ self.addEventListener('activate', e => {
 
 // Fetch — Network First for API, Cache First for assets
 self.addEventListener('fetch', e => {
+  // Ignorar pedidos não-GET (POST, etc.) — Cache API não suporta
+  if (e.request.method !== 'GET') return
+
   const url = new URL(e.request.url)
 
   // API calls: network first, fall back to cache

@@ -98,12 +98,22 @@ const QA = [
 ]
 
 const GALLERY = [
-  { url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75', cap:'Algarve · Portugal' },
-  { url:'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=75', cap:'Rio Guadiana' },
-  { url:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=75', cap:'Costa Algarvia' },
-  { url:'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=75', cap:'Hotel com Vista' },
-  { url:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=75', cap:'Gastronomia Local' },
-  { url:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=75', cap:'Peixe Fresco' },
+  { url:'/images/marina_guadiana.webp',                   cap:'Marina do Guadiana' },
+  { url:'/images/praa_marques_de_pombal.webp',            cap:'Praça Marquês de Pombal' },
+  { url:'/images/praia_vila_real_santo_antonio.webp',     cap:'Praia de VRSA' },
+  { url:'/images/farolvrsa.webp',                         cap:'Farol de VRSA' },
+  { url:'/images/por_do_sol_sapal.webp',                  cap:'Pôr do Sol no Guadiana' },
+  { url:'/images/ponte_guadiana.webp',                    cap:'Ponte Internacional do Guadiana' },
+  { url:'/images/praia_verde1.webp',                      cap:'Praia Verde' },
+  { url:'/images/monte_gordo.webp',                       cap:'Monte Gordo' },
+  { url:'/images/praia_montegordo2.webp',                 cap:'Praia de Monte Gordo' },
+  { url:'/images/castelo_castro_marim.webp',              cap:'Castelo de Castro Marim' },
+  { url:'/images/sapal.webp',                             cap:'Sapal de Castro Marim' },
+  { url:'/images/caminha_dos_3_pauzinhos.webp',           cap:'Caminho dos 3 Pauzinhos' },
+  { url:'/images/marina_guadiana2.webp',                  cap:'Marina · Rio Guadiana' },
+  { url:'/images/estatua_marques_pombal.webp',            cap:'Estátua Marquês de Pombal' },
+  { url:'/images/camara_municipal.webp',                  cap:'Câmara Municipal de VRSA' },
+  { url:'/images/praia_do_cabeo.webp',                    cap:'Praia do Cabeço' },
 ]
 
 const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m }

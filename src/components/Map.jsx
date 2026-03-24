@@ -128,8 +128,8 @@ const PinMarker = memo(function PinMarker({ pin, isSelected, editMode, onSelect,
         </div>
         {editMode && (
           <>
-            <div data-action="delete" style={{ position:'absolute', top:0, right:0, width:20, height:20, borderRadius:'50%', background:'#EF4444', border:'2.5px solid #fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontSize:12, fontWeight:900, cursor:'pointer', boxShadow:'0 2px 8px rgba(0,0,0,.2)', zIndex:5 }}>×</div>
-            <div data-action="editcat" style={{ position:'absolute', top:0, left:0, width:20, height:20, borderRadius:'50%', background:'#1D4ED8', border:'2.5px solid #fff', display:'flex', alignItems:'center', justifyContent:'center', fontSize:9, cursor:'pointer', boxShadow:'0 2px 8px rgba(0,0,0,.2)', zIndex:5 }}>✏️</div>
+            <div data-action="delete" style={{ position:'absolute', top:-4, right:-4, width:28, height:28, borderRadius:'50%', background:'#EF4444', border:'2.5px solid #fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontSize:14, fontWeight:900, cursor:'pointer', boxShadow:'0 2px 8px rgba(0,0,0,.2)', zIndex:5 }}>×</div>
+            <div data-action="editcat" style={{ position:'absolute', top:-4, left:-4, width:28, height:28, borderRadius:'50%', background:'#1D4ED8', border:'2.5px solid #fff', display:'flex', alignItems:'center', justifyContent:'center', fontSize:11, cursor:'pointer', boxShadow:'0 2px 8px rgba(0,0,0,.2)', zIndex:5 }}>✏️</div>
           </>
         )}
       </div>
@@ -160,7 +160,7 @@ function PinCard({ pin, userPos, lang, onClose, onNavigate }) {
       `}</style>
 
       <div style={{
-        background:'#fff',
+        background:'var(--white)',
         borderRadius:20,
         boxShadow:'0 -2px 0 rgba(0,0,0,.04), 0 8px 40px rgba(0,0,0,.18)',
         padding:'16px 18px 18px',
@@ -193,7 +193,7 @@ function PinCard({ pin, userPos, lang, onClose, onNavigate }) {
             </div>
             {/* Name */}
             <div style={{
-              fontSize:16, fontWeight:800, color:'#0F172A',
+              fontSize:16, fontWeight:800, color:'var(--ink)',
               lineHeight:1.25,
               whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis',
             }}>
@@ -203,12 +203,12 @@ function PinCard({ pin, userPos, lang, onClose, onNavigate }) {
             {dist !== null ? (
               <div style={{ display:'flex', alignItems:'center', gap:5, marginTop:4 }}>
                 <span style={{ fontSize:13 }}>🚶</span>
-                <span style={{ fontSize:12, fontWeight:700, color:'#059669' }}>
+                <span style={{ fontSize:12, fontWeight:700, color:'var(--green)' }}>
                   {fmtDist(dist)} · ~{mins} min
                 </span>
               </div>
             ) : (
-              <div style={{ fontSize:11, color:'#94A3B8', marginTop:4 }}>
+              <div style={{ fontSize:11, color:'var(--ink-20)', marginTop:4 }}>
                 {t.noGPS}
               </div>
             )}
@@ -219,9 +219,9 @@ function PinCard({ pin, userPos, lang, onClose, onNavigate }) {
             onClick={onClose}
             style={{
               width:30, height:30, borderRadius:'50%', flexShrink:0,
-              background:'#F1F5F9', border:'none', cursor:'pointer',
+              background:'var(--surface)', border:'none', cursor:'pointer',
               display:'flex', alignItems:'center', justifyContent:'center',
-              fontSize:16, color:'#64748B',
+              fontSize:16, color:'var(--ink-40)',
             }}
           >×</button>
         </div>
@@ -255,14 +255,14 @@ function Sheet({ onClose, children, noPad }) {
       display:'flex', alignItems:'flex-end', justifyContent:'center',
     }}>
       <div style={{
-        width:'100%', maxWidth:430, background:'#fff',
+        width:'100%', maxWidth:430, background:'var(--white)',
         borderRadius:'20px 20px 0 0',
         boxShadow:'0 -4px 40px rgba(0,0,0,.15)',
         maxHeight:'88vh', display:'flex', flexDirection:'column',
         paddingBottom:'env(safe-area-inset-bottom, 0px)',
       }}>
         <div style={{ padding: noPad ? '12px 0 0' : '12px 20px 0', flexShrink:0 }}>
-          <div style={{ width:40, height:4, borderRadius:2, background:'#E5E7EB', margin:'0 auto 14px' }} />
+          <div style={{ width:40, height:4, borderRadius:2, background:'var(--border-lt)', margin:'0 auto 14px' }} />
         </div>
         <div style={{ overflowY:'auto', flex:1, padding: noPad ? '0' : '0 20px 24px' }}>
           {children}
@@ -286,7 +286,7 @@ function CategoryPicker({ lang, pins, onSelect, onShowAll, onEdit }) {
       display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-end',
     }}>
       <div style={{
-        width:'100%', maxWidth:430, background:'#fff',
+        width:'100%', maxWidth:430, background:'var(--white)',
         borderRadius:'20px 20px 0 0',
         maxHeight:'78vh', display:'flex', flexDirection:'column',
         paddingBottom:'env(safe-area-inset-bottom, 0px)',
@@ -294,19 +294,19 @@ function CategoryPicker({ lang, pins, onSelect, onShowAll, onEdit }) {
       }}>
         {/* Header */}
         <div style={{ padding:'12px 20px 0', flexShrink:0 }}>
-          <div style={{ width:40, height:4, borderRadius:2, background:'#E5E7EB', margin:'0 auto 14px' }} />
+          <div style={{ width:40, height:4, borderRadius:2, background:'var(--border-lt)', margin:'0 auto 14px' }} />
           <div style={{ display:'flex', alignItems:'center', marginBottom:12 }}>
             <div style={{ flex:1 }}>
-              <div style={{ fontSize:17, fontWeight:800, color:'#111827' }}>{t.whatLooking}</div>
-              <div style={{ fontSize:12, color:'#9CA3AF', marginTop:2 }}>
+              <div style={{ fontSize:17, fontWeight:800, color:'var(--ink)' }}>{t.whatLooking}</div>
+              <div style={{ fontSize:12, color:'var(--ink-20)', marginTop:2 }}>
                 {lang==='EN' ? `${pins.length} places available` : lang==='ES' ? `${pins.length} lugares disponibles` : `${pins.length} locais disponíveis`}
               </div>
             </div>
             <button onClick={onShowAll} aria-label="Fechar" style={{
               width:32, height:32, borderRadius:'50%',
-              background:'#F3F4F6', border:'none', cursor:'pointer',
+              background:'var(--surface)', border:'none', cursor:'pointer',
               display:'flex', alignItems:'center', justifyContent:'center',
-              fontSize:18, color:'#6B7280', lineHeight:1,
+              fontSize:18, color:'var(--ink-40)', lineHeight:1,
             }}>×</button>
           </div>
         </div>
@@ -318,7 +318,7 @@ function CategoryPicker({ lang, pins, onSelect, onShowAll, onEdit }) {
               display:'flex', alignItems:'center', gap:14,
               width:'100%', padding:'11px 20px',
               background:'none', border:'none',
-              borderBottom: i < arr.length - 1 ? '1px solid #F9FAFB' : 'none',
+              borderBottom: i < arr.length - 1 ? '1px solid var(--bg)' : 'none',
               cursor:'pointer', textAlign:'left',
             }}>
               <div style={{
@@ -326,7 +326,7 @@ function CategoryPicker({ lang, pins, onSelect, onShowAll, onEdit }) {
                 background:c.bg, border:`1.5px solid ${c.color}22`,
                 display:'flex', alignItems:'center', justifyContent:'center', fontSize:19,
               }}>{c.icon}</div>
-              <div style={{ flex:1, fontSize:14, fontWeight:600, color:'#111827' }}>
+              <div style={{ flex:1, fontSize:14, fontWeight:600, color:'var(--ink)' }}>
                 {c.label[lang] || c.label.PT}
               </div>
               <div style={{
@@ -334,19 +334,19 @@ function CategoryPicker({ lang, pins, onSelect, onShowAll, onEdit }) {
                 fontSize:11, fontWeight:700,
                 padding:'2px 9px', borderRadius:50, flexShrink:0,
               }}>{counts[c.k]}</div>
-              <span style={{ color:'#D1D5DB', fontSize:16, flexShrink:0 }}>›</span>
+              <span style={{ color:'var(--border)', fontSize:16, flexShrink:0 }}>›</span>
             </button>
           ))}
         </div>
 
         {/* Footer */}
-        <div style={{ padding:'12px 20px 16px', flexShrink:0, borderTop:'1px solid #F3F4F6', display:'flex', gap:8 }}>
+        <div style={{ padding:'12px 20px 16px', flexShrink:0, borderTop:'1px solid var(--border-lt)', display:'flex', gap:8 }}>
           <button onClick={onShowAll} style={{
-            flex:1, padding:'12px 0', background:'#0A1628', color:'#fff',
+            flex:1, padding:'12px 0', background:'var(--primary)', color:'#fff',
             border:'none', borderRadius:12, fontSize:13, fontWeight:700, cursor:'pointer',
           }}>🗺️ {t.showAll}</button>
           <button onClick={onEdit} style={{
-            padding:'12px 16px', background:'#F3F4F6', color:'#374151',
+            padding:'12px 16px', background:'var(--surface)', color:'var(--ink-70)',
             border:'none', borderRadius:12, fontSize:13, fontWeight:600, cursor:'pointer',
           }}>✏️ {t.edit}</button>
         </div>
@@ -371,7 +371,7 @@ function MapContent({ lang, pins, setPins }) {
   const [newName, setNewName]           = useState('')
   const [editingPin, setEditingPin]     = useState(null)
   const [changes, setChanges]           = useState([])
-  const nextId = useRef(300)
+  const nextId = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
 
   useEffect(() => {
     if (!navigator.geolocation) return
@@ -411,6 +411,13 @@ function MapContent({ lang, pins, setPins }) {
   )
 
   function handleMapClick(e) {
+    // Em modo edição/adição, bloqueia o InfoWindow nativo para não congelar o mapa.
+    // Em modo normal, deixa o Google Maps abrir o InfoWindow livremente (útil para turistas).
+    if (e.detail?.placeId) {
+      if (editMode || addingPin) e.stop?.()
+      return
+    }
+    if (showAdd || editingPin || navDest) return  // sheet já aberto, ignorar clicks duplos
     if (!addingPin) { setSelected(null); return }
     if (!e.detail?.latLng) return
     setPendingPos({ lat:e.detail.latLng.lat, lng:e.detail.latLng.lng })

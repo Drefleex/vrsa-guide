@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
 const BEACHES = [
-  { id:1, name:'Praia de VRSA',            dist:'2.5 km', lat:37.173516, lng:-7.422291, flag:'🟢', note:{PT:'Bandeira Azul · Águas calmas',EN:'Blue Flag · Calm waters',ES:'Bandera Azul · Aguas tranquilas',FR:'Pavillon Bleu · Eaux calmes',DE:'Blaue Flagge · Ruhiges Wasser'}, parking:true, bar:true, wc:true },
-  { id:2, name:'Praia de Monte Gordo',      dist:'5 km',   lat:37.177989, lng:-7.449761, flag:'🟢', note:{PT:'Bandeira Azul · Aldeia piscatória',EN:'Blue Flag · Fishing village nearby',ES:'Bandera Azul · Pueblo pescador',FR:'Pavillon Bleu · Village de pêcheurs',DE:'Blaue Flagge · Fischerort'}, parking:true, bar:true, wc:true },
-  { id:3, name:'Praia da Ponta da Areia',   dist:'3 km',   lat:37.171226, lng:-7.411609, flag:'🟡', note:{PT:'Correntes · Cuidado ao nadar',EN:'Currents · Take care when swimming',ES:'Corrientes · Precaución al nadar',FR:'Courants · Prudence en nageant',DE:'Strömungen · Vorsicht beim Schwimmen'}, parking:true, bar:false, wc:true },
-  { id:4, name:'Praia Verde',               dist:'9 km',   lat:37.170101, lng:-7.49767,  flag:'🟢', note:{PT:'Pinheiros · Tranquila',EN:'Pine forest · Quiet and peaceful',ES:'Pinos · Tranquila',FR:'Forêt de pins · Tranquille',DE:'Kiefernwald · Ruhig'}, parking:true, bar:true, wc:false },
-  { id:5, name:'Praia das Amélias',         dist:'3.5 km', lat:37.170132, lng:-7.407478, flag:'🟢', note:{PT:'Isolada · Natureza selvagem',EN:'Secluded · Wild nature',ES:'Aislada · Naturaleza salvaje',FR:'Isolée · Nature sauvage',DE:'Abgelegen · Wilde Natur'}, parking:false, bar:false, wc:false },
+  { id:1, name:'Praia de VRSA',            photo:'/images/praia_vila_real_santo_antonio.webp', dist:'2.5 km', lat:37.173516, lng:-7.422291, flag:'🟢', note:{PT:'Bandeira Azul · Águas calmas',EN:'Blue Flag · Calm waters',ES:'Bandera Azul · Aguas tranquilas',FR:'Pavillon Bleu · Eaux calmes',DE:'Blaue Flagge · Ruhiges Wasser'}, parking:true, bar:true, wc:true },
+  { id:2, name:'Praia de Monte Gordo',      photo:'/images/praia_montegordo.webp',              dist:'5 km',   lat:37.177989, lng:-7.449761, flag:'🟢', note:{PT:'Bandeira Azul · Aldeia piscatória',EN:'Blue Flag · Fishing village nearby',ES:'Bandera Azul · Pueblo pescador',FR:'Pavillon Bleu · Village de pêcheurs',DE:'Blaue Flagge · Fischerort'}, parking:true, bar:true, wc:true },
+  { id:3, name:'Praia da Ponta da Areia',   photo:'/images/praia_da_lota.webp',                 dist:'3 km',   lat:37.171226, lng:-7.411609, flag:'🟡', note:{PT:'Correntes · Cuidado ao nadar',EN:'Currents · Take care when swimming',ES:'Corrientes · Precaución al nadar',FR:'Courants · Prudence en nageant',DE:'Strömungen · Vorsicht beim Schwimmen'}, parking:true, bar:false, wc:true },
+  { id:4, name:'Praia Verde',               photo:'/images/praia_verde.webp',                   dist:'9 km',   lat:37.170101, lng:-7.49767,  flag:'🟢', note:{PT:'Pinheiros · Tranquila',EN:'Pine forest · Quiet and peaceful',ES:'Pinos · Tranquila',FR:'Forêt de pins · Tranquille',DE:'Kiefernwald · Ruhig'}, parking:true, bar:true, wc:false },
+  { id:5, name:'Praia das Amélias',         photo:'/images/praia_do_cabeo.webp',                dist:'3.5 km', lat:37.170132, lng:-7.407478, flag:'🟢', note:{PT:'Isolada · Natureza selvagem',EN:'Secluded · Wild nature',ES:'Aislada · Naturaleza salvaje',FR:'Isolée · Nature sauvage',DE:'Abgelegen · Wilde Natur'}, parking:false, bar:false, wc:false },
 ]
 
 const FLAG_INFO = [
@@ -138,7 +138,7 @@ export default function Beaches({ lang, onNav }) {
           {BEACHES.map((b,i,arr) => (
             <div key={b.id} style={{ padding:'14px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
               <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:8 }}>
-                <div style={{ width:44, height:44, borderRadius:12, background:'#F0F9FF', display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, flexShrink:0 }}>🏖️</div>
+                <img src={b.photo} alt={b.name} loading="lazy" decoding="async" style={{ width:56, height:56, borderRadius:12, objectFit:'cover', flexShrink:0 }} />
                 <div style={{ flex:1, minWidth:0 }}>
                   <div style={{ fontSize:14, fontWeight:700, color:'var(--ink)' }}>{b.name}</div>
                   <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{b.note[L]} · {b.dist}</div>

@@ -121,6 +121,42 @@ const EVENTS = [
     desc:{PT:'O tradicional Mercado de Natal na Praça Pombal com artesanato, presentes regionais, iguarias natalícias e pista de gelo para crianças. Uma das melhores épocas do ano para visitar VRSA.',EN:'The traditional Christmas Market at Praça Pombal with crafts, regional gifts, Christmas delicacies and an ice rink for children. One of the best times of year to visit VRSA.',ES:'El tradicional Mercado de Navidad en la Plaza Pombal con artesanía, regalos regionales y pista de hielo para niños.',FR:'Le marché de Noël traditionnel à la Praça Pombal avec artisanat, cadeaux régionaux et patinoire pour enfants.',DE:'Der traditionelle Weihnachtsmarkt am Praça Pombal mit Kunsthandwerk, regionalen Geschenken und Eisbahn für Kinder.'},
     lat:37.19437, lng:-7.41558
   },
+  // ── Eventos confirmados cm-vrsa.pt ───────────────────────────
+  {
+    id:18, emoji:'🎭', color:'#92400E', month:5, day:9,
+    title:{PT:'Festival Histórico Setecentista',EN:'18th Century Historical Festival',ES:'Festival Histórico del Siglo XVIII',FR:'Festival Historique du XVIIIe Siècle',DE:'Historisches Festival des 18. Jahrhunderts'},
+    time:'18:00', loc:'Centro Histórico', price:'🆓',
+    desc:{PT:'Reconstituição histórica da fundação da cidade em 1776. Trajes do século XVIII, artesanato, música de época, teatro de rua e gastronomia histórica. Um dos maiores eventos culturais do Algarve — regressa sempre em maio.',EN:'Historical re-enactment of the city\'s 1776 founding. 18th century costumes, crafts, period music, street theatre and historical cuisine. One of the biggest cultural events in the Algarve — always returns in May.',ES:'Recreación de la fundación de la ciudad en 1776: trajes del siglo XVIII, artesanía, teatro y gastronomía histórica.',FR:'Reconstitution de la fondation de la ville en 1776: costumes, artisanat, théâtre de rue et gastronomie historique.',DE:'Historische Nachstellung der Stadtgründung 1776 mit Kostümen des 18. Jh., Handwerk, Theater und historischer Küche.'},
+    lat:37.194583, lng:-7.41551
+  },
+  {
+    id:19, emoji:'🕍', color:'#1565C0', month:5, day:13,
+    title:{PT:'Procissão Histórica — Fundação de VRSA',EN:'Historical Procession — VRSA Founding Day',ES:'Procesión Histórica — Fundación de VRSA',FR:'Procession Historique — Fondation de VRSA',DE:'Historische Prozession — Gründungstag von VRSA'},
+    time:'17:00', loc:'Centro Histórico', price:'🆓',
+    desc:{PT:'Procissão etnográfica a assinalar o aniversário da fundação de Vila Real de Santo António. Trajes tradicionais, música folclórica e celebração da identidade pombalina única desta cidade.',EN:'Ethnographic procession marking the anniversary of Vila Real de Santo António\'s founding. Traditional costumes, folk music and celebration of the city\'s unique Pombaline identity.',ES:'Procesión etnográfica con trajes tradicionales y música folclórica para celebrar el aniversario de la fundación de la ciudad.',FR:'Procession ethnographique avec costumes traditionnels et musique folklorique pour célébrer l\'anniversaire de la fondation.',DE:'Ethnografische Prozession mit Trachten und Volksmusik zum Jahrestag der Stadtgründung.'},
+    lat:37.194583, lng:-7.41551
+  },
+  {
+    id:20, emoji:'🧂', color:'#0277BD', month:3, day:4,
+    title:{PT:'Exposição "Histórias de Sal"',EN:'Exhibition "Stories of Salt"',ES:'Exposición "Historias de Sal"',FR:'Exposition "Histoires de Sel"',DE:'Ausstellung "Geschichten des Salzes"'},
+    time:'10:00–18:00', loc:'Centro Cultural António Aleixo', price:'🆓',
+    desc:{PT:'Exposição sobre a história das salinas do Guadiana e o seu papel na economia e identidade de VRSA. Fotografias históricas, objetos e documentos originais sobre o "ouro branco" do Algarve.',EN:'Exhibition on the history of the Guadiana salt pans and their role in VRSA\'s economy and identity. Historical photographs, objects and original documents about the Algarve\'s "white gold".',ES:'Exposición sobre la historia de las salinas del Guadiana con fotografías históricas y documentos sobre el "oro blanco" del Algarve.',FR:'Exposition sur l\'histoire des marais salants du Guadiana avec photos historiques sur l\'"or blanc" de l\'Algarve.',DE:'Ausstellung zur Geschichte der Guadiana-Salinen mit historischen Fotos und Dokumenten über das "weiße Gold" des Algarve.'},
+    lat:37.194583, lng:-7.41551
+  },
+  {
+    id:21, emoji:'👑', color:'#7C3AED', month:1, day:4,
+    title:{PT:'Reis de Ayamonte chegam a VRSA',EN:'Kings from Ayamonte Arrive in VRSA',ES:'Los Reyes de Ayamonte llegan a VRSA',FR:'Les Rois d\'Ayamonte arrivent à VRSA',DE:'Könige aus Ayamonte kommen nach VRSA'},
+    time:'11:30', loc:'Cais do Ferry', price:'🆓',
+    desc:{PT:'Os Três Reis Magos de Ayamonte chegam de barco pelo Rio Guadiana para entregar presentes às crianças de VRSA. Uma tradição única de amizade luso-espanhola que une as duas margens do rio.',EN:'The Three Wise Men from Ayamonte arrive by boat across the Guadiana to deliver gifts to VRSA\'s children. A unique tradition of Luso-Spanish friendship uniting both riverbanks.',ES:'Los Tres Reyes Magos de Ayamonte llegan en barco por el Guadiana para entregar regalos a los niños. Una tradición única de amistad hispano-portuguesa.',FR:'Les Trois Rois Mages d\'Ayamonte arrivent en bateau sur le Guadiana pour offrir des cadeaux aux enfants. Une tradition unique d\'amitié luso-espagnole.',DE:'Die Heiligen Drei Könige kommen per Boot aus Ayamonte über den Guadiana, um Geschenke zu verteilen. Eine einzigartige luso-spanische Freundschaftstradition.'},
+    lat:37.196981, lng:-7.413997
+  },
+  {
+    id:22, emoji:'🏃', color:'#059669', month:12, day:6,
+    title:{PT:'Corrida São Silvestre de VRSA',EN:'São Silvestre Race VRSA',ES:'Carrera San Silvestre de VRSA',FR:'Course São Silvestre de VRSA',DE:'São Silvestre Lauf VRSA'},
+    time:'16:45', loc:'Praça Marquês de Pombal', price:'🆓',
+    desc:{PT:'Corrida pedestre de São Silvestre pelas ruas históricas de VRSA. Categorias para todas as idades — uma das tradições desportivas mais queridas da cidade. Inscrição gratuita no local.',EN:'São Silvestre foot race through the historic streets of VRSA. Categories for all ages — one of the city\'s most beloved sporting traditions. Free registration on-site.',ES:'Carrera popular de San Silvestre por las calles históricas. Categorías para todas las edades. Inscripción gratuita en el lugar.',FR:'Course pédestre São Silvestre dans les rues historiques pour tous les âges. Inscription gratuite sur place.',DE:'São Silvestre Volkslauf durch die historischen Straßen für alle Altersgruppen. Kostenlose Anmeldung vor Ort.'},
+    lat:37.19437, lng:-7.41558
+  },
 ]
 
 const MONTHS = {

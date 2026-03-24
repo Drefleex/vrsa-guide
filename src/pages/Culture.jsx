@@ -10,7 +10,7 @@ const MONUMENTS = [
     id:1, emoji:'🏛️',
     name:'Praça Marquês de Pombal',
     lat:37.19437, lng:-7.41558,
-    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Vila%20Real%20de%20Sto.%20Antonio%20(Portugal)%20(40130207580).jpg',
+    photo:'/images/praa_marques_de_pombal.webp',
     year:'1776',
     tag:{PT:'Praça · Pombalino',EN:'Square · Pombaline',ES:'Plaza · Pombalino',FR:'Place · Pombalin',DE:'Platz · Pombalinisch'},
     desc:{
@@ -25,7 +25,7 @@ const MONUMENTS = [
     id:2, emoji:'🔦',
     name:'Farol de Vila Real',
     lat:37.187156, lng:-7.416435,
-    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Farol%20de%20Vila%20Real%20de%20Santo%20António%20-%20Portugal%20(49230811707).jpg',
+    photo:'/images/farolvrsa.webp',
     year:'1923',
     tag:{PT:'Farol · Património',EN:'Lighthouse · Heritage',ES:'Faro · Patrimonio',FR:'Phare · Patrimoine',DE:'Leuchtturm · Erbe'},
     desc:{
@@ -40,7 +40,7 @@ const MONUMENTS = [
     id:3, emoji:'⛪',
     name:'Igreja Matriz de VRSA',
     lat:37.195027, lng:-7.415957,
-    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Vila%20Real%20de%20Santo%20António%20-%20Portugal%20(48131457857).jpg',
+    photo:'/images/igreja_nossa_senhora.webp',
     year:'1783',
     tag:{PT:'Igreja · Barroco',EN:'Church · Baroque',ES:'Iglesia · Barroco',FR:'Église · Baroque',DE:'Kirche · Barock'},
     desc:{
@@ -70,7 +70,7 @@ const MONUMENTS = [
     id:5, emoji:'🌊',
     name:'Esporão de VRSA',
     lat:37.16507, lng:-7.400837,
-    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Miradouro%20do%20Guadiana%20-%20Portugal%20(46281328364).jpg',
+    photo:'/images/por_do_sol_sapal.webp',
     year:'Séc. XIX',
     tag:{PT:'Monumento · Natureza',EN:'Monument · Nature',ES:'Monumento · Naturaleza',FR:'Monument · Nature',DE:'Denkmal · Natur'},
     desc:{
@@ -115,7 +115,7 @@ const MONUMENTS = [
     id:8, emoji:'🦩',
     name:'Reserva Natural do Sapal',
     lat:37.21028, lng:-7.458453,
-    photo:'https://commons.wikimedia.org/wiki/Special:FilePath/Flamingo,%20Greater%20Flamingo%20(53164212516).jpg',
+    photo:'/images/sapal.webp',
     year:'1978',
     tag:{PT:'Natureza · Reserva',EN:'Nature · Reserve',ES:'Naturaleza · Reserva',FR:'Nature · Réserve',DE:'Natur · Reservat'},
     desc:{
