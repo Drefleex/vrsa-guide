@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 import { RICH } from '../data/restaurants'
+import { Share } from 'lucide-react'
 
 function getRich(id) {
   const base = RICH[id] || { rating:4.0, reviews:Math.floor(30+Math.random()*200), price:'€', hours:'12:00–22:00', phone:null, desc:{PT:'Restaurante local em VRSA.',EN:'Local restaurant in VRSA.',ES:'Restaurante local en VRSA.',FR:'Restaurant local à VRSA.',DE:'Lokales Restaurant em VRSA.'} }
@@ -114,6 +115,19 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
     return list
   }, [foodPins, filter, search])
 
+  const handleShare = async (itemTitle) => {
+    const shareData = {
+      title: 'VRSA Guide - ' + itemTitle,
+      text: `Vê este local fantástico no VRSA Guide: ${itemTitle}!`,
+      url: window.location.href
+    }
+    if (navigator.share) {
+      try { await navigator.share(shareData) } catch {}
+    } else {
+      navigator.clipboard?.writeText(`${shareData.text} ${shareData.url}`)
+    }
+  }
+
   // ── Detail view ──────────────────────────────────────────────
   if (detail) {
     const r    = detail
@@ -126,7 +140,10 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
         <div style={{ background:getAvatarColor(r.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-            <button aria-label={t.fav} onClick={() => toggleFav('pin-' + r.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+            <div style={{ display:'flex', gap:8 }}>
+              <button onClick={() => handleShare(r.name)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}><Share size={18} color="#fff" /></button>
+              <button aria-label={t.fav} onClick={() => toggleFav('pin-' + r.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+            </div>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:64, height:64, borderRadius:16, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -198,9 +215,9 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
               </a>
             )}
             <button
-              onClick={() => { if (navigator.share) { navigator.share({title:r.name, text:r.name+' — VRSA Guide', url:window.location.href}) } }}
-              style={{ width:50, height:50, background:'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}
-            >↗️</button>
+              onClick={() => handleShare(r.name)}
+              style={{ width:50, height:50, background:'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}
+            ><Share size={20} color="var(--ink)" /></button>
           </div>
         </div>
       </div>

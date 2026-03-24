@@ -2,11 +2,25 @@ import { useState } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 import { MONUMENTS } from '../data/culture'
+import { Share } from 'lucide-react'
 
 export default function Culture({ lang, favs, toggleFav, onNav }) {
   const L = lang || 'PT'
   const t = tr('culture', L)
   const [detail, setDetail]   = useState(null)
+
+  const handleShare = async (itemTitle) => {
+    const shareData = {
+      title: 'VRSA Guide - ' + itemTitle,
+      text: `Descobre este monumento incrível no VRSA Guide: ${itemTitle}!`,
+      url: window.location.href
+    }
+    if (navigator.share) {
+      try { await navigator.share(shareData) } catch {}
+    } else {
+      navigator.clipboard?.writeText(`${shareData.text} ${shareData.url}`)
+    }
+  }
 
   if (detail) {
     const isFav = favs.includes('culture-' + detail.id)
@@ -15,7 +29,10 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
         <div style={{ background:getAvatarColor(detail.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-            <button aria-label={t.fav} onClick={() => toggleFav('culture-' + detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+            <div style={{ display:'flex', gap:8 }}>
+              <button onClick={() => handleShare(detail.name)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}><Share size={18} color="#fff" /></button>
+              <button aria-label={t.fav} onClick={() => toggleFav('culture-' + detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+            </div>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:60, height:60, borderRadius:14, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -31,6 +48,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
           <p style={{ fontSize:14, color:'var(--ink-40)', lineHeight:1.8, marginBottom:20 }}>{detail.desc[L]||detail.desc.PT}</p>
           <div style={{ display:'flex', gap:8 }}>
             <button onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${detail.lat},${detail.lng}`,'_blank')} style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>📍 {t.navigate}</button>
+            <button onClick={() => handleShare(detail.name)} style={{ width:50, height:50, background:'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}><Share size={20} color="var(--ink)" /></button>
             <button aria-label={t.fav} onClick={() => toggleFav('culture-' + detail.id)} style={{ width:50, height:50, background: isFav?'#FEE2E2':'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav?'❤️':'🤍'}</button>
           </div>
         </div>

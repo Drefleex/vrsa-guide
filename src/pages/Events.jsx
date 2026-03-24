@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { tr } from '../utils/i18n'
 import { EVENTS } from '../data/events'
+import { Share } from 'lucide-react'
 
 const MONTHS = {
   PT:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
@@ -74,6 +75,19 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
   function isPast(ev)   { return ev.month < nowMon || (ev.month === nowMon && ev.day < nowDay) }
   function isUpcoming(ev){ return !isToday(ev) && !isPast(ev) }
 
+  const handleShare = async (itemTitle) => {
+    const shareData = {
+      title: 'VRSA Guide - ' + itemTitle,
+      text: `Vê este evento fantástico no VRSA Guide: ${itemTitle}!`,
+      url: window.location.href
+    }
+    if (navigator.share) {
+      try { await navigator.share(shareData) } catch {}
+    } else {
+      navigator.clipboard?.writeText(`${shareData.text} ${shareData.url}`)
+    }
+  }
+
   const sorted = [...EVENTS].sort((a,b) => a.month !== b.month ? a.month - b.month : a.day - b.day)
   const featured = sorted.find(e => isUpcoming(e) || isToday(e)) || sorted[0]
 
@@ -91,6 +105,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
         {/* Hero */}
         <div style={{ height:200, background:`linear-gradient(135deg,${ev.color},${ev.color}cc)`, display:'flex', flexDirection:'column', justifyContent:'flex-end', padding:'20px', position:'relative', flexShrink:0 }}>
           <button onClick={() => setDetail(null)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', left:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
+          <button onClick={() => handleShare(ev.title[L] || ev.title.PT)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', right:60, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}><Share size={18} color="#fff" /></button>
           <button onClick={() => toggleFav('event-' + ev.id)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', right:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           <span style={{ fontSize:52, marginBottom:8 }}>{ev.emoji}</span>
           <div style={{ fontSize:20, fontWeight:800, color:'#fff', lineHeight:1.2 }}>{ev.title[L] || ev.title.PT}</div>
@@ -130,6 +145,10 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
               onClick={() => { const c = ev.lat+','+ev.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c,'_blank') }}
               style={{ flex:1, padding:'13px 0', background:ev.color, color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}
             >📍 {t.navigate}</button>
+            <button
+              onClick={() => handleShare(ev.title[L] || ev.title.PT)}
+              style={{ width:50, height:50, background:'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}
+            ><Share size={20} color="var(--ink)" /></button>
             <button
               onClick={() => toggleFav('event-' + ev.id)}
               style={{ width:50, height:50, background: isFav ? '#FEE2E2' : 'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}
