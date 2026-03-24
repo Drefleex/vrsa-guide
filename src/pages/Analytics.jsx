@@ -119,7 +119,7 @@ export default function Analytics({ lang }) {
 
   return (
     <div className="page">
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 18px', paddingTop:'calc(18px + env(safe-area-inset-top,0px))' }}>
+      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
         <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between' }}>
           <div>
             <div style={{ fontSize:22, fontWeight:800, color:'#fff' }}>{t.title}</div>

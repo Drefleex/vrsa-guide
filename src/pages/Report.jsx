@@ -122,7 +122,7 @@ export default function Report({ lang }) {
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
       {/* Header */}
-      <div style={{ background:'var(--primary)', padding:'16px 18px 18px', paddingTop:'calc(16px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+      <div style={{ background:'var(--primary)', padding:'16px 18px 18px', paddingTop:'calc(60px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
         <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:2 }}>
           <img src="/brasao-vrsa.png" alt="" style={{ width:28, height:28, objectFit:'contain', flexShrink:0 }} />
           <div>

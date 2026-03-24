@@ -38,7 +38,7 @@ export default function Transport({ lang, onNav }) {
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
       {/* Hero */}
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(18px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff', marginBottom:4 }}>{t.title}</div>
         <div style={{ fontSize:12, color:'rgba(255,255,255,.38)', marginBottom:14 }}>{t.sub}</div>
 

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react'
 import BottomNav    from './components/BottomNav'
+import TopBar      from './components/TopBar'
 import SplashScreen from './components/SplashScreen'
 import WelcomeModal    from './components/WelcomeModal'
 import InstallBanner  from './components/InstallBanner'
@@ -118,8 +119,9 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} />}
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
-        <div key={page} className="page-enter" style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }}>
+        <div key={page} className="page-enter" style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden', }}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} />}
           {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} />}
           {page === 'restaurants' && <Restaurants {...cp} pins={pins} />}
@@ -146,7 +148,7 @@ export default function App() {
       {/* ── Fav toast ── */}
       {toast && (
         <div style={{
-          position:'fixed', top:'calc(12px + env(safe-area-inset-top,0px))',
+          position:'fixed', top:'calc(56px + env(safe-area-inset-top,0px))',
           left:'50%', transform:'translateX(-50%)',
           zIndex:500, borderRadius:50, padding:'9px 18px',
           background: toast === 'added' ? 'var(--green)' : 'var(--ink-70)',
@@ -170,7 +172,7 @@ export default function App() {
         onClose={() => { localStorage.setItem('vrsa_welcomed','1'); setWelcome(false) }}
       />
       {search && <Suspense fallback={null}><GlobalSearch lang={lang} pins={pins} onNav={setPage} onClose={() => setSearch(false)} /></Suspense>}
-      <BottomNav page={page} setPage={setPage} lang={lang} setLang={setLang} theme={theme} toggleTheme={toggleTheme} onSearch={() => setSearch(true)} />
+      <BottomNav page={page} setPage={setPage} lang={lang} theme={theme} toggleTheme={toggleTheme} />
     </div>
   )
 }

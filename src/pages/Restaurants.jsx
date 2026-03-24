@@ -197,7 +197,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
         {/* Avatar header */}
-        <div style={{ background:getAvatarColor(r.name), padding:'20px 18px 24px', paddingTop:'calc(20px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+        <div style={{ background:getAvatarColor(r.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
             <div style={{ display:'flex', gap:8 }}>
@@ -289,7 +289,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
       {/* Header */}
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(18px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-.3px', marginBottom:12 }}>{t.title}</div>
         {/* Search */}
         <div style={{ position:'relative', marginBottom:12 }}>

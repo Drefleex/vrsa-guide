@@ -254,8 +254,8 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
         {/* Hero */}
         <div style={{ height:200, background:`linear-gradient(135deg,${ev.color},${ev.color}cc)`, display:'flex', flexDirection:'column', justifyContent:'flex-end', padding:'20px', position:'relative', flexShrink:0 }}>
-          <button onClick={() => setDetail(null)} style={{ position:'absolute', top:'calc(16px + env(safe-area-inset-top,0px))', left:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-          <button onClick={() => toggleFav(ev.id)} style={{ position:'absolute', top:'calc(16px + env(safe-area-inset-top,0px))', right:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+          <button onClick={() => setDetail(null)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', left:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
+          <button onClick={() => toggleFav(ev.id)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', right:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           <span style={{ fontSize:52, marginBottom:8 }}>{ev.emoji}</span>
           <div style={{ fontSize:20, fontWeight:800, color:'#fff', lineHeight:1.2 }}>{ev.title[L] || ev.title.PT}</div>
         </div>
@@ -308,7 +308,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
   return (
     <div className="page">
       {/* Header */}
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 18px', paddingTop:'calc(18px + env(safe-area-inset-top,0px))' }}>
+      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-.3px' }}>{t.title}</div>
         <div style={{ fontSize:12, color:'rgba(255,255,255,.38)', marginTop:2 }}>Vila Real de Santo António · Algarve</div>
       </div>

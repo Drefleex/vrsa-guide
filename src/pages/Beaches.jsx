@@ -62,7 +62,7 @@ export default function Beaches({ lang, onNav }) {
   return (
     <div className="page">
       {/* Header */}
-      <div style={{ background:'linear-gradient(160deg,#062040 0%,#0B3060 100%)', padding:'18px 20px 18px', paddingTop:'calc(18px + env(safe-area-inset-top,0px))' }}>
+      <div style={{ background:'linear-gradient(160deg,#062040 0%,#0B3060 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-.3px' }}>{t.title}</div>
         <div style={{ fontSize:12, color:'rgba(255,255,255,.38)', marginTop:2 }}>{t.sub}</div>
       </div>

@@ -34,7 +34,7 @@ export default function Health({ lang, onNav }) {
 
   return (
     <div className="page">
-      <div style={{ background:'linear-gradient(160deg,#065F46 0%,#047857 100%)', padding:'18px 20px 18px', paddingTop:'calc(18px + env(safe-area-inset-top,0px))' }}>
+      <div style={{ background:'linear-gradient(160deg,#065F46 0%,#047857 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff' }}>{t.title}</div>
         <div style={{ fontSize:12, color:'rgba(255,255,255,.4)', marginTop:2 }}>Vila Real de Santo António</div>
       </div>

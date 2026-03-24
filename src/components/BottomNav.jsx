@@ -12,8 +12,6 @@ const NAV_SVG = {
   calendar:<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
   info:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>,
   more:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>,
-  search:  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-  globe:   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
 }
 
 const TABS = [
@@ -38,29 +36,12 @@ const MORE_ITEMS = [
   { k:'analytics', Icon:BarChart2,   color:'#1D4ED8', bg:'#EFF6FF', l:{PT:'Analytics',  EN:'Analytics', ES:'Analytics', FR:'Analytics', DE:'Analytics' } },
 ]
 
-const LANGS = ['PT','EN','ES','FR','DE']
-
-export default function BottomNav({ page, setPage, lang, setLang, theme, toggleTheme, onSearch }) {
-  const [langOpen, setLangOpen] = useState(false)
+export default function BottomNav({ page, setPage, lang, theme, toggleTheme }) {
   const [moreOpen, setMoreOpen] = useState(false)
   const isMorePage = MORE_ITEMS.some(m => m.k === page)
 
   return (
     <>
-      {/* ── Language picker ── */}
-      {langOpen && (
-        <>
-          <div onClick={() => setLangOpen(false)} style={{ position:'fixed', inset:0, zIndex:90 }} />
-          <div style={{ position:'fixed', bottom:'calc(58px + env(safe-area-inset-bottom,0px))', left:'50%', transform:'translateX(-50%)', width:'100%', maxWidth:430, zIndex:100, pointerEvents:'none' }}>
-            <div style={{ position:'absolute', right:8, bottom:0, background:'var(--white)', borderRadius:12, boxShadow:'0 4px 24px rgba(0,0,0,.16)', border:'1px solid var(--border-lt)', padding:6, display:'flex', flexDirection:'column', gap:2, minWidth:88, pointerEvents:'all' }}>
-              {LANGS.map(l => (
-                <button key={l} onClick={() => { setLang(l); setLangOpen(false) }} style={{ padding:'8px 16px', borderRadius:8, border:'none', textAlign:'left', background:lang===l?'var(--primary)':'transparent', color:lang===l?'#fff':'var(--ink-70)', fontSize:13, fontWeight:600, cursor:'pointer' }}>{l}</button>
-              ))}
-            </div>
-          </div>
-        </>
-      )}
-
       {/* ── More services bottom sheet ── */}
       {moreOpen && (
         <>
@@ -145,18 +126,6 @@ export default function BottomNav({ page, setPage, lang, setLang, theme, toggleT
           <div className="nav-active-bar" style={{ width:isMorePage||moreOpen?24:0 }} />
           <span className="nav-icon" style={{display:'flex',alignItems:'center',justifyContent:'center',color:isMorePage||moreOpen?'var(--primary)':'var(--ink-40)',transition:'color .18s'}}>{NAV_SVG.more}</span>
           <span className="nav-label" style={{color:isMorePage||moreOpen?'var(--primary)':'var(--ink-20)',fontWeight:isMorePage||moreOpen?700:600,transition:'color .18s'}}>{lang==='EN'?'More':lang==='ES'?'Más':lang==='FR'?'Plus':lang==='DE'?'Mehr':'Mais'}</span>
-        </button>
-
-        {/* Search */}
-        <button onClick={onSearch} aria-label="Pesquisar" style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:3, padding:'6px 7px', background:'none', border:'none', cursor:'pointer', borderLeft:'1px solid var(--border-lt)', flexShrink:0 }}>
-          <span style={{opacity:.45}}>{NAV_SVG.search}</span>
-          <span style={{ fontSize:8, fontWeight:600, color:'var(--ink-20)' }}>{lang==='EN'?'SEARCH':lang==='FR'?'CHERCH':lang==='DE'?'SUCH':lang==='ES'?'BUSCAR':'BUSCA'}</span>
-        </button>
-
-        {/* Language */}
-        <button onClick={() => setLangOpen(o => !o)} aria-label="Idioma" style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:3, padding:'6px 7px', background:'none', border:'none', cursor:'pointer', flexShrink:0 }}>
-          <span style={{opacity:langOpen?1:.45}}>{NAV_SVG.globe}</span>
-          <span style={{ fontSize:8, fontWeight:700, color:langOpen?'var(--primary)':'var(--ink-20)', background:langOpen?'var(--primary-lt)':'transparent', padding:'1px 4px', borderRadius:3 }}>{lang}</span>
         </button>
       </nav>
     </>

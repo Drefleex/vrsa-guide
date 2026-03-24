@@ -55,7 +55,7 @@ export default function Shopping({ lang, pins, favs, toggleFav, onNav }) {
 
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(18px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff', marginBottom:12 }}>{t.title}</div>
         <div style={{ position:'relative', marginBottom:12 }}>
           <span style={{ position:'absolute', left:14, top:'50%', transform:'translateY(-50%)', fontSize:15, pointerEvents:'none' }}>🔍</span>

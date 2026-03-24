@@ -147,7 +147,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
     const isFav = favs.includes(detail.id)
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
-        <div style={{ background:getAvatarColor(detail.name), padding:'20px 18px 24px', paddingTop:'calc(20px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+        <div style={{ background:getAvatarColor(detail.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
             <div style={{ display:'flex', gap:8 }}>
@@ -178,7 +178,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
 
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
-      <div style={{ background:'linear-gradient(160deg,#2D1B69 0%,#1E1145 100%)', padding:'18px 20px 18px', paddingTop:'calc(18px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+      <div style={{ background:'linear-gradient(160deg,#2D1B69 0%,#1E1145 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-.3px' }}>{t.title}</div>
         <div style={{ fontSize:12, color:'rgba(255,255,255,.38)', marginTop:2 }}>{t.sub}</div>
       </div>

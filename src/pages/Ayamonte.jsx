@@ -55,7 +55,7 @@ export default function Ayamonte({ lang, onNav }) {
   return (
     <div className="page">
       {/* Hero */}
-      <div style={{ background:'linear-gradient(160deg,var(--primary-dark) 0%,var(--primary) 100%)', padding:'18px 20px 18px', paddingTop:'calc(18px + env(safe-area-inset-top,0px))', flexShrink:0, position:'relative', overflow:'hidden' }}>
+      <div style={{ background:'linear-gradient(160deg,var(--primary-dark) 0%,var(--primary) 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0, position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', top:-40, right:-40, width:180, height:180, borderRadius:'50%', background:'rgba(255,255,255,.05)', pointerEvents:'none' }} />
         <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
           <span style={{ fontSize:16 }}>🇪🇸</span>
