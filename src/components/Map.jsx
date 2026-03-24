@@ -83,6 +83,15 @@ function getCat(k) {
   return CATS.find(c=>c.k===k) || { icon:'📍', color:'#546E7A', bg:'#ECEFF1', label:{PT:k,EN:k,ES:k} }
 }
 
+const MAP_FILTERS = [
+  { id:'all',       icon:null,  cats:null,                                                                     label:{PT:'Todos',      EN:'All',        ES:'Todos',      FR:'Tout',      DE:'Alle'    } },
+  { id:'eat',       icon:'🍽️', cats:['restaurante','pastelaria','gelataria','hamburgaria','pizzaria','kebab'], label:{PT:'Comer',      EN:'Eat',         ES:'Comer',      FR:'Manger',    DE:'Essen'   } },
+  { id:'beach',     icon:'🏖️', cats:['praia'],                                                                label:{PT:'Praias',     EN:'Beaches',     ES:'Playas',     FR:'Plages',    DE:'Strände' } },
+  { id:'culture',   icon:'🏛️', cats:['cultura','monumento','estado'],                                        label:{PT:'Cultura',    EN:'Culture',     ES:'Cultura',    FR:'Culture',   DE:'Kultur'  } },
+  { id:'hotel',     icon:'🏨',  cats:['hotel'],                                                                label:{PT:'Hotéis',     EN:'Hotels',      ES:'Hoteles',    FR:'Hôtels',    DE:'Hotels'  } },
+  { id:'transport', icon:'🚌',  cats:['transporte','parking'],                                                label:{PT:'Transporte', EN:'Transport',   ES:'Transporte', FR:'Transport', DE:'Verkehr' } },
+]
+
 // ── Pin marker ──────────────────────────────────────────────────────────────
 const PinMarker = memo(function PinMarker({ pin, isSelected, editMode, onSelect, onDelete, onEditCat, onDragEnd }) {
   const cat = getCat(pin.cat)
@@ -501,6 +510,7 @@ function MapContent({ lang, pins, setPins, theme }) {
   const [changes, setChanges]           = useState([])
   const [activeRoute, setActiveRoute]   = useState(null) // {origin, destination}
   const [routeResult, setRouteResult]   = useState(null) // DirectionsResult
+  const [quickFilter, setQuickFilter]   = useState('all')
   const nextId    = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
   const locateMeRef = useRef(null)
 
@@ -534,12 +544,16 @@ function MapContent({ lang, pins, setPins, theme }) {
     setEditMode(true)
   }
 
-  const visible = useMemo(() =>
-    !activeFilter || activeFilter === 'todas'
+  const visible = useMemo(() => {
+    let base = !activeFilter || activeFilter === 'todas'
       ? pins
-      : pins.filter(p => p.cat === activeFilter),
-    [pins, activeFilter]
-  )
+      : pins.filter(p => p.cat === activeFilter)
+    if (quickFilter !== 'all') {
+      const f = MAP_FILTERS.find(mf => mf.id === quickFilter)
+      if (f?.cats) base = base.filter(p => f.cats.includes(p.cat))
+    }
+    return base
+  }, [pins, activeFilter, quickFilter])
 
   function handleMapClick(e) {
     // Em modo edição/adição, bloqueia o InfoWindow nativo para não congelar o mapa.
@@ -659,6 +673,40 @@ function MapContent({ lang, pins, setPins, theme }) {
 
       {/* Map */}
       <div style={{ flex:1, minHeight:0, position:'relative' }}>
+
+        {/* Quick filter bar */}
+        {!showPicker && !navDest && !activeRoute && (
+          <div style={{
+            position:'absolute', top:8, left:0, right:0, zIndex:10,
+            display:'flex', overflowX:'auto', gap:6, padding:'0 10px',
+            scrollbarWidth:'none', pointerEvents:'none',
+          }}>
+            {MAP_FILTERS.map(f => {
+              const active = quickFilter === f.id
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => setQuickFilter(f.id)}
+                  style={{
+                    pointerEvents:'auto', flexShrink:0,
+                    display:'flex', alignItems:'center', gap:5,
+                    padding:'6px 13px', borderRadius:50,
+                    border: active ? 'none' : '1px solid rgba(0,0,0,.1)',
+                    background: active ? 'var(--primary)' : 'var(--white)',
+                    color: active ? '#fff' : 'var(--ink)',
+                    fontSize:12, fontWeight:700, cursor:'pointer',
+                    boxShadow:'0 2px 8px rgba(0,0,0,.15)',
+                    transition:'background .15s, color .15s',
+                  }}
+                >
+                  {f.icon && <span style={{ fontSize:13 }}>{f.icon}</span>}
+                  {f.label[lang] || f.label.PT}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
         <GMap
           defaultCenter={{ lat:37.194, lng:-7.425 }}
           defaultZoom={13}
