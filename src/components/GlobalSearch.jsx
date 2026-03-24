@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
+import { EVENTS } from '../pages/Events'
+import { MONUMENTS } from '../pages/Culture'
 import {
   Search, Ship, Waves, Calendar, Building2, Globe, Map,
   Plus, Bus, AlertCircle, Landmark, Clock,
@@ -34,6 +36,7 @@ const CAT_ICONS = {
   hamburgaria: Beef,
   pizzaria:    Pizza,
   kebab:       Sandwich,
+  evento:      Calendar,
   cultura:     Landmark,
   praia:       Waves,
   hotel:       Building2,
@@ -52,7 +55,7 @@ const CAT_ICONS = {
 const CAT_LABELS = {
   restaurante:'Restaurantes', pastelaria:'Pastelarias', gelataria:'Gelatarias',
   hamburgaria:'Hamburgarias', pizzaria:'Pizzarias', kebab:'Kebabs',
-  cultura:'Cultura', praia:'Praias', hotel:'Hotéis', mercado:'Mercados',
+  evento:'Eventos', cultura:'Cultura', praia:'Praias', hotel:'Hotéis', mercado:'Mercados',
   transporte:'Transportes', natureza:'Natureza', estado:'Serviços',
   banco:'Bancos', parking:'Estacionamento', farmacia:'Farmácias',
   combustivel:'Combustível', compras:'Compras', saude:'Saúde',
@@ -92,17 +95,38 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
   }, [q])
 
   const query = debouncedQ.trim().toLowerCase()
-  const allPins = query.length >= 2 ? (pins||[]).filter(p => p.name.toLowerCase().includes(query)) : []
+
+  const normalizedPins = (pins||[]).map(p => ({ ...p, page: 'map' }))
+
+  const normalizedEvents = (EVENTS||[]).map(e => ({
+    ...e,
+    name: typeof e.title === 'object' ? (e.title[L] || e.title.PT) : (e.title || e.name),
+    cat: 'evento',
+    emoji: '📅',
+    page: 'events',
+  }))
+
+  const normalizedMonuments = (MONUMENTS||[]).map(m => ({
+    ...m,
+    name: typeof m.name === 'object' ? (m.name[L] || m.name.PT) : m.name,
+    cat: m.cat || 'cultura',
+    emoji: m.emoji || '🏛️',
+    page: 'culture',
+  }))
+
+  const allSearchableItems = [...normalizedPins, ...normalizedEvents, ...normalizedMonuments]
+
+  const allResults = query.length >= 2 ? allSearchableItems.filter(p => p.name?.toLowerCase().includes(query)) : []
   const pageResults = query.length >= 2 ? PAGE_SHORTCUTS.filter(s => s.q.some(kw => kw.includes(query)||query.includes(kw))).slice(0,3) : []
 
-  // Group pin results by category (max 3 per cat, max 4 cats)
+  // Group results by category (max 3 per cat, max 4 cats)
   const catGroups = {}
-  for (const p of allPins) {
+  for (const p of allResults) {
     if (!catGroups[p.cat]) catGroups[p.cat] = []
     if (catGroups[p.cat].length < 3) catGroups[p.cat].push(p)
     if (Object.keys(catGroups).length >= 4 && !catGroups[p.cat]) break
   }
-  const hasResults = allPins.length > 0 || pageResults.length > 0
+  const hasResults = allResults.length > 0 || pageResults.length > 0
 
   function goTo(page, term) {
     if (term) {
@@ -172,7 +196,7 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
               <div key={cat}>
                 <div style={SEC}>{CAT_LABELS[cat] || cat}</div>
                 {items.map((p,i) => (
-                  <button key={i} onClick={() => goTo('map', p.name)} style={ROW}>
+                  <button key={i} onClick={() => goTo(p.page || 'map', p.name)} style={ROW}>
                     <div style={{ width:36, height:36, borderRadius:8, background:'var(--surface)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                       <span style={{ fontSize:18 }}>{p.emoji}</span>
                     </div>
