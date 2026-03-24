@@ -687,15 +687,19 @@ function MapContent({ lang, pins, setPins, theme }) {
             </AdvancedMarker>
           )}
 
-          {!showPicker && visible
-            .filter(pin => (selected && !editMode) ? pin.id === selected.id : true)
-            .map(pin => (
-              <PinMarker key={pin.id} pin={pin} isSelected={selected?.id === pin.id} editMode={editMode}
+          {!showPicker && visible.map(pin => {
+            const destId = navDest?.id ?? activeRoute?.destination?.id
+            const shouldShow = destId ? destId === pin.id : true
+            if (!shouldShow) return null
+            return (
+              <PinMarker key={pin.id} pin={pin}
+                isSelected={selected?.id === pin.id || navDest?.id === pin.id || activeRoute?.destination?.id === pin.id}
+                editMode={editMode}
                 onSelect={setSelected} onDelete={handleDelete}
                 onEditCat={setEditingPin} onDragEnd={handleDragEnd}
               />
-            ))
-          }
+            )
+          })}
 
         </GMap>
 
