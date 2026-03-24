@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
+import { tr } from '../utils/i18n'
 
 
 const RICH = {
@@ -31,14 +32,6 @@ function Stars({ n }) {
   return <span style={{ color:'#F59E0B', fontSize:12, letterSpacing:1 }}>{'★'.repeat(n)}{'☆'.repeat(5-n)}</span>
 }
 
-const TR = {
-  PT:{ title:'Hotéis', search:'Pesquisar alojamento...', all:'Todos', luxury:'Luxo', mid:'Conforto', budget:'Económico', book:'Reservar', navigate:'Navegar', back:'← Voltar', priceLabel:'Preço/noite', stars:'estrelas', noResults:'Sem resultados.', fav:'Favorito' },
-  EN:{ title:'Hotels', search:'Search accommodation...', all:'All', luxury:'Luxury', mid:'Comfort', budget:'Budget', book:'Book', navigate:'Navigate', back:'← Back', priceLabel:'Price/night', stars:'stars', noResults:'No results.', fav:'Favourite' },
-  ES:{ title:'Hoteles', search:'Buscar alojamiento...', all:'Todos', luxury:'Lujo', mid:'Confort', budget:'Económico', book:'Reservar', navigate:'Navegar', back:'← Volver', priceLabel:'Precio/noche', stars:'estrellas', noResults:'Sin resultados.', fav:'Favorito' },
-  FR:{ title:'Hôtels', search:'Rechercher hébergement...', all:'Tous', luxury:'Luxe', mid:'Confort', budget:'Économique', book:'Réserver', navigate:'Naviguer', back:'← Retour', priceLabel:'Prix/nuit', stars:'étoiles', noResults:'Aucun résultat.', fav:'Favori' },
-  DE:{ title:'Hotels', search:'Unterkunft suchen...', all:'Alle', luxury:'Luxus', mid:'Komfort', budget:'Budget', book:'Buchen', navigate:'Navigieren', back:'← Zurück', priceLabel:'Preis/Nacht', stars:'Sterne', noResults:'Keine Ergebnisse.', fav:'Favorit' },
-}
-
 const FILTERS = [
   { k:'all',     match: r => true },
   { k:'luxury',  match: r => r.stars >= 4 },
@@ -48,7 +41,7 @@ const FILTERS = [
 
 export default function Hotels({ lang, pins, favs, toggleFav, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('hotels', L)
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
   const [detail, setDetail] = useState(null)

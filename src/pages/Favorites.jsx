@@ -1,20 +1,13 @@
 import { Heart } from 'lucide-react'
-import { EVENTS } from './Events'
-import { MONUMENTS } from './Culture'
-
-const TR = {
-  PT:{ title:'Favoritos', empty:'Ainda não tens favoritos.', emptyHint:'Toca em ❤️ nos restaurantes, eventos e monumentos para guardar.', places:'Restaurantes & Locais', events:'Eventos Guardados', culture:'Cultura & Monumentos', explore:'Explorar Restaurantes', removeFav:'Remover favorito' },
-  EN:{ title:'Favourites', empty:'No favourites yet.', emptyHint:'Tap ❤️ on restaurants, events and monuments to save them.', places:'Restaurants & Places', events:'Saved Events', culture:'Culture & Monuments', explore:'Explore Restaurants', removeFav:'Remove favourite' },
-  ES:{ title:'Favoritos', empty:'Aún no tienes favoritos.', emptyHint:'Toca ❤️ en restaurantes, eventos y monumentos para guardar.', places:'Restaurantes & Lugares', events:'Eventos Guardados', culture:'Cultura & Monumentos', explore:'Explorar Restaurantes', removeFav:'Quitar favorito' },
-  FR:{ title:'Favoris', empty:'Pas encore de favoris.', emptyHint:'Tapez ❤️ sur les restaurants, événements et monuments pour les sauvegarder.', places:'Restaurants & Lieux', events:'Événements Sauvegardés', culture:'Culture & Monuments', explore:'Explorer les Restaurants', removeFav:'Supprimer des favoris' },
-  DE:{ title:'Favoriten', empty:'Noch keine Favoriten.', emptyHint:'Tippe auf ❤️ bei Restaurants, Events und Denkmälern zum Speichern.', places:'Restaurants & Orte', events:'Gespeicherte Events', culture:'Kultur & Denkmäler', explore:'Restaurants erkunden', removeFav:'Aus Favoriten entfernen' },
-}
+import { EVENTS } from '../data/events'
+import { MONUMENTS } from '../data/culture'
+import { tr } from '../utils/i18n'
 
 const FOOD_CATS = ['restaurante','pastelaria','gelataria','hamburgaria','pizzaria','kebab']
 
 export default function Favorites({ lang, favs, toggleFav, pins, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('favorites', L)
 
   const savedPins      = pins.filter(p => favs.includes('pin-' + p.id))
   const savedEvents    = EVENTS.filter(ev => favs.includes('event-' + ev.id))

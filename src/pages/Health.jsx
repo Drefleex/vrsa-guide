@@ -1,3 +1,5 @@
+import { tr } from '../utils/i18n'
+
 const PHARMACIES = [
   { id:1, name:'Farmácia Carilho',   addr:'Rua Dr. Teófilo Braga',      hours:'Seg–Sex 09:00–19:00 · Sáb 09:00–13:00', phone:'+351 281 543 212', lat:37.190519, lng:-7.419999, emergency:false },
   { id:2, name:'Farmácia Pombalina', addr:'Rua Marquês de Pombal',      hours:'Seg–Sex 09:00–19:30 · Sáb 09:00–13:00', phone:'+351 281 511 089', lat:37.194066, lng:-7.421179, emergency:false },
@@ -19,17 +21,9 @@ const TIPS = {
   DE:['Speichere die Nummer des Gesundheitszentrums vorab', 'Die Notdienstapotheke wechselt wöchentlich — an jeder Apothekentür angezeigt', 'Mit der Europäischen Krankenversicherungskarte (EHIC) kostenloser Zugang', 'Einfache Medikamente wie Paracetamol rezeptfrei erhältlich'],
 }
 
-const TR = {
-  PT:{ title:'Farmácias & Saúde', pharmacies:'Farmácias', dutyPharmacy:'Farmácia de Serviço', health:'Serviços de Saúde', tips:'Dicas Úteis', call:'Ligar', navigate:'Navegar', emergency:'Serviço', open:'Aberta' },
-  EN:{ title:'Pharmacies & Health', pharmacies:'Pharmacies', dutyPharmacy:'Duty Pharmacy', health:'Health Services', tips:'Useful Tips', call:'Call', navigate:'Navigate', emergency:'On Duty', open:'Open' },
-  ES:{ title:'Farmacias & Salud', pharmacies:'Farmacias', dutyPharmacy:'Farmacia de Guardia', health:'Servicios de Salud', tips:'Consejos Útiles', call:'Llamar', navigate:'Navegar', emergency:'Guardia', open:'Abierta' },
-  FR:{ title:'Pharmacies & Santé', pharmacies:'Pharmacies', dutyPharmacy:'Pharmacie de Garde', health:'Services de Santé', tips:'Conseils Utiles', call:'Appeler', navigate:'Naviguer', emergency:'Garde', open:'Ouverte' },
-  DE:{ title:'Apotheken & Gesundheit', pharmacies:'Apotheken', dutyPharmacy:'Notdienstapotheke', health:'Gesundheitsdienste', tips:'Nützliche Tipps', call:'Anrufen', navigate:'Navigieren', emergency:'Notdienst', open:'Geöffnet' },
-}
-
 export default function Health({ lang, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('health', L)
   const tips = TIPS[L] || TIPS.PT
 
   return (

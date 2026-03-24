@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import { EVENTS } from '../pages/Events'
-import { MONUMENTS } from '../pages/Culture'
+import { EVENTS } from '../data/events'
+import { MONUMENTS } from '../data/culture'
 import { tr } from '../utils/i18n'
 import {
   Search, Ship, Waves, Calendar, Building2, Globe, Map,

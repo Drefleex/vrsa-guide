@@ -1,48 +1,11 @@
 import { useState } from 'react'
-
-const TR = {
-  PT: { skip:'Saltar', next:'Seguinte', start:'Começar a Explorar',
-    steps: [
-      { emoji:'👋', title:'Bem-vindo ao VRSA Guide', desc:'O teu guia turístico oficial de Vila Real de Santo António no bolso. Restaurantes, praias, cultura e muito mais.' },
-      { emoji:'❤️', title:'Cria o teu Roteiro', desc:'Toca no coração nos teus restaurantes e eventos preferidos para os guardares e acederes facilmente.' },
-      { emoji:'🗺️', title:'Navega sem Internet', desc:'Traça rotas a pé no mapa interativo para qualquer monumento ou praia, mesmo sem gastar dados móveis!' }
-    ]
-  },
-  EN: { skip:'Skip', next:'Next', start:'Start Exploring',
-    steps: [
-      { emoji:'👋', title:'Welcome to VRSA Guide', desc:'Your official tourist guide for Vila Real de Santo António in your pocket. Restaurants, beaches, culture and more.' },
-      { emoji:'❤️', title:'Create your Itinerary', desc:'Tap the heart on your favourite restaurants and events to save them for easy access later.' },
-      { emoji:'🗺️', title:'Navigate Offline', desc:'Get walking directions on the interactive map to any monument or beach, without using mobile data!' }
-    ]
-  },
-  ES: { skip:'Saltar', next:'Siguiente', start:'Empezar a Explorar',
-    steps: [
-      { emoji:'👋', title:'Bienvenido a VRSA Guide', desc:'Tu guía turística oficial de Vila Real de Santo António en el bolsillo. Restaurantes, playas, cultura y mucho más.' },
-      { emoji:'❤️', title:'Crea tu Itinerario', desc:'Toca el corazón en tus restaurantes y eventos favoritos para guardarlos y acceder fácilmente.' },
-      { emoji:'🗺️', title:'Navega sin Internet', desc:'¡Traza rutas a pie en el mapa interactivo hacia cualquier monumento o playa, sin gastar datos móviles!' }
-    ]
-  },
-  FR: { skip:'Passer', next:'Suivant', start:'Commencer à Explorer',
-    steps: [
-      { emoji:'👋', title:'Bienvenue sur VRSA Guide', desc:'Votre guide touristique officiel de Vila Real de Santo António dans la poche. Restaurants, plages, culture et plus.' },
-      { emoji:'❤️', title:'Créez votre Itinéraire', desc:'Tapez sur le cœur de vos restaurants et événements préférés pour les sauvegarder facilement.' },
-      { emoji:'🗺️', title:'Naviguez hors-ligne', desc:'Obtenez des itinéraires à pied sur la carte interactive sans utiliser vos données mobiles !' }
-    ]
-  },
-  DE: { skip:'Überspringen', next:'Weiter', start:'Erkunden beginnen',
-    steps: [
-      { emoji:'👋', title:'Willkommen beim VRSA Guide', desc:'Ihr offizieller Reiseführer für Vila Real de Santo António in der Tasche. Restaurants, Strände, Kultur und mehr.' },
-      { emoji:'❤️', title:'Erstelle deine Reiseroute', desc:'Tippe bei deinen Lieblingsrestaurants und -events auf das Herz, um sie für später zu speichern.' },
-      { emoji:'🗺️', title:'Offline navigieren', desc:'Lass dir auf der interaktiven Karte Fußwege zu Denkmälern oder Stränden anzeigen, ganz ohne mobile Daten!' }
-    ]
-  },
-}
+import { tr } from '../utils/i18n'
 
 export default function WelcomeModal({ lang, visible, onClose }) {
   const [step, setStep] = useState(0)
 
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('welcomeModal', L)
 
   if (!visible) return null
 

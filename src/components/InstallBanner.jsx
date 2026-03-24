@@ -1,16 +1,9 @@
 import { useState, useEffect } from 'react'
-
-const TR = {
-  PT:{ title:'Instalar VRSA Guide', sub:'Adicionar ao ecrã inicial — grátis', btn:'Instalar', dismiss:'Agora não' },
-  EN:{ title:'Install VRSA Guide', sub:'Add to home screen — free', btn:'Install', dismiss:'Not now' },
-  ES:{ title:'Instalar VRSA Guide', sub:'Añadir a la pantalla de inicio — gratis', btn:'Instalar', dismiss:'Ahora no' },
-  FR:{ title:'Installer VRSA Guide', sub:'Ajouter à l\'écran d\'accueil — gratuit', btn:'Installer', dismiss:'Plus tard' },
-  DE:{ title:'VRSA Guide installieren', sub:'Zum Startbildschirm hinzufügen — kostenlos', btn:'Installieren', dismiss:'Nicht jetzt' },
-}
+import { tr } from '../utils/i18n'
 
 export default function InstallBanner({ lang }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('installBanner', L)
   const [prompt, setPrompt]   = useState(null)
   const [visible, setVisible] = useState(false)
 

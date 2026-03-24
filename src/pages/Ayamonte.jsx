@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { tr } from '../utils/i18n'
 
 const SPOTS = [
   { id:1, emoji:'🏰', name:'Castillo de Ayamonte', desc:{PT:'Castelo árabe do século XII com vista panorâmica para o Guadiana e VRSA. Vale muito a subida.',EN:'12th century Moorish castle with panoramic views over the Guadiana and VRSA. Well worth the climb.',ES:'Castillo árabe del siglo XII con vistas panorámicas al Guadiana.',FR:'Château maure du XIIe siècle avec vue panoramique sur le Guadiana.',DE:'Maurische Burg aus dem 12. Jahrhundert mit Panoramablick auf den Guadiana.'}, walk:'20 min', free:true, lat:37.2128, lng:-7.4081 },
@@ -19,17 +20,9 @@ const ESSENTIALS = [
   { icon:'🕐', label:{PT:'Fuso Horário',EN:'Timezone',ES:'Zona Horaria',FR:'Fuseau',DE:'Zeitzone'}, val:{PT:'+1h em relação a Portugal',EN:'+1h ahead of Portugal',ES:'+1h respecto a Portugal',FR:'+1h par rapport au Portugal',DE:'+1h gegenüber Portugal'} },
 ]
 
-const TR = {
-  PT:{ title:'Ayamonte', sub:'Espanha · 15 min de ferry', topSpots:'O Que Ver e Fazer', essentials:'Informações Essenciais', tip:'💡 O último ferry de volta para VRSA parte às 19:30. Não percas!', walkTime:'a pé', free:'Grátis', paid:'Pago', navigate:'Google Maps', back:'← Voltar' },
-  EN:{ title:'Ayamonte', sub:'Spain · 15 min by ferry', topSpots:'Top Spots', essentials:'Essential Info', tip:'💡 The last ferry back to VRSA leaves at 19:30. Don\'t miss it!', walkTime:'walk', free:'Free', paid:'Paid', navigate:'Google Maps', back:'← Back' },
-  ES:{ title:'Ayamonte', sub:'España · 15 min en ferry', topSpots:'Qué Ver y Hacer', essentials:'Información Esencial', tip:'💡 El último ferry de vuelta a VRSA sale a las 19:30. ¡No te lo pierdas!', walkTime:'a pie', free:'Gratis', paid:'Pago', navigate:'Google Maps', back:'← Volver' },
-  FR:{ title:'Ayamonte', sub:'Espagne · 15 min en ferry', topSpots:'À Voir et Faire', essentials:'Infos Essentielles', tip:'💡 Le dernier ferry retour pour VRSA part à 19h30. Ne le ratez pas!', walkTime:'à pied', free:'Gratuit', paid:'Payant', navigate:'Google Maps', back:'← Retour' },
-  DE:{ title:'Ayamonte', sub:'Spanien · 15 min mit der Fähre', topSpots:'Sehenswürdigkeiten', essentials:'Wichtige Infos', tip:'💡 Die letzte Fähre zurück nach VRSA fährt um 19:30 Uhr. Nicht verpassen!', walkTime:'zu Fuß', free:'Kostenlos', paid:'Kostenpflichtig', navigate:'Google Maps', back:'← Zurück' },
-}
-
 export default function Ayamonte({ lang, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('ayamonte', L)
 
   const [esTime, setEsTime] = useState(() => {
     const now = new Date()

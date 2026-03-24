@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
+import { tr } from '../utils/i18n'
 
 
 const DETAILS = {
@@ -16,14 +17,6 @@ function getDetails(id) {
   return DETAILS[id] || { hours:'09:00–19:00', note:{PT:'Loja local em VRSA.',EN:'Local shop in VRSA.',ES:'Tienda local en VRSA.',FR:'Boutique locale à VRSA.',DE:'Lokales Geschäft in VRSA.'} }
 }
 
-const TR = {
-  PT:{ title:'Compras & Mercados', all:'Todos', market:'Mercado', super:'Supermercados', shops:'Lojas', hours:'Horário', navigate:'Navegar', fav:'Favorito', back:'← Voltar', tip:'💡 Dica: O Mercado Municipal tem os melhores preços de peixe fresco — vai de manhã cedo!', search:'Pesquisar...', noResults:'Sem resultados.' },
-  EN:{ title:'Shopping & Markets', all:'All', market:'Market', super:'Supermarkets', shops:'Shops', hours:'Hours', navigate:'Navigate', fav:'Favourite', back:'← Back', tip:'💡 Tip: The Municipal Market has the best fresh fish prices — go early in the morning!', search:'Search...', noResults:'No results.' },
-  ES:{ title:'Compras & Mercados', all:'Todos', market:'Mercado', super:'Supermercados', shops:'Tiendas', hours:'Horario', navigate:'Navegar', fav:'Favorito', back:'← Volver', tip:'💡 Consejo: El Mercado Municipal tiene los mejores precios de pescado fresco.', search:'Buscar...', noResults:'Sin resultados.' },
-  FR:{ title:'Shopping & Marchés', all:'Tous', market:'Marché', super:'Supermarchés', shops:'Boutiques', hours:'Horaires', navigate:'Naviguer', fav:'Favori', back:'← Retour', tip:'💡 Astuce: Le Marché Municipal a les meilleurs prix pour le poisson frais!', search:'Rechercher...', noResults:'Aucun résultat.' },
-  DE:{ title:'Einkaufen & Märkte', all:'Alle', market:'Markt', super:'Supermärkte', shops:'Geschäfte', hours:'Öffnungszeiten', navigate:'Navigieren', fav:'Favorit', back:'← Zurück', tip:'💡 Tipp: Der Stadtmarkt hat die besten Preise für frischen Fisch!', search:'Suchen...', noResults:'Keine Ergebnisse.' },
-}
-
 const SHOP_CATS = ['mercado','compras']
 const FILTERS = [
   { k:'all',    cats:['mercado','compras'] },
@@ -34,7 +27,7 @@ const FILTERS = [
 
 export default function Shopping({ lang, pins, favs, toggleFav, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('shopping', L)
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
 

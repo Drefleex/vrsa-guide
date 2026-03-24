@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { tr } from '../utils/i18n'
 
 // ─── Simple analytics tracked in localStorage ────────────────
 export function trackEvent(type, data) {
@@ -55,21 +56,13 @@ function Stat({ icon, value, label }) {
   )
 }
 
-const TR = {
-  PT:{ title:'Analytics', sub:'Dados de uso da app', pages:'Páginas mais visitadas', pins:'Pins mais clicados', langs:'Idiomas usados', hourly:'Actividade por hora', sessions:'Sessões', clicks:'Cliques', total:'Total de interacções', reset:'Limpar dados', resetConfirm:'Tens a certeza? Isto apaga todos os dados.', noData:'Ainda sem dados. Usa a app para gerar estatísticas.', today:'Hoje', week:'Esta semana', export:'Exportar' },
-  EN:{ title:'Analytics', sub:'App usage data', pages:'Most visited pages', pins:'Most clicked pins', langs:'Languages used', hourly:'Activity by hour', sessions:'Sessions', clicks:'Clicks', total:'Total interactions', reset:'Clear data', resetConfirm:'Are you sure? This deletes all data.', noData:'No data yet. Use the app to generate statistics.', today:'Today', week:'This week', export:'Export' },
-  ES:{ title:'Analytics', sub:'Datos de uso de la app', pages:'Páginas más visitadas', pins:'Pins más clicados', langs:'Idiomas usados', hourly:'Actividad por hora', sessions:'Sesiones', clicks:'Clics', total:'Total interacciones', reset:'Borrar datos', resetConfirm:'¿Estás seguro? Esto borra todos los datos.', noData:'Sin datos aún.', today:'Hoy', week:'Esta semana', export:'Exportar' },
-  FR:{ title:'Analytics', sub:'Données d\'utilisation', pages:'Pages les plus visitées', pins:'Pins les plus cliqués', langs:'Langues utilisées', hourly:'Activité par heure', sessions:'Sessions', clicks:'Clics', total:'Total interactions', reset:'Effacer données', resetConfirm:'Êtes-vous sûr?', noData:'Pas encore de données.', today:'Aujourd\'hui', week:'Cette semaine', export:'Exporter' },
-  DE:{ title:'Analytics', sub:'App-Nutzungsdaten', pages:'Meist besuchte Seiten', pins:'Meist geklickte Pins', langs:'Verwendete Sprachen', hourly:'Aktivität nach Stunde', sessions:'Sitzungen', clicks:'Klicks', total:'Gesamtinteraktionen', reset:'Daten löschen', resetConfirm:'Bist du sicher?', noData:'Noch keine Daten.', today:'Heute', week:'Diese Woche', export:'Exportieren' },
-}
-
 const PAGE_LABELS = { home:'🏠 Início', map:'🗺️ Mapa', restaurants:'🍽️ Restaurantes', events:'📅 Eventos', info:'ℹ️ Info', beaches:'🏖️ Praias', hotels:'🏨 Hotéis', shopping:'🛒 Compras', favorites:'❤️ Favoritos' }
 const LANG_FLAGS  = { PT:'🇵🇹 PT', EN:'🇬🇧 EN', ES:'🇪🇸 ES', FR:'🇫🇷 FR', DE:'🇩🇪 DE' }
 const COLORS      = { primary:'var(--blue)', secondary:'var(--mint)', accent:'var(--gold)' }
 
 export default function Analytics({ lang }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('analytics', L)
   const [data, setData]     = useState(getAnalytics())
   const [tick, setTick]     = useState(0)
 

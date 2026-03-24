@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { tr } from '../utils/i18n'
 
 const FERRY_TIMES  = ['09:00','09:45','10:30','11:15','12:00','12:45','13:30','14:15','15:00','15:45','16:30','17:15','18:00','18:45','19:30']
 const TRAIN_TIMES  = [{dep:'06:12',arr:'07:19'},{dep:'07:45',arr:'08:52'},{dep:'09:10',arr:'10:17'},{dep:'10:40',arr:'11:47'},{dep:'12:05',arr:'13:12'},{dep:'13:35',arr:'14:42'},{dep:'15:00',arr:'16:07'},{dep:'16:30',arr:'17:37'},{dep:'18:00',arr:'19:07'},{dep:'19:45',arr:'20:52'},{dep:'21:10',arr:'22:17'}]
@@ -15,17 +16,9 @@ const MODES = [
   { k:'car',    icon:'🚗',  color:'#64748B', bg:'var(--surface)' },
 ]
 
-const TR = {
-  PT:{ title:'Transportes', sub:'Como chegar e como sair', ferry:'Ferry', train:'Comboio', bus:'Autocarro', taxi:'Táxi', airport:'Aeroporto', car:'Carro', next:'Próximo', noMore:'Sem mais hoje', book:'Reservar', navigate:'Ver mapa', toFaro:'até Faro', toAyamonte:'para Ayamonte', airportNote:'Faro (FAO) · ~65 km · ~50 min', trainNote:'Via Monte Gordo · Tavira · Olhão', ferryNote:'€2,50 · 15 min · Passaporte obrigatório', carRentals:'Rent-a-Car VRSA', parkings:'Parques de Estacionamento' },
-  EN:{ title:'Transport',  sub:'Getting around & getting out', ferry:'Ferry', train:'Train', bus:'Bus', taxi:'Taxi', airport:'Airport', car:'Car', next:'Next', noMore:'No more today', book:'Book', navigate:'View map', toFaro:'to Faro', toAyamonte:'to Ayamonte', airportNote:'Faro (FAO) · ~65 km · ~50 min', trainNote:'Via Monte Gordo · Tavira · Olhão', ferryNote:'€2.50 · 15 min · Passport required', carRentals:'Car Rentals VRSA', parkings:'Car Parks' },
-  ES:{ title:'Transportes', sub:'Cómo llegar y cómo salir', ferry:'Ferry', train:'Tren', bus:'Autobús', taxi:'Taxi', airport:'Aeropuerto', car:'Coche', next:'Próximo', noMore:'Sin más hoy', book:'Reservar', navigate:'Ver mapa', toFaro:'hasta Faro', toAyamonte:'a Ayamonte', airportNote:'Faro (FAO) · ~65 km · ~50 min', trainNote:'Vía Monte Gordo · Tavira · Olhão', ferryNote:'€2,50 · 15 min · Pasaporte obligatorio', carRentals:'Alquiler de Coches', parkings:'Aparcamientos' },
-  FR:{ title:'Transports',  sub:'Comment circuler', ferry:'Ferry', train:'Train', bus:'Bus', taxi:'Taxi', airport:'Aéroport', car:'Voiture', next:'Prochain', noMore:'Plus aujourd\'hui', book:'Réserver', navigate:'Voir carte', toFaro:'jusqu\'à Faro', toAyamonte:'vers Ayamonte', airportNote:'Faro (FAO) · ~65 km · ~50 min', trainNote:'Via Monte Gordo · Tavira · Olhão', ferryNote:'€2,50 · 15 min · Passeport obligatoire', carRentals:'Location de voitures', parkings:'Parkings' },
-  DE:{ title:'Transport',   sub:'Anreise und Abreise', ferry:'Fähre', train:'Zug', bus:'Bus', taxi:'Taxi', airport:'Flughafen', car:'Auto', next:'Nächster', noMore:'Heute nicht mehr', book:'Buchen', navigate:'Karte', toFaro:'nach Faro', toAyamonte:'nach Ayamonte', airportNote:'Faro (FAO) · ~65 km · ~50 min', trainNote:'Über Monte Gordo · Tavira · Olhão', ferryNote:'€2,50 · 15 min · Reisepass erforderlich', carRentals:'Autovermietung', parkings:'Parkplätze' },
-}
-
 export default function Transport({ lang, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('transport', L)
   const [mode, setMode]   = useState('ferry')
   const [tick, setTick]   = useState(0)
   useEffect(() => { const iv = setInterval(()=>setTick(x=>x+1),60000); return ()=>clearInterval(iv) }, [])

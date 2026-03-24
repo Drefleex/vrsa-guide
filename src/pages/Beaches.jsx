@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { tr } from '../utils/i18n'
 
 const BEACHES = [
   { id:1, name:'Praia de VRSA',            photo:'/images/praia_vila_real_santo_antonio.webp', dist:'2.5 km', lat:37.173516, lng:-7.422291, flag:'🟢', note:{PT:'Bandeira Azul · Águas calmas',EN:'Blue Flag · Calm waters',ES:'Bandera Azul · Aguas tranquilas',FR:'Pavillon Bleu · Eaux calmes',DE:'Blaue Flagge · Ruhiges Wasser'}, parking:true, bar:true, wc:true },
@@ -15,14 +16,6 @@ const FLAG_INFO = [
   { flag:'🟣', l:{PT:'Roxo — Animais marinhos',EN:'Purple — Marine animals',ES:'Morado — Animales marinos',FR:'Violet — Animaux marins',DE:'Lila — Meerestiere'} },
 ]
 
-const TR = {
-  PT:{ title:'Praias', sub:'Vila Real de Santo António · Algarve', seaTemp:'Temperatura do Mar', seaConditions:'Condições Hoje', flagGuide:'Guia de Bandeiras', beaches:'Praias Próximas', parking:'Parque', bar:'Bar', wc:'WC', directions:'Navegar', loading:'A carregar dados marinhos...', summer:'Verão (Jun–Set)', winter:'Inverno (Out–Mai)', tipTitle:'Dica do dia', uv:'Índice UV', wave:'Altura de Onda', wind:'Vento', conditions:{0:'Excelente',1:'Bom',2:'Razoável',3:'Mau'} },
-  EN:{ title:'Beaches', sub:'Vila Real de Santo António · Algarve', seaTemp:'Sea Temperature', seaConditions:'Today\'s Conditions', flagGuide:'Flag Guide', beaches:'Nearby Beaches', parking:'Parking', bar:'Bar', wc:'WC', directions:'Navigate', loading:'Loading marine data...', summer:'Summer (Jun–Sep)', winter:'Winter (Oct–May)', tipTitle:'Tip of the day', uv:'UV Index', wave:'Wave Height', wind:'Wind', conditions:{0:'Excellent',1:'Good',2:'Fair',3:'Poor'} },
-  ES:{ title:'Playas', sub:'Vila Real de Santo António · Algarve', seaTemp:'Temperatura del Mar', seaConditions:'Condiciones de Hoy', flagGuide:'Guía de Banderas', beaches:'Playas Cercanas', parking:'Aparcamiento', bar:'Bar', wc:'WC', directions:'Navegar', loading:'Cargando datos marinos...', summer:'Verano (Jun–Sep)', winter:'Invierno (Oct–May)', tipTitle:'Consejo del día', uv:'Índice UV', wave:'Altura Olas', wind:'Viento', conditions:{0:'Excelente',1:'Buenas',2:'Regulares',3:'Malas'} },
-  FR:{ title:'Plages', sub:'Vila Real de Santo António · Algarve', seaTemp:'Température de la Mer', seaConditions:'Conditions du Jour', flagGuide:'Guide des Drapeaux', beaches:'Plages Proches', parking:'Parking', bar:'Bar', wc:'WC', directions:'Naviguer', loading:'Chargement des données marines...', summer:'Été (Jun–Sep)', winter:'Hiver (Oct–Mai)', tipTitle:'Conseil du jour', uv:'Indice UV', wave:'Hauteur des Vagues', wind:'Vent', conditions:{0:'Excellentes',1:'Bonnes',2:'Correctes',3:'Mauvaises'} },
-  DE:{ title:'Strände', sub:'Vila Real de Santo António · Algarve', seaTemp:'Meerestemperatur', seaConditions:'Heutige Bedingungen', flagGuide:'Flaggenführer', beaches:'Nahe Strände', parking:'Parkplatz', bar:'Bar', wc:'WC', directions:'Navigieren', loading:'Marine Daten laden...', summer:'Sommer (Jun–Sep)', winter:'Winter (Okt–Mai)', tipTitle:'Tipp des Tages', uv:'UV-Index', wave:'Wellenhöhe', wind:'Wind', conditions:{0:'Ausgezeichnet',1:'Gut',2:'Mäßig',3:'Schlecht'} },
-}
-
 function getConditionLevel(wx) {
   if (!wx) return 0
   const code = wx.weathercode || 0
@@ -34,7 +27,7 @@ function getConditionLevel(wx) {
 
 export default function Beaches({ lang, onNav }) {
   const L = lang || 'PT'
-  const t = TR[L] || TR.PT
+  const t = tr('beaches', L)
   const [marine, setMarine] = useState(null)
   const [wx, setWx]         = useState(null)
 
