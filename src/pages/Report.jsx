@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import { usePhotos } from '../hooks/usePhotos'
 
 const CATEGORIES = [
   { id:'lixo',       icon:'🗑️', color:'#92400E', bg:'#FEF3C7', label:{PT:'Lixo / Sujidade',     EN:'Waste / Dirt',       ES:'Basura / Suciedad',  FR:'Déchets / Saleté',  DE:'Müll / Schmutz'    } },

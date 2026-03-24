@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { usePhotos } from '../hooks/usePhotos'
-import PhotoPicker, { PhotoButton } from '../components/PhotoPicker'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 
 
@@ -140,8 +138,6 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
   const L = lang || 'PT'
   const t = TR[L] || TR.PT
   const [detail, setDetail]   = useState(null)
-  const [picker, setPicker]   = useState(null)
-  const { getPhoto, setPhoto, deletePhoto } = usePhotos()
 
   if (detail) {
     const isFav = favs.includes(detail.id)
@@ -150,10 +146,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
         <div style={{ background:getAvatarColor(detail.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-            <div style={{ display:'flex', gap:8 }}>
-              <PhotoButton id={detail.id} hasPhoto={!!getPhoto(detail.id)} onPress={() => setPicker(detail.id)} />
-              <button aria-label={t.fav} onClick={() => toggleFav(detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
-            </div>
+            <button aria-label={t.fav} onClick={() => toggleFav(detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:60, height:60, borderRadius:14, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -194,10 +187,7 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
                     <span style={{ fontSize:32 }}>{m.emoji}</span>
                     <span style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.7)', background:'rgba(255,255,255,.15)', padding:'2px 8px', borderRadius:50 }}>{m.tag[L]||m.tag.PT}</span>
                   </div>
-                  <div style={{ display:'flex', gap:6 }}>
-                    <PhotoButton id={m.id} hasPhoto={!!getPhoto(m.id)} onPress={() => setPicker(m.id)} />
-                    <button aria-label={t.fav} onClick={e => { e.stopPropagation(); toggleFav(m.id) }} style={{ width:32, height:32, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:15, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav?'❤️':'🤍'}</button>
-                  </div>
+                  <button aria-label={t.fav} onClick={e => { e.stopPropagation(); toggleFav(m.id) }} style={{ width:32, height:32, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:15, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav?'❤️':'🤍'}</button>
                 </div>
                 <div style={{ padding:'12px 14px 14px' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:4 }}>
@@ -212,16 +202,6 @@ export default function Culture({ lang, favs, toggleFav, onNav }) {
           })}
         </div>
       </div>
-      {picker !== null && (
-        <PhotoPicker
-          id={picker}
-          lang={lang}
-          currentPhoto={getPhoto(picker)}
-          onSave={async (id, file) => { await setPhoto(id, file) }}
-          onDelete={deletePhoto}
-          onClose={() => setPicker(null)}
-        />
-      )}
     </div>
   )
 }

@@ -1,6 +1,4 @@
 import { useState, useMemo } from 'react'
-import { usePhotos } from '../hooks/usePhotos'
-import PhotoPicker, { PhotoButton } from '../components/PhotoPicker'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 
 // ─── Unsplash photos by food type ────────────────────────────
@@ -170,12 +168,10 @@ function Stars({ rating }) {
 // ─── Main ─────────────────────────────────────────────────────
 export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRestaurants }) {
   const L  = lang || 'PT'
-  const { getPhoto, setPhoto, deletePhoto } = usePhotos()
   const t  = TR[L] || TR.PT
   const [filter, setFilter]   = useState('all')
   const [search, setSearch]   = useState('')
   const [detail, setDetail]   = useState(null)
-  const [picker, setPicker]   = useState(null) // id of pin being edited
 
   const foodPins = useMemo(() => {
     const base = cmsRestaurants && cmsRestaurants.length > 0
@@ -205,10 +201,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
         <div style={{ background:getAvatarColor(r.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-            <div style={{ display:'flex', gap:8 }}>
-              <PhotoButton id={r.id} hasPhoto={!!getPhoto(r.id)} onPress={() => setPicker(r.id)} />
-              <button aria-label={t.fav} onClick={() => toggleFav(r.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
-            </div>
+            <button aria-label={t.fav} onClick={() => toggleFav(r.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:64, height:64, borderRadius:16, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -393,17 +386,6 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
           </div>
         )}
       </div>
-      {/* Photo picker sheet */}
-      {picker !== null && (
-        <PhotoPicker
-          id={picker}
-          lang={lang}
-          currentPhoto={getPhoto(picker)}
-          onSave={async (id, file) => { await setPhoto(id, file) }}
-          onDelete={deletePhoto}
-          onClose={() => setPicker(null)}
-        />
-      )}
 
     </div>
   )

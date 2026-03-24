@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { usePhotos } from '../hooks/usePhotos'
-import PhotoPicker, { PhotoButton } from '../components/PhotoPicker'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 
 
@@ -54,9 +52,6 @@ export default function Hotels({ lang, pins, favs, toggleFav, onNav }) {
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
   const [detail, setDetail] = useState(null)
-  const [picker, setPicker]   = useState(null)
-  const { getPhoto, setPhoto, deletePhoto } = usePhotos()
-
   const hotelPins = pins.filter(p => p.cat === 'hotel')
 
   const filtered = hotelPins.filter(p => {
@@ -75,10 +70,7 @@ export default function Hotels({ lang, pins, favs, toggleFav, onNav }) {
         <div style={{ background:getAvatarColor(detail.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-            <div style={{ display:'flex', gap:8 }}>
-              <PhotoButton id={detail.id} hasPhoto={!!getPhoto(detail.id)} onPress={() => setPicker(detail.id)} />
-              <button aria-label={t.fav} onClick={() => toggleFav(detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
-            </div>
+            <button aria-label={t.fav} onClick={() => toggleFav(detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:60, height:60, borderRadius:14, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -148,10 +140,7 @@ export default function Hotels({ lang, pins, favs, toggleFav, onNav }) {
                       </div>
                       <span style={{ background:'rgba(255,255,255,.2)', color:'#fff', fontSize:12, fontWeight:700, padding:'2px 10px', borderRadius:50 }}>{r.price}</span>
                     </div>
-                    <div style={{ display:'flex', gap:6 }}>
-                      <PhotoButton id={p.id} hasPhoto={!!getPhoto(p.id)} onPress={() => setPicker(p.id)} />
-                      <button aria-label={t.fav} onClick={e => { e.stopPropagation(); toggleFav(p.id) }} style={{ width:32, height:32, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
-                    </div>
+                    <button aria-label={t.fav} onClick={e => { e.stopPropagation(); toggleFav(p.id) }} style={{ width:32, height:32, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
                   </div>
                   <div style={{ padding:'12px 14px' }}>
                     <div style={{ fontSize:14, fontWeight:800, color:'var(--ink)', marginBottom:4 }}>{p.name}</div>
@@ -164,11 +153,6 @@ export default function Hotels({ lang, pins, favs, toggleFav, onNav }) {
           </div>
         )}
       </div>
-      {picker !== null && (
-        <PhotoPicker id={picker} lang={lang} currentPhoto={getPhoto(picker)}
-          onSave={async (id, file) => { await setPhoto(id, file) }}
-          onDelete={deletePhoto} onClose={() => setPicker(null)} />
-      )}
     </div>
   )
 }
