@@ -10,55 +10,55 @@ import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 
 
 const RICH = {
-  13:  { rating:4.5, reviews:523, price:'€€', hours:'12:00–15:30 · 18:00–22:30', phone:'+351 281 513 038', open:true,
+  13:  { rating:4.5, reviews:523, price:'€€', hours:'12:00–15:30 · 18:00–22:30', phone:'+351 281 513 038', closedDays:[1],
          desc:{PT:'Na sede da Associação Naval, junto ao Porto de Recreio. Vista espetacular para o Guadiana. Cataplana de marisco, açorda e arroz de marisco.',
                EN:'At the Naval Association, next to the marina. Spectacular Guadiana views. Seafood cataplana, açorda and seafood rice.',
                ES:'Vista espectacular al Guadiana. Cataplana de marisco, açorda y arroz de marisco.',
                FR:'Vue spectaculaire sur le Guadiana. Cataplana de fruits de mer, açorda et riz aux fruits de mer.',
                DE:'Spektakuläre Aussicht auf den Guadiana. Meeresfrüchte-Cataplana und Meeresfrüchtereis.'} },
-  253: { rating:4.6, reviews:312, price:'€',  hours:'12:00–15:00 · 19:00–22:00', phone:'+351 281 403 370', open:true,
+  253: { rating:4.6, reviews:312, price:'€',  hours:'12:00–15:00 · 19:00–22:00', phone:'+351 281 403 370', closedDays:[1],
          desc:{PT:'Pequeno e autêntico. Atum e peixe fresco do dia. Menu do dia com o que apanharam de manhã. Muito popular com os locais.',
                EN:'Small and authentic. Fresh tuna and daily catch. Very popular with locals.',
                ES:'Pequeño y auténtico. Atún y pescado fresco. Muy popular entre los lugareños.',
                FR:'Petit et authentique. Thon et poisson frais du jour. Très populaire chez les locaux.',
                DE:'Klein und authentisch. Frischer Thunfisch und Tagesfang. Sehr beliebt bei Einheimischen.'} },
-  270: { rating:4.4, reviews:287, price:'€€', hours:'12:00–23:00', phone:null, open:true,
+  270: { rating:4.4, reviews:287, price:'€€', hours:'12:00–23:00', phone:null,
          desc:{PT:'Marisqueira com vista para o Guadiana. Gambas, percebes e marisco fresco. Uma das melhores marisqueiras da zona.',
                EN:'Seafood restaurant overlooking the Guadiana. Prawns, barnacles and fresh shellfish.',
                ES:'Marisquería con vistas al Guadiana. Gambas, percebes y marisco fresco.',
                FR:'Restaurant de fruits de mer avec vue sur le Guadiana.',
                DE:'Meeresfrüchte-Restaurant mit Blick auf den Guadiana.'} },
-  117: { rating:4.3, reviews:198, price:'€€', hours:'12:30–15:00 · 19:00–23:00', phone:'+351 920 246 529', open:true,
+  117: { rating:4.3, reviews:198, price:'€€', hours:'12:30–15:00 · 19:00–23:00', phone:'+351 920 246 529', closedDays:[2],
          desc:{PT:'O único restaurante japonês de VRSA. Sushi fresco, ramen e pratos asiáticos. Bom serviço, ambiente acolhedor.',
                EN:'The only Japanese restaurant in VRSA. Fresh sushi, ramen and Asian dishes.',
                ES:'El único restaurante japonés de VRSA. Sushi fresco, ramen y platos asiáticos.',
                FR:'Le seul restaurant japonais de VRSA. Sushis frais, ramen et plats asiatiques.',
                DE:'Das einzige japanische Restaurant in VRSA. Frisches Sushi und Ramen.'} },
-  120: { rating:4.1, reviews:156, price:'€',  hours:'18:00–23:30', phone:null, open:true,
+  120: { rating:4.1, reviews:156, price:'€',  hours:'18:00–23:30', phone:null,
          desc:{PT:'Pizzaria artesanal com fornos a lenha. Massas frescas e ingredientes de qualidade.',
                EN:'Artisan pizzeria with wood-fired ovens. Fresh pasta and quality ingredients.',
                ES:'Pizzería artesanal con hornos de leña. Pastas frescas e ingredientes de calidad.',
                FR:'Pizzeria artisanale avec fours à bois. Pâtes fraîches.',
                DE:'Handgemachte Pizza aus dem Holzofen. Frische Pasta.'} },
-  134: { rating:3.8, reviews:89,  price:'€',  hours:'10:00–23:00', phone:null, open:true,
+  134: { rating:3.8, reviews:89,  price:'€',  hours:'10:00–23:00', phone:null,
          desc:{PT:'Hambúrgueres, batatas fritas e menus rápidos.',
                EN:'Burgers, fries and quick meals.',
                ES:'Hamburguesas, patatas fritas y menús rápidos.',
                FR:'Burgers, frites et menus rapides.',
                DE:'Burger, Pommes und Schnellmenüs.'} },
-  135: { rating:3.7, reviews:124, price:'€',  hours:'07:00–00:00', phone:null, open:true,
+  135: { rating:3.7, reviews:124, price:'€',  hours:'07:00–00:00', phone:null,
          desc:{PT:'McDonald\'s em VRSA. Aberto até tarde.',
                EN:'McDonald\'s in VRSA. Open late.',
                ES:'McDonald\'s en VRSA. Abre hasta tarde.',
                FR:'McDonald\'s à VRSA. Ouvert tard.',
                DE:'McDonald\'s in VRSA. Lange geöffnet.'} },
-  252: { rating:4.5, reviews:187, price:'€€', hours:'12:00–15:30 · 19:00–22:30', phone:'+351 281 511 127', open:true,
+  252: { rating:4.5, reviews:187, price:'€€', hours:'12:00–15:30 · 19:00–22:30', phone:'+351 281 511 127',
          desc:{PT:'Tapas e petiscos no coração de VRSA. Ambiente descontraído, preços justos e muito bom peixe fresco.',
                EN:'Tapas and snacks in the heart of VRSA. Relaxed atmosphere, fair prices and excellent fresh fish.',
                ES:'Tapas y aperitivos en el corazón de VRSA. Ambiente relajado y buen pescado fresco.',
                FR:'Tapas et petits plats au cœur de VRSA. Ambiance décontractée et excellent poisson frais.',
                DE:'Tapas und Snacks im Herzen von VRSA. Entspannte Atmosphäre und frischer Fisch.'} },
-  125: { rating:4.3, reviews:156, price:'€€', hours:'12:00–15:00 · 19:00–22:00', phone:'+351 914 353 282', open:true,
+  125: { rating:4.3, reviews:156, price:'€€', hours:'12:00–15:00 · 19:00–22:00', phone:'+351 914 353 282',
          desc:{PT:'Junto ao Guadiana. Menu variado de peixe e marisco. Boa selecção de vinhos e atendimento simpático.',
                EN:'By the Guadiana. Varied fish and seafood menu. Good wine selection and friendly service.',
                ES:'Junto al Guadiana. Menú variado de pescado y marisco. Buena selección de vinos.',
@@ -73,12 +73,16 @@ const RICH = {
 }
 
 function getRich(id) {
-  return RICH[id] || { rating:4.0, reviews:Math.floor(30+Math.random()*200), price:'€', hours:'12:00–22:00', phone:null, open:true, desc:{PT:'Restaurante local em VRSA.',EN:'Local restaurant in VRSA.',ES:'Restaurante local en VRSA.',FR:'Restaurant local à VRSA.',DE:'Lokales Restaurant em VRSA.'} }
+  const base = RICH[id] || { rating:4.0, reviews:Math.floor(30+Math.random()*200), price:'€', hours:'12:00–22:00', phone:null, desc:{PT:'Restaurante local em VRSA.',EN:'Local restaurant in VRSA.',ES:'Restaurante local en VRSA.',FR:'Restaurant local à VRSA.',DE:'Lokales Restaurant em VRSA.'} }
+  const open = isOpenNow(base.hours, base.closedDays)
+  return { ...base, open: open !== null ? open : true }
 }
 
-function isOpenNow(hours) {
+// closedDays: array of JS weekday numbers (0=Sun, 1=Mon, … 6=Sat)
+function isOpenNow(hours, closedDays) {
   if (!hours) return null
   const now = new Date()
+  if (closedDays?.includes(now.getDay())) return false
   const cur = now.getHours() * 60 + now.getMinutes()
   const slots = hours.split(' · ')
   for (const slot of slots) {
@@ -91,9 +95,10 @@ function isOpenNow(hours) {
   return false
 }
 
-function closesAt(hours) {
+function closesAt(hours, closedDays) {
   if (!hours) return null
   const now = new Date()
+  if (closedDays?.includes(now.getDay())) return null
   const cur = now.getHours() * 60 + now.getMinutes()
   const slots = hours.split(' · ')
   for (const slot of slots) {

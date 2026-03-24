@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, memo, useCallback, useMemo } from 'react'
 import {
   APIProvider, Map as GMap,
-  AdvancedMarker,
+  AdvancedMarker, useMap, useMapsLibrary,
 } from '@vis.gl/react-google-maps'
 
-const MAPS_KEY = import.meta.env.VITE_GOOGLE_MAPS_KEY
+const MAPS_KEY     = import.meta.env.VITE_GOOGLE_MAPS_KEY
+const DARK_MAP_ID  = import.meta.env.VITE_GOOGLE_MAPS_DARK_ID  // optional — configure in Google Console
 
 // Module-level helpers — accessible by ALL components in this file
 function calcDist(a, b) {
@@ -23,6 +24,7 @@ const T = {
     changeCat: 'Alterar categoria', navigateTo: 'NAVEGAR PARA',
     walk: (d,t) => `${d} a pé · ~${t} min`, noGPS: 'Ativa o GPS para distância',
     navigate: 'Navegar', saved: 'Copiado!',
+    stopNav: 'Parar Navegação', calcRoute: 'A calcular rota...',
     changes: n => `💾 ${n} alteraç${n===1?'ão':'ões'}`,
     places: n => `${n} locais`,
     dragHint: 'Arrasta · × apaga · ✏️ categoria',
@@ -35,6 +37,7 @@ const T = {
     changeCat: 'Change category', navigateTo: 'NAVIGATE TO',
     walk: (d,t) => `${d} walk · ~${t} min`, noGPS: 'Enable GPS for distance',
     navigate: 'Navigate', saved: 'Copied!',
+    stopNav: 'Stop Navigation', calcRoute: 'Calculating route...',
     changes: n => `💾 ${n} change${n===1?'':'s'}`,
     places: n => `${n} places`,
     dragHint: 'Drag · × delete · ✏️ category',
@@ -47,6 +50,7 @@ const T = {
     changeCat: 'Cambiar categoría', navigateTo: 'NAVEGAR A',
     walk: (d,t) => `${d} a pie · ~${t} min`, noGPS: 'Activa GPS para distancia',
     navigate: 'Navegar', saved: 'Copiado!',
+    stopNav: 'Parar Navegación', calcRoute: 'Calculando ruta...',
     changes: n => `💾 ${n} cambio${n===1?'':'s'}`,
     places: n => `${n} lugares`,
     dragHint: 'Arrastra · × borrar · ✏️ categoría',
@@ -355,8 +359,132 @@ function CategoryPicker({ lang, pins, onSelect, onShowAll, onEdit }) {
   )
 }
 
+// ── Map controller (must be a child of GMap to access useMap) ───────────────
+function MapController({ activeFilter, visible, locateMeRef, userPos }) {
+  const map = useMap()
+
+  // Expose locateMe to parent via ref
+  useEffect(() => {
+    if (!map) return
+    locateMeRef.current = () => {
+      if (!userPos) return
+      map.panTo(userPos)
+      map.setZoom(17)
+    }
+  }, [map, userPos])
+
+  // Auto fit-bounds when category filter changes
+  useEffect(() => {
+    if (!map || activeFilter === null || visible.length === 0) return
+    if (visible.length === 1) {
+      map.panTo({ lat: visible[0].lat, lng: visible[0].lng })
+      map.setZoom(16)
+      return
+    }
+    const bounds = new window.google.maps.LatLngBounds()
+    visible.forEach(p => bounds.extend({ lat: p.lat, lng: p.lng }))
+    map.fitBounds(bounds, 60)
+  }, [activeFilter, map]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  return null
+}
+
+// ── Routing controller (must be inside GMap to use useMap / useMapsLibrary) ─
+function RoutingController({ activeRoute, onResult }) {
+  const map       = useMap()
+  const routesLib = useMapsLibrary('routes')
+  const [svc, setSvc]           = useState(null)
+  const [renderer, setRenderer] = useState(null)
+
+  // Init DirectionsService + DirectionsRenderer once the library loads
+  useEffect(() => {
+    if (!routesLib || !map) return
+    setSvc(new routesLib.DirectionsService())
+    const dr = new routesLib.DirectionsRenderer({
+      suppressMarkers: true,
+      polylineOptions: { strokeColor: '#1976D2', strokeWeight: 5, strokeOpacity: 0.85 },
+    })
+    setRenderer(dr)
+    return () => dr.setMap(null)
+  }, [routesLib, map])
+
+  // Request walking directions whenever activeRoute changes
+  useEffect(() => {
+    if (!svc || !renderer || !routesLib) return
+    if (!activeRoute) {
+      renderer.setMap(null)
+      onResult(null)
+      return
+    }
+    renderer.setMap(map)
+    svc.route(
+      { origin: activeRoute.origin, destination: activeRoute.destination, travelMode: routesLib.TravelMode.WALKING },
+      (result, status) => {
+        if (status === 'OK') { renderer.setDirections(result); onResult(result) }
+        else onResult(null)
+      }
+    )
+  }, [activeRoute, svc, renderer]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  return null
+}
+
+// ── Route card (shown while in-app navigation is active) ────────────────────
+function RouteCard({ activeRoute, routeResult, lang, onStop }) {
+  const { destination, origin } = activeRoute
+  const cat = getCat(destination.cat)
+  const t   = T[lang] || T.PT
+  const leg = routeResult?.routes?.[0]?.legs?.[0]
+
+  const gmUrl   = `https://www.google.com/maps/dir/?api=1${origin ? `&origin=${origin.lat},${origin.lng}` : ''}&destination=${destination.lat},${destination.lng}&travelmode=walking`
+  const wazeUrl = `https://waze.com/ul?ll=${destination.lat},${destination.lng}&navigate=yes`
+
+  return (
+    <div style={{
+      position:'absolute', bottom:0, left:0, right:0, zIndex:20,
+      padding:'0 12px 16px',
+      animation: 'pin-card-in .25s cubic-bezier(.22,.68,0,1.2) both',
+    }}>
+      <div style={{
+        background:'var(--white)', borderRadius:20,
+        boxShadow:'0 -2px 0 rgba(0,0,0,.04), 0 8px 40px rgba(0,0,0,.18)',
+        padding:'16px 18px 18px', display:'flex', flexDirection:'column', gap:12,
+      }}>
+        {/* Destination header */}
+        <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+          <div style={{ width:46, height:46, borderRadius:13, background:cat.bg, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, border:`1.5px solid ${cat.color}22` }}>{cat.icon}</div>
+          <div style={{ flex:1, minWidth:0 }}>
+            <div style={{ fontSize:15, fontWeight:800, color:'var(--ink)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{destination.name}</div>
+            {leg ? (
+              <div style={{ fontSize:12, color:'#16A34A', fontWeight:700, marginTop:2 }}>🚶 {leg.distance?.text} · {leg.duration?.text}</div>
+            ) : (
+              <div style={{ fontSize:11, color:'var(--ink-20)', marginTop:2 }}>{t.calcRoute}</div>
+            )}
+          </div>
+          <button onClick={onStop} style={{ width:30, height:30, borderRadius:'50%', background:'var(--surface)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16, color:'var(--ink-40)', flexShrink:0 }}>×</button>
+        </div>
+
+        {/* External navigation apps */}
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
+          <button onClick={() => window.open(gmUrl, '_blank')} style={{ padding:'10px 0', background:'#4285F4', color:'#fff', border:'none', borderRadius:12, fontSize:12, fontWeight:700, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:5 }}>
+            🗺️ Google Maps
+          </button>
+          <button onClick={() => window.open(wazeUrl, '_blank')} style={{ padding:'10px 0', background:'#00BFFF', color:'#fff', border:'none', borderRadius:12, fontSize:12, fontWeight:700, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:5 }}>
+            🔵 Waze
+          </button>
+        </div>
+
+        {/* Stop navigation */}
+        <button onClick={onStop} style={{ width:'100%', padding:'12px 0', background:'#FEE2E2', color:'#DC2626', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer' }}>
+          ✕ {t.stopNav}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 // ── Main ────────────────────────────────────────────────────────────────────
-function MapContent({ lang, pins, setPins }) {
+function MapContent({ lang, pins, setPins, theme }) {
   const t = T[lang] || T.PT
   const [activeFilter, setActiveFilter] = useState(null) // null = show picker
   const [showPicker, setShowPicker]     = useState(true)
@@ -371,7 +499,10 @@ function MapContent({ lang, pins, setPins }) {
   const [newName, setNewName]           = useState('')
   const [editingPin, setEditingPin]     = useState(null)
   const [changes, setChanges]           = useState([])
-  const nextId = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
+  const [activeRoute, setActiveRoute]   = useState(null) // {origin, destination}
+  const [routeResult, setRouteResult]   = useState(null) // DirectionsResult
+  const nextId    = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
+  const locateMeRef = useRef(null)
 
   useEffect(() => {
     if (!navigator.geolocation) return
@@ -531,12 +662,22 @@ function MapContent({ lang, pins, setPins }) {
         <GMap
           defaultCenter={{ lat:37.194, lng:-7.425 }}
           defaultZoom={13}
-          mapId="vrsa-map"
+          mapId={theme === 'dark' && DARK_MAP_ID ? DARK_MAP_ID : 'vrsa-map'}
           gestureHandling="greedy"
           style={{ width:'100%', height:'100%' }}
           onClick={handleMapClick}
           mapTypeControl={false} streetViewControl={false} fullscreenControl={false}
         >
+          <MapController
+            activeFilter={activeFilter}
+            visible={visible}
+            locateMeRef={locateMeRef}
+            userPos={userPos}
+          />
+          <RoutingController
+            activeRoute={activeRoute}
+            onResult={setRouteResult}
+          />
           {userPos && (
             <AdvancedMarker position={userPos} zIndex={20}>
               <div style={{ position:'relative', width:18, height:18 }}>
@@ -555,14 +696,32 @@ function MapContent({ lang, pins, setPins }) {
 
         </GMap>
 
-        {/* ── Floating pin card (replaces ugly InfoWindow) ── */}
-        {selected && !editMode && (
+        {/* ── Active route card ── */}
+        {activeRoute && (
+          <RouteCard
+            activeRoute={activeRoute}
+            routeResult={routeResult}
+            lang={lang}
+            onStop={() => { setActiveRoute(null); setRouteResult(null) }}
+          />
+        )}
+
+        {/* ── Floating pin card (only when no active route) ── */}
+        {selected && !editMode && !activeRoute && (
           <PinCard
             pin={selected}
             userPos={userPos}
             lang={lang}
             onClose={() => setSelected(null)}
-            onNavigate={() => { setNavDest(selected); setSelected(null) }}
+            onNavigate={() => {
+              if (userPos) {
+                setActiveRoute({ origin: userPos, destination: selected })
+                setSelected(null)
+              } else {
+                setNavDest(selected)
+                setSelected(null)
+              }
+            }}
           />
         )}
 
@@ -579,6 +738,27 @@ function MapContent({ lang, pins, setPins }) {
               <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:10, height:10, borderRadius:'50%', background:'#1565C0' }} />
             </div>
           </div>
+        )}
+
+        {/* ── Locate Me button ── */}
+        {userPos && !showPicker && (
+          <button
+            onClick={() => locateMeRef.current?.()}
+            aria-label="Locate me"
+            style={{
+              position:'absolute',
+              right:12,
+              bottom: activeRoute ? 240 : selected && !editMode ? 190 : 76,
+              width:44, height:44, borderRadius:12,
+              background:'var(--white)',
+              border:'1.5px solid var(--border-lt)',
+              boxShadow:'0 2px 12px rgba(0,0,0,.18)',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              fontSize:20, cursor:'pointer',
+              transition:'bottom .25s cubic-bezier(.22,.68,0,1.2)',
+              zIndex:15,
+            }}
+          >🎯</button>
         )}
       </div>
 
@@ -676,10 +856,10 @@ function MapContent({ lang, pins, setPins }) {
   )
 }
 
-export default function Map({ lang, pins, setPins }) {
+export default function Map({ lang, pins, setPins, theme }) {
   return (
     <APIProvider apiKey={MAPS_KEY}>
-      <MapContent lang={lang} pins={pins} setPins={setPins} />
+      <MapContent lang={lang} pins={pins} setPins={setPins} theme={theme} />
     </APIProvider>
   )
 }

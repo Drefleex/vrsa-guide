@@ -77,10 +77,11 @@ function InfoBanner({ icon, children, color='#1D4ED8' }) {
 
 // ─── Main ─────────────────────────────────────────────────────
 export default function Info({ lang }) {
-  const [tab, setTab] = useState('weather')
-  const [wx, setWx]   = useState(null)
+  const [tab, setTab]     = useState('weather')
+  const [wx, setWx]       = useState(null)
+  const [wxLoading, setWxLoading] = useState(false)
   const [busOpen, setBusOpen] = useState(null)
-  const [tick, setTick] = useState(0)
+  const [tick, setTick]   = useState(0)
 
   const L = lang || 'PT'
   const DAY = {PT:['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ES:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],FR:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],DE:['So','Mo','Di','Mi','Do','Fr','Sa']}
@@ -94,9 +95,15 @@ export default function Info({ lang }) {
   }
   const t = T[L] || T.PT
 
-  useEffect(() => {
+  function fetchWx() {
+    setWxLoading(true)
     fetch('https://api.open-meteo.com/v1/forecast?latitude=37.1948&longitude=-7.4161&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m,wind_direction_10m,relativehumidity_2m,precipitation&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_sum&timezone=Europe/Lisbon&forecast_days=7')
       .then(r=>r.json()).then(d=>{ if(d?.current) setWx(d) }).catch(()=>{})
+      .finally(()=>setWxLoading(false))
+  }
+
+  useEffect(() => {
+    fetchWx()
     const iv = setInterval(()=>setTick(x=>x+1), 60000)
     return () => clearInterval(iv)
   }, [])
@@ -175,6 +182,20 @@ export default function Info({ lang }) {
         {/* ══════════ WEATHER ══════════ */}
         {tab === 'weather' && (
           <div>
+            {/* Refresh row */}
+            <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:8 }}>
+              <button
+                onClick={fetchWx}
+                disabled={wxLoading}
+                aria-label="Refresh weather"
+                style={{ display:'flex', alignItems:'center', gap:5, padding:'5px 11px', borderRadius:50, background:'var(--surface)', border:'1px solid var(--border-lt)', fontSize:12, fontWeight:600, color:'var(--ink-40)', cursor:'pointer', opacity: wxLoading ? .5 : 1 }}
+              >
+                <span style={{ display:'inline-block', animation: wxLoading ? 'spin .8s linear infinite' : 'none' }}>🔄</span>
+                {wxLoading
+                  ? (L==='EN'?'Updating…':L==='ES'?'Actualizando…':L==='FR'?'Mise à jour…':L==='DE'?'Aktualisierung…':'A atualizar…')
+                  : (L==='EN'?'Refresh':L==='ES'?'Actualizar':L==='FR'?'Actualiser':L==='DE'?'Aktualisieren':'Atualizar')}
+              </button>
+            </div>
             {wx ? (() => {
               const code  = wx.current.weathercode
               const temp  = Math.round(wx.current.temperature_2m)
@@ -461,7 +482,7 @@ export default function Info({ lang }) {
             </InfoCard>
 
             {/* Tourist train */}
-            <div style={{ background:'var(--mint-lt)', border:'1px solid #A7F3D0', borderRadius:var_r_l(), padding:'16px 18px' }}>
+            <div style={{ background:'var(--mint-lt)', border:'1px solid #A7F3D0', borderRadius:20, padding:'16px 18px' }}>
               <div style={{ fontSize:13, fontWeight:800, color:'#065F46', marginBottom:6 }}>{t.touristTrain}</div>
               <div style={{ fontSize:11, color:'#059669', marginBottom:12 }}>{t.touristNote}</div>
               <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
@@ -547,7 +568,7 @@ export default function Info({ lang }) {
                 { icon:'☀️', season:{PT:'Verão (Jun–Set)',EN:'Summer (Jun–Sep)',ES:'Verano (Jun–Sep)'}[L], temp:'18–22°C', bg:'#FFF7ED', c:'#D97706', bc:'#FDE68A' },
                 { icon:'🌧️', season:{PT:'Inverno (Out–Mai)',EN:'Winter (Oct–May)',ES:'Invierno (Oct–May)'}[L], temp:'14–17°C', bg:'#EFF6FF', c:'#1D4ED8', bc:'#BFDBFE' },
               ].map((s,i)=>(
-                <div key={i} style={{ background:s.bg, border:`1px solid ${s.bc}`, borderRadius:var_r_l(), padding:'16px', textAlign:'center' }}>
+                <div key={i} style={{ background:s.bg, border:`1px solid ${s.bc}`, borderRadius:20, padding:'16px', textAlign:'center' }}>
                   <div style={{ fontSize:28, marginBottom:8 }}>{s.icon}</div>
                   <div style={{ fontSize:24, fontWeight:900, color:s.c }}>{s.temp}</div>
                   <div style={{ fontSize:11, color:s.c, marginTop:4, fontWeight:700 }}>{s.season}</div>
@@ -647,9 +668,8 @@ export default function Info({ lang }) {
         )}
 
       </div>
+      <style>{`@keyframes spin { to { transform:rotate(360deg) } }`}</style>
     </div>
   )
 }
 
-// Workaround: CSS var as inline (border-radius)
-function var_r_l() { return '20px' }
