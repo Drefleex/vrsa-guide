@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 // ─── 15 real-context 2026 VRSA events ───────────────────────
-const EVENTS = [
+export const EVENTS = [
   {
     id:1, emoji:'🎷', color:'#1D4ED8', month:4, day:25,
     title:{PT:'Celebração do 25 de Abril',EN:'April 25th Celebration',ES:'Celebración 25 de Abril',FR:'Fête du 25 Avril',DE:'25. April Feier'},
@@ -200,7 +200,7 @@ function PastEvents({ past, favs, toggleFav, setDetail, MONTHS, L, t }) {
         <div className="card">
           {past.map((ev, i) => {
             const mon   = (MONTHS[L] || MONTHS.PT)[ev.month - 1]
-            const isFav = favs.includes(ev.id)
+            const isFav = favs.includes('ev_' + ev.id)
             return (
               <div key={ev.id} onClick={() => setDetail(ev)} style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', borderBottom: i < past.length-1 ? '1px solid var(--surface)' : 'none', cursor:'pointer', opacity:.5 }}>
                 <div style={{ width:42, height:42, borderRadius:10, flexShrink:0, background:'var(--surface)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
@@ -212,7 +212,7 @@ function PastEvents({ past, favs, toggleFav, setDetail, MONTHS, L, t }) {
                   <div style={{ fontSize:11, color:'var(--ink-20)', marginTop:1 }}>{ev.loc}</div>
                 </div>
                 <span style={{ fontSize:11, color:'var(--ink-20)' }}>✓</span>
-                <button onClick={e => { e.stopPropagation(); toggleFav(ev.id) }} style={{ background:'none', border:'none', fontSize:14, cursor:'pointer', padding:2, opacity:.6 }}>{isFav ? '❤️' : '🤍'}</button>
+                <button onClick={e => { e.stopPropagation(); toggleFav('ev_' + ev.id) }} style={{ background:'none', border:'none', fontSize:14, cursor:'pointer', padding:2, opacity:.6 }}>{isFav ? '❤️' : '🤍'}</button>
               </div>
             )
           })}
@@ -244,7 +244,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
   // ── Detail view ──────────────────────────────────────────────
   if (detail) {
     const ev    = detail
-    const isFav = favs.includes(ev.id)
+    const isFav = favs.includes('ev_' + ev.id)
     const days  = countdown(ev.month, ev.day)
     const mon   = (MONTHS[L] || MONTHS.PT)[ev.month - 1]
     const past  = isPast(ev)
@@ -255,7 +255,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
         {/* Hero */}
         <div style={{ height:200, background:`linear-gradient(135deg,${ev.color},${ev.color}cc)`, display:'flex', flexDirection:'column', justifyContent:'flex-end', padding:'20px', position:'relative', flexShrink:0 }}>
           <button onClick={() => setDetail(null)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', left:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
-          <button onClick={() => toggleFav(ev.id)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', right:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
+          <button onClick={() => toggleFav('ev_' + ev.id)} style={{ position:'absolute', top:'calc(60px + env(safe-area-inset-top,0px))', right:16, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.3)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           <span style={{ fontSize:52, marginBottom:8 }}>{ev.emoji}</span>
           <div style={{ fontSize:20, fontWeight:800, color:'#fff', lineHeight:1.2 }}>{ev.title[L] || ev.title.PT}</div>
         </div>
@@ -295,7 +295,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
               style={{ flex:1, padding:'13px 0', background:ev.color, color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}
             >📍 {t.navigate}</button>
             <button
-              onClick={() => toggleFav(ev.id)}
+              onClick={() => toggleFav('ev_' + ev.id)}
               style={{ width:50, height:50, background: isFav ? '#FEE2E2' : 'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}
             >{isFav ? '❤️' : '🤍'}</button>
           </div>
@@ -360,7 +360,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
                   <div className="card" style={{ marginBottom:16 }}>
                     {upcoming.map((ev, i) => {
                       const mon   = (MONTHS[L] || MONTHS.PT)[ev.month - 1]
-                      const isFav = favs.includes(ev.id)
+                      const isFav = favs.includes('ev_' + ev.id)
                       const today = isToday(ev)
                       const days  = countdown(ev.month, ev.day)
                       return (
@@ -380,7 +380,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
                               <div><div style={{ fontSize:15, fontWeight:900, color:ev.color }}>{days}</div><div style={{ fontSize:9, color:'var(--ink-20)', fontWeight:600 }}>{t.days}</div></div>
                             ) : <span style={{ fontSize:18 }}>{ev.emoji}</span>}
                           </div>
-                          <button onClick={e => { e.stopPropagation(); toggleFav(ev.id) }} style={{ background:'none', border:'none', fontSize:16, cursor:'pointer', padding:2, flexShrink:0 }}>{isFav ? '❤️' : '🤍'}</button>
+                          <button onClick={e => { e.stopPropagation(); toggleFav('ev_' + ev.id) }} style={{ background:'none', border:'none', fontSize:16, cursor:'pointer', padding:2, flexShrink:0 }}>{isFav ? '❤️' : '🤍'}</button>
                         </div>
                       )
                     })}
