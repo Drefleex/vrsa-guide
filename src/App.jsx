@@ -49,9 +49,13 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [favs, setFavs]       = useState(loadFavs)
   const [theme, setTheme]     = useState(loadTheme)
-  const [welcome, setWelcome] = useState(() => {
-    try { return !localStorage.getItem('vrsa_welcomed') } catch { return true }
+  const [showWelcome, setShowWelcome] = useState(() => {
+    return localStorage.getItem('vrsa_tutorial_seen') !== 'true'
   })
+  const closeWelcome = () => {
+    localStorage.setItem('vrsa_tutorial_seen', 'true')
+    setShowWelcome(false)
+  }
   const [search, setSearch]   = useState(false)
   const [toast, setToast]     = useState(null)
   const toastTimer            = useRef(null)
@@ -168,8 +172,8 @@ export default function App() {
       <InstallBanner lang={lang} />
       <WelcomeModal
         lang={lang}
-        visible={welcome}
-        onClose={() => { localStorage.setItem('vrsa_welcomed','1'); setWelcome(false) }}
+        visible={showWelcome}
+        onClose={closeWelcome}
       />
       {search && <Suspense fallback={null}><GlobalSearch lang={lang} pins={pins} onNav={setPage} onClose={() => setSearch(false)} /></Suspense>}
       <BottomNav page={page} setPage={setPage} lang={lang} theme={theme} toggleTheme={toggleTheme} />
