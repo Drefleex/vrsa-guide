@@ -32,7 +32,7 @@ export default function SplashScreen({ lang, setLang, onStart }) {
         loading="eager"
         decoding="async"
         fetchpriority="high"
-        style={{ width:370, marginBottom:10, animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}
+        style={{ width:'100%', maxWidth:380, marginBottom:10, animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}
       />
 
       <div style={{ fontSize:12, color:'rgba(255,255,255,.35)', marginBottom:36, fontWeight:500, textAlign:'center', animation:ready?'inst-fade .5s ease both .22s':'none', opacity:ready?undefined:0 }}>{SUB[lang]||SUB.PT}</div>

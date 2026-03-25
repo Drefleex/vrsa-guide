@@ -380,7 +380,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
           alt="VRSA Guide"
           loading="eager"
           decoding="async"
-          style={{ width:320, marginBottom:10, display:'block', margin:'0 auto 10px' }}
+          style={{ width:'100%', maxWidth:360, marginBottom:10, display:'block', margin:'0 auto 10px' }}
         />
 
         {/* Mode toggle: Rio/Centro ↔ Praia */}
