@@ -17,7 +17,7 @@ export default function SplashScreen({ lang, setLang, onStart }) {
   useEffect(() => { const t = setTimeout(() => setReady(true), 80); return () => clearTimeout(t) }, [])
 
   return (
-    <div style={{ position:'fixed', inset:0, background:'linear-gradient(175deg,#020D1A 0%,#06152B 55%,#0A1F3D 100%)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'40px 32px', overflow:'hidden', fontFamily:"'Inter',-apple-system,sans-serif" }}>
+    <div style={{ position:'fixed', inset:0, background:'linear-gradient(175deg,#002D55 0%,#003B6F 55%,#004F96 100%)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'40px 32px', overflow:'hidden', fontFamily:"'Inter',-apple-system,sans-serif" }}>
       <style>{`
         @keyframes inst-fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
         @keyframes inst-logo{0%{opacity:0;transform:scale(.7)}60%{transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}

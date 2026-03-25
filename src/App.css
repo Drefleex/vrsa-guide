@@ -149,7 +149,7 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline:2
 .sched-row.next-dep .sched-time { color:var(--primary); }
 
 /* ── Home page ── */
-.home-hero { background:#06152B; padding:14px 18px 22px; padding-top:calc(58px + env(safe-area-inset-top,0px)); position:relative; overflow:hidden; }
+.home-hero { background:var(--primary); padding:14px 18px 22px; padding-top:calc(58px + env(safe-area-inset-top,0px)); position:relative; overflow:hidden; }
 .home-hero::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:14px; background:var(--bg); border-radius:14px 14px 0 0; }
 .wx-tile { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15); border-radius:var(--r); padding:10px 12px; cursor:pointer; text-align:center; min-width:72px; flex-shrink:0; }
 .ferry-tile { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); border-radius:var(--r); padding:10px 14px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; margin-top:12px; }
