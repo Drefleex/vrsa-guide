@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   Landmark, Activity, Bus, Building2, ShoppingBag,
-  Globe, Waves, Heart, AlertCircle, BarChart2, Sun, Moon,
+  Globe, Waves, Heart, AlertCircle, BarChart2,
 } from 'lucide-react'
 
 // ── Nav tab SVGs ──────────────────────────────────────────────
@@ -36,7 +36,7 @@ const MORE_ITEMS = [
   { k:'analytics', Icon:BarChart2,   color:'#1D4ED8', bg:'#EFF6FF', l:{PT:'Analytics',  EN:'Analytics', ES:'Analytics', FR:'Analytics', DE:'Analytics' } },
 ]
 
-export default function BottomNav({ page, setPage, lang, theme, toggleTheme }) {
+export default function BottomNav({ page, setPage, lang }) {
   const [moreOpen, setMoreOpen] = useState(false)
   const isMorePage = MORE_ITEMS.some(m => m.k === page)
 
@@ -87,22 +87,6 @@ export default function BottomNav({ page, setPage, lang, theme, toggleTheme }) {
                 )
               })}
 
-              {/* Theme toggle */}
-              <button
-                onClick={toggleTheme}
-                aria-label={theme==='dark'?(lang==='EN'?'Light mode':'Modo claro'):(lang==='EN'?'Dark mode':'Modo escuro')}
-                style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:6, padding:'11px 4px 9px', background:'var(--surface)', borderRadius:12, border:'1px solid var(--border-lt)', cursor:'pointer' }}
-              >
-                <div style={{ width:40, height:40, borderRadius:10, background: theme==='dark' ? '#1E293B' : '#F1F5F9', display:'flex', alignItems:'center', justifyContent:'center' }}>
-                  {theme==='dark'
-                    ? <Sun size={20} strokeWidth={1.8} color="#F59E0B" />
-                    : <Moon size={20} strokeWidth={1.8} color="#64748B" />
-                  }
-                </div>
-                <span style={{ fontSize:9, fontWeight:600, color:'var(--ink-40)', textAlign:'center' }}>
-                  {theme==='dark'?(lang==='EN'?'Light':lang==='FR'?'Clair':lang==='DE'?'Hell':'Claro'):(lang==='EN'?'Dark':lang==='FR'?'Sombre':lang==='DE'?'Dunkel':'Escuro')}
-                </span>
-              </button>
             </div>
           </div>
         </>

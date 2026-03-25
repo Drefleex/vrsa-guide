@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Sun, Moon } from 'lucide-react'
 
 const LANGS = ['PT','EN','ES','FR','DE']
 
@@ -17,7 +18,7 @@ const SVG_GLOBE = (
   </svg>
 )
 
-export default function TopBar({ lang, setLang, onSearch }) {
+export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) {
   const [langOpen, setLangOpen] = useState(false)
 
   return (
@@ -44,6 +45,15 @@ export default function TopBar({ lang, setLang, onSearch }) {
             style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:10, background:'rgba(255,255,255,.12)', border:'none', color:'#fff', cursor:'pointer' }}
           >
             {SVG_SEARCH}
+          </button>
+
+          {/* ── Dark mode ── */}
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Modo claro' : 'Modo escuro'}
+            style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:10, background:'rgba(255,255,255,.12)', border:'none', color:'#fff', cursor:'pointer', touchAction:'manipulation' }}
+          >
+            {theme === 'dark' ? <Sun size={17} strokeWidth={1.8} /> : <Moon size={17} strokeWidth={1.8} />}
           </button>
 
           {/* ── Idioma ── */}
