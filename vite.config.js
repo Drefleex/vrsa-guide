@@ -10,7 +10,9 @@ export default defineConfig({
       injectRegister: 'auto',
       // Precache all built assets automatically (JS, CSS, HTML, images)
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2}'],
+        // Precache only app shell (JS/CSS/HTML/icons) — NOT the heavy /images/ folder
+        globPatterns: ['**/*.{js,css,html,ico,woff2}', '*.png', '*.svg'],
+        globIgnores: ['**/images/**'],
         // Runtime caching rules (replaces the old manual sw.js logic)
         runtimeCaching: [
           // Weather API — network first, fall back to cache (5 min)
@@ -47,6 +49,15 @@ export default defineConfig({
             options: {
               cacheName: 'google-fonts-files',
               expiration: { maxAgeSeconds: 31536000, maxEntries: 30 },
+            },
+          },
+          // Local /images/ — CacheFirst, cached on first view, kept 30 days
+          {
+            urlPattern: /\/images\/.+\.webp$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'local-images',
+              expiration: { maxAgeSeconds: 2592000, maxEntries: 80 },
             },
           },
           // Unsplash & external images
