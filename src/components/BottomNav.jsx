@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {
-  Landmark, Activity, Bus, Building2, ShoppingBag,
+  Landmark, Activity, Building2, ShoppingBag,
   Globe, Waves, Heart, AlertCircle, BarChart2, Info,
 } from 'lucide-react'
 
@@ -26,7 +26,6 @@ const TABS = [
 const MORE_ITEMS = [
   { k:'culture',   Icon:Landmark,    color:'#7C3AED', bg:'#F5F3FF', l:{PT:'Cultura',   EN:'Culture',   ES:'Cultura',   FR:'Culture',  DE:'Kultur'    } },
   { k:'health',    Icon:Activity,    color:'#059669', bg:'#ECFDF5', l:{PT:'Saúde',      EN:'Health',    ES:'Salud',     FR:'Santé',    DE:'Gesundheit'} },
-  { k:'transport', Icon:Bus,         color:'#D97706', bg:'#FFFBEB', l:{PT:'Transporte', EN:'Transport', ES:'Transporte',FR:'Transport', DE:'Transport' } },
   { k:'hotels',    Icon:Building2,   color:'#9333EA', bg:'#FDF4FF', l:{PT:'Hotéis',     EN:'Hotels',    ES:'Hoteles',   FR:'Hôtels',   DE:'Hotels'    } },
   { k:'shopping',  Icon:ShoppingBag, color:'#059669', bg:'#ECFDF5', l:{PT:'Compras',    EN:'Shopping',  ES:'Compras',   FR:'Shopping', DE:'Einkaufen' } },
   { k:'ayamonte',  Icon:Globe,       color:'#DC2626', bg:'#FEF2F2', l:{PT:'Ayamonte',   EN:'Ayamonte',  ES:'Ayamonte',  FR:'Ayamonte', DE:'Ayamonte'  } },
