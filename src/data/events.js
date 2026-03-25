@@ -14,21 +14,21 @@ export const EVENTS = [
     lat:37.1911, lng:-7.412957
   },
   {
-    id:3, emoji:'🦐', color:'#059669', month:5, day:23,
+    id:3, emoji:'🦐', color:'#047857', month:5, day:23,
     title:{PT:'Festival do Marisco de VRSA',EN:'VRSA Seafood Festival',ES:'Festival del Marisco de VRSA',FR:'Festival des Fruits de Mer',DE:'VRSA Meeresfrüchte-Festival'},
     time:'18:00–24:00', loc:'Cais do Guadiana', price:'€ entrada livre · pratos €5–€15',
     desc:{PT:'Quatro dias de gastronomia junto ao rio. Cataplanas, gambas, percebes, mariscos frescos e vinhos algarvios. O maior evento gastronómico do concelho.',EN:'Four days of gastronomy by the river. Cataplanas, prawns, barnacles, fresh shellfish and Algarve wines. The largest gastronomic event in the municipality.',ES:'Cuatro días de gastronomía junto al río.',FR:'Quatre jours de gastronomie au bord du fleuve.',DE:'Vier Tage Gastronomie am Fluss.'},
     lat:37.192943, lng:-7.413413
   },
   {
-    id:4, emoji:'🎨', color:'#C85A3B', month:6, day:7,
+    id:4, emoji:'🎨', color:'#B04A2C', month:6, day:7,
     title:{PT:'Mercado de Artesanato',EN:'Crafts Market',ES:'Mercado de Artesanía',FR:'Marché Artisanal',DE:'Kunsthandwerksmarkt'},
     time:'10:00–20:00', loc:'Jardim Municipal', price:'🆓',
     desc:{PT:'Mais de 60 expositores com artesanato local: azulejos pintados à mão, cerâmica algarvia, bordados, cestos e produtos regionais. Ideal para levar recordações.',EN:'Over 60 exhibitors with local crafts: hand-painted tiles, Algarve ceramics, embroidery, baskets and regional products. Ideal for souvenirs.',ES:'Más de 60 expositores con artesanía local.',FR:'Plus de 60 exposants avec artisanat local.',DE:'Über 60 Aussteller mit lokalem Kunsthandwerk.'},
     lat:37.1911, lng:-7.412957
   },
   {
-    id:5, emoji:'🌊', color:'#0891B2', month:6, day:21,
+    id:5, emoji:'🌊', color:'#0E7490', month:6, day:21,
     title:{PT:'Dia Mundial do Surf — VRSA',EN:'World Surf Day — VRSA',ES:'Día Mundial del Surf',FR:'Journée Mondiale du Surf',DE:'Welt-Surf-Tag'},
     time:'09:00', loc:'Praia de Monte Gordo', price:'🆓',
     desc:{PT:'Celebração do Dia Mundial do Surf com provas livres, aulas de iniciação gratuitas e beach clean-up. Participa mesmo sem experiência!',EN:'World Surf Day celebration with free competitions, beginner lessons and beach clean-up. Join even without experience!',ES:'Celebración del Día Mundial del Surf con competiciones y clases gratuitas.',FR:'Journée mondiale du surf avec compétitions et cours gratuits.',DE:'Welt-Surf-Tag mit Wettbewerben und kostenlosen Anfänger-Kursen.'},
@@ -56,14 +56,14 @@ export const EVENTS = [
     lat:37.196981, lng:-7.413997
   },
   {
-    id:9, emoji:'🏄', color:'#059669', month:8, day:8,
+    id:9, emoji:'🏄', color:'#047857', month:8, day:8,
     title:{PT:'Campeonato Regional de Surf',EN:'Regional Surf Championship',ES:'Campeonato Regional de Surf',FR:'Championnat Régional de Surf',DE:'Regionales Surf-Turnier'},
     time:'08:00–18:00', loc:'Praia de Monte Gordo', price:'🆓',
     desc:{PT:'Competição regional de surf com categorias júnior e sénior. Participantes de toda a região algarvia em ondas de Monte Gordo.',EN:'Regional surf competition with junior and senior categories. Participants from across the Algarve on Monte Gordo\'s waves.',ES:'Competición regional de surf con categorías junior y senior.',FR:'Compétition régionale de surf avec catégories junior et senior.',DE:'Regionale Surf-Meisterschaft mit Junior- und Senior-Kategorien.'},
     lat:37.177989, lng:-7.449761
   },
   {
-    id:10, emoji:'🎉', color:'#C85A3B', month:8, day:15,
+    id:10, emoji:'🎉', color:'#B04A2C', month:8, day:15,
     title:{PT:'Festas da Cidade — Dia de VRSA',EN:'City Festival — VRSA Day',ES:'Fiestas de la Ciudad',FR:'Fête de la Ville',DE:'Stadtfest — VRSA-Tag'},
     time:'Todo o dia', loc:'Centro histórico', price:'🆓',
     desc:{PT:'Aniversário da fundação de VRSA em 1776. Desfiles históricos, música tradicional, gastronomia nas ruas e animação para toda a família.',EN:'Anniversary of the founding of VRSA in 1776. Historical parades, traditional music, street food and family entertainment.',ES:'Aniversario de la fundación de VRSA en 1776. Desfiles, música y gastronomía.',FR:'Anniversaire de la fondation de VRSA en 1776. Défilés, musique et gastronomie.',DE:'Jahrestag der Stadtgründung 1776. Historische Umzüge, Musik und Gastronomie.'},
@@ -91,7 +91,7 @@ export const EVENTS = [
     lat:37.194583, lng:-7.41551
   },
   {
-    id:14, emoji:'🎄', color:'#059669', month:12, day:6,
+    id:14, emoji:'🎄', color:'#047857', month:12, day:6,
     title:{PT:'Natal em VRSA — Inauguração',EN:'Christmas in VRSA — Inauguration',ES:'Navidad en VRSA',FR:'Noël à VRSA',DE:'Weihnachten in VRSA'},
     time:'18:30', loc:'Praça Marquês de Pombal', price:'🆓',
     desc:{PT:'Iluminação natalícia da cidade com concerto coral, Pai Natal e chocolatada quente para todos. O Presépio Gigante abre oficialmente.',EN:'City Christmas lights with choral concert, Santa Claus and hot chocolate for everyone. The Giant Nativity Scene officially opens.',ES:'Iluminación navideña con concierto coral, Papá Noel y chocolate caliente.',FR:'Illuminations de Noël avec concert choral, Père Noël et chocolat chaud.',DE:'Weihnachtsbeleuchtung mit Chorkonzert, Weihnachtsmann und heißer Schokolade.'},
@@ -112,7 +112,7 @@ export const EVENTS = [
     lat:37.194583, lng:-7.41551
   },
   {
-    id:17, emoji:'🎁', color:'#059669', month:12, day:13,
+    id:17, emoji:'🎁', color:'#047857', month:12, day:13,
     title:{PT:'Mercado de Natal de VRSA',EN:'VRSA Christmas Market',ES:'Mercado de Navidad de VRSA',FR:'Marché de Noël de VRSA',DE:'VRSA Weihnachtsmarkt'},
     time:'17:00–22:00', loc:'Praça Marquês de Pombal', price:'🆓',
     desc:{PT:'O tradicional Mercado de Natal na Praça Pombal com artesanato, presentes regionais, iguarias natalícias e pista de gelo para crianças. Uma das melhores épocas do ano para visitar VRSA.',EN:'The traditional Christmas Market at Praça Pombal with crafts, regional gifts, Christmas delicacies and an ice rink for children. One of the best times of year to visit VRSA.',ES:'El tradicional Mercado de Navidad en la Plaza Pombal con artesanía, regalos regionales y pista de hielo para niños.',FR:'Le marché de Noël traditionnel à la Praça Pombal avec artisanat, cadeaux régionaux et patinoire pour enfants.',DE:'Der traditionelle Weihnachtsmarkt am Praça Pombal mit Kunsthandwerk, regionalen Geschenken und Eisbahn für Kinder.'},
@@ -148,7 +148,7 @@ export const EVENTS = [
     lat:37.196981, lng:-7.413997
   },
   {
-    id:22, emoji:'🏃', color:'#059669', month:12, day:6,
+    id:22, emoji:'🏃', color:'#047857', month:12, day:6,
     title:{PT:'Corrida São Silvestre de VRSA',EN:'São Silvestre Race VRSA',ES:'Carrera San Silvestre de VRSA',FR:'Course São Silvestre de VRSA',DE:'São Silvestre Lauf VRSA'},
     time:'16:45', loc:'Praça Marquês de Pombal', price:'🆓',
     desc:{PT:'Corrida pedestre de São Silvestre pelas ruas históricas de VRSA. Categorias para todas as idades — uma das tradições desportivas mais queridas da cidade. Inscrição gratuita no local.',EN:'São Silvestre foot race through the historic streets of VRSA. Categories for all ages — one of the city\'s most beloved sporting traditions. Free registration on-site.',ES:'Carrera popular de San Silvestre por las calles históricas. Categorías para todas las edades. Inscripción gratuita en el lugar.',FR:'Course pédestre São Silvestre dans les rues historiques pour tous les âges. Inscription gratuite sur place.',DE:'São Silvestre Volkslauf durch die historischen Straßen für alle Altersgruppen. Kostenlose Anmeldung vor Ort.'},

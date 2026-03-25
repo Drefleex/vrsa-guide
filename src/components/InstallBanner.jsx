@@ -61,7 +61,7 @@ export default function InstallBanner({ lang }) {
       zIndex:300, boxShadow:'0 4px 24px rgba(0,0,0,.12)',
       animation:'slide-up .3s ease',
     }}>
-      <img src="/brasao-vrsa.png" alt="" loading="lazy" decoding="async" style={{ width:36, height:36, objectFit:'contain', flexShrink:0 }} />
+      <img src="/brasao-vrsa.webp" alt="" loading="lazy" decoding="async" style={{ width:36, height:36, objectFit:'contain', flexShrink:0 }} />
       <div style={{ flex:1, minWidth:0 }}>
         <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)' }}>{t.title}</div>
         <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{t.sub}</div>

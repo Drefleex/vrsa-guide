@@ -131,7 +131,7 @@ export default function Report({ lang }) {
       {/* Header */}
       <div style={{ background:'var(--primary)', padding:'16px 18px 18px', paddingTop:'calc(60px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
         <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:2 }}>
-          <img src="/brasao-vrsa.png" alt="" style={{ width:28, height:28, objectFit:'contain', flexShrink:0 }} />
+          <img src="/brasao-vrsa.webp" alt="" style={{ width:28, height:28, objectFit:'contain', flexShrink:0 }} />
           <div>
             <div style={{ fontSize:18, fontWeight:700, color:'#fff' }}>{t.title}</div>
             <div style={{ fontSize:10, color:'rgba(255,255,255,.4)', letterSpacing:.3 }}>{t.sub}</div>

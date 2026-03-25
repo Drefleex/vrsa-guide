@@ -377,7 +377,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
         {/* Top row: brasão + name */}
         <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:10 }}>
           <img
-            src="/brasao-vrsa.png"
+            src="/brasao-vrsa.webp"
             alt="Brasão VRSA"
             loading="eager"
             decoding="async"

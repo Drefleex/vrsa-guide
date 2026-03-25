@@ -26,7 +26,7 @@ export default function SplashScreen({ lang, setLang, onStart }) {
       <div style={{ position:'absolute', top:0, right:0, width:220, height:220, borderRadius:'0 0 0 100%', background:'rgba(255,255,255,.035)', pointerEvents:'none' }} />
       <div style={{ position:'absolute', bottom:0, left:0, width:160, height:160, borderRadius:'0 100% 0 0', background:'rgba(255,255,255,.035)', pointerEvents:'none' }} />
 
-      <div style={{ width:88, height:88, borderRadius:16, background:'rgba(255,255,255,.1)', border:'1.5px solid rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:44, marginBottom:24, animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}><img src="/brasao-vrsa.png" alt="Brasão VRSA" loading="eager" decoding="async" style={{ width:72, height:72, objectFit:'contain' }} /></div>
+      <div style={{ width:88, height:88, borderRadius:16, background:'rgba(255,255,255,.1)', border:'1.5px solid rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:44, marginBottom:24, animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}><img src="/brasao-vrsa.webp" alt="Brasão VRSA" loading="eager" decoding="async" fetchpriority="high" style={{ width:72, height:72, objectFit:'contain' }} /></div>
 
       <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.42)', letterSpacing:'3px', textTransform:'uppercase', marginBottom:8, animation:ready?'inst-fade .5s ease both .15s':'none', opacity:ready?undefined:0 }}>Câmara Municipal</div>
 

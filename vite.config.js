@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      injectRegister: 'script',
       // Precache all built assets automatically (JS, CSS, HTML, images)
       workbox: {
         // Precache only app shell (JS/CSS/HTML/icons) — NOT the heavy /images/ folder
