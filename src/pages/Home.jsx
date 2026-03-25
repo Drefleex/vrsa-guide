@@ -638,7 +638,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
         <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gridTemplateRows:'140px 140px', gap:5, marginBottom:24, borderRadius:16, overflow:'hidden' }}>
           {/* Grande à esquerda */}
           <div onClick={() => setLb(0)} style={{ gridRow:'1 / 3', position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
-            <img src={GALLERY[0].url} alt={GALLERY[0].cap} loading="eager" decoding="async" className="gallery-img"
+            <img src={GALLERY[0].url} alt={GALLERY[0].cap} className="gallery-img"
               style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
             />
             <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent,rgba(0,0,0,.65))', padding:'24px 12px 10px' }}>
@@ -648,7 +648,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
           {/* Pequenas à direita */}
           {[1,2].map(i => (
             <div key={i} onClick={() => setLb(i)} style={{ position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
-              <img src={GALLERY[i].url} alt={GALLERY[i].cap} loading="lazy" decoding="async" className="gallery-img"
+              <img src={GALLERY[i].url} alt={GALLERY[i].cap} className="gallery-img"
                 style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
               />
               {i === 2 && GALLERY.length > 3 && (

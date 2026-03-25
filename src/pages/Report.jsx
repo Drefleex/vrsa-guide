@@ -73,6 +73,14 @@ export default function Report({ lang }) {
 
   function handleSend() {
     if (!category) { setError(t.required); return }
+    if (!desc.trim()) {
+      setError(L === 'PT' ? 'A descrição é obrigatória.' :
+               L === 'EN' ? 'Description is required.' :
+               L === 'ES' ? 'La descripción es obligatoria.' :
+               L === 'FR' ? 'La description est obligatoire.' :
+               'Die Beschreibung ist obligatorisch.')
+      return
+    }
     setError('')
 
     const cat     = CATEGORIES.find(c => c.id === category)
