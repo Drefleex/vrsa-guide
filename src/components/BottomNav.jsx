@@ -98,7 +98,7 @@ export default function BottomNav({ page, setPage, lang }) {
           const active = page === tab.k
           return (
             <button key={tab.k} className={'nav-btn'+(active?' active':'')} onClick={() => setPage(tab.k)} aria-label={tab.l[lang]||tab.l.PT}>
-              <div className="nav-active-bar" style={{ width:active?24:0 }} />
+              <div className="nav-active-bar" />
               <span className="nav-icon" style={{display:'flex',alignItems:'center',justifyContent:'center',color:active?'var(--primary)':'var(--ink-40)',transition:'color .18s'}}>{NAV_SVG[tab.nav]}</span>
               <span className="nav-label" style={{color:active?'var(--primary)':'var(--ink-20)',fontWeight:active?700:600,transition:'color .18s'}}>{tab.l[lang]||tab.l.PT}</span>
             </button>
@@ -107,7 +107,7 @@ export default function BottomNav({ page, setPage, lang }) {
 
         {/* More tab */}
         <button className={'nav-btn'+(isMorePage||moreOpen?' active':'')} onClick={() => setMoreOpen(o => !o)} aria-label="Mais serviços">
-          <div className="nav-active-bar" style={{ width:isMorePage||moreOpen?24:0 }} />
+          <div className="nav-active-bar" />
           <span className="nav-icon" style={{display:'flex',alignItems:'center',justifyContent:'center',color:isMorePage||moreOpen?'var(--primary)':'var(--ink-40)',transition:'color .18s'}}>{NAV_SVG.more}</span>
           <span className="nav-label" style={{color:isMorePage||moreOpen?'var(--primary)':'var(--ink-20)',fontWeight:isMorePage||moreOpen?700:600,transition:'color .18s'}}>{lang==='EN'?'More':lang==='ES'?'Más':lang==='FR'?'Plus':lang==='DE'?'Mehr':'Mais'}</span>
         </button>

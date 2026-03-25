@@ -583,7 +583,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
             const done = (checked[r.id] || []).length
             const pct  = Math.round((done / r.steps.length) * 100)
             return (
-              <div key={r.id} onClick={() => setRoute(r)} className="route-card" style={{ background:`linear-gradient(135deg,${r.color},${r.color}cc)`, boxShadow:`0 4px 18px ${r.color}40` }}>
+              <button key={r.id} onClick={() => setRoute(r)} aria-label={r.title[L]} className="route-card" style={{ background:`linear-gradient(135deg,${r.color},${r.color}cc)`, boxShadow:`0 4px 18px ${r.color}40`, border:'none', textAlign:'left' }}>
                 <div style={{ marginBottom:10, opacity:.92, color:'#fff' }}><r.Icon size={28} strokeWidth={1.8} /></div>
                 <div style={{ fontSize:13, fontWeight:800, color:'#fff', lineHeight:1.35, marginBottom:4 }}>{r.title[L]}</div>
                 <div style={{ fontSize:10, color:'rgba(255,255,255,.6)', fontWeight:600, marginBottom: pct > 0 ? 8 : 0 }}>{r.dur[L]}</div>
@@ -597,7 +597,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
                     </div>
                   </div>
                 )}
-              </div>
+              </button>
             )
           })}
         </div>
@@ -652,8 +652,8 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
               </div>
               <div className="card" style={{ marginBottom:24 }}>
                 {topPins.map((p,i,arr) => (
-                  <div key={p.id} onClick={() => onNav('map')}
-                    style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', cursor:'pointer' }}>
+                  <button key={p.id} onClick={() => onNav('map')} aria-label={p.name}
+                    style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', cursor:'pointer', width:'100%', background:'none', border:'none', textAlign:'left' }}>
                     <div style={{ width:42, height:42, borderRadius:12, background:avc(p.name), display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                       <span style={{ fontSize:15, fontWeight:700, color:'#fff' }}>{avi(p.name)}</span>
                     </div>
@@ -666,7 +666,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
                       style={{ fontSize:11, fontWeight:700, color:'var(--primary)', background:'var(--primary-lt)', padding:'4px 10px', borderRadius:50, textDecoration:'none', flexShrink:0 }}>
                       📍 {L==='EN'?'Map':L==='FR'?'Carte':L==='DE'?'Karte':L==='ES'?'Mapa':'Mapa'}
                     </a>
-                  </div>
+                  </button>
                 ))}
               </div>
             </>
@@ -677,30 +677,30 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
         <div className="sec-label" style={{ marginBottom:12 }}>{t.gallery}</div>
         <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gridTemplateRows:'140px 140px', gap:5, marginBottom:24, borderRadius:16, overflow:'hidden' }}>
           {/* Grande à esquerda */}
-          <div onClick={() => setLb(0)} style={{ gridRow:'1 / 3', position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
+          <button onClick={() => setLb(0)} aria-label={GALLERY[0].cap} style={{ gridRow:'1 / 3', position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)', border:'none', padding:0 }}>
             <img src={GALLERY[0].url} alt={GALLERY[0].cap} className="gallery-img"
               style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
             />
             <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent,rgba(0,0,0,.65))', padding:'24px 12px 10px' }}>
               <div style={{ fontSize:11, color:'#fff', fontWeight:700 }}>{GALLERY[0].cap}</div>
             </div>
-          </div>
+          </button>
           {/* Pequenas à direita */}
           {[1,2].map(i => (
-            <div key={i} onClick={() => setLb(i)} style={{ position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)' }}>
+            <button key={i} onClick={() => setLb(i)} aria-label={GALLERY[i].cap} style={{ position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)', border:'none', padding:0 }}>
               <img src={GALLERY[i].url} alt={GALLERY[i].cap} className="gallery-img"
                 style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
               />
               {i === 2 && GALLERY.length > 3 && (
-                <div onClick={e => { e.stopPropagation(); setLb(3) }}
-                  style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.52)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer' }}>
+                <button onClick={e => { e.stopPropagation(); setLb(3) }} aria-label={`Ver mais ${GALLERY.length - 2} fotos`}
+                  style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.52)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', border:'none' }}>
                   <div style={{ color:'#fff', fontSize:18, fontWeight:800 }}>+{GALLERY.length - 2}</div>
-                </div>
+                </button>
               )}
               <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent,rgba(0,0,0,.6))', padding:'14px 8px 6px' }}>
                 <div style={{ fontSize:9, color:'rgba(255,255,255,.85)', fontWeight:600 }}>{GALLERY[i].cap}</div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
