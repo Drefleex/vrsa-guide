@@ -26,25 +26,19 @@ export default function SplashScreen({ lang, setLang, onStart }) {
       <div style={{ position:'absolute', top:0, right:0, width:220, height:220, borderRadius:'0 0 0 100%', background:'rgba(255,255,255,.035)', pointerEvents:'none' }} />
       <div style={{ position:'absolute', bottom:0, left:0, width:160, height:160, borderRadius:'0 100% 0 0', background:'rgba(255,255,255,.035)', pointerEvents:'none' }} />
 
-      {/* ── Logo oficial ── */}
-      <div style={{ background:'rgba(255,255,255,.96)', borderRadius:20, padding:'22px 32px 18px', marginBottom:32, boxShadow:'0 12px 48px rgba(0,0,0,.35)', animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}>
-        <img
-          src="/logo-camara.webp"
-          alt="Câmara Municipal Vila Real Sto. António"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          style={{ width:210, objectFit:'contain', display:'block' }}
-        />
+      <div style={{ width:88, height:88, borderRadius:16, background:'rgba(255,255,255,.1)', border:'1.5px solid rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:44, marginBottom:24, animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}><img src="/brasao-vrsa.webp" alt="Brasão VRSA" loading="eager" decoding="async" fetchpriority="high" style={{ width:72, height:72, objectFit:'contain' }} /></div>
+
+      <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.42)', letterSpacing:'3px', textTransform:'uppercase', marginBottom:8, animation:ready?'inst-fade .5s ease both .15s':'none', opacity:ready?undefined:0 }}>Câmara Municipal</div>
+
+      <div style={{ fontSize:'clamp(26px,8vw,36px)', fontWeight:700, color:'#fff', lineHeight:1.1, textAlign:'center', letterSpacing:'-.4px', marginBottom:8, animation:ready?'inst-fade .5s ease both .22s':'none', opacity:ready?undefined:0 }}>Vila Real de<br/>Santo António</div>
+
+      <div style={{ display:'flex', alignItems:'center', gap:7, background:'#C9A84C', borderRadius:50, padding:'4px 14px', marginBottom:8, animation:ready?'inst-fade .5s ease both .3s':'none', opacity:ready?undefined:0 }}>
+        <span style={{ fontSize:10, fontWeight:700, color:'#fff', letterSpacing:.6 }}>VRSA</span>
+        <span style={{ width:3, height:3, borderRadius:'50%', background:'rgba(255,255,255,.55)' }} />
+        <span style={{ fontSize:10, fontWeight:700, color:'#fff', letterSpacing:.6 }}>GUIA TURÍSTICO</span>
       </div>
 
-      <div style={{ display:'flex', alignItems:'center', gap:7, background:'rgba(201,168,76,.22)', border:'1px solid rgba(201,168,76,.4)', borderRadius:50, padding:'5px 16px', marginBottom:8, animation:ready?'inst-fade .5s ease both .3s':'none', opacity:ready?undefined:0 }}>
-        <span style={{ fontSize:10, fontWeight:700, color:'#E8C96A', letterSpacing:.8 }}>VRSA</span>
-        <span style={{ width:3, height:3, borderRadius:'50%', background:'rgba(255,255,255,.3)' }} />
-        <span style={{ fontSize:10, fontWeight:700, color:'#E8C96A', letterSpacing:.8 }}>GUIA TURÍSTICO</span>
-      </div>
-
-      <div style={{ fontSize:12, color:'rgba(255,255,255,.32)', marginBottom:40, fontWeight:400, textAlign:'center', animation:ready?'inst-fade .5s ease both .36s':'none', opacity:ready?undefined:0 }}>{SUB[lang]||SUB.PT}</div>
+      <div style={{ fontSize:12, color:'rgba(255,255,255,.38)', marginBottom:40, fontWeight:500, textAlign:'center', animation:ready?'inst-fade .5s ease both .36s':'none', opacity:ready?undefined:0 }}>{SUB[lang]||SUB.PT}</div>
 
       <button onClick={() => setOpen(true)} style={{ display:'flex', alignItems:'center', gap:10, background:'rgba(255,255,255,.1)', border:'1px solid rgba(255,255,255,.2)', borderRadius:8, padding:'9px 18px', cursor:'pointer', marginBottom:14, outline:'none', animation:ready?'inst-fade .5s ease both .42s':'none', opacity:ready?undefined:0 }}>
         <span style={{ fontSize:18 }}>{current.flag}</span>

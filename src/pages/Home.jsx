@@ -374,18 +374,20 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
       {/* ── Hero ── */}
       <div className="home-hero" style={mode==='praia' ? {background:'linear-gradient(160deg,#0277BD,#00838F)'} : {}}>
 
-        {/* Top row: logo oficial */}
-        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10 }}>
-          <div style={{ background:'rgba(255,255,255,.95)', borderRadius:12, padding:'8px 14px 6px', boxShadow:'0 4px 16px rgba(0,0,0,.25)' }}>
-            <img
-              src="/logo-camara.webp"
-              alt="Câmara Municipal Vila Real Sto. António"
-              loading="eager"
-              decoding="async"
-              style={{ width:140, objectFit:'contain', display:'block' }}
-            />
+        {/* Top row: brasão + name */}
+        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:10 }}>
+          <img
+            src="/brasao-vrsa.webp"
+            alt="Brasão VRSA"
+            loading="eager"
+            decoding="async"
+            style={{ width:52, height:58, objectFit:'contain', flexShrink:0 }}
+          />
+          <div style={{ flex:1, minWidth:0 }}>
+            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:'1.5px', textTransform:'uppercase', marginBottom:3 }}>Câmara Municipal de VRSA</div>
+            <div style={{ fontSize:'clamp(18px,5vw,23px)', fontWeight:700, color:'#fff', lineHeight:1.15, letterSpacing:'-.3px' }}>Vila Real de<br/>Santo António</div>
+            <div style={{ fontSize:9, color:'rgba(255,255,255,.28)', letterSpacing:1.5, textTransform:'uppercase', marginTop:3 }}>Guia Turístico Oficial</div>
           </div>
-          <div style={{ fontSize:9, color:'rgba(255,255,255,.3)', letterSpacing:1.2, textTransform:'uppercase', textAlign:'right' }}>Guia<br/>Turístico<br/>Oficial</div>
         </div>
 
         {/* Mode toggle: Rio/Centro ↔ Praia */}
