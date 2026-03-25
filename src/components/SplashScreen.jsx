@@ -27,18 +27,15 @@ export default function SplashScreen({ lang, setLang, onStart }) {
       <div style={{ position:'absolute', bottom:0, left:0, width:160, height:160, borderRadius:'0 100% 0 0', background:'rgba(255,255,255,.035)', pointerEvents:'none' }} />
 
       {/* ── Logo oficial ── */}
-      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', marginBottom:36, animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}>
+      <div style={{ background:'rgba(255,255,255,.96)', borderRadius:20, padding:'22px 32px 18px', marginBottom:32, boxShadow:'0 12px 48px rgba(0,0,0,.35)', animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}>
         <img
-          src="/brasao-vrsa.webp"
-          alt="Brasão VRSA"
+          src="/logo-camara.webp"
+          alt="Câmara Municipal Vila Real Sto. António"
           loading="eager"
           decoding="async"
           fetchpriority="high"
-          style={{ width:96, height:96, objectFit:'contain', filter:'drop-shadow(0 8px 24px rgba(0,0,0,.45))' }}
+          style={{ width:210, objectFit:'contain', display:'block' }}
         />
-        <div style={{ width:40, height:1.5, background:'rgba(255,255,255,.18)', margin:'18px 0 14px', borderRadius:2 }} />
-        <div style={{ fontSize:10, fontWeight:500, color:'rgba(255,255,255,.5)', letterSpacing:'3.5px', textTransform:'uppercase', marginBottom:5 }}>Câmara Municipal</div>
-        <div style={{ fontSize:'clamp(22px,6.5vw,30px)', fontWeight:700, color:'#78C99A', lineHeight:1.15, textAlign:'center', letterSpacing:'-.2px' }}>Vila Real<br/>Sto. António</div>
       </div>
 
       <div style={{ display:'flex', alignItems:'center', gap:7, background:'rgba(201,168,76,.22)', border:'1px solid rgba(201,168,76,.4)', borderRadius:50, padding:'5px 16px', marginBottom:8, animation:ready?'inst-fade .5s ease both .3s':'none', opacity:ready?undefined:0 }}>
