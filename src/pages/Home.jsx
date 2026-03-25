@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Sun, Users, UtensilsCrossed, Landmark, Sunset, Leaf, MapPin as MapPinIcon } from 'lucide-react'
 import { tr } from '../utils/i18n'
 
@@ -468,7 +468,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8, marginBottom:8 }}>
           {QA.slice(0,3).map((q,i) => (
             <button key={i} onClick={() => onNav(q.page)} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:7, padding:'14px 6px 12px', background:'var(--white)', borderRadius:12, border:'1px solid var(--border-lt)', cursor:'pointer', boxShadow:'var(--sh-xs)', touchAction:'manipulation' }}>
-              <div style={{ width:44, height:44, borderRadius:10, background:q.bg, display:'flex', alignItems:'center', justifyContent:'center', color:q.color, padding:10 }}>{SVGS[q.svg]}</div>
+              <div style={{ width:44, height:44, borderRadius:10, background:q.bg, display:'flex', alignItems:'center', justifyContent:'center', color:q.color, padding:10 }}>{React.cloneElement(SVGS[q.svg], { width:'100%', height:'100%' })}</div>
               <span style={{ fontSize:11, fontWeight:600, color:'var(--ink-40)', textAlign:'center' }}>{q.label[L]}</span>
             </button>
           ))}
@@ -482,7 +482,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
               onClick={() => onNav(q.page)}
               style={{ width:'100%', display:'flex', alignItems:'center', gap:12, padding:'11px 14px', background:'none', border:'none', borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none', cursor:'pointer', textAlign:'left', touchAction:'manipulation' }}
             >
-              <div style={{ width:34, height:34, borderRadius:8, background:q.bg, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, color:q.color, padding:7 }}>{SVGS[q.svg]}</div>
+              <div style={{ width:34, height:34, borderRadius:8, background:q.bg, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, color:q.color, padding:7 }}>{React.cloneElement(SVGS[q.svg], { width:'100%', height:'100%' })}</div>
               <span style={{ fontSize:13, fontWeight:600, color:'var(--ink-70)', flex:1 }}>{q.label[L]}</span>
               <span style={{ fontSize:16, color:'var(--ink-20)' }}>›</span>
             </button>
