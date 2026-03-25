@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { tr } from '../utils/i18n'
 
 const PHARMACIES = [
@@ -21,10 +22,66 @@ const TIPS = {
   DE:['Speichere die Nummer des Gesundheitszentrums vorab', 'Die Notdienstapotheke wechselt wöchentlich — an jeder Apothekentür angezeigt', 'Mit der Europäischen Krankenversicherungskarte (EHIC) kostenloser Zugang', 'Einfache Medikamente wie Paracetamol rezeptfrei erhältlich'],
 }
 
-export default function Health({ lang, onNav }) {
+export default function Health({ lang, onNav, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('health', L)
   const tips = TIPS[L] || TIPS.PT
+  const [detail, setDetail] = useState(null)
+
+  useEffect(() => {
+    if (!focusName) return
+    const found = PHARMACIES.find(p => p.name.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(p.name.toLowerCase()))
+    if (found) setDetail(found)
+    onFocusClear?.()
+  }, [focusName])
+
+  if (detail) {
+    const p = detail
+    const backLabel = L==='EN'?'Back':L==='ES'?'Volver':L==='FR'?'Retour':L==='DE'?'Zurück':'Voltar'
+    const navLabel  = L==='EN'?'Navigate':L==='ES'?'Navegar':L==='FR'?'Naviguer':L==='DE'?'Navigieren':'Navegar'
+    return (
+      <div className="page" style={{ display:'flex', flexDirection:'column' }}>
+        <div style={{ background:'linear-gradient(160deg,#065F46 0%,#047857 100%)', padding:'18px 20px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+          <button onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:14 }}>←</button>
+          <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+            <div style={{ width:56, height:56, borderRadius:16, background:'rgba(255,255,255,.15)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:28, flexShrink:0 }}>💊</div>
+            <div>
+              <div style={{ fontSize:18, fontWeight:800, color:'#fff' }}>{p.name}</div>
+              {p.emergency && <span style={{ fontSize:10, fontWeight:700, background:'#BBF7D0', color:'#15803D', padding:'2px 8px', borderRadius:50, marginTop:4, display:'inline-block' }}>{t.dutyPharmacy}</span>}
+            </div>
+          </div>
+        </div>
+        <div style={{ overflowY:'auto', flex:1, padding:'16px 16px 40px' }}>
+          <div className="card" style={{ padding:'16px', marginBottom:14 }}>
+            {[
+              { icon:'📍', val: p.addr },
+              { icon:'⏰', val: p.hours },
+            ].map((r,i) => (
+              <div key={i} style={{ display:'flex', gap:12, padding:'10px 0', borderBottom:i===0?'1px solid var(--surface)':'none' }}>
+                <span style={{ fontSize:18, flexShrink:0 }}>{r.icon}</span>
+                <span style={{ fontSize:13, color:'var(--ink-70)' }}>{r.val}</span>
+              </div>
+            ))}
+          </div>
+          <a href={`tel:${p.phone.replace(/\s/g,'')}`} style={{ textDecoration:'none', display:'block', marginBottom:8 }}>
+            <button style={{ width:'100%', padding:'13px 0', background:'#059669', color:'#fff', border:'none', borderRadius:12, fontSize:14, fontWeight:700, cursor:'pointer' }}>📞 {p.phone}</button>
+          </a>
+          <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.2, textTransform:'uppercase', margin:'16px 0 10px' }}>{navLabel}</div>
+          {[
+            { icon:'🗺️', label:'Google Maps', url:`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}` },
+            { icon:'🍎', label:'Apple Maps',  url:`https://maps.apple.com/?daddr=${p.lat},${p.lng}` },
+            { icon:'🔵', label:'Waze',        url:`https://waze.com/ul?ll=${p.lat},${p.lng}&navigate=yes` },
+          ].map(({ icon, label, url }) => (
+            <button key={label} onClick={() => window.open(url,'_blank')} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
+              <span style={{ fontSize:26 }}>{icon}</span>
+              <span style={{ flex:1, fontSize:14, fontWeight:700, color:'var(--ink)' }}>{label}</span>
+              <span style={{ color:'var(--ink-20)', fontSize:18 }}>›</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="page">
@@ -76,26 +133,20 @@ export default function Health({ lang, onNav }) {
         <div className="sec-label">{t.pharmacies}</div>
         <div className="card" style={{ marginBottom:14 }}>
           {PHARMACIES.map((p,i,arr) => (
-            <div key={p.id} style={{ padding:'13px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
-              <div style={{ display:'flex', alignItems:'flex-start', gap:12, marginBottom:8 }}>
-                <div style={{ width:44, height:44, borderRadius:12, background: p.emergency ? '#ECFDF5' : 'var(--surface)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, flexShrink:0 }}>💊</div>
-                <div style={{ flex:1 }}>
-                  <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:2 }}>
-                    <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)' }}>{p.name}</div>
-                    {p.emergency && <span style={{ background:'#DCFCE7', color:'#15803D', fontSize:10, fontWeight:700, padding:'1px 7px', borderRadius:50 }}>{t.dutyPharmacy}</span>}
-                  </div>
-                  <div style={{ fontSize:11, color:'var(--ink-40)' }}>{p.addr}</div>
-                  <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>⏰ {p.hours}</div>
+            <button key={p.id} onClick={() => setDetail(p)} style={{ display:'flex', alignItems:'center', gap:12, width:'100%', padding:'13px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', background:'none', border:'none', textAlign:'left', cursor:'pointer' }}>
+              <div style={{ width:44, height:44, borderRadius:12, background: p.emergency ? '#ECFDF5' : 'var(--surface)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, flexShrink:0 }}>💊</div>
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:2 }}>
+                  <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)' }}>{p.name}</div>
+                  {p.emergency && <span style={{ background:'#DCFCE7', color:'#15803D', fontSize:10, fontWeight:700, padding:'1px 7px', borderRadius:50 }}>{t.dutyPharmacy}</span>}
                 </div>
+                <div style={{ fontSize:11, color:'var(--ink-40)' }}>{p.addr}</div>
+                <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>⏰ {p.hours}</div>
               </div>
-              <div style={{ display:'flex', gap:8, marginLeft:56 }}>
-                <a href={`tel:${p.phone.replace(/\s/g,'')}`} style={{ textDecoration:'none', flex:1 }}>
-                  <button style={{ width:'100%', padding:'7px 0', background:'#059669', color:'#fff', border:'none', borderRadius:9, fontSize:12, fontWeight:700, cursor:'pointer' }}>📞 {p.phone}</button>
-                </a>
-                <button onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`,'_blank')} style={{ padding:'7px 12px', background:'var(--surface)', border:'1px solid var(--border)', borderRadius:9, fontSize:12, fontWeight:700, color:'var(--ink-40)', cursor:'pointer' }}>🧭</button>
-              </div>
-            </div>
+              <span style={{ fontSize:16, color:'var(--ink-20)', flexShrink:0 }}>›</span>
+            </button>
           ))}
+
         </div>
 
         {/* Tips */}

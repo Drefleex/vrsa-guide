@@ -25,11 +25,19 @@ function getConditionLevel(wx) {
   return 0
 }
 
-export default function Beaches({ lang, onNav }) {
+export default function Beaches({ lang, onNav, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('beaches', L)
   const [marine, setMarine] = useState(null)
   const [wx, setWx]         = useState(null)
+  const [detail, setDetail] = useState(null)
+
+  useEffect(() => {
+    if (!focusName) return
+    const found = BEACHES.find(b => b.name.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(b.name.toLowerCase()))
+    if (found) setDetail(found)
+    onFocusClear?.()
+  }, [focusName])
 
   useEffect(() => {
     // Weather
@@ -51,6 +59,71 @@ export default function Beaches({ lang, onNav }) {
 
   const condColor    = ['#059669','#D97706','#EA580C','#DC2626'][condLevel]
   const condBg       = ['#ECFDF5','#FFFBEB','#FFF7ED','#FEF2F2'][condLevel]
+
+  // ── Detail view ──────────────────────────────────────────────
+  if (detail) {
+    const b = detail
+    const navLabel = L==='EN'?'Navigate':L==='ES'?'Navegar':L==='FR'?'Naviguer':L==='DE'?'Navigieren':'Navegar'
+    const backLabel = L==='EN'?'Back':L==='ES'?'Volver':L==='FR'?'Retour':L==='DE'?'Zurück':'Voltar'
+    return (
+      <div className="page" style={{ display:'flex', flexDirection:'column' }}>
+        {/* Photo header */}
+        <div style={{ position:'relative', height:220, flexShrink:0 }}>
+          <img src={b.photo} alt={b.name} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+          <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, rgba(0,0,0,.35) 0%, transparent 50%, rgba(0,0,0,.55) 100%)' }} />
+          <button onClick={() => setDetail(null)} style={{ position:'absolute', top:'calc(14px + env(safe-area-inset-top,0px))', left:14, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.35)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
+          <div style={{ position:'absolute', bottom:14, left:16, right:16 }}>
+            <div style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-.3px', textShadow:'0 1px 4px rgba(0,0,0,.5)' }}>{b.name}</div>
+            <div style={{ fontSize:12, color:'rgba(255,255,255,.8)', marginTop:3 }}>{b.note[L]} · {b.flag} · {b.dist}</div>
+          </div>
+        </div>
+
+        <div style={{ overflowY:'auto', flex:1, padding:'16px 16px 40px' }}>
+          {/* Conditions */}
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:8, marginBottom:14 }}>
+            {[
+              { icon:'🌊', val: waveH !== '—' ? waveH+'m' : '—', label:t.wave },
+              { icon:'💨', val: windSpd !== '—' ? windSpd+' km/h' : '—', label:t.wind },
+              { icon:'🌡️', val: typeof seaTemp==='number' ? seaTemp+'°C' : seaTemp+'°C', label:t.seaTemp },
+            ].map((s,i) => (
+              <div key={i} className="card" style={{ padding:'12px 8px', textAlign:'center' }}>
+                <div style={{ fontSize:20, marginBottom:4 }}>{s.icon}</div>
+                <div style={{ fontSize:15, fontWeight:800, color:'var(--ink)' }}>{s.val}</div>
+                <div style={{ fontSize:9, color:'var(--ink-20)', fontWeight:700, textTransform:'uppercase', letterSpacing:.5, marginTop:2 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Amenities */}
+          <div className="card" style={{ padding:'14px 16px', marginBottom:14 }}>
+            <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.2, textTransform:'uppercase', marginBottom:10 }}>{L==='EN'?'Amenities':L==='ES'?'Servicios':L==='FR'?'Équipements':L==='DE'?'Ausstattung':'Comodidades'}</div>
+            <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+              {b.parking ? <span style={{ fontSize:12, fontWeight:700, background:'var(--primary-lt)', color:'var(--primary)', padding:'5px 12px', borderRadius:50 }}>🅿️ {t.parking}</span> : <span style={{ fontSize:12, color:'var(--ink-20)', padding:'5px 12px', borderRadius:50, background:'var(--surface)' }}>🅿️ {L==='EN'?'No parking':L==='ES'?'Sin parking':'Sem parking'}</span>}
+              {b.bar     ? <span style={{ fontSize:12, fontWeight:700, background:'var(--primary-lt)', color:'var(--primary)', padding:'5px 12px', borderRadius:50 }}>🍹 {t.bar}</span>     : <span style={{ fontSize:12, color:'var(--ink-20)', padding:'5px 12px', borderRadius:50, background:'var(--surface)' }}>🍹 {L==='EN'?'No bar':L==='ES'?'Sin bar':'Sem bar'}</span>}
+              {b.wc      ? <span style={{ fontSize:12, fontWeight:700, background:'var(--primary-lt)', color:'var(--primary)', padding:'5px 12px', borderRadius:50 }}>🚿 {t.wc}</span>      : <span style={{ fontSize:12, color:'var(--ink-20)', padding:'5px 12px', borderRadius:50, background:'var(--surface)' }}>🚿 {L==='EN'?'No WC':L==='ES'?'Sin WC':'Sem WC'}</span>}
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.2, textTransform:'uppercase', marginBottom:10 }}>{navLabel}</div>
+          {[
+            { icon:'🗺️', label:'Google Maps', sub:'Google LLC',  url:`https://www.google.com/maps/dir/?api=1&destination=${b.lat},${b.lng}&travelmode=driving` },
+            { icon:'🍎', label:'Apple Maps',  sub:'Apple Inc.',  url:`https://maps.apple.com/?daddr=${b.lat},${b.lng}&dirflg=d` },
+            { icon:'🔵', label:'Waze',        sub:'Google LLC',  url:`https://waze.com/ul?ll=${b.lat},${b.lng}&navigate=yes` },
+          ].map(({ icon, label, sub, url }) => (
+            <button key={label} onClick={() => window.open(url,'_blank')} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
+              <span style={{ fontSize:28 }}>{icon}</span>
+              <div style={{ flex:1 }}>
+                <div style={{ fontSize:14, fontWeight:700, color:'var(--ink)' }}>{label}</div>
+                <div style={{ fontSize:11, color:'var(--ink-20)' }}>{sub}</div>
+              </div>
+              <span style={{ color:'var(--ink-20)', fontSize:18 }}>›</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="page">
@@ -129,29 +202,25 @@ export default function Beaches({ lang, onNav }) {
         <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.2, textTransform:'uppercase', marginBottom:10 }}>{t.beaches}</div>
         <div className="card">
           {BEACHES.map((b,i,arr) => (
-            <div key={b.id} style={{ padding:'14px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
-              <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:8 }}>
+            <button key={b.id} onClick={() => setDetail(b)} style={{ display:'block', width:'100%', padding:'14px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', background:'none', border:'none', textAlign:'left', cursor:'pointer' }}>
+              <div style={{ display:'flex', alignItems:'center', gap:12 }}>
                 <img src={b.photo} alt={b.name} loading="lazy" decoding="async" style={{ width:56, height:56, borderRadius:12, objectFit:'cover', flexShrink:0 }} />
                 <div style={{ flex:1, minWidth:0 }}>
                   <div style={{ fontSize:14, fontWeight:700, color:'var(--ink)' }}>{b.name}</div>
                   <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{b.note[L]} · {b.dist}</div>
+                  <div style={{ display:'flex', gap:6, marginTop:6 }}>
+                    {b.parking && <span style={{ fontSize:10, fontWeight:600, background:'var(--surface)', color:'var(--ink-40)', padding:'2px 7px', borderRadius:50, border:'1px solid var(--border)' }}>🅿️</span>}
+                    {b.bar     && <span style={{ fontSize:10, fontWeight:600, background:'var(--surface)', color:'var(--ink-40)', padding:'2px 7px', borderRadius:50, border:'1px solid var(--border)' }}>🍹</span>}
+                    {b.wc      && <span style={{ fontSize:10, fontWeight:600, background:'var(--surface)', color:'var(--ink-40)', padding:'2px 7px', borderRadius:50, border:'1px solid var(--border)' }}>🚿</span>}
+                  </div>
                 </div>
-                <span style={{ fontSize:20 }}>{b.flag}</span>
+                <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:4, flexShrink:0 }}>
+                  <span style={{ fontSize:20 }}>{b.flag}</span>
+                  <span style={{ fontSize:16, color:'var(--ink-20)' }}>›</span>
+                </div>
               </div>
-
-              {/* Amenities + directions */}
-              <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-                {b.parking && <span style={{ fontSize:10, fontWeight:700, background:'var(--surface)', color:'var(--ink-40)', padding:'2px 8px', borderRadius:50, border:'1px solid var(--border)' }}>🅿️ {t.parking}</span>}
-                {b.bar     && <span style={{ fontSize:10, fontWeight:700, background:'var(--surface)', color:'var(--ink-40)', padding:'2px 8px', borderRadius:50, border:'1px solid var(--border)' }}>🍹 {t.bar}</span>}
-                {b.wc      && <span style={{ fontSize:10, fontWeight:700, background:'var(--surface)', color:'var(--ink-40)', padding:'2px 8px', borderRadius:50, border:'1px solid var(--border)' }}>🚿 {t.wc}</span>}
-                <button
-                  aria-label={t.directions}
-                  onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination='+b.lat+','+b.lng+'&travelmode=driving','_blank')}
-                  style={{ marginLeft:'auto', padding:'5px 12px', background:'var(--navy)', color:'#fff', border:'none', borderRadius:50, fontSize:11, fontWeight:700, cursor:'pointer' }}
-                >🧭 {t.directions}</button>
-              </div>
-            </div>
-          ))}
+            </button>
+        ))}
         </div>
 
       </div>

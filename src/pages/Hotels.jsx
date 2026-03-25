@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 
@@ -39,12 +39,16 @@ const FILTERS = [
   { k:'budget',  match: r => r.stars <= 2 },
 ]
 
-export default function Hotels({ lang, pins, favs, toggleFav, onNav }) {
+export default function Hotels({ lang, pins, favs, toggleFav, onNav, focusPin, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('hotels', L)
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
-  const [detail, setDetail] = useState(null)
+  const [detail, setDetail] = useState(focusPin || null)
+
+  useEffect(() => {
+    if (focusPin) { setDetail(focusPin); onFocusClear?.() }
+  }, [focusPin])
   const hotelPins = pins.filter(p => p.cat === 'hotel')
 
   const filtered = hotelPins.filter(p => {

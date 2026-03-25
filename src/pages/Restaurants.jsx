@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 import { RICH } from '../data/restaurants'
@@ -92,12 +92,16 @@ function Stars({ rating }) {
 }
 
 // ─── Main ─────────────────────────────────────────────────────
-export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRestaurants }) {
+export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRestaurants, focusPin, onFocusClear }) {
   const L  = lang || 'PT'
   const t  = tr('restaurants', L)
   const [filter, setFilter]   = useState('all')
   const [search, setSearch]   = useState('')
-  const [detail, setDetail]   = useState(null)
+  const [detail, setDetail]   = useState(focusPin || null)
+
+  useEffect(() => {
+    if (focusPin) { setDetail(focusPin); onFocusClear?.() }
+  }, [focusPin])
 
   const foodPins = useMemo(() => {
     const base = cmsRestaurants && cmsRestaurants.length > 0

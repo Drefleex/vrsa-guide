@@ -61,7 +61,29 @@ export default function App() {
     localStorage.setItem('vrsa_tutorial_seen', 'true')
     setShowWelcome(false)
   }
-  const [search, setSearch]   = useState(false)
+  const [search, setSearch]                         = useState(false)
+  const [mapFocusPin, setMapFocusPin]               = useState(null)
+  const [restaurantFocusPin, setRestaurantFocusPin] = useState(null)
+  const [hotelFocusPin, setHotelFocusPin]           = useState(null)
+  const [beachFocusName, setBeachFocusName]         = useState(null)
+  const [cultureFocusName, setCultureFocusName]     = useState(null)
+  const [shoppingFocusName, setShoppingFocusName]   = useState(null)
+  const [healthFocusName, setHealthFocusName]       = useState(null)
+
+  function handleNav(dest) {
+    if (dest && typeof dest === 'object') {
+      setPage(dest.page)
+      if (dest.page === 'map'         && dest.pin)       setMapFocusPin(dest.pin)
+      if (dest.page === 'restaurants' && dest.pin)       setRestaurantFocusPin(dest.pin)
+      if (dest.page === 'hotels'      && dest.pin)       setHotelFocusPin(dest.pin)
+      if (dest.page === 'beaches'     && dest.focusName) setBeachFocusName(dest.focusName)
+      if (dest.page === 'culture'     && dest.focusName) setCultureFocusName(dest.focusName)
+      if (dest.page === 'shopping'    && dest.focusName) setShoppingFocusName(dest.focusName)
+      if (dest.page === 'health'      && dest.focusName) setHealthFocusName(dest.focusName)
+    } else {
+      setPage(dest)
+    }
+  }
   const [toast, setToast]     = useState(null)
   const toastTimer            = useRef(null)
   const [isOnline, setIsOnline] = useState(() => navigator.onLine)
@@ -150,17 +172,17 @@ export default function App() {
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
         <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} />}
-          {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={setPage} />}
-          {page === 'restaurants' && <Restaurants {...cp} pins={pins} />}
+          {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={setPage} focusPin={mapFocusPin} onFocusClear={() => setMapFocusPin(null)} />}
+          {page === 'restaurants' && <Restaurants {...cp} pins={pins} focusPin={restaurantFocusPin} onFocusClear={() => setRestaurantFocusPin(null)} />}
           {page === 'events'      && <Events      {...cp} />}
-          {page === 'beaches'     && <Beaches     {...cp} />}
-          {page === 'hotels'      && <Hotels      {...cp} pins={pins} />}
-          {page === 'shopping'    && <Shopping    {...cp} pins={pins} />}
+          {page === 'beaches'     && <Beaches     {...cp} focusName={beachFocusName} onFocusClear={() => setBeachFocusName(null)} />}
+          {page === 'hotels'      && <Hotels      {...cp} pins={pins} focusPin={hotelFocusPin} onFocusClear={() => setHotelFocusPin(null)} />}
+          {page === 'shopping'    && <Shopping    {...cp} pins={pins} focusName={shoppingFocusName} onFocusClear={() => setShoppingFocusName(null)} />}
           {page === 'ayamonte'    && <Ayamonte    lang={lang} onNav={setPage} />}
           {page === 'favorites'   && <Favorites   {...cp} pins={pins} />}
           {page === 'analytics'   && <Analytics   lang={lang} />}
-          {page === 'culture'     && <Culture     {...cp} />}
-          {page === 'health'      && <Health      lang={lang} onNav={setPage} />}
+          {page === 'culture'     && <Culture     {...cp} focusName={cultureFocusName} onFocusClear={() => setCultureFocusName(null)} />}
+          {page === 'health'      && <Health      lang={lang} onNav={setPage} focusName={healthFocusName} onFocusClear={() => setHealthFocusName(null)} />}
           {page === 'transport'   && <Transport   lang={lang} onNav={setPage} />}
           {page === 'report'      && <Report      lang={lang} />}
           {page === 'info'        && <Info        lang={lang} />}
@@ -198,7 +220,7 @@ export default function App() {
         visible={showWelcome}
         onClose={closeWelcome}
       />
-      {search && <Suspense fallback={null}><GlobalSearch lang={lang} pins={pins} onNav={setPage} onClose={() => setSearch(false)} /></Suspense>}
+      {search && <Suspense fallback={null}><GlobalSearch lang={lang} pins={pins} onNav={handleNav} onClose={() => setSearch(false)} /></Suspense>}
       <BottomNav page={page} setPage={setPage} lang={lang} theme={theme} toggleTheme={toggleTheme} />
     </div>
   )

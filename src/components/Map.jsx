@@ -494,11 +494,11 @@ function RouteCard({ activeRoute, routeResult, lang, onStop }) {
 }
 
 // ── Main ────────────────────────────────────────────────────────────────────
-function MapContent({ lang, pins, setPins, theme, onNav }) {
+function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear }) {
   const t = T[lang] || T.PT
   const [activeFilter, setActiveFilter] = useState(null)
   const [tick, setTick] = useState(0) // null = show picker
-  const [showPicker, setShowPicker]     = useState(true)
+  const [showPicker, setShowPicker]     = useState(!focusPin)
   const [selected, setSelected]         = useState(null)
   const [userPos, setUserPos]           = useState(null)
   const [navDest, setNavDest]           = useState(null)
@@ -532,6 +532,14 @@ function MapContent({ lang, pins, setPins, theme, onNav }) {
   }, [])
 
   useEffect(() => { const iv = setInterval(() => setTick(x => x+1), 60000); return () => clearInterval(iv) }, [])
+
+  // When navigating here from a search result, skip picker and open directions
+  useEffect(() => {
+    if (!focusPin) return
+    setShowPicker(false)
+    setNavDest(focusPin)
+    onFocusClear?.()
+  }, [focusPin])
 
   // Ferry pill — next departure within 30 min
   const nm = new Date().getHours()*60 + new Date().getMinutes()
@@ -935,10 +943,10 @@ function MapContent({ lang, pins, setPins, theme, onNav }) {
   )
 }
 
-export default function Map({ lang, pins, setPins, theme, onNav }) {
+export default function Map({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear }) {
   return (
     <APIProvider apiKey={MAPS_KEY}>
-      <MapContent lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={onNav} />
+      <MapContent lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={onNav} focusPin={focusPin} onFocusClear={onFocusClear} />
     </APIProvider>
   )
 }

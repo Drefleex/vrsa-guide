@@ -1,13 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 import { MONUMENTS } from '../data/culture'
 import { Share } from 'lucide-react'
 
-export default function Culture({ lang, favs, toggleFav, onNav }) {
+export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('culture', L)
   const [detail, setDetail]   = useState(null)
+
+  useEffect(() => {
+    if (!focusName) return
+    const found = MONUMENTS.find(m => {
+      const n = (typeof m.name === 'object' ? (m.name[L] || m.name.PT) : m.name) || ''
+      return n.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(n.toLowerCase())
+    })
+    if (found) setDetail(found)
+    onFocusClear?.()
+  }, [focusName])
 
   const handleShare = async (itemTitle) => {
     const shareData = {

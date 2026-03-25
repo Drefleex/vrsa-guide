@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 
@@ -25,11 +25,19 @@ const FILTERS = [
   { k:'shops',  cats:['compras'] },
 ]
 
-export default function Shopping({ lang, pins, favs, toggleFav, onNav }) {
+export default function Shopping({ lang, pins, favs, toggleFav, onNav, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('shopping', L)
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
+  const itemRefs = useRef({})
+
+  useEffect(() => {
+    if (!focusName) return
+    const key = Object.keys(itemRefs.current).find(k => k.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(k.toLowerCase()))
+    if (key) itemRefs.current[key]?.scrollIntoView({ behavior:'smooth', block:'center' })
+    onFocusClear?.()
+  }, [focusName])
 
   const shopPins = pins.filter(p => SHOP_CATS.includes(p.cat))
 
@@ -74,8 +82,9 @@ export default function Shopping({ lang, pins, favs, toggleFav, onNav }) {
           ) : filtered.map((p, i, arr) => {
             const d    = getDetails(p.id)
             const isFav = favs.includes('pin-' + p.id)
+            const isMatch = focusName && (p.name.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(p.name.toLowerCase()))
             return (
-              <div key={p.id} style={{ display:'flex', alignItems:'center', gap:12, padding:'13px 16px', borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none' }}>
+              <div key={p.id} ref={el => { if (el) itemRefs.current[p.name] = el }} style={{ display:'flex', alignItems:'center', gap:12, padding:'13px 16px', borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none', background:isMatch?'var(--primary-lt)':'transparent', borderLeft:isMatch?'3px solid var(--primary)':'3px solid transparent', transition:'background .3s' }}>
                 <div style={{ width:50, height:50, borderRadius:12, flexShrink:0, background:getAvatarColor(p.name), display:'flex', alignItems:'center', justifyContent:'center' }}>
                   <span style={{ fontSize:17, fontWeight:700, color:'#fff' }}>{getInitials(p.name)}</span>
                 </div>

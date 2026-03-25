@@ -32,7 +32,8 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) 
         width: '100%',
         maxWidth: 430,
         zIndex: 199,
-        background: 'var(--primary)',
+        background: theme === 'dark' ? '#0D2D4A' : '#EBF4FF',
+        borderBottom: theme === 'dark' ? '1px solid #1A3D5C' : '1px solid #C9DEFA',
         paddingTop: 'env(safe-area-inset-top, 0px)',
         boxSizing: 'border-box',
       }}>
@@ -42,7 +43,7 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) 
           <button
             onClick={onSearch}
             aria-label="Pesquisar"
-            style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:10, background:'rgba(255,255,255,.12)', border:'none', color:'#fff', cursor:'pointer' }}
+            style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:10, background: theme === 'dark' ? 'rgba(255,255,255,.12)' : 'rgba(0,0,0,.05)', border:'none', color: theme === 'dark' ? '#fff' : 'var(--ink)', cursor:'pointer' }}
           >
             {SVG_SEARCH}
           </button>
@@ -51,7 +52,7 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) 
           <button
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? 'Modo claro' : 'Modo escuro'}
-            style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:10, background:'rgba(255,255,255,.12)', border:'none', color:'#fff', cursor:'pointer', touchAction:'manipulation' }}
+            style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:10, background: theme === 'dark' ? 'rgba(255,255,255,.12)' : 'rgba(0,0,0,.05)', border:'none', color: theme === 'dark' ? '#fff' : 'var(--ink)', cursor:'pointer', touchAction:'manipulation' }}
           >
             {theme === 'dark' ? <Sun size={17} strokeWidth={1.8} /> : <Moon size={17} strokeWidth={1.8} />}
           </button>
@@ -61,7 +62,7 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) 
             <button
               onClick={() => setLangOpen(o => !o)}
               aria-label="Idioma"
-              style={{ display:'flex', alignItems:'center', gap:4, height:38, padding:'0 10px', borderRadius:10, background: langOpen ? 'rgba(255,255,255,.22)' : 'rgba(255,255,255,.12)', border:'none', color:'#fff', cursor:'pointer', fontSize:12, fontWeight:700 }}
+              style={{ display:'flex', alignItems:'center', gap:4, height:38, padding:'0 10px', borderRadius:10, background: langOpen ? (theme === 'dark' ? 'rgba(255,255,255,.22)' : 'rgba(0,0,0,.08)') : (theme === 'dark' ? 'rgba(255,255,255,.12)' : 'rgba(0,0,0,.05)'), border:'none', color: theme === 'dark' ? '#fff' : 'var(--ink)', cursor:'pointer', fontSize:12, fontWeight:700 }}
             >
               {SVG_GLOBE}
               <span>{lang}</span>

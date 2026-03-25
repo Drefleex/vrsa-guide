@@ -11,16 +11,18 @@ import {
 
 
 const PAGE_SHORTCUTS = [
-  { q:['ferry','barca','fähre'],                           page:'transport', Icon:Ship,         label:{PT:'Ferry para Ayamonte',EN:'Ferry to Ayamonte',ES:'Ferry a Ayamonte',FR:'Ferry pour Ayamonte',DE:'Fähre nach Ayamonte'} },
-  { q:['praia','beach','plage','strand','playa'],           page:'beaches',   Icon:Waves,        label:{PT:'Praias',EN:'Beaches',ES:'Playas',FR:'Plages',DE:'Strände'} },
-  { q:['event','evento'],                                  page:'events',    Icon:Calendar,     label:{PT:'Eventos',EN:'Events',ES:'Eventos',FR:'Événements',DE:'Events'} },
-  { q:['hotel','hostel','pousada'],                        page:'hotels',    Icon:Building2,    label:{PT:'Hotéis',EN:'Hotels',ES:'Hoteles',FR:'Hôtels',DE:'Hotels'} },
-  { q:['ayamonte','espanha','spain'],                      page:'ayamonte',  Icon:Globe,        label:{PT:'Guia Ayamonte',EN:'Ayamonte Guide',ES:'Guía Ayamonte',FR:'Guide Ayamonte',DE:'Ayamonte Guide'} },
-  { q:['mapa','map','karte','carte'],                      page:'map',       Icon:Map,          label:{PT:'Mapa',EN:'Map',ES:'Mapa',FR:'Carte',DE:'Karte'} },
-  { q:['farmácia','pharmacy','farmacia','apotheke'],        page:'health',    Icon:Plus,         label:{PT:'Farmácias & Saúde',EN:'Health & Pharmacies',ES:'Farmacias',FR:'Pharmacies',DE:'Apotheken'} },
-  { q:['transporte','transport','bus','comboio','train'],   page:'transport', Icon:Bus,          label:{PT:'Transportes',EN:'Transport',ES:'Transporte',FR:'Transport',DE:'Transport'} },
-  { q:['report','reportar','problem','problema'],           page:'report',    Icon:AlertCircle,  label:{PT:'Reportar Problema',EN:'Report Problem',ES:'Reportar',FR:'Signaler',DE:'Melden'} },
-  { q:['cultura','culture','monumento','monument'],         page:'culture',   Icon:Landmark,     label:{PT:'Cultura & Monumentos',EN:'Culture & Monuments',ES:'Cultura',FR:'Culture',DE:'Kultur'} },
+  { q:['ferry','barca','fähre'],                                                   page:'transport',   Icon:Ship,            label:{PT:'Ferry para Ayamonte',EN:'Ferry to Ayamonte',ES:'Ferry a Ayamonte',FR:'Ferry pour Ayamonte',DE:'Fähre nach Ayamonte'} },
+  { q:['praia','beach','plage','strand','playa'],                                   page:'beaches',     Icon:Waves,           label:{PT:'Praias',EN:'Beaches',ES:'Playas',FR:'Plages',DE:'Strände'} },
+  { q:['restaurante','restaurant','comer','comida','food','essen','manger','café','cafe','prato'], page:'restaurants', Icon:UtensilsCrossed, label:{PT:'Guia de Restaurantes',EN:'Restaurant Guide',ES:'Guía de Restaurantes',FR:'Guide Restaurants',DE:'Restaurant-Guide'} },
+  { q:['event','evento'],                                                          page:'events',      Icon:Calendar,        label:{PT:'Eventos',EN:'Events',ES:'Eventos',FR:'Événements',DE:'Events'} },
+  { q:['hotel','hostel','pousada','alojamento','accommodation'],                   page:'hotels',      Icon:Building2,       label:{PT:'Hotéis & Alojamento',EN:'Hotels & Accommodation',ES:'Hoteles',FR:'Hôtels',DE:'Hotels'} },
+  { q:['compras','shopping','loja','store','laden','magasin','mercado'],            page:'shopping',    Icon:ShoppingBag,     label:{PT:'Compras',EN:'Shopping',ES:'Compras',FR:'Shopping',DE:'Shopping'} },
+  { q:['ayamonte','espanha','spain'],                                              page:'ayamonte',    Icon:Globe,           label:{PT:'Guia Ayamonte',EN:'Ayamonte Guide',ES:'Guía Ayamonte',FR:'Guide Ayamonte',DE:'Ayamonte Guide'} },
+  { q:['mapa','map','karte','carte'],                                              page:'map',         Icon:Map,             label:{PT:'Mapa',EN:'Map',ES:'Mapa',FR:'Carte',DE:'Karte'} },
+  { q:['farmácia','pharmacy','farmacia','apotheke','saúde','health','salud'],       page:'health',      Icon:Plus,            label:{PT:'Farmácias & Saúde',EN:'Health & Pharmacies',ES:'Farmacias',FR:'Pharmacies',DE:'Apotheken'} },
+  { q:['transporte','transport','bus','comboio','train'],                           page:'transport',   Icon:Bus,             label:{PT:'Transportes',EN:'Transport',ES:'Transporte',FR:'Transport',DE:'Transport'} },
+  { q:['report','reportar','problem','problema'],                                  page:'report',      Icon:AlertCircle,     label:{PT:'Reportar Problema',EN:'Report Problem',ES:'Reportar',FR:'Signaler',DE:'Melden'} },
+  { q:['cultura','culture','monumento','monument'],                                page:'culture',     Icon:Landmark,        label:{PT:'Cultura & Monumentos',EN:'Culture & Monuments',ES:'Cultura',FR:'Culture',DE:'Kultur'} },
 ]
 
 const CAT_ICONS = {
@@ -122,13 +124,40 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
   }
   const hasResults = allResults.length > 0 || pageResults.length > 0
 
-  function goTo(page, term) {
+  // Categories that have dedicated pages — route pin results there instead of map
+  const CAT_PAGE = {
+    restaurante:'restaurants', pastelaria:'restaurants', gelataria:'restaurants',
+    hamburgaria:'restaurants', pizzaria:'restaurants', kebab:'restaurants',
+    praia:'beaches',
+    hotel:'hotels',
+    cultura:'culture',
+    compras:'shopping', mercado:'shopping',
+    farmacia:'health', saude:'health',
+  }
+
+  function goTo(dest, term) {
     if (term) {
       const updated = [term, ...recents.filter(r => r !== term)].slice(0, 5)
       setRecents(updated)
       saveRecents(updated)
     }
-    onNav(page); onClose()
+    if (typeof dest === 'object') {
+      const targetPage = dest.page === 'map' ? (CAT_PAGE[dest.cat] || 'map') : dest.page
+      if (targetPage === 'map') {
+        onNav({ page: 'map', pin: dest })
+      } else if (targetPage === 'restaurants') {
+        onNav({ page: 'restaurants', pin: dest })
+      } else if (targetPage === 'hotels') {
+        onNav({ page: 'hotels', pin: dest })
+      } else if (['beaches','culture','shopping','health'].includes(targetPage)) {
+        onNav({ page: targetPage, focusName: dest.name })
+      } else {
+        onNav(targetPage)
+      }
+    } else {
+      onNav(dest)
+    }
+    onClose()
   }
 
   function pickSuggestion(s) { setQ(s) }
@@ -190,7 +219,7 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
               <div key={cat}>
                 <div style={SEC}>{CAT_LABELS[cat] || cat}</div>
                 {items.map((p,i) => (
-                  <button key={i} onClick={() => goTo(p.page || 'map', p.name)} style={ROW}>
+                  <button key={i} onClick={() => goTo(p, p.name)} style={ROW}>
                     <div style={{ width:36, height:36, borderRadius:8, background:'var(--surface)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                       <span style={{ fontSize:18 }}>{p.emoji}</span>
                     </div>
