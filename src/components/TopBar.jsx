@@ -32,7 +32,8 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) 
         width: '100%',
         maxWidth: 430,
         zIndex: 199,
-        background: 'var(--primary)',
+        background: '#06152B',
+        borderBottom: '1px solid rgba(0,242,255,0.12)',
         paddingTop: 'env(safe-area-inset-top, 0px)',
         boxSizing: 'border-box',
       }}>
