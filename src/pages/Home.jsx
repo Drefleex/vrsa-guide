@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Sun, Users, UtensilsCrossed, Landmark, Sunset, Leaf, MapPin as MapPinIcon } from 'lucide-react'
 import { tr } from '../utils/i18n'
-
-const FERRY = ['09:00','09:45','10:30','11:15','12:00','12:45','13:30','14:15','15:00','15:45','16:30','17:15','18:00','18:45','19:30']
+import { FERRY_TIMES, TRAIN_TIMES, toMin } from '../data/transport'
 
 const ROUTES = [
   { id:1, Icon:Sun, color:'#1D4ED8',
@@ -117,7 +116,6 @@ const GALLERY = [
   { url:'/images/praia_do_cabeo.webp',                    cap:'Praia do Cabeço' },
 ]
 
-const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m }
 const wIcon = c => c===0?'☀️':c<=3?'⛅':c<=48?'🌫️':c<=67?'🌧️':c<=82?'🌦️':'⛈️'
 const wDesc = (c,l) => {
   const m = {PT:{0:'Céu limpo',2:'Parcialmente nublado',3:'Nublado',61:'Chuva leve',80:'Aguaceiros'},EN:{0:'Clear sky',2:'Partly cloudy',3:'Overcast',61:'Light rain',80:'Showers'},ES:{0:'Despejado',2:'Parcialmente nublado',3:'Nublado',61:'Lluvia leve',80:'Chubascos'},FR:{0:'Ciel dégagé',2:'Partiellement nuageux',3:'Couvert',61:'Pluie légère',80:'Averses'},DE:{0:'Klarer Himmel',2:'Teilweise bewölkt',3:'Bedeckt',61:'Leichter Regen',80:'Schauer'}}
@@ -156,6 +154,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
   const [wx7, setWx7]     = useState(null)
   const [wxError, setWxError] = useState(false)
   const [ferry, setFerry] = useState(null)
+  const [train, setTrain] = useState(null)
   const [route, setRoute] = useState(null)
   const [lb, setLb]       = useState(null)
   const [checked, setChecked] = useState(() => {
@@ -168,8 +167,10 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
   useEffect(() => {
     const update = () => {
       const nm  = new Date().getHours()*60 + new Date().getMinutes()
-      const nxt = FERRY.find(f => toMin(f) > nm)
+      const nxt = FERRY_TIMES.find(f => toMin(f) > nm)
       setFerry(nxt || null)
+      const nxtTrain = TRAIN_TIMES.find(f => toMin(f.dep) > nm)
+      setTrain(nxtTrain || null)
     }
     update()
     const iv = setInterval(update, 60000)
@@ -462,6 +463,45 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
       </div>
 
       <div style={{ padding:'16px 16px 40px' }}>
+
+        {/* ── Próximas Partidas ── */}
+        <button
+          onClick={() => onNav('transport')}
+          style={{ width:'100%', display:'flex', alignItems:'stretch', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:14, overflow:'hidden', boxShadow:'var(--sh-xs)', marginBottom:16, cursor:'pointer', touchAction:'manipulation' }}
+        >
+          <div style={{ width:4, background:'linear-gradient(180deg,#1D4ED8,#059669)', flexShrink:0 }} />
+          <div style={{ flex:1, padding:'11px 14px', display:'flex', gap:0 }}>
+            {/* Ferry */}
+            <div style={{ flex:1, display:'flex', alignItems:'center', gap:10 }}>
+              <span style={{ fontSize:22 }}>⛴️</span>
+              <div>
+                <div style={{ fontSize:9, fontWeight:700, color:'var(--ink-20)', textTransform:'uppercase', letterSpacing:.8 }}>Ferry → Ayamonte</div>
+                <div style={{ fontSize:16, fontWeight:800, color:'var(--ink)', lineHeight:1.1 }}>{ferry || '—'}</div>
+                {ferry && (
+                  <div style={{ fontSize:10, fontWeight:700, color:'#1D4ED8', marginTop:1 }}>
+                    {(() => { const d=toMin(ferry)-(new Date().getHours()*60+new Date().getMinutes()); return d>0?(d<60?`em ${d}min`:`em ${Math.floor(d/60)}h${d%60?` ${d%60}m`:''}`):'A partir' })()}
+                  </div>
+                )}
+              </div>
+            </div>
+            {/* Divider */}
+            <div style={{ width:1, background:'var(--border-lt)', margin:'0 4px', alignSelf:'stretch' }} />
+            {/* Train */}
+            <div style={{ flex:1, display:'flex', alignItems:'center', gap:10, paddingLeft:10 }}>
+              <span style={{ fontSize:22 }}>🚂</span>
+              <div>
+                <div style={{ fontSize:9, fontWeight:700, color:'var(--ink-20)', textTransform:'uppercase', letterSpacing:.8 }}>Comboio → Faro</div>
+                <div style={{ fontSize:16, fontWeight:800, color:'var(--ink)', lineHeight:1.1 }}>{train?.dep || '—'}</div>
+                {train && (
+                  <div style={{ fontSize:10, fontWeight:700, color:'#059669', marginTop:1 }}>
+                    {(() => { const d=toMin(train.dep)-(new Date().getHours()*60+new Date().getMinutes()); return d>0?(d<60?`em ${d}min`:`em ${Math.floor(d/60)}h${d%60?` ${d%60}m`:''}`):'A partir' })()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div style={{ display:'flex', alignItems:'center', paddingRight:12, color:'var(--ink-20)', fontSize:18 }}>›</div>
+        </button>
 
         {/* ── Acesso Principal — 3 botões grandes ── */}
         <div className="sec-label">{t.qa}</div>

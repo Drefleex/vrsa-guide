@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, memo, useCallback, useMemo } from 'react'
+import { FERRY_TIMES, toMin } from '../data/transport'
 import {
   APIProvider, Map as GMap,
   AdvancedMarker, useMap, useMapsLibrary,
@@ -493,9 +494,10 @@ function RouteCard({ activeRoute, routeResult, lang, onStop }) {
 }
 
 // ── Main ────────────────────────────────────────────────────────────────────
-function MapContent({ lang, pins, setPins, theme }) {
+function MapContent({ lang, pins, setPins, theme, onNav }) {
   const t = T[lang] || T.PT
-  const [activeFilter, setActiveFilter] = useState(null) // null = show picker
+  const [activeFilter, setActiveFilter] = useState(null)
+  const [tick, setTick] = useState(0) // null = show picker
   const [showPicker, setShowPicker]     = useState(true)
   const [selected, setSelected]         = useState(null)
   const [userPos, setUserPos]           = useState(null)
@@ -528,6 +530,14 @@ function MapContent({ lang, pins, setPins, theme }) {
     )
     return () => navigator.geolocation.clearWatch(wid)
   }, [])
+
+  useEffect(() => { const iv = setInterval(() => setTick(x => x+1), 60000); return () => clearInterval(iv) }, [])
+
+  // Ferry pill — next departure within 30 min
+  const nm = new Date().getHours()*60 + new Date().getMinutes()
+  const nextFerry = FERRY_TIMES.find(f => toMin(f) > nm)
+  const ferryEta  = nextFerry ? toMin(nextFerry) - nm : null
+  const showFerryPill = ferryEta !== null && ferryEta <= 30
 
   // When filter changes, hide picker
   function selectCategory(cat) {
@@ -616,6 +626,20 @@ function MapContent({ lang, pins, setPins, theme }) {
 
   return (
     <div style={{ height:'100%', display:'flex', flexDirection:'column' }}>
+
+      {/* ── Ferry pill — only when next departure ≤ 30 min ── */}
+      {showFerryPill && (
+        <button
+          onClick={() => onNav?.('transport')}
+          style={{ position:'absolute', bottom:'calc(72px + env(safe-area-inset-bottom,0px))', left:16, zIndex:20, display:'flex', alignItems:'center', gap:7, background:'#1D4ED8', border:'none', borderRadius:50, padding:'8px 14px 8px 10px', boxShadow:'0 4px 16px rgba(29,78,216,.45)', cursor:'pointer', touchAction:'manipulation' }}
+        >
+          <span style={{ fontSize:17 }}>⛴️</span>
+          <div style={{ textAlign:'left' }}>
+            <div style={{ fontSize:11, fontWeight:800, color:'#fff', lineHeight:1 }}>{nextFerry}</div>
+            <div style={{ fontSize:10, color:'rgba(255,255,255,.75)', fontWeight:600, lineHeight:1, marginTop:2 }}>em {ferryEta}min</div>
+          </div>
+        </button>
+      )}
 
       {/* Top bar — only when NOT showing picker */}
       {!showPicker && (
@@ -911,10 +935,10 @@ function MapContent({ lang, pins, setPins, theme }) {
   )
 }
 
-export default function Map({ lang, pins, setPins, theme }) {
+export default function Map({ lang, pins, setPins, theme, onNav }) {
   return (
     <APIProvider apiKey={MAPS_KEY}>
-      <MapContent lang={lang} pins={pins} setPins={setPins} theme={theme} />
+      <MapContent lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={onNav} />
     </APIProvider>
   )
 }

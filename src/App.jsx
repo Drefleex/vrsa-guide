@@ -43,7 +43,7 @@ function saveFavs(a) { try { localStorage.setItem('vrsa_favs', JSON.stringify(a)
 function loadTheme() { try { return localStorage.getItem('vrsa_theme')||'light' } catch { return 'light' } }
 
 // Tabs that support left/right swipe navigation (map excluded — has its own pan)
-const SWIPE_TABS = ['home', 'restaurants', 'events', 'info']
+const SWIPE_TABS = ['home', 'restaurants', 'events', 'transport']
 
 export default function App() {
   const [lang, setLang]     = useState(() => { try { return localStorage.getItem('vrsa_lang')||'PT' } catch { return 'PT' } })
@@ -150,7 +150,7 @@ export default function App() {
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
         <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} />}
-          {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} />}
+          {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={setPage} />}
           {page === 'restaurants' && <Restaurants {...cp} pins={pins} />}
           {page === 'events'      && <Events      {...cp} />}
           {page === 'beaches'     && <Beaches     {...cp} />}

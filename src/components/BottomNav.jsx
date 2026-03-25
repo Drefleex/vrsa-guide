@@ -1,25 +1,25 @@
 import { useState } from 'react'
 import {
   Landmark, Activity, Bus, Building2, ShoppingBag,
-  Globe, Waves, Heart, AlertCircle, BarChart2,
+  Globe, Waves, Heart, AlertCircle, BarChart2, Info,
 } from 'lucide-react'
 
 // ── Nav tab SVGs ──────────────────────────────────────────────
 const NAV_SVG = {
-  home:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
-  map:     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
-  eat:     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/></svg>,
-  calendar:<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
-  info:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>,
-  more:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>,
+  home:      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  map:       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+  eat:       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/></svg>,
+  calendar:  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+  transport: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M7 15h.01"/><path d="M17 15h.01"/><path d="M6 19v2"/><path d="M18 19v2"/></svg>,
+  more:      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>,
 }
 
 const TABS = [
-  { k:'home',        nav:'home',     l:{PT:'Início', EN:'Home',    ES:'Inicio',  FR:'Accueil',DE:'Start'  } },
-  { k:'map',         nav:'map',      l:{PT:'Mapa',   EN:'Map',     ES:'Mapa',    FR:'Carte',  DE:'Karte'  } },
-  { k:'restaurants', nav:'eat',      l:{PT:'Comer',  EN:'Eat',     ES:'Comer',   FR:'Manger', DE:'Essen'  } },
-  { k:'events',      nav:'calendar', l:{PT:'Eventos',EN:'Events',  ES:'Eventos', FR:'Agenda', DE:'Events' } },
-  { k:'info',        nav:'info',     l:{PT:'Info',   EN:'Info',    ES:'Info',    FR:'Info',   DE:'Info'   } },
+  { k:'home',        nav:'home',      l:{PT:'Início',    EN:'Home',      ES:'Inicio',    FR:'Accueil',  DE:'Start'     } },
+  { k:'map',         nav:'map',       l:{PT:'Mapa',      EN:'Map',       ES:'Mapa',      FR:'Carte',    DE:'Karte'     } },
+  { k:'restaurants', nav:'eat',       l:{PT:'Comer',     EN:'Eat',       ES:'Comer',     FR:'Manger',   DE:'Essen'     } },
+  { k:'events',      nav:'calendar',  l:{PT:'Eventos',   EN:'Events',    ES:'Eventos',   FR:'Agenda',   DE:'Events'    } },
+  { k:'transport',   nav:'transport', l:{PT:'Transporte',EN:'Transport', ES:'Transporte',FR:'Transport', DE:'Verkehr'  } },
 ]
 
 // Each item: Icon = Lucide component, color/bg = tinted icon badge
@@ -34,6 +34,7 @@ const MORE_ITEMS = [
   { k:'favorites', Icon:Heart,       color:'#DC2626', bg:'#FEF2F2', l:{PT:'Favoritos',  EN:'Saved',     ES:'Favoritos', FR:'Favoris',  DE:'Favoriten' } },
   { k:'report',    Icon:AlertCircle, color:'#B91C1C', bg:'#FEF2F2', l:{PT:'Reportar',   EN:'Report',    ES:'Reportar',  FR:'Signaler', DE:'Melden'    } },
   { k:'analytics', Icon:BarChart2,   color:'#1D4ED8', bg:'#EFF6FF', l:{PT:'Analytics',  EN:'Analytics', ES:'Analytics', FR:'Analytics', DE:'Analytics' } },
+  { k:'info',       Icon:Info,        color:'#0891B2', bg:'#ECFEFF', l:{PT:'Info',        EN:'Info',       ES:'Info',       FR:'Info',       DE:'Info'       } },
 ]
 
 export default function BottomNav({ page, setPage, lang }) {
