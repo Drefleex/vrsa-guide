@@ -42,9 +42,14 @@ function loadFavs() { try { return JSON.parse(localStorage.getItem('vrsa_favs')|
 function saveFavs(a) { try { localStorage.setItem('vrsa_favs', JSON.stringify(a)) } catch {} }
 function loadTheme() { try { return localStorage.getItem('vrsa_theme')||'light' } catch { return 'light' } }
 
+// Tabs that support left/right swipe navigation (map excluded — has its own pan)
+const SWIPE_TABS = ['home', 'restaurants', 'events', 'info']
+
 export default function App() {
   const [lang, setLang]     = useState(() => { try { return localStorage.getItem('vrsa_lang')||'PT' } catch { return 'PT' } })
   const [page, setPage]     = useState('splash')
+  const swipeX = useRef(null)
+  const swipeY = useRef(null)
   const [pins, setPins]     = useState(DEFAULT_PINS)
   const [loading, setLoading] = useState(false)
   const [favs, setFavs]       = useState(loadFavs)
@@ -115,6 +120,24 @@ export default function App() {
     setTheme(t => t === 'light' ? 'dark' : 'light')
   }, [])
 
+  const onSwipeStart = useCallback((e) => {
+    swipeX.current = e.touches[0].clientX
+    swipeY.current = e.touches[0].clientY
+  }, [])
+
+  const onSwipeEnd = useCallback((e) => {
+    if (swipeX.current === null) return
+    const dx = e.changedTouches[0].clientX - swipeX.current
+    const dy = e.changedTouches[0].clientY - swipeY.current
+    swipeX.current = null
+    // Only horizontal swipes > 60px that are more horizontal than vertical
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return
+    const idx = SWIPE_TABS.indexOf(page)
+    if (idx === -1) return
+    if (dx < 0 && idx < SWIPE_TABS.length - 1) setPage(SWIPE_TABS[idx + 1])
+    else if (dx > 0 && idx > 0) setPage(SWIPE_TABS[idx - 1])
+  }, [page])
+
   if (page === 'splash') {
     return <SplashScreen lang={lang} setLang={setLang} onStart={() => setPage('home')} />
   }
@@ -125,7 +148,7 @@ export default function App() {
     <div className="app-shell">
       {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} />}
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
-        <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }}>
+        <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} />}
           {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} />}
           {page === 'restaurants' && <Restaurants {...cp} pins={pins} />}
