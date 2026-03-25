@@ -75,8 +75,8 @@ button, input, textarea, select { font-family:var(--font); }
 
 .app-shell { position:fixed; inset:0; max-width:430px; margin:0 auto; background:var(--bg); display:flex; flex-direction:column; overflow:hidden; box-shadow:0 0 0 1px rgba(0,0,0,.08); }
 
-.page { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--bg); animation:page-in .18s ease both; }
-@keyframes page-in { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+.page { position:absolute; inset:0; overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--bg); animation:page-in .1s cubic-bezier(0.0,0.0,0.2,1) both; will-change:opacity,transform; }
+@keyframes page-in { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
 
 .card { background:var(--white); border-radius:var(--r-l); border:1px solid var(--border-lt); box-shadow:var(--sh); overflow:hidden; }
 .card-flat { background:var(--white); border-radius:var(--r-l); border:1px solid var(--border-lt); overflow:hidden; }

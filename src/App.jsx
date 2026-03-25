@@ -125,7 +125,7 @@ export default function App() {
     <div className="app-shell">
       {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} />}
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
-        <div key={page} className="page-enter" style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden', }}>
+        <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} />}
           {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} />}
           {page === 'restaurants' && <Restaurants {...cp} pins={pins} />}
