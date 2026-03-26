@@ -94,7 +94,7 @@ export default function Shopping({ lang, pins, favs, toggleFav, onNav, focusName
                   <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{(d.note[L] || d.note.PT).substring(0,55)}...</div>
                 </div>
                 <div style={{ display:'flex', flexDirection:'column', gap:4, flexShrink:0 }}>
-                  <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination='+p.lat+','+p.lng,'_blank')} style={{ width:34, height:34, background:'var(--blue-lt)', border:'none', borderRadius:9, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🧭</button>
+                  <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination='+p.lat+','+p.lng,'_blank','noopener,noreferrer')} style={{ width:34, height:34, background:'var(--blue-lt)', border:'none', borderRadius:9, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🧭</button>
                   <button aria-label={t.fav} onClick={() => toggleFav('pin-' + p.id)} style={{ width:34, height:34, background: isFav ? '#FEE2E2' : 'var(--surface)', border:'1px solid var(--border)', borderRadius:9, fontSize:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
                 </div>
               </div>

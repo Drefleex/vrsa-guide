@@ -33,7 +33,7 @@ function parseCSV(text) {
     const parts = row.split(',')
     const lat = parseFloat(parts[parts.length-2])
     const lng = parseFloat(parts[parts.length-1])
-    if (isNaN(lat) || isNaN(lng) || Math.abs(lat) < 10) return null
+    if (isNaN(lat) || isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) return null
     return { id:parseInt(parts[0]), name:parts.slice(1,parts.length-5).join(',').trim(), emoji:parts[parts.length-5]?.trim()||'📍', cat:parts[parts.length-4]?.trim()||'compras', color:parts[parts.length-3]?.trim()||'#0E2B4A', lat, lng }
   }).filter(Boolean)
 }

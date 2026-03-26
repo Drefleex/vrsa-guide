@@ -97,7 +97,7 @@ function Stars({ rating }) {
 }
 
 // ─── Main ─────────────────────────────────────────────────────
-export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRestaurants, focusPin, onFocusClear }) {
+export default function Restaurants({ lang, pins, favs, toggleFav, onNav, focusPin, onFocusClear }) {
   const L  = lang || 'PT'
   const t  = tr('restaurants', L)
   const [filter, setFilter]   = useState('all')
@@ -109,11 +109,8 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
   }, [focusPin])
 
   const foodPins = useMemo(() => {
-    const base = cmsRestaurants && cmsRestaurants.length > 0
-      ? [...pins.filter(p => !FOOD_CATS.includes(p.cat)), ...cmsRestaurants]
-      : pins
-    return base.filter(p => FOOD_CATS.includes(p.cat))
-  }, [pins, cmsRestaurants])
+    return pins.filter(p => FOOD_CATS.includes(p.cat))
+  }, [pins])
 
   const filtered = useMemo(() => {
     let list = foodPins.filter(p => matchFilter(p, filter))
@@ -215,7 +212,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, cmsRes
           {/* Action buttons */}
           <div style={{ display:'flex', gap:8 }}>
             <button
-              onClick={() => { const c = r.lat+','+r.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c,'_blank') }}
+              onClick={() => { const c = r.lat+','+r.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c,'_blank','noopener,noreferrer') }}
               style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8, boxShadow:'0 4px 16px rgba(6,21,43,.25)' }}
             >🧭 {t.navigate}</button>
             {rich.phone && (

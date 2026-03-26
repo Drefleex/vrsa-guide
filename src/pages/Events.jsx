@@ -210,7 +210,7 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
 
           <div style={{ display:'flex', gap:8 }}>
             <button
-              onClick={() => { const c = ev.lat+','+ev.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c,'_blank') }}
+              onClick={() => { const c = ev.lat+','+ev.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c,'_blank','noopener,noreferrer') }}
               style={{ flex:1, padding:'13px 0', background:ev.color, color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}
             >📍 {t.navigate}</button>
             <button

@@ -476,10 +476,10 @@ function RouteCard({ activeRoute, routeResult, lang, onStop }) {
 
         {/* External navigation apps */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
-          <button onClick={() => window.open(gmUrl, '_blank')} style={{ padding:'10px 0', background:'#4285F4', color:'#fff', border:'none', borderRadius:12, fontSize:12, fontWeight:700, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:5 }}>
+          <button onClick={() => window.open(gmUrl, '_blank','noopener,noreferrer')} style={{ padding:'10px 0', background:'#4285F4', color:'#fff', border:'none', borderRadius:12, fontSize:12, fontWeight:700, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:5 }}>
             🗺️ Google Maps
           </button>
-          <button onClick={() => window.open(wazeUrl, '_blank')} style={{ padding:'10px 0', background:'#00BFFF', color:'#fff', border:'none', borderRadius:12, fontSize:12, fontWeight:700, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:5 }}>
+          <button onClick={() => window.open(wazeUrl, '_blank','noopener,noreferrer')} style={{ padding:'10px 0', background:'#00BFFF', color:'#fff', border:'none', borderRadius:12, fontSize:12, fontWeight:700, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:5 }}>
             🔵 Waze
           </button>
         </div>
@@ -922,7 +922,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
             const orig=userPos?`&origin=${userPos.lat},${userPos.lng}`:''
             const urls={google:`https://www.google.com/maps/dir/?api=1${orig}&destination=${coord}&travelmode=walking`,apple:`https://maps.apple.com/?daddr=${coord}&dirflg=w`,waze:`https://waze.com/ul?ll=${coord}&navigate=yes`}
             return (
-              <button key={app} onClick={()=>{ window.open(urls[app],'_blank'); setNavDest(null) }} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'#FAFAFA', border:'1px solid #EEEEEE', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
+              <button key={app} onClick={()=>{ window.open(urls[app],'_blank','noopener,noreferrer'); setNavDest(null) }} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'#FAFAFA', border:'1px solid #EEEEEE', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
                 <span style={{ fontSize:28 }}>{icon}</span>
                 <div style={{ flex:1 }}>
                   <div style={{ fontSize:14, fontWeight:700, color:'#111827' }}>{label}</div>

@@ -93,8 +93,8 @@ export default function Hotels({ lang, pins, favs, toggleFav, onNav, focusPin, o
           </div>
           <p style={{ fontSize:13, color:'var(--ink-40)', lineHeight:1.75, marginBottom:20 }}>{r.desc[L] || r.desc.PT}</p>
           <div style={{ display:'flex', gap:8 }}>
-            <button onClick={() => window.open(r.book, '_blank')} style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>🛏️ {t.book}</button>
-            <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination='+detail.lat+','+detail.lng, '_blank')} style={{ width:50, height:50, background:'var(--blue-lt)', border:'none', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🧭</button>
+            <button onClick={() => window.open(r.book, '_blank','noopener,noreferrer')} style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>🛏️ {t.book}</button>
+            <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination='+detail.lat+','+detail.lng, '_blank','noopener,noreferrer')} style={{ width:50, height:50, background:'var(--blue-lt)', border:'none', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🧭</button>
             <button aria-label={t.fav} onClick={() => toggleFav('pin-' + detail.id)} style={{ width:50, height:50, background: isFav ? '#FEE2E2' : 'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
         </div>

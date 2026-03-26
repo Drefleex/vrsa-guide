@@ -200,8 +200,8 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
           {pageResults.length > 0 && (
             <>
               <div style={SEC}>{t.pages}</div>
-              {pageResults.map((r,i) => (
-                <button key={i} onClick={() => goTo(r.page, r.label[L]||r.label.PT)} style={ROW}>
+              {pageResults.map((r) => (
+                <button key={r.page + (r.label[L]||r.label.PT)} onClick={() => goTo(r.page, r.label[L]||r.label.PT)} style={ROW}>
                   <div style={{ width:36, height:36, borderRadius:8, background:'var(--primary-lt)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, color:'var(--primary)' }}>
                     <r.Icon size={18} strokeWidth={1.8} />
                   </div>
@@ -218,8 +218,8 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
             return (
               <div key={cat}>
                 <div style={SEC}>{CAT_LABELS[cat] || cat}</div>
-                {items.map((p,i) => (
-                  <button key={i} onClick={() => goTo(p, p.name)} style={ROW}>
+                {items.map((p) => (
+                  <button key={p.id ?? p.name} onClick={() => goTo(p, p.name)} style={ROW}>
                     <div style={{ width:36, height:36, borderRadius:8, background:'var(--surface)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                       <span style={{ fontSize:18 }}>{p.emoji}</span>
                     </div>
