@@ -11,18 +11,26 @@ function getRich(id) {
 }
 
 // closedDays: array of JS weekday numbers (0=Sun, 1=Mon, … 6=Sat)
+function parseSlot(slot) {
+  const [s, e] = slot.split('–').map(t => {
+    const [h, m] = t.trim().split(':').map(Number)
+    return h * 60 + (m || 0)
+  })
+  // 00:00 closing = midnight = end of day (1440 min)
+  const end = e === 0 ? 1440 : e
+  return { s, end }
+}
+
 function isOpenNow(hours, closedDays) {
   if (!hours) return null
   const now = new Date()
   if (closedDays?.includes(now.getDay())) return false
   const cur = now.getHours() * 60 + now.getMinutes()
-  const slots = hours.split(' · ')
-  for (const slot of slots) {
-    const [s, e] = slot.split('–').map(t => {
-      const [h, m] = t.trim().split(':').map(Number)
-      return h * 60 + (m || 0)
-    })
-    if (cur >= s && cur <= e) return true
+  for (const slot of hours.split(' · ')) {
+    const { s, end } = parseSlot(slot)
+    // crosses midnight (e.g. 23:00–02:00)
+    if (end < s) { if (cur >= s || cur <= end) return true }
+    else         { if (cur >= s && cur <= end) return true }
   }
   return false
 }
@@ -32,14 +40,11 @@ function closesAt(hours, closedDays) {
   const now = new Date()
   if (closedDays?.includes(now.getDay())) return null
   const cur = now.getHours() * 60 + now.getMinutes()
-  const slots = hours.split(' · ')
-  for (const slot of slots) {
-    const [s, e] = slot.split('–').map(t => {
-      const [h, m] = t.trim().split(':').map(Number)
-      return h * 60 + (m || 0)
-    })
-    if (cur >= s && cur <= e) {
-      const hh = Math.floor(e/60), mm = e%60
+  for (const slot of hours.split(' · ')) {
+    const { s, end } = parseSlot(slot)
+    const open = end < s ? (cur >= s || cur <= end) : (cur >= s && cur <= end)
+    if (open) {
+      const hh = Math.floor(end / 60) % 24, mm = end % 60
       return `${hh}:${mm.toString().padStart(2,'0')}`
     }
   }
