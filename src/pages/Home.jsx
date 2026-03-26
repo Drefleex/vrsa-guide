@@ -146,7 +146,7 @@ function getDailyTip() {
   return DAILY_TIPS[dayOfYear % DAILY_TIPS.length]
 }
 
-export default function Home({ lang, pins, loading, favs, onNav }) {
+export default function Home({ lang, pins, loading, favs, onNav, municipalAlert }) {
   const L = lang || 'PT'
   const t = tr('home', L)
   const h = new Date().getHours()
@@ -162,16 +162,17 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
   })
   const [mode, setMode] = useState(() => localStorage.getItem('vrsa_mode') || 'rio')
 
-  // Configuração do Alerta Municipal (mudar active: true/false para ligar/desligar)
-  const municipalAlert = {
-    active: true,
-    type: 'warning', // 'warning' (laranja) | 'danger' (vermelho) | 'info' (azul)
+  // Alerta municipal — carregado dinamicamente via VITE_ALERT_URL (Google Sheets)
+  // Se não houver URL configurada, pode activar aqui manualmente:
+  const localAlert = municipalAlert ?? {
+    active: false, // ← mudar para true para mostrar alerta sem Google Sheets
+    type: 'warning', // 'warning' | 'danger' | 'info'
     message: {
-      PT: 'Aviso: Fogo de artifício de passagem de ano alterado para as 23h30.',
-      EN: 'Alert: New Year\'s Eve fireworks rescheduled to 11:30 PM.',
-      ES: 'Aviso: Fuegos artificiales de fin de año reprogramados para las 23:30.',
-      FR: 'Alerte\u00a0: Feux d\'artifice du Nouvel An reportés à 23h30.',
-      DE: 'Achtung: Silvesterfeuerwerk auf 23:30 Uhr verschoben.',
+      PT: '',
+      EN: '',
+      ES: '',
+      FR: '',
+      DE: '',
     }
   }
 
@@ -476,13 +477,13 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
       </div>
 
       {/* ── Quadro de Avisos Municipais ── */}
-      {municipalAlert.active && (() => {
+      {localAlert.active && (() => {
         const colors = {
           danger:  { bg:'#FEF2F2', color:'#991B1B', border:'#FECACA', icon:'#DC2626' },
           warning: { bg:'#FFF7ED', color:'#9A3412', border:'#FED7AA', icon:'#EA580C' },
           info:    { bg:'#EFF6FF', color:'#1E40AF', border:'#BFDBFE', icon:'#2563EB' },
         }
-        const c = colors[municipalAlert.type] || colors.info
+        const c = colors[localAlert.type] || colors.info
         return (
           <div style={{ margin:'12px 16px 0', padding:'12px 14px', borderRadius:12, background:c.bg, border:`1px solid ${c.border}`, display:'flex', alignItems:'flex-start', gap:10 }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.icon} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink:0, marginTop:1 }}>
@@ -490,7 +491,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
               <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
             </svg>
             <p style={{ margin:0, fontSize:13, fontWeight:600, color:c.color, lineHeight:1.45 }}>
-              {municipalAlert.message[L] || municipalAlert.message.PT}
+              {localAlert.message[L] || localAlert.message.PT}
             </p>
           </div>
         )

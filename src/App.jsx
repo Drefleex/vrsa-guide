@@ -69,6 +69,25 @@ export default function App() {
   const [cultureFocusName, setCultureFocusName]     = useState(null)
   const [shoppingFocusName, setShoppingFocusName]   = useState(null)
   const [healthFocusName, setHealthFocusName]       = useState(null)
+  const [municipalAlert, setMunicipalAlert]         = useState(null)
+
+  // Load municipal alert from Google Sheets CSV (VITE_ALERT_URL)
+  // Sheet format — row 1: header, row 2: active,type,PT,EN,ES,FR,DE
+  useEffect(() => {
+    const url = import.meta.env.VITE_ALERT_URL
+    if (!url) return
+    fetch(url)
+      .then(r => r.text())
+      .then(text => {
+        const lines = text.trim().split('\n')
+        if (lines.length < 2) return
+        const vals = lines[1].split(',').map(s => s.trim().replace(/^"|"$/g, ''))
+        const [active, type, PT, EN, ES, FR, DE] = vals
+        if (active === 'true') setMunicipalAlert({ active:true, type:type||'info', message:{PT,EN,ES,FR,DE} })
+        else setMunicipalAlert({ active: false })
+      })
+      .catch(() => {})
+  }, [])
 
   function handleNav(dest) {
     if (dest && typeof dest === 'object') {
@@ -171,7 +190,7 @@ export default function App() {
       {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} theme={theme} toggleTheme={toggleTheme} />}
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
         <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
-          {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} />}
+          {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} municipalAlert={municipalAlert} />}
           {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={setPage} focusPin={mapFocusPin} onFocusClear={() => setMapFocusPin(null)} />}
           {page === 'restaurants' && <Restaurants {...cp} pins={pins} focusPin={restaurantFocusPin} onFocusClear={() => setRestaurantFocusPin(null)} />}
           {page === 'events'      && <Events      {...cp} />}

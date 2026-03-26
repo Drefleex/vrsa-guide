@@ -4,8 +4,25 @@ import { tr } from '../utils/i18n'
 import { RICH } from '../data/restaurants'
 import { Share } from 'lucide-react'
 
-function getRich(id) {
-  const base = RICH[id] || { rating:4.0, reviews:Math.floor(30+Math.random()*200), price:'€', hours:'12:00–22:00', phone:null, desc:{PT:'Restaurante local em VRSA.',EN:'Local restaurant in VRSA.',ES:'Restaurante local en VRSA.',FR:'Restaurant local à VRSA.',DE:'Lokales Restaurant em VRSA.'} }
+const CAT_DEFAULTS = {
+  restaurante: { rating:4.0, price:'€€', hours:'12:00–15:00 · 19:00–22:30', closedDays:[1],
+    desc:{PT:'Restaurante tradicional português. Peixe fresco e petiscos da região do Algarve.',EN:'Traditional Portuguese restaurant. Fresh fish and regional Algarve specialties.',ES:'Restaurante tradicional portugués. Pescado fresco y especialidades del Algarve.',FR:'Restaurant traditionnel portugais. Poisson frais et spécialités de l\'Algarve.',DE:'Traditionelles portugiesisches Restaurant. Frischer Fisch und regionale Spezialitäten.'} },
+  pastelaria: { rating:4.1, price:'€', hours:'08:00–20:00',
+    desc:{PT:'Café e pastelaria com produtos artesanais. Perfeito para pequeno-almoço ou lanche.',EN:'Café and bakery with artisan products. Perfect for breakfast or a snack.',ES:'Café y pastelería artesanal. Perfecto para desayuno o merienda.',FR:'Café et pâtisserie artisanale. Parfait pour le petit-déjeuner ou le goûter.',DE:'Café und Bäckerei mit handgemachten Produkten. Ideal für Frühstück oder Snack.'} },
+  gelataria: { rating:4.2, price:'€', hours:'10:00–23:00',
+    desc:{PT:'Gelataria artesanal com sabores frescos e criativos.',EN:'Artisan ice cream shop with fresh and creative flavours.',ES:'Heladería artesanal con sabores frescos y creativos.',FR:'Glacier artisanal avec des saveurs fraîches et créatives.',DE:'Handwerkliche Eisdiele mit frischen und kreativen Eissorten.'} },
+  hamburgaria: { rating:3.9, price:'€', hours:'12:00–23:00',
+    desc:{PT:'Hambúrgueres artesanais e refeições rápidas.',EN:'Artisan burgers and quick meals.',ES:'Hamburguesas artesanales y comidas rápidas.',FR:'Burgers artisanaux et repas rapides.',DE:'Handgemachte Burger und Schnellgerichte.'} },
+  pizzaria: { rating:4.0, price:'€€', hours:'12:00–15:00 · 18:00–23:00',
+    desc:{PT:'Pizzaria com ingredientes frescos e massa artesanal.',EN:'Pizza restaurant with fresh ingredients and handmade dough.',ES:'Pizzería con ingredientes frescos y masa artesanal.',FR:'Pizzeria avec ingrédients frais et pâte artisanale.',DE:'Pizzeria mit frischen Zutaten und handgemachtem Teig.'} },
+  kebab: { rating:3.8, price:'€', hours:'12:00–00:00',
+    desc:{PT:'Kebab e grelhados. Rápido, saboroso e económico.',EN:'Kebab and grilled meats. Fast, tasty and affordable.',ES:'Kebab y carnes a la brasa. Rápido, sabroso y económico.',FR:'Kebab et grillades. Rapide, savoureux et abordable.',DE:'Kebab und Grillgerichte. Schnell, lecker und günstig.'} },
+}
+
+function getRich(id, cat) {
+  const def  = CAT_DEFAULTS[cat] || CAT_DEFAULTS.restaurante
+  // deterministic reviews: avoids re-render flickering from Math.random()
+  const base = RICH[id] || { ...def, reviews: 30 + (id * 13 % 170), phone: null }
   const open = isOpenNow(base.hours, base.closedDays)
   return { ...base, open: open !== null ? open : true }
 }
@@ -137,7 +154,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, focusP
   // ── Detail view ──────────────────────────────────────────────
   if (detail) {
     const r    = detail
-    const rich = getRich(r.id)
+    const rich = getRich(r.id, r.cat)
     const isFav = favs.includes('pin-' + r.id)
 
     return (
