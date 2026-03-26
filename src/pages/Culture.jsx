@@ -7,7 +7,17 @@ import { Share } from 'lucide-react'
 export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('culture', L)
-  const [detail, setDetail]   = useState(null)
+  const [detail, setDetail] = useState(null)
+  const [playingId, setPlayingId] = useState(null)
+
+  const voiceLangs = { PT:'pt-PT', EN:'en-US', ES:'es-ES', FR:'fr-FR', DE:'de-DE' }
+
+  const audioText = { PT:'Ouvir História', EN:'Listen to Story', ES:'Escuchar Historia', FR:"Écouter l'histoire", DE:'Geschichte anhören' }
+  const stopText  = { PT:'Parar Áudio',    EN:'Stop Audio',       ES:'Detener Audio',   FR:'Arrêter Audio',    DE:'Audio stoppen' }
+
+  useEffect(() => {
+    return () => { if ('speechSynthesis' in window) window.speechSynthesis.cancel() }
+  }, [])
 
   useEffect(() => {
     if (!focusName) return
@@ -18,6 +28,26 @@ export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFoc
     if (found) setDetail(found)
     onFocusClear?.()
   }, [focusName])
+
+  function handleSpeak(id, text) {
+    if (!('speechSynthesis' in window)) {
+      alert(L === 'PT' ? 'O seu navegador não suporta áudio.' : 'Audio not supported in this browser.')
+      return
+    }
+    if (playingId === id) {
+      window.speechSynthesis.cancel()
+      setPlayingId(null)
+      return
+    }
+    window.speechSynthesis.cancel()
+    const utterance  = new SpeechSynthesisUtterance(text)
+    utterance.lang   = voiceLangs[L] || 'en-US'
+    utterance.rate   = 0.95
+    utterance.onend  = () => setPlayingId(null)
+    utterance.onerror = () => setPlayingId(null)
+    setPlayingId(id)
+    window.speechSynthesis.speak(utterance)
+  }
 
   const handleShare = async (itemTitle) => {
     const shareData = {
@@ -55,7 +85,29 @@ export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFoc
           </div>
         </div>
         <div style={{ flex:1, overflowY:'auto', padding:'20px 20px 40px' }}>
-          <p style={{ fontSize:14, color:'var(--ink-40)', lineHeight:1.8, marginBottom:20 }}>{detail.desc[L]||detail.desc.PT}</p>
+          <p style={{ fontSize:14, color:'var(--ink-40)', lineHeight:1.8, marginBottom:14 }}>{detail.desc[L]||detail.desc.PT}</p>
+
+          {/* Áudio-Guia */}
+          <button
+            onClick={() => handleSpeak(detail.id, detail.desc[L] || detail.desc.PT)}
+            style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:8, width:'100%', padding:'12px 0', marginBottom:12, borderRadius:12, border:'none', cursor:'pointer', fontSize:14, fontWeight:700,
+              background: playingId === detail.id ? '#FEE2E2' : '#EFF6FF',
+              color:      playingId === detail.id ? '#DC2626'  : '#2563EB',
+            }}
+          >
+            {playingId === detail.id ? (
+              <>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                {stopText[L]}
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                {audioText[L]}
+              </>
+            )}
+          </button>
+
           <div style={{ display:'flex', gap:8 }}>
             <button onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${detail.lat},${detail.lng}`,'_blank')} style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>📍 {t.navigate}</button>
             <button onClick={() => handleShare(detail.name)} style={{ width:50, height:50, background:'var(--surface)', border:'1.5px solid var(--border)', borderRadius:14, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}><Share size={20} color="var(--ink)" /></button>
@@ -92,7 +144,26 @@ export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFoc
                     <div style={{ fontSize:15, fontWeight:800, color:'var(--ink)' }}>{m.name}</div>
                   </div>
                   <div style={{ fontSize:12, color:'var(--ink-40)', lineHeight:1.55 }}>{(m.desc[L]||m.desc.PT).substring(0,100)}...</div>
-                  <div style={{ fontSize:11, color:'var(--ink-20)', marginTop:6, fontWeight:600 }}>📅 {t.year}: {m.year}</div>
+                  <div style={{ fontSize:11, color:'var(--ink-20)', marginTop:6, fontWeight:600, marginBottom:10 }}>📅 {t.year}: {m.year}</div>
+                  <button
+                    onClick={e => { e.stopPropagation(); handleSpeak(m.id, m.desc[L] || m.desc.PT) }}
+                    style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:7, width:'100%', padding:'8px 0', borderRadius:9, border:'none', cursor:'pointer', fontSize:12, fontWeight:700,
+                      background: playingId === m.id ? '#FEE2E2' : '#EFF6FF',
+                      color:      playingId === m.id ? '#DC2626'  : '#2563EB',
+                    }}
+                  >
+                    {playingId === m.id ? (
+                      <>
+                        <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                        {stopText[L]}
+                      </>
+                    ) : (
+                      <>
+                        <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                        {audioText[L]}
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
             )

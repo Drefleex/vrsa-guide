@@ -65,6 +65,66 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
   const [detail, setDetail]  = useState(null)
   const [tick, setTick]      = useState(0)
 
+  const calendarText = {
+    PT: 'Adicionar ao Calendário',
+    EN: 'Add to Calendar',
+    ES: 'Añadir al Calendario',
+    FR: 'Ajouter au Calendrier',
+    DE: 'Zum Kalender hinzufügen',
+  }
+
+  function downloadICS(ev) {
+    const now  = new Date()
+    const year = (ev.month < now.getMonth() + 1 || (ev.month === now.getMonth() + 1 && ev.day < now.getDate()))
+      ? now.getFullYear() + 1
+      : now.getFullYear()
+
+    // Parse time like "21h00", "21:00", "9h30" — fallback to all-day
+    const timeMatch = String(ev.time || '').match(/(\d{1,2})[h:](\d{2})/)
+    const pad = n => String(n).padStart(2, '0')
+    const dateStr = `${year}${pad(ev.month)}${pad(ev.day)}`
+
+    let dtStart, dtEnd
+    if (timeMatch) {
+      const hh = pad(parseInt(timeMatch[1]))
+      const mm = pad(parseInt(timeMatch[2]))
+      dtStart = `${dateStr}T${hh}${mm}00`
+      // default 2h duration
+      const endH = pad((parseInt(timeMatch[1]) + 2) % 24)
+      dtEnd   = `${dateStr}T${endH}${mm}00`
+    } else {
+      dtStart = `${dateStr}`
+      dtEnd   = `${year}${pad(ev.month)}${pad(ev.day + 1)}`
+    }
+
+    const title = (ev.title[L] || ev.title.PT).replace(/,/g, '\\,')
+    const desc  = (ev.desc[L]  || ev.desc.PT ).replace(/\n/g, '\\n').replace(/,/g, '\\,')
+    const loc   = (ev.loc || '').replace(/,/g, '\\,')
+
+    const ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//VRSA Guide//Tourist Guide//PT',
+      'BEGIN:VEVENT',
+      `UID:vrsa-event-${ev.id}-${Date.now()}@guia-vrsa.pt`,
+      `DTSTART${timeMatch ? '' : ';VALUE=DATE'}:${dtStart}`,
+      `DTEND${timeMatch ? '' : ';VALUE=DATE'}:${dtEnd}`,
+      `SUMMARY:${title}`,
+      `DESCRIPTION:${desc}`,
+      `LOCATION:${loc}`,
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n')
+
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' })
+    const url  = URL.createObjectURL(blob)
+    const a    = document.createElement('a')
+    a.href     = url
+    a.download = `${title.replace(/\s+/g, '_')}.ics`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   useEffect(() => { const iv = setInterval(() => setTick(x => x+1), 60000); return () => clearInterval(iv) }, [])
 
   const now     = new Date()
@@ -136,9 +196,17 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
             ))}
           </div>
 
-          <p style={{ fontSize:13, color:'var(--ink-40)', lineHeight:1.75, marginBottom:20 }}>
+          <p style={{ fontSize:13, color:'var(--ink-40)', lineHeight:1.75, marginBottom:16 }}>
             {ev.desc[L] || ev.desc.PT}
           </p>
+
+          <button
+            onClick={() => downloadICS(ev)}
+            style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:8, width:'100%', padding:'11px 0', background:'#EFF6FF', color:'#2563EB', border:'1px solid #BFDBFE', borderRadius:12, fontSize:13, fontWeight:700, cursor:'pointer', marginBottom:10 }}
+          >
+            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            {calendarText[L]}
+          </button>
 
           <div style={{ display:'flex', gap:8 }}>
             <button
@@ -219,23 +287,34 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
                       const today = isToday(ev)
                       const days  = countdown(ev.month, ev.day)
                       return (
-                        <div key={ev.id} onClick={() => setDetail(ev)} style={{ display:'flex', alignItems:'center', gap:12, padding:'13px 16px', borderBottom: i < upcoming.length-1 ? '1px solid var(--surface)' : 'none', cursor:'pointer' }}>
-                          <div style={{ width:46, height:46, borderRadius:12, flexShrink:0, background:`${ev.color}18`, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', border:`1px solid ${ev.color}30` }}>
-                            <div style={{ fontSize:15, fontWeight:900, color:ev.color, lineHeight:1 }}>{ev.day}</div>
-                            <div style={{ fontSize:9, fontWeight:700, color:ev.color, textTransform:'uppercase' }}>{mon}</div>
+                        <div key={ev.id} style={{ padding:'13px 16px', borderBottom: i < upcoming.length-1 ? '1px solid var(--surface)' : 'none' }}>
+                          {/* Row */}
+                          <div onClick={() => setDetail(ev)} style={{ display:'flex', alignItems:'center', gap:12, cursor:'pointer', marginBottom:10 }}>
+                            <div style={{ width:46, height:46, borderRadius:12, flexShrink:0, background:`${ev.color}18`, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', border:`1px solid ${ev.color}30` }}>
+                              <div style={{ fontSize:15, fontWeight:900, color:ev.color, lineHeight:1 }}>{ev.day}</div>
+                              <div style={{ fontSize:9, fontWeight:700, color:ev.color, textTransform:'uppercase' }}>{mon}</div>
+                            </div>
+                            <div style={{ flex:1, minWidth:0 }}>
+                              <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{ev.title[L] || ev.title.PT}</div>
+                              <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:2 }}>{ev.loc} · {ev.time}</div>
+                            </div>
+                            <div style={{ textAlign:'right', flexShrink:0 }}>
+                              {today ? (
+                                <span style={{ background:'#FEF3C7', color:'#B45309', fontSize:10, fontWeight:800, padding:'2px 8px', borderRadius:50 }}>{t.today}</span>
+                              ) : days <= 30 ? (
+                                <div><div style={{ fontSize:15, fontWeight:900, color:ev.color }}>{days}</div><div style={{ fontSize:9, color:'var(--ink-20)', fontWeight:600 }}>{t.days}</div></div>
+                              ) : <span style={{ fontSize:18 }}>{ev.emoji}</span>}
+                            </div>
+                            <button onClick={e => { e.stopPropagation(); toggleFav('event-' + ev.id) }} style={{ background:'none', border:'none', fontSize:16, cursor:'pointer', padding:2, flexShrink:0 }}>{isFav ? '❤️' : '🤍'}</button>
                           </div>
-                          <div style={{ flex:1, minWidth:0 }}>
-                            <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{ev.title[L] || ev.title.PT}</div>
-                            <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:2 }}>{ev.loc} · {ev.time}</div>
-                          </div>
-                          <div style={{ textAlign:'right', flexShrink:0 }}>
-                            {today ? (
-                              <span style={{ background:'#FEF3C7', color:'#B45309', fontSize:10, fontWeight:800, padding:'2px 8px', borderRadius:50 }}>{t.today}</span>
-                            ) : days <= 30 ? (
-                              <div><div style={{ fontSize:15, fontWeight:900, color:ev.color }}>{days}</div><div style={{ fontSize:9, color:'var(--ink-20)', fontWeight:600 }}>{t.days}</div></div>
-                            ) : <span style={{ fontSize:18 }}>{ev.emoji}</span>}
-                          </div>
-                          <button onClick={e => { e.stopPropagation(); toggleFav('event-' + ev.id) }} style={{ background:'none', border:'none', fontSize:16, cursor:'pointer', padding:2, flexShrink:0 }}>{isFav ? '❤️' : '🤍'}</button>
+                          {/* Calendar button */}
+                          <button
+                            onClick={e => { e.stopPropagation(); downloadICS(ev) }}
+                            style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:7, width:'100%', padding:'8px 0', background:'#EFF6FF', color:'#2563EB', border:'1px solid #BFDBFE', borderRadius:9, fontSize:12, fontWeight:700, cursor:'pointer' }}
+                          >
+                            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            {calendarText[L]}
+                          </button>
                         </div>
                       )
                     })}

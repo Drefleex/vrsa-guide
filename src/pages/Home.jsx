@@ -162,7 +162,20 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
   })
   const [mode, setMode] = useState(() => localStorage.getItem('vrsa_mode') || 'rio')
 
-  const DAY = {PT:['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ES:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],FR:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],DE:['So','Mo','Di','Mi','Do','Fr','Sa']}
+  // Configuração do Alerta Municipal (mudar active: true/false para ligar/desligar)
+  const municipalAlert = {
+    active: true,
+    type: 'warning', // 'warning' (laranja) | 'danger' (vermelho) | 'info' (azul)
+    message: {
+      PT: 'Aviso: Fogo de artifício de passagem de ano alterado para as 23h30.',
+      EN: 'Alert: New Year\'s Eve fireworks rescheduled to 11:30 PM.',
+      ES: 'Aviso: Fuegos artificiales de fin de año reprogramados para las 23:30.',
+      FR: 'Alerte\u00a0: Feux d\'artifice du Nouvel An reportés à 23h30.',
+      DE: 'Achtung: Silvesterfeuerwerk auf 23:30 Uhr verschoben.',
+    }
+  }
+
+  const DAY ={PT:['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ES:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],FR:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],DE:['So','Mo','Di','Mi','Do','Fr','Sa']}
 
   useEffect(() => {
     const update = () => {
@@ -462,6 +475,27 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
         </div>
       </div>
 
+      {/* ── Quadro de Avisos Municipais ── */}
+      {municipalAlert.active && (() => {
+        const colors = {
+          danger:  { bg:'#FEF2F2', color:'#991B1B', border:'#FECACA', icon:'#DC2626' },
+          warning: { bg:'#FFF7ED', color:'#9A3412', border:'#FED7AA', icon:'#EA580C' },
+          info:    { bg:'#EFF6FF', color:'#1E40AF', border:'#BFDBFE', icon:'#2563EB' },
+        }
+        const c = colors[municipalAlert.type] || colors.info
+        return (
+          <div style={{ margin:'12px 16px 0', padding:'12px 14px', borderRadius:12, background:c.bg, border:`1px solid ${c.border}`, display:'flex', alignItems:'flex-start', gap:10 }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.icon} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink:0, marginTop:1 }}>
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <p style={{ margin:0, fontSize:13, fontWeight:600, color:c.color, lineHeight:1.45 }}>
+              {municipalAlert.message[L] || municipalAlert.message.PT}
+            </p>
+          </div>
+        )
+      })()}
+
       <div style={{ padding:'16px 16px 40px' }}>
 
         {/* ── Próximas Partidas ── */}
@@ -652,8 +686,9 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
               </div>
               <div className="card" style={{ marginBottom:24 }}>
                 {topPins.map((p,i,arr) => (
-                  <button key={p.id} onClick={() => onNav('map')} aria-label={p.name}
-                    style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', cursor:'pointer', width:'100%', background:'none', border:'none', textAlign:'left' }}>
+                  <div key={p.id} onClick={() => onNav('map')} role="button" tabIndex={0}
+                    onKeyDown={e => e.key === 'Enter' && onNav('map')}
+                    style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', cursor:'pointer' }}>
                     <div style={{ width:42, height:42, borderRadius:12, background:avc(p.name), display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                       <span style={{ fontSize:15, fontWeight:700, color:'#fff' }}>{avi(p.name)}</span>
                     </div>
@@ -666,7 +701,7 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
                       style={{ fontSize:11, fontWeight:700, color:'var(--primary)', background:'var(--primary-lt)', padding:'4px 10px', borderRadius:50, textDecoration:'none', flexShrink:0 }}>
                       📍 {L==='EN'?'Map':L==='FR'?'Carte':L==='DE'?'Karte':L==='ES'?'Mapa':'Mapa'}
                     </a>
-                  </button>
+                  </div>
                 ))}
               </div>
             </>
@@ -692,10 +727,12 @@ export default function Home({ lang, pins, loading, favs, onNav }) {
                 style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
               />
               {i === 2 && GALLERY.length > 3 && (
-                <button onClick={e => { e.stopPropagation(); setLb(3) }} aria-label={`Ver mais ${GALLERY.length - 2} fotos`}
-                  style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.52)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', border:'none' }}>
+                <div onClick={e => { e.stopPropagation(); setLb(3) }} role="button" tabIndex={0}
+                  onKeyDown={e => e.key === 'Enter' && setLb(3)}
+                  aria-label={`Ver mais ${GALLERY.length - 2} fotos`}
+                  style={{ position:'absolute', inset:0, background:'rgba(0,0,0,.52)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer' }}>
                   <div style={{ color:'#fff', fontSize:18, fontWeight:800 }}>+{GALLERY.length - 2}</div>
-                </button>
+                </div>
               )}
               <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(transparent,rgba(0,0,0,.6))', padding:'14px 8px 6px' }}>
                 <div style={{ fontSize:9, color:'rgba(255,255,255,.85)', fontWeight:600 }}>{GALLERY[i].cap}</div>
