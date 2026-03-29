@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
-import { RICH } from '../data/restaurants'
+import DB from '../data/places-db.json'
 import { Share } from 'lucide-react'
 
 const CAT_DEFAULTS = {
@@ -21,10 +21,18 @@ const CAT_DEFAULTS = {
 
 function getRich(id, cat) {
   const def  = CAT_DEFAULTS[cat] || CAT_DEFAULTS.restaurante
-  // deterministic reviews: avoids re-render flickering from Math.random()
-  const base = RICH[id] || { ...def, reviews: 30 + (id * 13 % 170), phone: null }
+  const real = DB[id]
+  const base = {
+    rating: real?.rating || def.rating,
+    reviews: real?.user_ratings_total || (30 + (id * 13 % 170)),
+    phone: real?.phone || null,
+    hours: real?.hours_text || def.hours,
+    price: real?.price_level ? '€'.repeat(real.price_level) : def.price,
+    closedDays: def.closedDays,
+    desc: def.desc
+  }
   const open = isOpenNow(base.hours, base.closedDays)
-  return { ...base, open: open !== null ? open : true }
+  return { ...base, open: open !== null ? open : true, realReviews: real?.reviews || [] }
 }
 
 // closedDays: array of JS weekday numbers (0=Sun, 1=Mon, … 6=Sat)
@@ -183,6 +191,24 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
           <p style={{ fontSize:13, color:'var(--ink-40)', lineHeight:1.7, margin:'14px 0' }}>
             {(rich.desc[L] || rich.desc.PT)}
           </p>
+
+          {rich.realReviews?.length > 0 && (
+            <div style={{ marginBottom:20 }}>
+              <div style={{ fontSize:15, fontWeight:800, color:'var(--ink)', marginBottom:12 }}>Google Reviews</div>
+              <div style={{ display:'flex', overflowX:'auto', gap:10, paddingBottom:8, msOverflowStyle:'none', scrollbarWidth:'none' }}>
+                {rich.realReviews.map((rev, idx) => (
+                  <div key={idx} className="card" style={{ padding:14, borderRadius:12, minWidth:260, maxWidth:280, flexShrink:0 }}>
+                    <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:6 }}>
+                      <div style={{ fontSize:12, fontWeight:700, color:'var(--ink)' }}>{rev.author}</div>
+                      <Stars rating={rev.rating} />
+                    </div>
+                    <div style={{ fontSize:12, color:'var(--ink-40)', lineHeight:1.5 }}>&ldquo;{rev.text.length > 130 ? rev.text.substring(0,130)+'...' : rev.text}&rdquo;</div>
+                    <div style={{ fontSize:10, color:'var(--ink-20)', marginTop:8 }}>{rev.time}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Info grid */}
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:16 }}>

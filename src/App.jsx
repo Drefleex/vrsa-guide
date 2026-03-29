@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react'
+import Papa from 'papaparse'
 import BottomNav    from './components/BottomNav'
 import TopBar      from './components/TopBar'
 import SplashScreen from './components/SplashScreen'
@@ -29,13 +30,14 @@ import { DEFAULT_PINS } from './data/pins'
 
 
 function parseCSV(text) {
-  const rows = text.trim().split('\n').slice(1)
-  return rows.map(row => {
-    const parts = row.split(',')
+  const parsed = Papa.parse(text.trim(), { skipEmptyLines: true })
+  const rows = parsed.data.slice(1) // skip header
+  return rows.map(parts => {
+    if (parts.length < 5) return null
     const lat = parseFloat(parts[parts.length-2])
     const lng = parseFloat(parts[parts.length-1])
     if (isNaN(lat) || isNaN(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) return null
-    return { id:parseInt(parts[0]), name:parts.slice(1,parts.length-5).join(',').trim(), emoji:parts[parts.length-5]?.trim()||'📍', cat:parts[parts.length-4]?.trim()||'compras', color:parts[parts.length-3]?.trim()||'#0E2B4A', lat, lng }
+    return { id:parseInt(parts[0]||0), name:parts.slice(1,parts.length-5).join(' ').trim(), emoji:parts[parts.length-5]?.trim()||'📍', cat:parts[parts.length-4]?.trim()||'compras', color:parts[parts.length-3]?.trim()||'#0E2B4A', lat, lng }
   }).filter(Boolean)
 }
 

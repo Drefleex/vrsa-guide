@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
+import DB from '../data/places-db.json'
 
 
 const RICH = {
@@ -25,7 +26,19 @@ const RICH = {
 }
 
 function getRich(id) {
-  return RICH[id] || { stars:3, price:'€€', desc:{PT:'Alojamento em VRSA.',EN:'Accommodation in VRSA.',ES:'Alojamiento en VRSA.',FR:'Hébergement à VRSA.',DE:'Unterkunft in VRSA.'}, book:'https://www.booking.com' }
+  const def = RICH[id] || { stars:3, price:'€€', desc:{PT:'Alojamento em VRSA.',EN:'Accommodation in VRSA.',ES:'Alojamiento en VRSA.',FR:'Hébergement à VRSA.',DE:'Unterkunft in VRSA.'}, book:'https://www.booking.com' }
+  const real = DB[id]
+  if (real) {
+    return {
+      ...def,
+      stars: real.rating ? Math.round(real.rating) : def.stars,
+      rating: real.rating || def.stars,
+      reviews: real.user_ratings_total || 0,
+      phone: real.phone || def.phone,
+      realReviews: real.reviews || []
+    }
+  }
+  return { ...def, rating: def.stars, reviews: 0 }
 }
 
 function Stars({ n }) {
@@ -96,6 +109,25 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
             <span style={{ fontSize:11, color:'var(--ink-40)' }}>{r.stars} {t.stars}</span>
           </div>
           <p style={{ fontSize:13, color:'var(--ink-40)', lineHeight:1.75, marginBottom:20 }}>{r.desc[L] || r.desc.PT}</p>
+
+          {r.realReviews?.length > 0 && (
+            <div style={{ marginBottom:20 }}>
+              <div style={{ fontSize:15, fontWeight:800, color:'var(--ink)', marginBottom:12 }}>Google Reviews</div>
+              <div style={{ display:'flex', overflowX:'auto', gap:10, paddingBottom:8, msOverflowStyle:'none', scrollbarWidth:'none' }}>
+                {r.realReviews.map((rev, idx) => (
+                  <div key={idx} className="card" style={{ padding:14, borderRadius:12, minWidth:260, maxWidth:280, flexShrink:0 }}>
+                    <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:6 }}>
+                      <div style={{ fontSize:12, fontWeight:700, color:'var(--ink)' }}>{rev.author}</div>
+                      <Stars n={Math.round(rev.rating)} />
+                    </div>
+                    <div style={{ fontSize:12, color:'var(--ink-40)', lineHeight:1.5 }}>&ldquo;{rev.text.length > 130 ? rev.text.substring(0,130)+'...' : rev.text}&rdquo;</div>
+                    <div style={{ fontSize:10, color:'var(--ink-20)', marginTop:8 }}>{rev.time}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div style={{ display:'flex', gap:8 }}>
             <button onClick={() => window.open(r.book, '_blank','noopener,noreferrer')} style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>🛏️ {t.book}</button>
             <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination='+detail.lat+','+detail.lng, '_blank','noopener,noreferrer')} style={{ width:50, height:50, background:'var(--blue-lt)', border:'none', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🧭</button>
