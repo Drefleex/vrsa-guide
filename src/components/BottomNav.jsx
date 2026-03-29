@@ -33,8 +33,7 @@ const MORE_ITEMS = [
   { k:'favorites', Icon:Heart,       color:'#DC2626', bg:'#FEF2F2', l:{PT:'Favoritos',  EN:'Saved',     ES:'Favoritos', FR:'Favoris',  DE:'Favoriten' } },
   { k:'report',    Icon:AlertCircle, color:'#B91C1C', bg:'#FEF2F2', l:{PT:'Reportar',   EN:'Report',    ES:'Reportar',  FR:'Signaler', DE:'Melden'    } },
   { k:'info',      Icon:Info,        color:'#0891B2', bg:'#ECFEFF', l:{PT:'Info',        EN:'Info',       ES:'Info',       FR:'Info',       DE:'Info'       } },
-  { k:'sobre',     Icon:BarChart2,   color:'#0E2B4A', bg:'#EFF6FF', l:{PT:'Sobre o Guia',EN:'About',     ES:'Acerca de', FR:'À propos',  DE:'Über uns'  } },
-  // Admin e Analytics acessíveis via URL ?admin=1 (não expostos publicamente)
+  // Admin, Analytics e Sobre acessíveis via URL ?admin=1 / ?sobre=1 (não expostos publicamente)
 ]
 
 export default function BottomNav({ page, setPage, lang }) {

@@ -6,7 +6,7 @@ export const DEFAULT_PINS = [
   {id:101,name:"Os Arcos",emoji:"🍽️",cat:"restaurante",color:"#D32F2F",lat:37.193359,lng:-7.414072},
   {id:109,name:"Restaurante Trinca-Dela",emoji:"🍽️",cat:"restaurante",color:"#D32F2F",lat:37.194046,lng:-7.414899},
   {id:120,name:"Pizzaria Napoli",emoji:"🍕",cat:"pizzaria",color:"#C62828",lat:37.193912,lng:-7.41752},
-  {id:127,name:"Casa Benfica VRSA",emoji:"🏠",cat:"compras",color:"#6A1B9A",lat:37.197356,lng:-7.41854},
+  {id:127,name:"Casa Benfica VRSA",emoji:"🏆",cat:"cultura",color:"#6A1B9A",lat:37.197356,lng:-7.41854},
   {id:137,name:"Pastelaria Andrade",emoji:"🥐",cat:"pastelaria",color:"#5D4037",lat:37.188271,lng:-7.44519},
   {id:210,name:"Continente Modelo",emoji:"🛒",cat:"mercado",color:"#1B5E20",lat:37.19157,lng:-7.42973},
   {id:226,name:"Casa das Bonecas",emoji:"🏨",cat:"hotel",color:"#AD1457",lat:37.1932,lng:-7.416854},

@@ -95,7 +95,6 @@ const QA = [
   { page:'shopping',    svg:'shopping', color:'#059669', bg:'#ECFDF5', label:{PT:'Compras',   EN:'Shopping',  ES:'Compras',   FR:'Shopping', DE:'Einkaufen' } },
   { page:'favorites',   svg:'heart',    color:'#DC2626', bg:'#FEF2F2', label:{PT:'Favoritos', EN:'Saved',     ES:'Favoritos', FR:'Favoris',  DE:'Favoriten' } },
   { page:'report',      svg:'alert',    color:'#DC2626', bg:'#FEF2F2', label:{PT:'Reportar',  EN:'Report',    ES:'Reportar',  FR:'Signaler', DE:'Melden'    } },
-  { page:'sobre',       svg:'heart',    color:'#0E2B4A', bg:'#EFF6FF', label:{PT:'Sobre o Guia',EN:'About',   ES:'Acerca de', FR:'À propos',  DE:'Über uns'  } },
 ]
 
 const GALLERY = [

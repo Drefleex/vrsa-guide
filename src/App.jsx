@@ -56,6 +56,7 @@ export default function App() {
     const p = new URLSearchParams(window.location.search)
     if (p.get('admin') === '1') return 'admin'
     if (p.get('analytics') === '1') return 'analytics'
+    if (p.get('sobre') === '1') return 'sobre'
     return 'splash'
   })
   const swipeX = useRef(null)
