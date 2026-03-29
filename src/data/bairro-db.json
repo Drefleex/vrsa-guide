@@ -1,0 +1,4963 @@
+{
+  "casa pisa ii": {
+    "bairroId": 80771,
+    "name": "Casa Pisa II",
+    "rating": 4.5,
+    "totalReviews": 2,
+    "phone": "+351281531689",
+    "website": null,
+    "instagram": "https://www.instagram.com/casapisarestaurante/profilecard/",
+    "lat": 37.1943191,
+    "lng": -7.415005600000001,
+    "address": "Rua Jornal do Algarve 56",
+    "category": "Comida Portuguesa",
+    "hours": {
+      "Dom": "11h30 - 15h00 / 19h00 - 23h00",
+      "Seg": "11h30 - 15h00 / 19h00 - 23h00",
+      "Ter": "11h30 - 15h00 / 19h00 - 23h00",
+      "Qua": "Fechado",
+      "Qui": "11h30 - 15h00 / 19h00 - 23h00",
+      "Sex": "11h30 - 15h00 / 19h00 - 23h00",
+      "Sab": "11h30 - 15h00 / 19h00 - 23h00",
+      "Fer": "11h30 - 15h00 / 19h00 - 23h00"
+    },
+    "menu": [
+      {
+        "section": "Suggestions",
+        "items": [
+          {
+            "name": "SALMâO GRELHADO",
+            "desc": "Grilled Salmon",
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "ROBALO GRELHADO",
+            "desc": "Grilled Sea Bream",
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "DOURADA GRELHADA",
+            "desc": "Grilled Goldenbream",
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "ESPADARTE GRELHADO",
+            "desc": "Grilled Sword Fish",
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "ATUM GRELHADO",
+            "desc": "Grilled Tuna Steak",
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "ATUM ALGARVIA",
+            "desc": "Tuna Steak Algarvian Style",
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "LULINHAS ALGARVIA",
+            "desc": "Squids Algarve Style",
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "CHOCO GRELHADO",
+            "desc": "Grilled Cuttlefish",
+            "price": 17,
+            "promo": null
+          },
+          {
+            "name": "LULAS GRELHADAS",
+            "desc": "Grilled Squids",
+            "price": 17,
+            "promo": null
+          },
+          {
+            "name": "ESPETADA DE CAMARâO E LULAS",
+            "desc": "Shrimps and Squids Kebab",
+            "price": 18,
+            "promo": null
+          },
+          {
+            "name": "CHOCO A CASA (2 pax)",
+            "desc": "House Cuttlefish Grande",
+            "price": 18,
+            "promo": null
+          },
+          {
+            "name": "SECRETOS DE PORCO IBÉRICO",
+            "desc": "Secretos Iberian Pork",
+            "price": 17,
+            "promo": null
+          },
+          {
+            "name": "CARNE MISTA",
+            "desc": "Mixed Meat",
+            "price": 17,
+            "promo": null
+          },
+          {
+            "name": "BIFé A CASA",
+            "desc": "House Steak",
+            "price": 16,
+            "promo": null
+          },
+          {
+            "name": "BIFINHOS DE PERU C/ COGUMELOS",
+            "desc": "Turkey Steak w/ Mushrooms",
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "FRANGO PIRI PIRI",
+            "desc": "Chicken Piri-Piri",
+            "price": 12,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Entradas/Starters",
+        "items": [
+          {
+            "name": "PATÉ, MANTEIGA CADA",
+            "desc": null,
+            "price": 0.75,
+            "promo": null
+          },
+          {
+            "name": "PÃO, AZEITONAS CADA",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          },
+          {
+            "name": "SOPA DO DIA",
+            "desc": "Soup of the day",
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "MELÃO COM PRESUNTO",
+            "desc": "Melon with smoked ham",
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "SALADA MISTA",
+            "desc": "Mixed salad",
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "SALADA ATUM",
+            "desc": "Tuna salad",
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "MEXILHÕES A CASA",
+            "desc": "Mussels House Style",
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "CAMARÃO FRITO C/ ALHO \"DOSE\"",
+            "desc": "Fried shrimp with garlic \"portion\"",
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "CAMARÃO COZIDO",
+            "desc": "Boiled shrimp",
+            "price": 11,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Na brasa/Grill",
+        "items": [
+          {
+            "name": "GREHLADA MISTA",
+            "desc": "Mixed Grill Meat",
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "PERU GREHLADO",
+            "desc": "Grilled Turkey Steak",
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "FRANGO GREHLADO (DOSE)",
+            "desc": "Grilled Chicken (portion)",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "SECRETOS DE PORCO IBÉRICO",
+            "desc": "Secretos Iberian Pork",
+            "price": 17,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Menu Criança - Children menu",
+        "items": [
+          {
+            "name": "OMELETE COM QUEIJO E FIAMBRE",
+            "desc": "Ham or Cheese Omelet",
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "SALCHICHAS GRELHADAS COM OVO",
+            "desc": "Grilled sausages with egg",
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "FRANGO PANADO",
+            "desc": "Breaded Chicken",
+            "price": 7,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Bifes/Steaks",
+        "items": [
+          {
+            "name": "BIFE À CASA",
+            "desc": "Steak House Style",
+            "price": 16,
+            "promo": null
+          },
+          {
+            "name": "BIFE PIMENTA (MOLHO PIMENTA)",
+            "desc": "Pepper Steak",
+            "price": 16,
+            "promo": null
+          },
+          {
+            "name": "BIFE DIANA (C/ COGUMELNOS)",
+            "desc": "Steak Diana (w/ mushrooms)",
+            "price": 16,
+            "promo": null
+          },
+          {
+            "name": "BIFE VAZIA GREHLADO",
+            "desc": "Grilled Steak",
+            "price": 16,
+            "promo": null
+          },
+          {
+            "name": "BIFE À PORTUGUESA C/ QUEIJO E PRESUNTO",
+            "desc": "Steak Portuguese Style w/ cheese and smoked ham",
+            "price": 17,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Estacionamento: Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80771/"
+  },
+  "chicknbite": {
+    "bairroId": 86202,
+    "name": "Chicknbite",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351920688722",
+    "website": "https://www.instagram.com/chicknbitevrsa/",
+    "instagram": null,
+    "lat": 37.1900158,
+    "lng": -7.4163601,
+    "address": "Rua Jacinto José de Andrade 5",
+    "category": "Comida Portuguesa",
+    "hours": {
+      "Dom": "12h00 - 21h00",
+      "Seg": "11h00 - 22h00",
+      "Ter": "11h00 - 22h00",
+      "Qua": "11h00 - 22h00",
+      "Qui": "11h00 - 22h00",
+      "Sex": "11h00 - 22h00",
+      "Sab": "11h00 - 22h00",
+      "Fer": "Fechado"
+    },
+    "menu": [
+      {
+        "section": "Carne (grelhada)",
+        "items": [
+          {
+            "name": "Cheeseburger - single",
+            "desc": "Pão, hamburger\nqueijo, alface, tomate, cebola e molho",
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "Cheeseburger - menu",
+            "desc": "Pão, hamburger\nqueijo, alface, tomate, cebola e molho",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer duplo - single",
+            "desc": "Pão, hamburger\nduplo, 2 fatias de queijo, alface, tomate,\ncebola e molho",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer duplo - menu",
+            "desc": "Pão, hamburger\nduplo, 2 fatias de queijo, alface, tomate,\ncebola e molho",
+            "price": 7.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer torre - single",
+            "desc": "Pão duplo, hamburger\nduplo, 2 fatias de queijo, alface, tomate,\ncebola e molho",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer torre - menu",
+            "desc": "Pão duplo, hamburger\nduplo, 2 fatias de queijo, alface, tomate,\ncebola e molho",
+            "price": 8.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer triplo - single",
+            "desc": "Pão, hamburger\ntriplo, 3 fatias de queijo, alface, tomate,\nceb ola e molho",
+            "price": 7.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer triplo - menu",
+            "desc": "Pão, hamburger\ntriplo, 3 fatias de queijo, alface, tomate,\nceb ola e molho",
+            "price": 9.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Frango",
+        "items": [
+          {
+            "name": "Chicken burguer crocante - single",
+            "desc": "Pão, frango crocante, alface e tomate",
+            "price": 3.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken burguer crocante - menu",
+            "desc": "Pão, frango crocante, alface e tomate",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken cheeseburguer crocante - single",
+            "desc": "Pão, frango crocante, queijo, alface, tomate,\ncebola e molho",
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken cheeseburguer crocante - menu",
+            "desc": "Pão, frango crocante, queijo, alface, tomate,\ncebola e molho",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Twice chicken cheeseburguer - single",
+            "desc": "Pão, 2 chicken tenders, 2 fatias de queijo,\nalface, tomate, cebola e molho",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Twice chicken cheeseburguer - menu",
+            "desc": "Pão, 2 chicken tenders, 2 fatias de queijo,\nalface, tomate, cebola e molho",
+            "price": 7.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken burguer grelhado - single",
+            "desc": "Pão, 2 chicken tenders, 2 fatias de queijo,\nalface, tomate, cebola e molho",
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken burguer grelhado - menu",
+            "desc": "Pão, 2 chicken tenders, 2 fatias de queijo,\nalface, tomate, cebola e molho",
+            "price": 6.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Especiais",
+        "items": [
+          {
+            "name": "Burguer especial - single",
+            "desc": "Pão, hamburger\nduplo, 2 fatias de queijo, ovo, alface,\ntomate, cebola e molho",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer especial - menu",
+            "desc": "Pão, hamburger\nduplo, 2 fatias de queijo, ovo, alface,\ntomate, cebola e molho",
+            "price": 8.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken especial - single",
+            "desc": "Pão, 2 chicken tenders, 2 fatias de queijo,\novo, alface, tomate, cebola e molho",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken especial - menu",
+            "desc": "Pão, 2 chicken tenders, 2 fatias de queijo,\novo, alface, tomate, cebola e molho",
+            "price": 8.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Veggie",
+        "items": [
+          {
+            "name": "Falafel burger - single",
+            "desc": "Pão, falafel, queijo\nalface, tomate, cebola e molho",
+            "price": 3.9,
+            "promo": null
+          },
+          {
+            "name": "Falafel burger - menu",
+            "desc": "Pão, falafel, queijo\nalface, tomate, cebola e molho",
+            "price": 5.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Menu kids",
+        "items": [
+          {
+            "name": "Burguer junior - single",
+            "desc": "Pão, hamburger e ketchup",
+            "price": 3.9,
+            "promo": null
+          },
+          {
+            "name": "Burguer junior - menu",
+            "desc": "Pão, hamburger e ketchup",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Cheeseburguer senior - single",
+            "desc": "Pão, hamburger maxi, queijo e ketchup",
+            "price": 4.2,
+            "promo": null
+          },
+          {
+            "name": "Cheeseburguer senior - menu",
+            "desc": "Pão, hamburger maxi, queijo e ketchup",
+            "price": 6.2,
+            "promo": null
+          },
+          {
+            "name": "Chicken burguer crocante junior - single",
+            "desc": "Pão, frango crocante e ketchup",
+            "price": 3.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken burguer crocante junior - menu",
+            "desc": "Pão, frango crocante e ketchup",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Chicken burguer crocante senior - single",
+            "desc": "Pão, frango crocante, queijo e ketchup",
+            "price": 4.2,
+            "promo": null
+          },
+          {
+            "name": "Chicken burguer crocante senior - menu",
+            "desc": "Pão, frango crocante, queijo e ketchup",
+            "price": 6.2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Extras",
+        "items": [
+          {
+            "name": "Alcaparras",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Batata frita - p",
+            "desc": null,
+            "price": 1.25,
+            "promo": null
+          },
+          {
+            "name": "Batata frita - g",
+            "desc": null,
+            "price": 1.95,
+            "promo": null
+          },
+          {
+            "name": "Ananás",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Salada césar",
+            "desc": "Alface, tomate, cebola, frango e molho césar",
+            "price": 4.95,
+            "promo": null
+          },
+          {
+            "name": "Atum",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Salada vinagrete",
+            "desc": "Frango grelhado, tomate cherry, cebola\nalface, azeitonas e molho vinagrete",
+            "price": 5.95,
+            "promo": null
+          },
+          {
+            "name": "Azeitonas",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Bacon",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Camarão (4 unds)",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Cebola roxa",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Chouriço",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Cogumelos",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Fiambre",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Manjericão",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Milho",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Parmezão ralado",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Pimenta",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Queijo mozzarella",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Rúcula",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Salame picante",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Tomate cereja",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Fried chicken",
+        "items": [
+          {
+            "name": "Box wings 3 - single",
+            "desc": "3 peças chicken wings\nbatata frita + refrigerante lata",
+            "price": 2.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 3 - menu",
+            "desc": "3 peças chicken wings\nbatata frita + refrigerante lata",
+            "price": 4.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 6 - single",
+            "desc": "6 peças chicken wings\nbatata frita + refrigerante lata",
+            "price": 5.55,
+            "promo": null
+          },
+          {
+            "name": "Box wings 6 - menu",
+            "desc": "6 peças chicken wings\nbatata frita + refrigerante lata",
+            "price": 7.55,
+            "promo": null
+          },
+          {
+            "name": "Box wings 10 - single",
+            "desc": "10 peças chicken wings\nbatata frita + refrigerante lata",
+            "price": 8.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 10 - menu",
+            "desc": "10 peças chicken wings\nbatata frita + refrigerante lata",
+            "price": 10.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 20 - single",
+            "desc": "20 peças chicken wings\n2 batatas fritas + 2 refrigerantes lata",
+            "price": 16.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 20 - menu",
+            "desc": "20 peças chicken wings\n2 batatas fritas + 2 refrigerantes lata",
+            "price": 19.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 30 - single",
+            "desc": "30 peças chicken wings\n4 batatas fritas + 1,5l coca-cola / fanta",
+            "price": 24.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 30 - menu",
+            "desc": "30 peças chicken wings\n4 batatas fritas + 1,5l coca-cola / fanta",
+            "price": 29.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 50 - single",
+            "desc": "50 peças chicken wings\n5 batatas fritas + 1,5l coca-cola / fanta",
+            "price": 39.95,
+            "promo": null
+          },
+          {
+            "name": "Box wings 50 - menu",
+            "desc": "50 peças chicken wings\n5 batatas fritas + 1,5l coca-cola / fanta",
+            "price": 46.95,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 3 - single",
+            "desc": "3 peças chicken tender\nbatata frita + refrigerante lata",
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 3 - menu",
+            "desc": "3 peças chicken tender\nbatata frita + refrigerante lata",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 5 - single",
+            "desc": "5 peças chicken tender\nbatata frita + refrigerante lata",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 5 - menu",
+            "desc": "5 peças chicken tender\nbatata frita + refrigerante lata",
+            "price": 8.9,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 10 - single",
+            "desc": "10 peças chicken tender\nbatata frita + refrigerante lata",
+            "price": 12.9,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 10 - menu",
+            "desc": "10 peças chicken tender\nbatata frita + refrigerante lata",
+            "price": 14.9,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 20 - single",
+            "desc": "20 peças chicken tender\n4 batatas fritas + 1,5l coca-cola / fanta",
+            "price": 22.9,
+            "promo": null
+          },
+          {
+            "name": "Box tenders 20 - menu",
+            "desc": "20 peças chicken tender\n4 batatas fritas + 1,5l coca-cola / fanta",
+            "price": 29.9,
+            "promo": null
+          },
+          {
+            "name": "Box mix 1",
+            "desc": "4 peças chicken wings + 4 peças chicken tenders\nbatatas frita + refrigerante lata",
+            "price": 12.9,
+            "promo": null
+          },
+          {
+            "name": "Box mix 2",
+            "desc": "10 peças chicken wings + 5 peças chicken tenders\n2 batatas fritas + 2 refrigerantes lata",
+            "price": 18.9,
+            "promo": null
+          },
+          {
+            "name": "Box first",
+            "desc": "Burguer torre + 6 peças chicken wings\nbatata frita + refrigerante lata",
+            "price": 14.9,
+            "promo": null
+          },
+          {
+            "name": "Box bites",
+            "desc": "2 cheeseburgers + 10 peças chicken wings\n2 batatas fritas + 2 refrigerantes lata",
+            "price": 19.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Box chicken fries",
+        "items": [
+          {
+            "name": "Box chicken fries - single",
+            "desc": "Tender ou frango\ngrelhado, batata frita,\nqueijo ralado,\nbacon crocante\ne refrigerante lata",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Box chicken fries - menu",
+            "desc": "Tender ou frango\ngrelhado, batata frita,\nqueijo ralado,\nbacon crocante\ne refrigerante lata",
+            "price": 7.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Family plus",
+        "items": [
+          {
+            "name": "Family mix",
+            "desc": "15 peças chickens wings1\n10 peças chicken tender\n4 batatas fritas - 1,5l coca-cola",
+            "price": 34.95,
+            "promo": null
+          },
+          {
+            "name": "Family mix",
+            "desc": "33 peças chickens wings\n4 cheeseburguers\n4 batatas fritas - 2 coca-cola de 1,5l",
+            "price": 49.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pizzas bite",
+        "items": [
+          {
+            "name": "Bite first",
+            "desc": "Molho de tomate, mozzarella, bacon, ananás,\nrúcula e cogumelos",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Portugal first",
+            "desc": "Molho de tomate, mozzarella, chouriço,\npimento e manjericão fresco",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Europe first",
+            "desc": "Molho de tomate, mozzarella, bacon, azeitonas, pimento,\ncogumelos e manjericão fresco",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Africa first",
+            "desc": "Molho de tomate, milho, mozzarella, frango,\npimento e manjericão fresco",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "America first",
+            "desc": "Molho de tomate, mozzarella, salame, bacon, pimento,\ncebola e manjericão fresco",
+            "price": 9.95,
+            "promo": null
+          },
+          {
+            "name": "Marisco first",
+            "desc": "Molho de tomate, mozzarella, camarão grelhado,\nmanjericão fresco",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Veggie first",
+            "desc": "Molho de tomate, mozzarella, cebola, pimentos, cogumelos,\nmanjericão fresco e azeitonas",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Margherita",
+            "desc": "Molho de tomate, mozzarella, manjericão fresco",
+            "price": 7.95,
+            "promo": null
+          },
+          {
+            "name": "Fiambre",
+            "desc": "Molho de tomate, mozzarella, cogumelos e fiambre",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Zingara",
+            "desc": "Molho de tomate, mozzarella e salame",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Primavera",
+            "desc": "Molho de tomate, mozzarella, azeitonas, rúcula\ne parmesão ralado",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Tuna",
+            "desc": "Molho de tomate, mozzarella, cebola, atum e alcaparras",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "Carbonara",
+            "desc": "Molho branco, mozzarella, bacon, cebola, parmesão",
+            "price": 9.55,
+            "promo": null
+          },
+          {
+            "name": "4 formaggi",
+            "desc": "Molho de tomate, mozzarella, gorgonzola, parmesão,\nqueijo de cabra",
+            "price": 9.55,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pizza selfie",
+        "items": [
+          {
+            "name": "Pizza selfie",
+            "desc": "base bite (molho de tomate e queijo mozzarella)adicione os seus ingredientes extra preferidos",
+            "price": 7.95,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Hot dogs",
+        "items": [
+          {
+            "name": "Simples hot dog: single",
+            "desc": "Pão, salsicha e cebola crocante",
+            "price": 2.55,
+            "promo": null
+          },
+          {
+            "name": "Simples hot dog:  menu",
+            "desc": "Pão, salsicha e cebola crocante",
+            "price": 4.55,
+            "promo": null
+          },
+          {
+            "name": "Bite veg special:  single",
+            "desc": "Pão, salsicha de soja, cebola crocante,\nqueijo ralado e molhos",
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Bite veg special: menu",
+            "desc": "Pão, salsicha de soja, cebola crocante,\nqueijo ralado e molhos",
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Chick’n bite special: single",
+            "desc": "Pão, alface, salsicha, cebola crocante,\nqueijo ralado e molhos",
+            "price": 3.95,
+            "promo": null
+          },
+          {
+            "name": "Chick’n bite special: menu",
+            "desc": "Pão, alface, salsicha, cebola crocante,\nqueijo ralado e molhos",
+            "price": 5.95,
+            "promo": null
+          },
+          {
+            "name": "Bacon & cheddar special: single",
+            "desc": "Pão, salsicha, bacon, mostarda, molhos,\nqueijo cheddar e cebola crocante",
+            "price": 4.95,
+            "promo": null
+          },
+          {
+            "name": "Bacon & cheddar special: menu",
+            "desc": "Pão, salsicha, bacon, mostarda, molhos,\nqueijo cheddar e cebola crocante",
+            "price": 6.95,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Box nuggets",
+        "items": [
+          {
+            "name": "3 peças - single",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "3 peças - menu",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "6 peças - single",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 4.25,
+            "promo": null
+          },
+          {
+            "name": "6 peças - menu",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 6.25,
+            "promo": null
+          },
+          {
+            "name": "10 peças - single",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 6.95,
+            "promo": null
+          },
+          {
+            "name": "10 peças - menu",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 9.95,
+            "promo": null
+          },
+          {
+            "name": "20 peças - single",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 10.95,
+            "promo": null
+          },
+          {
+            "name": "20 peças - menu",
+            "desc": "Batata frita + refrigerante lata",
+            "price": 14.95,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Kebabs",
+        "items": [
+          {
+            "name": "Donar kebab: single",
+            "desc": "Frango, alface, tomate, cebola e molho",
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Donar kebab: menu",
+            "desc": "Frango, alface, tomate, cebola e molho",
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "Durum kebab: single",
+            "desc": "Frango, alface, tomate, cebola e molho",
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Durum kebab: menu",
+            "desc": "Frango, alface, tomate, cebola e molho",
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Prato kebab: single",
+            "desc": "Frango, alface, tomate, cebola,\ncenoura, pepino e molho",
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Prato kebab: menu",
+            "desc": "Frango, alface, tomate, cebola,\ncenoura, pepino e molho",
+            "price": 8.5,
+            "promo": null
+          },
+          {
+            "name": "Lahmacun kebab: single",
+            "desc": "Frango, alface, tomate, cebola,\ncenoura, pepino e molho",
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Lahmacun kebab: menu",
+            "desc": "Frango, alface, tomate, cebola,\ncenoura, pepino e molho",
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Falafel kebab: single",
+            "desc": "Alface, tomate, cebola e molho",
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Falafel kebab - menu",
+            "desc": "Alface, tomate, cebola e molho",
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "Falafel durum - single",
+            "desc": "Alface, tomate, pepino, cebola e molho",
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Falafel durum - menu",
+            "desc": "Alface, tomate, pepino, cebola e molho",
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Box kebab - single",
+            "desc": "Frango, alface, tomate, cenoura,\npepino, cebola e molho",
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "Box kebab - menu",
+            "desc": "Frango, alface, tomate, cenoura,\npepino, cebola e molho",
+            "price": 7.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Bite wraps",
+        "items": [
+          {
+            "name": "Wrap falafel - single",
+            "desc": "Falafel, queijo, alface, tomate,\ncebola e molho",
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Wrap falafel - menu",
+            "desc": "Falafel, queijo, alface, tomate,\ncebola e molho",
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Wrap grill - single",
+            "desc": "Frango grelhado, queijo, alface, tomate,\ncebola e molho",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Wrap grill - menu",
+            "desc": "Frango grelhado, queijo, alface, tomate,\ncebola e molho",
+            "price": 7.9,
+            "promo": null
+          },
+          {
+            "name": "Wrap thai - single",
+            "desc": "Frango grelhado, thai (hot), queijo,\nalface, tomate, cebola e molho",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Wrap thai - menu",
+            "desc": "Frango grelhado, thai (hot), queijo,\nalface, tomate, cebola e molho",
+            "price": 7.9,
+            "promo": null
+          },
+          {
+            "name": "Wrap twister - single",
+            "desc": "2 peças chicken tender, 2 fatias de queijo,\nalface, tomate, cebola e molho",
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "Wrap twister - menu",
+            "desc": "2 peças chicken tender, 2 fatias de queijo,\nalface, tomate, cebola e molho",
+            "price": 6.9,
+            "promo": null
+          },
+          {
+            "name": "Wrap monster - single",
+            "desc": "2 peças chicken tender, 2 fatias de queijo,\novo, alface, tomate, cebola e molho",
+            "price": 5.9,
+            "promo": null
+          },
+          {
+            "name": "Wrap monster - menu",
+            "desc": "2 peças chicken tender, 2 fatias de queijo,\novo, alface, tomate, cebola e molho",
+            "price": 7.9,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/86202/"
+  },
+  "trincadela": {
+    "bairroId": 80762,
+    "name": "TrincaDela",
+    "rating": 5,
+    "totalReviews": 1,
+    "phone": "+351920837190",
+    "website": null,
+    "instagram": null,
+    "lat": 37.1938187,
+    "lng": -7.41492,
+    "address": "Rua Jornal do Algarve 60",
+    "category": "Restaurantes Italianos",
+    "hours": {
+      "Dom": "12h00 - 22h00",
+      "Seg": "12h00 - 22h00",
+      "Ter": "12h00 - 22h00",
+      "Qua": "12h00 - 22h00",
+      "Qui": "12h00 - 22h00",
+      "Sex": "12h00 - 22h00",
+      "Sab": "12h00 - 22h00",
+      "Fer": "12h00 - 22h00"
+    },
+    "menu": [
+      {
+        "section": "Mini Delights",
+        "items": [
+          {
+            "name": "Pizza Flash",
+            "desc": null,
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "Pizza Pepa",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Pizza Pirate",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Adicione",
+        "items": [
+          {
+            "name": "Legumes: Tomate fresco; Cebola; Cogumelos frescos; Alcachofras; Azeitonas; Ananás; Pimentos; Rúcula",
+            "desc": null,
+            "price": 0.7,
+            "promo": null
+          },
+          {
+            "name": "Proteínas: Fiambre; Frango; Salame picante; Bacon; Mozzarella; Parmesão; Sardinhas; Anchovas; Atum; Ovo",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Adicione ",
+        "items": [
+          {
+            "name": "Presunto ou Muxama",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pizzas",
+        "items": [
+          {
+            "name": "Margaritha",
+            "desc": null,
+            "price": 9.5,
+            "promo": null
+          },
+          {
+            "name": "Prosciutto e funghi",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "Tropical",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "Quatro Stagione",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Diavola",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Pollo",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Necas",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Ticino",
+            "desc": null,
+            "price": 13.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pizza",
+        "items": [
+          {
+            "name": "Zermatt",
+            "desc": null,
+            "price": 13.5,
+            "promo": null
+          },
+          {
+            "name": "Algarve",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Siciliana",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "Setúbal",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Vegetariana",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "Calzone",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Stuffed cheesy garlic bread",
+            "desc": null,
+            "price": 8.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Focaccia",
+        "items": [
+          {
+            "name": "Focaccia da Casa",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "Focaccia do Marquês",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Paninis",
+        "items": [
+          {
+            "name": "Panini Portugal",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Panini Italia",
+            "desc": null,
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "Panini Toscana",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Bebidas",
+        "items": [
+          {
+            "name": "Coca-cola",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Coca-cola zero",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Sprite",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Ice Tea pêssego",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Ice Tea limão",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Guarana",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Limonada caseira",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          },
+          {
+            "name": "Sumol Ananás / Laranja",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          },
+          {
+            "name": "Água com gás",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          },
+          {
+            "name": "Água sem gás",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Café",
+        "items": [
+          {
+            "name": "Espresso",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          },
+          {
+            "name": "Double Espresso",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          },
+          {
+            "name": "Abatanado",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Cappuccino",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          },
+          {
+            "name": "Cortado",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          },
+          {
+            "name": "Galão",
+            "desc": null,
+            "price": 1.7,
+            "promo": null
+          },
+          {
+            "name": "Chá",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Cafe",
+        "items": [
+          {
+            "name": "Meia de Leite",
+            "desc": null,
+            "price": 1.7,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Cerveja",
+        "items": [
+          {
+            "name": "Cerveja mini",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Cerveja media",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          },
+          {
+            "name": "Cerveja preta",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          },
+          {
+            "name": "Cerveja 0.0 %",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Vinho",
+        "items": [
+          {
+            "name": "Vinho tinto",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Vinho branco",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Prosecco",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Lambrusco",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Spirits",
+        "items": [
+          {
+            "name": "Baileys",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Moscatel de Setúbal",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Vinho do Porto",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Martini Bianco/ Rosso",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "C.R.F.",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Licor Beirão",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Limoncello",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Amêndoa Amarga",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Apero",
+        "items": [
+          {
+            "name": "Flor de Verão",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "Ouro Siciliano",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "Brisa de Veneza",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "Sangria",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Capacidade: 30",
+      "Fumadores: Sim (excl.)",
+      "Estacionamento: Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80762/"
+  },
+  "restaurante vegood": {
+    "bairroId": 80760,
+    "name": "Restaurante Vegood",
+    "rating": 5,
+    "totalReviews": 2,
+    "phone": "+351926435839",
+    "website": "http://www.vegood.pt/",
+    "instagram": null,
+    "lat": 37.194103,
+    "lng": -7.4151297,
+    "address": "Rua Jornal do Algarve 63",
+    "category": "Vegetariano",
+    "hours": {
+      "Dom": "19h00 - 23h00",
+      "Seg": "19h00 - 23h00",
+      "Ter": "19h00 - 23h00",
+      "Qua": "19h00 - 23h00",
+      "Qui": "19h00 - 23h00",
+      "Sex": "19h00 - 00h00",
+      "Sab": "19h00 - 00h00",
+      "Fer": "19h00 - 23h00"
+    },
+    "menu": [
+      {
+        "section": "Para abrir o apetite e partilhar (ou não!)",
+        "items": [
+          {
+            "name": "CARPACCIO DE COURGETTE",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "CANNELLONI DA CHEF un.",
+            "desc": null,
+            "price": 1.3,
+            "promo": null
+          },
+          {
+            "name": "HUMMUS ORIGINAL",
+            "desc": null,
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "HUMMUS DE BETERRABA",
+            "desc": null,
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "BABA GANUSH",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "MIX DIPPING",
+            "desc": null,
+            "price": 10.9,
+            "promo": null
+          },
+          {
+            "name": "CENOURAS NO FORNO",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "BURRATA ITALIANA",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "MUXAMA",
+            "desc": null,
+            "price": 8.9,
+            "promo": null
+          },
+          {
+            "name": "TÁBUA DE QUEIJOS (pequena)",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "BATATA DA CASA (original)",
+            "desc": null,
+            "price": 4.9,
+            "promo": null
+          },
+          {
+            "name": "CROQUETES ARTESANAIS",
+            "desc": null,
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "SOPA DO DIA",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "QUICHE DO DIA",
+            "desc": null,
+            "price": 4.8,
+            "promo": null
+          },
+          {
+            "name": "COVERT",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "GUACAMOLE",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "TÁBUA DE QUEIJOS (grande)",
+            "desc": null,
+            "price": 18,
+            "promo": null
+          },
+          {
+            "name": "BATATA DA CASA (doce)",
+            "desc": null,
+            "price": 5.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Menus (não disponíveis ao jantar, fim de semana e feriados)",
+        "items": [
+          {
+            "name": "MENU \"MANHÃ SIMPLES\" - Torrada do dia + sumo do dia + expresso/chá.",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "MENU BRUNCH - Torrada do dia + banana bread + sumo do dia + café expresso/chá + biscoito.",
+            "desc": null,
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "MENU \"COME E SEGUE\" - Quiche do dia + sopa do dia + sumo do dia + expresso/chá.",
+            "desc": null,
+            "price": 9.5,
+            "promo": null
+          },
+          {
+            "name": "MENU \"COME SOSSEGADO\" - Sugestão do dia + sopa do dia + sobremesa + café expresso/chá.",
+            "desc": null,
+            "price": 17.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Sumos de fruta naturais",
+        "items": [
+          {
+            "name": "PINK: Morango, Maçã e Gengibre",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "YELLOW: Ananás, Maçã, Gengibre e Limão",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "RED: Beterraba, Morango e Laranja",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "TROPICAL: Manga, Laranja e Banana",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "GREEN: Spirulina, Banana e Maçã",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "DETOX: Cenoura, Limão e Cúrcuma",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "SMOOTHIE PERSONALIZADO (1 fruta)",
+            "desc": null,
+            "price": 3.2,
+            "promo": null
+          },
+          {
+            "name": "SUMO DE LARANJA NATURAL",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Águas",
+        "items": [
+          {
+            "name": "ÁGUAS s/GÁS",
+            "desc": null,
+            "price": 1.4,
+            "promo": null
+          },
+          {
+            "name": "ÁGUA s/GÁS 1,5L",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          },
+          {
+            "name": "ÁGUAS c/GÁS",
+            "desc": null,
+            "price": 1.6,
+            "promo": null
+          },
+          {
+            "name": "ÁGUA TÓNICA / GINGER BEER",
+            "desc": null,
+            "price": 2.2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Algo reconfortante",
+        "items": [
+          {
+            "name": "CAPPUCCINO",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "MATCHA LATTE",
+            "desc": null,
+            "price": 3.1,
+            "promo": null
+          },
+          {
+            "name": "CARAMEL MACHIATTO",
+            "desc": null,
+            "price": 3.1,
+            "promo": null
+          },
+          {
+            "name": "EXTRA BEBIDA VEGETAL",
+            "desc": null,
+            "price": 0.4,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Cocktails",
+        "items": [
+          {
+            "name": "MOJITO (frutos vermelhos +1€) (s/álcool 6.50€)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "DAIQUIRI (morango +1€) (frappé + 2€)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "CAIPIRINHA (morango/maracujá +1€)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "MARGARITA (frappé +2€)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "MOSCOW MULE",
+            "desc": null,
+            "price": 8.5,
+            "promo": null
+          },
+          {
+            "name": "CUBA LIBRE",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "TOM COLLINS",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Capacidade: 60",
+      "Fumadores: Zona Específica",
+      "Estacionamento: Rua Pago"
+    ],
+    "booking": "NORMAL",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80760/"
+  },
+  "os arcos": {
+    "bairroId": 87202,
+    "name": "Os Arcos",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351281543764",
+    "website": null,
+    "instagram": "https://www.instagram.com/osarcosvrsa/",
+    "lat": 37.1933179,
+    "lng": -7.4140881,
+    "address": "Avenida República 45 null",
+    "category": "Comida Portuguesa",
+    "hours": {
+      "Dom": "08h00 - 00h00",
+      "Seg": "08h00 - 00h00",
+      "Ter": "Fechado",
+      "Qua": "08h00 - 00h00",
+      "Qui": "08h00 - 00h00",
+      "Sex": "08h00 - 00h00",
+      "Sab": "08h00 - 00h00",
+      "Fer": "Fechado"
+    },
+    "menu": [],
+    "features": [
+      "Capacidade: 100",
+      "Estacionamento: Fácil, Rua Grátis, Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/87202/"
+  },
+  "bom gosto snack bar take away": {
+    "bairroId": 86705,
+    "name": "Bom Gosto Snack Bar & Take Away",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351925739941",
+    "website": null,
+    "instagram": null,
+    "lat": 37.1903479,
+    "lng": -7.413617800000001,
+    "address": "Jornal do Algarve  Lote 2",
+    "category": "Restaurantes Brasileiros",
+    "hours": {
+      "Dom": "08h00 - 15h00",
+      "Seg": "07h30 - 18h30",
+      "Ter": "07h30 - 18h30",
+      "Qua": "07h30 - 18h30",
+      "Qui": "07h30 - 18h30",
+      "Sex": "07h30 - 18h30",
+      "Sab": "07h30 - 18h30",
+      "Fer": "08h00 - 18h30"
+    },
+    "menu": [],
+    "features": [
+      "Capacidade: 30",
+      "Fumadores: Zona Específica",
+      "Estacionamento: Fácil"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/86705/"
+  },
+  "cafe paraiso": {
+    "bairroId": 81673,
+    "name": "Café Paraiso",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351920246316",
+    "website": null,
+    "instagram": "https://www.instagram.com/cafeparaiso_vrsa",
+    "lat": 37.19548510000001,
+    "lng": -7.4157822,
+    "address": "R Conselheiro F Ramirez 24 null",
+    "category": "Internacional",
+    "hours": {
+      "Dom": "11h00 - 20h00",
+      "Seg": "Fechado",
+      "Ter": "09h00 - 22h30",
+      "Qua": "09h00 - 22h30",
+      "Qui": "09h00 - 22h30",
+      "Sex": "09h00 - 13h00",
+      "Sab": "09h00 - 22h30",
+      "Fer": "Fechado"
+    },
+    "menu": [],
+    "features": [
+      "Fumadores: Zona Específica",
+      "Estacionamento: Fácil"
+    ],
+    "booking": "NORMAL",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/81673/"
+  },
+  "delhi s belly restaurante": {
+    "bairroId": 80779,
+    "name": "Delhi's Belly Restaurante",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351963346168",
+    "website": null,
+    "instagram": null,
+    "lat": 37.1936338,
+    "lng": -7.416807399999999,
+    "address": "Rua Dom Pedro V 57",
+    "category": "Restaurante Asiático",
+    "hours": {
+      "Dom": "12h00 - 00h00",
+      "Seg": "12h00 - 00h00",
+      "Ter": "12h00 - 00h00",
+      "Qua": "12h00 - 00h00",
+      "Qui": "12h00 - 00h00",
+      "Sex": "12h00 - 00h00",
+      "Sab": "12h00 - 00h00",
+      "Fer": "12h00 - 00h00"
+    },
+    "menu": [
+      {
+        "section": "Entradas/Starters",
+        "items": [
+          {
+            "name": "Papad/Papari",
+            "desc": null,
+            "price": 0.75,
+            "promo": null
+          },
+          {
+            "name": "Masala Papad/Papari com especiarias",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          },
+          {
+            "name": "Indian Samosa/Chamuqa",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Vegetable Pakora/Pastéis de vegetais",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Paneer Pakora/Pastéis de Queijo Indiano",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Chicken Pakora/Pastéis de Frango",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Raita/Iogurte",
+        "items": [
+          {
+            "name": "Plain (simple iogurte)",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Green (Pepino, Tomate, Cebola)",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Salada Frango (Frango, Alface, Tomate, Queijo, Orégãos)",
+            "desc": null,
+            "price": 6.95,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "PIZZA",
+        "items": [
+          {
+            "name": "Pizza Margherita média (grande 13,50€ / familiar 16€)",
+            "desc": null,
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "Pizza Vegetariana média (grande 13.50€ / familiar 17€)",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Pizza Chicken (Kebab) média (grande13.50€ / familiar 17€)",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Pizza Salmão média (grande 13.50€ / familiar 17€)",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Pizza Salami média (grande 13.50€ / familiar 17€)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Pizza Fiambre média (grande 13.50€ / familiar 17€)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Pizza Hawai média (grande 13.50€ / familiar 17€)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pão Indiano/Indian Bread",
+        "items": [
+          {
+            "name": "Garlic Naan/Pão Indiano com Alho",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Cheese Naan/Pão Indiano com Queijo",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Cheese and Garlic Naan/Pão Indiano com Queijo e Alho",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Parathas/Camas de Pão Indiano",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          },
+          {
+            "name": "Chappati (Roti Simples)",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Salad/Salada",
+        "items": [
+          {
+            "name": "Salada Verde (Alface, Tomate, Cebola)",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Salada só Alface",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Salada Atum (Alface, Tomate, Atum, Azeitonas, Cebola)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Chicken Dishes/Pratos de Frango",
+        "items": [
+          {
+            "name": "Chicken Curry/Caril de Frango",
+            "desc": null,
+            "price": 9.99,
+            "promo": null
+          },
+          {
+            "name": "Karahi Chicken",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          },
+          {
+            "name": "Chicken Madras",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          },
+          {
+            "name": "Chicken Saag",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          },
+          {
+            "name": "Chicken Chilly",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          },
+          {
+            "name": "Butter Chicken",
+            "desc": null,
+            "price": 11.99,
+            "promo": null
+          },
+          {
+            "name": "Chicken Tikka Masala",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Rice/Arroz",
+        "items": [
+          {
+            "name": "Plain Rice/Arroz Branco",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Pulao Rice/Arroz Pulau",
+            "desc": null,
+            "price": 4.99,
+            "promo": null
+          },
+          {
+            "name": "Mushroom Rice/Arroz com Cogumelos",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Chilli Rice/Arroz com malagueta verde e vermelha",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Jeera Rice/Arroz com cominhos",
+            "desc": null,
+            "price": 4.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Lamb Dishes/Pratos de Borrego",
+        "items": [
+          {
+            "name": "Lamb Curry/Caril de Borrego",
+            "desc": null,
+            "price": 11.99,
+            "promo": null
+          },
+          {
+            "name": "Karahi Lamb",
+            "desc": null,
+            "price": 12.99,
+            "promo": null
+          },
+          {
+            "name": "Lamb Madras",
+            "desc": null,
+            "price": 11.99,
+            "promo": null
+          },
+          {
+            "name": "Lamb Saag",
+            "desc": null,
+            "price": 12.99,
+            "promo": null
+          },
+          {
+            "name": "Lamb Tikka Masala",
+            "desc": null,
+            "price": 12.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Biryani",
+        "items": [
+          {
+            "name": "Vegetable Biryany/Arroz com mistura de Vegetais",
+            "desc": null,
+            "price": 8.99,
+            "promo": null
+          },
+          {
+            "name": "Chicken Biryani/Arroz com cubos de frango",
+            "desc": null,
+            "price": 9.5,
+            "promo": null
+          },
+          {
+            "name": "Lamb Biryani/Arroz com cubos de Borrego",
+            "desc": null,
+            "price": 9.95,
+            "promo": null
+          },
+          {
+            "name": "Prawn Biryani/Arroz com Camarão",
+            "desc": null,
+            "price": 9.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Tandoori Grilled Dishes/Grelhados Tandoori",
+        "items": [
+          {
+            "name": "Tandoori Chicken",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          },
+          {
+            "name": "Chicken Afgani",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          },
+          {
+            "name": "Kall Mirch Grilled Chicken",
+            "desc": null,
+            "price": 10.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Vegetarian Dishes/Especialidades Vegetarianas",
+        "items": [
+          {
+            "name": "Vegetable Curry/Caril de Vegetais",
+            "desc": null,
+            "price": 8.99,
+            "promo": null
+          },
+          {
+            "name": "Daal Makhni",
+            "desc": null,
+            "price": 8.99,
+            "promo": null
+          },
+          {
+            "name": "Aloo Palak",
+            "desc": null,
+            "price": 8.99,
+            "promo": null
+          },
+          {
+            "name": "Palak Paneer",
+            "desc": null,
+            "price": 8.99,
+            "promo": null
+          },
+          {
+            "name": "Chana Masala",
+            "desc": null,
+            "price": 8.99,
+            "promo": null
+          },
+          {
+            "name": "Mutter Paneer",
+            "desc": null,
+            "price": 8.99,
+            "promo": null
+          },
+          {
+            "name": "Paneer Karahi",
+            "desc": null,
+            "price": 9.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Bitoque",
+        "items": [
+          {
+            "name": "Frango Kebab",
+            "desc": null,
+            "price": 9.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Doner Kebab/Kebab Prato/Durum",
+        "items": [
+          {
+            "name": "Doner Kebab",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Doner Kebab Menu (batata frita, salada, pão e lata 33cl)",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Durum",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Durum Menu (batata frita, salada, pão e lata 33cl)",
+            "desc": null,
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "Kebab Prato",
+            "desc": null,
+            "price": 7.99,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Burger/Hamburger",
+        "items": [
+          {
+            "name": "Veggie Burger",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Veggie Burger Menu (batata frita e lata 33cl)",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "Chicken Burger",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Chicken Burger Menu (batata frita e lata 33cl)",
+            "desc": null,
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "Hamburger",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Hamburguer Menu (batata e lata 33cl)",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Pork Burger",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Pork Burger Menu (batata frita e lata 33cl)",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "Salmão Burger",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "Salmão Burger Menu (batata frita e lata 33cl)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pasta",
+        "items": [
+          {
+            "name": "Red Sauce Pasta",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "White Sauce Pasta",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [],
+    "booking": "NORMAL",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80779/"
+  },
+  "cafe boca doce": {
+    "bairroId": 80767,
+    "name": "Cafe Boca Doce",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351962313125",
+    "website": "https://www.facebook.com/bocadocevrsa",
+    "instagram": null,
+    "lat": 37.1939235,
+    "lng": -7.4169504,
+    "address": "Rua 5 de Outubro 41 loja D",
+    "category": "Café",
+    "hours": {
+      "Dom": "Fechado",
+      "Seg": "08h00 - 19h00",
+      "Ter": "08h00 - 19h00",
+      "Qua": "08h00 - 19h00",
+      "Qui": "08h00 - 19h00",
+      "Sex": "08h00 - 19h00",
+      "Sab": "08h00 - 19h00",
+      "Fer": "08h00 - 19h00"
+    },
+    "menu": [
+      {
+        "section": "Menus",
+        "items": [
+          {
+            "name": "Cheeseburger + Batatas",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Baguete de Atum + Batatas",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Tosta Mista + Batatas",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Bifana + Batatas",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Cachorro + Batatas",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pratos",
+        "items": [
+          {
+            "name": "Cordon Bleu",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Bitoque",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Choco Frito",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Lasanha Bolonhesa",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Bife de Atum",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Esparguete à Bolonhesa",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Cafetaria",
+        "items": [
+          {
+            "name": "Café / Descafeinado",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          },
+          {
+            "name": "Carioca de café / limão",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          },
+          {
+            "name": "Copo de leite",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          },
+          {
+            "name": "Garoto",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          },
+          {
+            "name": "Galão",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Leite de Chocolate - Garrafa",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          },
+          {
+            "name": "Chá ",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Torradas",
+        "items": [
+          {
+            "name": "Torrada",
+            "desc": null,
+            "price": 1,
+            "promo": null
+          },
+          {
+            "name": "1/2 Torrada",
+            "desc": null,
+            "price": 0.9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Refrigerantes e Sumos",
+        "items": [
+          {
+            "name": "Refrigerantes - Lata",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          },
+          {
+            "name": "Água Tónica",
+            "desc": null,
+            "price": 1.8,
+            "promo": null
+          },
+          {
+            "name": "Sumos de Frutas Naturais",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Nectares",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Whiskies",
+        "items": [
+          {
+            "name": "Whiskie Novo",
+            "desc": null,
+            "price": 2.8,
+            "promo": null
+          },
+          {
+            "name": "Whiskie Velho",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Aguardentes",
+        "items": [
+          {
+            "name": "Aguardentes Velhas",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Bagaceiras",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          },
+          {
+            "name": "Brandys",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Cognac",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Licores",
+        "items": [
+          {
+            "name": "Licor Beirão",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Brandywell",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Amêndoa Amarga",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Cervejas",
+        "items": [
+          {
+            "name": "Cervejas garrafa 0.33cl",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          },
+          {
+            "name": "Cerveja a copo 0.20cl",
+            "desc": null,
+            "price": 1.2,
+            "promo": null
+          },
+          {
+            "name": "Caneca de cerveja 0.50cl",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          },
+          {
+            "name": "Cervejas s/álcool",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Sandes",
+        "items": [
+          {
+            "name": "Sandes de Fiambre",
+            "desc": null,
+            "price": 1.8,
+            "promo": null
+          },
+          {
+            "name": "Sandes de Queijo",
+            "desc": null,
+            "price": 1.8,
+            "promo": null
+          },
+          {
+            "name": "Sandes Mista",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          },
+          {
+            "name": "Pão c/ manteiga",
+            "desc": null,
+            "price": 1.8,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Estacionamento: Fácil, Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80767/"
+  },
+  "bella napoli": {
+    "bairroId": 80765,
+    "name": "Bella Napoli",
+    "rating": 5,
+    "totalReviews": 1,
+    "phone": "+351281542222",
+    "website": "http://www.bellanapoli-vrsa.eatbu.com/",
+    "instagram": null,
+    "lat": 37.1939724,
+    "lng": -7.417497900000001,
+    "address": "Rua 5 de Outubro 38",
+    "category": "Restaurantes Italianos",
+    "hours": {
+      "Dom": "12h00 - 15h00 / 19h00 - 23h00",
+      "Seg": "Fechado",
+      "Ter": "12h00 - 15h00 / 19h00 - 23h00",
+      "Qua": "12h00 - 15h00 / 19h00 - 23h00",
+      "Qui": "12h00 - 15h00 / 19h00 - 23h00",
+      "Sex": "12h00 - 15h00 / 19h00 - 23h00",
+      "Sab": "12h00 - 15h00 / 19h00 - 23h00",
+      "Fer": "12h00 - 15h00 / 19h00 - 23h00"
+    },
+    "menu": [
+      {
+        "section": "ANTIPASTI",
+        "items": [
+          {
+            "name": "PANE ALL 'AGLIO",
+            "desc": "Pão Fresco com Alho\nGarlic Bread\nPan con Ajo",
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "PANE ALL 'AGLIO CON MOZZARELLA",
+            "desc": "Pão Fresco com Alho e Queijo Mozzarella\nGarlic Bread with Mozzarella Cheese\nPan con Ajo y Queso Mozzarella",
+            "price": 3.25,
+            "promo": null
+          },
+          {
+            "name": "PANE ALL 'AGLIO CON MOZZARELLA E PROSCIUTTO COTTO O FETA",
+            "desc": "Pão Fresco com alho, Queijo Mozzarella e Fiambre ou Queijo Feta\nGarlic Bread with Mozzarella cheese and Ham or Feta Cheese\nPan con Ajo, Queso Mozzarella y Jamon York o Queso Feta",
+            "price": 3.75,
+            "promo": null
+          },
+          {
+            "name": "BRUSCHETTA DI POMODORO",
+            "desc": "Pão Torrado com Tomate Fresco, Alho, Manjerico e Azeite\nToast Bread with Garlic marinated Tomatoes and fresh Basil and olive oil\nPan Tostado con Tomates Marinados y Albahaca y Aceite de Oliva",
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "BRUSCHETTA DI SALMONE",
+            "desc": "Pão Torrado coberto com Queijo Ricotta, Salmão Fumado, Rúcula e Alcaparras\nToast Bread Cubierto con Queso Ricotta, Salmon Ahumado, Rucula y Alcaparras",
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "INSALATA DI BRESAOLA",
+            "desc": "Bresaola (finíssimas fatias de carne curada) com Rúcula, Lascas de Queijo Parmesão, azeite e limão\nBresaola (thinly sliced cured beef) with Wild Roca, shaved parmesan, olive oil and Lemon\nBresaola (finas fatias de carne curada) com Rucula, Virutas de Parmesano, Aceite e Limon",
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "INSALATA MISTA",
+            "desc": "Salada Mista, Tomate, Pepino, Rúcula, Azeitonas e Cebola\nMixed Salad, Tomatoes, Cucumber, Wild Roca, Olives and Oinios\nEnsalada Mixta, Tomates, Pepinos, Rucula, Aceitunas e Cebolla",
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "MOZZARELLA CAPRESE",
+            "desc": "Tomate Fresco, Mozzarella Fresca, Rúcula e Azeitonas\nFresh Mozzarella, Wild Roca and olives\nTomates Fresco, Mozzarella Fresca, Rúcula y aceitunas",
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "CALAMARI FRITTI",
+            "desc": "Calamares fritos c/ molho tártaro\nFried Calamari with Tartare Sauce\nCalamares fritos c/Salsa Tartara",
+            "price": 6.5,
+            "promo": null
+          },
+          {
+            "name": "ANTIPASTO A' ITALIANA (per 2 persone)",
+            "desc": "Presunto, Salame, Bresaola, Mozzarella Fresca, Rúcula, Azeitonas e Pão Fresco\nHam, Salami, Bresaola, Fresh Mozzarella, Wild Roca, Olives and Fresh Bread\nJamon, Salame, Bresaola, Mozzarella Fresca, Rucula, Aceitunas y Pan Fresco",
+            "price": 12,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "PIZZAS",
+        "items": [
+          {
+            "name": "VEGETARIANA (grande 12€)",
+            "desc": "Tomate, Queijo Mozzarella, Cogumelos, Cebola, Azeitonas, Alcachofras, Pimento",
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "BOLONHESA (grande 12€)",
+            "desc": "Tomate, Queijo Mozzarella, Molho Bolonhesa, Bacon, Cogumelos",
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "SAN REMO (grande 12€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre, Camarão, Cogumelos",
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "SOLEMIO (grande 12€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre, Camarão, Ananás",
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "ROMANA (grande 12€)",
+            "desc": "Tomate, Queijo Mozzarella, Bacon, Ovo, Cebola",
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "CIAO CIAO (grande 12€)",
+            "desc": "Tomate, Queijo Mozzarella, Molho Bolonhesa, Cogumelos, Ananás",
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "FRUTTI DI MARE (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Camarão, Mexilhão, Atum",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "QUATTRO FORMAGGI (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Queijo Feta, Queijo Gorgonzola e Queijo Parmesão",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "GARLIC LOVERS (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Peito de Frango, Bacon, Cogumelos, Alho",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "QUATRO STAGIONI (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Cogumelos, Camarão, Fiambre, Mexilhões, Alcachofras e Azeitonas",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "MEXICANA (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Peito de Frango, Natas, Banana, Ananás",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "PEPPERONI PIZZA (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Pepperoni, Cogumelos, Pimento, Azeitonas",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "ROMA (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Salame, Tomate Fresco, Cogumelos",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "MAESTRO (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Molho Bolonhesa, Camarão, Gorgonzola, Ananás",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "RIMINI (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Azeitonas, Tomate Fresco, Queijo Feta, Pimento e Rúcula",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "AL POLLO E CURRY (grande 22)",
+            "desc": "Tomate, Queijo Mozzarella, Peito de Frango, Ananás, Banana, Camarão e Caril",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "PARMA (grande 24€)",
+            "desc": "Tomate, Queijo Mozzarella, Tomate Seco, Presunto, Rúcula, Lascas de Parmesão e Azeitonas",
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "BRESAOLA PIZZA (grande 24€)",
+            "desc": "Tomate, Queijo Mozzarella, Bresaola, Cogumelos, Rúcula, Lascas de Grana Padano",
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "PIZZA DI SALMONE (grande 24€)",
+            "desc": "Tomate, Queijo Mozzarella, Alcaparras, Salmão Fumado, Rúcula e Queijo Ricota",
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "PAVORITI (grande 24€)",
+            "desc": "Tomate, Queijo Mozzarella, Salame, Pepperoni, Tomate Seco, Gorgonzola, Ananás, Brócolos",
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "PIZZA BELLA NAPOLI (grande 24€)",
+            "desc": "Tomate, Queijo Mozzarella, Camarão, Peito de Frango, Natas, Espinafres, alho",
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "PIZZA MIA (grande 24€)",
+            "desc": "Tomate, Queijo Mczzarella, 4 Ingredientes a sua escolha",
+            "price": 12.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "PIZZA",
+        "items": [
+          {
+            "name": "MARGHERITA (grande 18€)",
+            "desc": "Tomate, Queijo Mozzarella\nTomato Sauce, Mozzarella Cheese",
+            "price": 9.5,
+            "promo": null
+          },
+          {
+            "name": "VESUVIO (grande 19€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre\nTomato Sauce, Mozzarella Cheese, Ham",
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "CAPRICCIOSA (grande 20€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre, Cogumelos\nTomato Sauce, Mozzarella Cheese, Ham, Mushrooms",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "JAMAICA  (grande 20€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre, Camarão\nTomato Sauce, Mozzarella Cheese, Ham, Shrimps",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "HAWAI  (grande 20€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre, Ananás\nTomato Sauce, Mozzarella Cheese, Ham, Pineapple",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "TONNO  (grande 20€)",
+            "desc": "Tomate, Queijo Mozzarella, Atum, Cebola\nTomato Sauce, Mozzarella Cheese, Tunafish, Onion",
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "CALZONE (pizza fechada / closed pizza / pizza cerrada)  (grande 20€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre, Extra Queijo\nTomato Sauce, Mozzarella Cheese, Ham and Extra Cheese",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "NAPOLITANA  (grande 20€)",
+            "desc": "Tomate, Queijo Mozzarella, Anchovas, Alcaparras\nTomato Sauce, Mozzarella Cheese, Anchovies, Capers",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "ALGARVIA  (grande 20€)",
+            "desc": "Tomate, Queijo Mozzarella, Chouriço, Cebola, Azeitonas\nTomato Sauce, Mozzarella Cheese, Sausages, Onion, Olives",
+            "price": 10.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "SALADAS",
+        "items": [
+          {
+            "name": "INSALATA DI CAESAR",
+            "desc": "Salada Mista, Tomate Cereja, Lascas de Parmesão com Croutons Temperados e Molho Cesar",
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "INSALATA DI TONO",
+            "desc": "Salada Mista, Tomate, Camarão, Atum,Ovo Cozido, Pepino, Milho, Azeitonas e Molho da Casa",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "INSALATA GRECA",
+            "desc": "Queijo Feta, Salada Mista, Tomate, Pepino, Milho, Cebola, Azeitonas, Pimento, Oregãos",
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "INSALATA KEBAB",
+            "desc": "Kebab, Salada Mista, Tomate, Pepino, Milho, Cebola, Ananás, Azeitonas, Molho da Casa",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "INSALATA DI POLLO",
+            "desc": "Salada Mista, Tomate, Pepino, Peito de Frango, Ananás, Milho, Azeitonas, Molho da Casa",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "INSALATA DI PASTA CON POLLO",
+            "desc": "Salada com Penne, Bacon, Peito de Frango, Queijo Feta, Tomate Cereja, Pimento, Azeitonas, Molho da Casa",
+            "price": 11.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "PASTAS",
+        "items": [
+          {
+            "name": "LASAGNE ALLA BOLOGNESE",
+            "desc": "Lasanha c/ Carne Bolonhesa, Molho Bechamel e Queijo Gratinado",
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "DIAVOLO AL FORNO",
+            "desc": "Espaguete c/ Carne Bolonhesa Picante, Alho, Cebola, Pimento, Cogumelos e queijo Gratinado",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "RAVIOLI DI RICOTTA E SPINACI",
+            "desc": "Ravioli Recheada c/ Queijo Ricota e Espinafre em Molho de Tomate, Molho Gorgonzola, Queijo Gratinado",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "SPAGHETTI AL POMODORO",
+            "desc": "Espaguete c/ Molho de tomate, grana padano e manjericão",
+            "price": 9.5,
+            "promo": null
+          },
+          {
+            "name": "SPAGHETTI ALLA BOLOGNESE",
+            "desc": "Espaguete c/ Molho Bolonhesa e Queijo Parmesão",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "SPAGHETTI ALLA CARBONARA",
+            "desc": "Espaguete com Bacon, Fiambre e Molho Bechamel",
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "PASTA DELICIOSA",
+            "desc": "Tagilatelle c/ Peito de Frango, Cogumelos, Bacon e Natas",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "PASTA BELLA NAPOLI",
+            "desc": "Penne c/ Camarão, Espinafres, Peito de Frango, Natas e Caril",
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "PASTA AL FRUTTI DI MARE",
+            "desc": "Espaguete c/ misturas de Maricos em Molho Marinara\nSpaghetti with mixed Seafood in Marinara Sauce",
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "PASTA DOLCE VITA",
+            "desc": "Penne Rigate c/ Salmão, Brócolos, Camarão, Alho Francês e Natas\nPenne Rigate con Salmon, Brócoli, Gambas, Puerro y Crema",
+            "price": 13,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pizzas",
+        "items": [
+          {
+            "name": "TROPICANA (grande 12€)",
+            "desc": "Tomate, Queijo Mozzarella, Fiambre, Ananás, Banana",
+            "price": 11,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "BEBIDAS",
+        "items": [
+          {
+            "name": "SANGRIA TINTA OU BRANCA 0,5L",
+            "desc": "Tinta ou Branca",
+            "price": 6.75,
+            "promo": null
+          },
+          {
+            "name": "VINHO DA CASA A JARRO TINTO OU BRANCO 0,25L",
+            "desc": "Tinto ou Branco",
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "VINHO TINTO - MONTE VELHO 0,375L",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "VINHO TINTO - MONTE VELHO 0,75L",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "VINHO TINTO - PAPA FIGOS 0,75L",
+            "desc": null,
+            "price": 16,
+            "promo": null
+          },
+          {
+            "name": "VINHO TINTO - TRINCA BOLOTAS 0,75L",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "VINHOS BRANCO - MONTE VELHO 0,375L",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "VINHOS BRANCO - MONTE VELHO 0,75L",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "VINHOS BRANCO - PLANALTO 0,75L",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "VINHOS ROSÉ - MATEUS ROSÉ 0,375L",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "VINHOS ROSÉ - MATEUS ROSÉ 0,75L",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "VINHOS ROSÉ - LAMBRUSCO 0,75L",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "VINHOS VERDES - GAZELA 0,375L",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "VINHOS VERDES - GAZELA 0,75L",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "VINHOS VERDES - CASAL GARCIA 0,375L",
+            "desc": null,
+            "price": 7,
+            "promo": null
+          },
+          {
+            "name": "COCA COLA 0,33L",
+            "desc": null,
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "SPRITE 0,33L",
+            "desc": null,
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "FANTA LARANJA 0,33L",
+            "desc": null,
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "NESTEA 0,33L",
+            "desc": null,
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "ÁGUA 0,33L",
+            "desc": null,
+            "price": 1.1,
+            "promo": null
+          },
+          {
+            "name": "ÁGUA C/GÁS 0.25l",
+            "desc": null,
+            "price": 1.8,
+            "promo": null
+          },
+          {
+            "name": "IMPERIAL 0,20L",
+            "desc": null,
+            "price": 1.8,
+            "promo": null
+          },
+          {
+            "name": "CERVEJA 0,33L",
+            "desc": null,
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "CERVEJA S/ ÁLCOOL 0,33L",
+            "desc": null,
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "CERVEJA PRETA 0,33L",
+            "desc": null,
+            "price": 2.75,
+            "promo": null
+          },
+          {
+            "name": "CANECA 0,5L",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "SANGRIA TINTA OU BRANCA 1L",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "SANGRIA TINTA OU BRANCA 1,5L",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "VINHO DA CASA A JARRO TINTO OU BRANCO 0,50L",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "VINHO DA CASA A JARRO TINTO OU BRANCO 1L",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "VINHOS VERDES - CASAL GARCIA 0,75L",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "KEBAB",
+        "items": [
+          {
+            "name": "PIZZA KEBAB (1 pessoa)",
+            "desc": "Tomate, Queijo Mozzarella, Kebab, Cebola, Molho de Kebab\nTomato Sauce, Mozzarella Cheese, Kebab, Onion, Kebab Sauce",
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "PIZZA KEBAB ESPECIAL (1 pessoa)",
+            "desc": "Tomate, Queijo Mozzarella, Kebab, Alface, Cebola, Tomate Fresco, Pepino, Molho de Kebab\nTomato Sauce, Mozzarella Cheese, Kebab, Lettuce, Onion, Tomato, Cucumber, Kebab Sauce",
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "PIZZA KEBAB HAWAI (1 pessoa)",
+            "desc": "Tomate, Queijo Mozzarella, Kebab, Ananás, Alface, Tomate Fresco, Pepino, Molho de Kebab\nTomato Sauce, Mozzarella Cheese, Kebab, Pineapple, Lettuce, Tomato, Cucumber, Kebab Sauce",
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "ROLO DE KEBAB = SANDWICH KEBAB",
+            "desc": "Kebab, Alface, Tomate, Pepino, Cebola, Molho Kebab\nKebab, Lettuce, Tomato, Cucumber, Onion, Kebab Sauce",
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "PRATO DE KEBAB",
+            "desc": "Kebab, Batatas Fritas, Alface, Tomate Fresco, Pepino, Cebola, Molho Kebab\nKebab, French Fries, Lettuce, Tomato, Cucumber, Onion, Kebab Sauce",
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "PIZZA KEBAB (2 pessoas)",
+            "desc": "Tomate, Queijo Mozzarella, Kebab, Alface, Cebola, Tomate Fresco, Pepino, Molho de Kebab\nTomato Sauce, Mozzarella Cheese, Kebab, Lettuce, Onion, Tomato, Cucumber, Kebab Sauce",
+            "price": 22,
+            "promo": null
+          },
+          {
+            "name": "PIZZA KEBAB ESPECIAL (2 pessoas)",
+            "desc": "Tomate, Queijo Mozzarella, Kebab, Alface, Cebola, Tomate Fresco, Pepino, Molho de Kebab\nTomato Sauce, Mozzarella Cheese, Kebab, Lettuce, Onion, Tomato, Cucumber, Kebab Sauce",
+            "price": 23,
+            "promo": null
+          },
+          {
+            "name": "PIZZA KEBAB HAWAI (2 pessoa)",
+            "desc": "Tomate, Queijo Mozzarella, Kebab, Ananás, Alface, Tomate Fresco, Pepino, Molho de Kebab\nTomato Sauce, Mozzarella Cheese, Kebab, Pineapple, Lettuce, Tomato, Cucumber, Kebab Sauce",
+            "price": 23,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Estacionamento: Fácil, Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80765/"
+  },
+  "restaurante o pescador": {
+    "bairroId": 30073,
+    "name": "Restaurante o Pescador",
+    "rating": 4.6667,
+    "totalReviews": 3,
+    "phone": "+351281543473",
+    "website": null,
+    "instagram": null,
+    "lat": 37.1949455,
+    "lng": -7.4147686,
+    "address": "Avenida República 48 51 null",
+    "category": "Comida Portuguesa",
+    "hours": {
+      "Dom": "07h00 - 22h00",
+      "Seg": "Fechado",
+      "Ter": "07h00 - 22h00",
+      "Qua": "07h00 - 22h00",
+      "Qui": "07h00 - 22h00",
+      "Sex": "07h00 - 22h00",
+      "Sab": "07h00 - 22h00",
+      "Fer": "07h00 - 22h00"
+    },
+    "menu": [
+      {
+        "section": "Entradas",
+        "items": [
+          {
+            "name": "Couvert",
+            "desc": null,
+            "price": 2.8,
+            "promo": null
+          },
+          {
+            "name": "Pão",
+            "desc": null,
+            "price": 0.7,
+            "promo": null
+          },
+          {
+            "name": "Azeitonas",
+            "desc": null,
+            "price": 0.7,
+            "promo": null
+          },
+          {
+            "name": "Manteiga",
+            "desc": null,
+            "price": 0.7,
+            "promo": null
+          },
+          {
+            "name": "Pasta Sardinha",
+            "desc": null,
+            "price": 0.7,
+            "promo": null
+          },
+          {
+            "name": "Queijo Curado",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          },
+          {
+            "name": "Ameijoas de Viveiro (dose)",
+            "desc": "(dose)",
+            "price": 18,
+            "promo": null
+          },
+          {
+            "name": "Camarão Cozido (kg)",
+            "desc": "(kg)",
+            "price": 45,
+            "promo": null
+          },
+          {
+            "name": "Camarão Frito ou Grelhado (kg)",
+            "desc": "(kg)",
+            "price": 55,
+            "promo": null
+          },
+          {
+            "name": "Camarão Grande Grelhado (kg)",
+            "desc": "(kg)",
+            "price": 90,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Especialidades",
+        "items": [
+          {
+            "name": "Arroz de Lingueirão (por encomenda)",
+            "desc": "(p/ encomenda)",
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "Choco Frito",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Choco Assado na Brasa",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Barriga de Atum Grelhada",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Cataplana de Amêijoas (2 pessoas / por encomenda)",
+            "desc": "(2 pessoas) (p/ encomenda)",
+            "price": 40,
+            "promo": null
+          },
+          {
+            "name": "Cataplana de Tamboril (2 pessoas / por encomenda)",
+            "desc": "(2 pessoas) (p/ encomenda)",
+            "price": 40,
+            "promo": null
+          },
+          {
+            "name": "Arroz de Marisco (2 pessoas / por encomenda)",
+            "desc": "(2 pessoas) (p/ encomenda)",
+            "price": 38,
+            "promo": null
+          },
+          {
+            "name": "Arroz de Polvo (2 pessoas / por encomenda)",
+            "desc": "(p/ encomenda)",
+            "price": 38,
+            "promo": null
+          },
+          {
+            "name": "Arroz de Tamboril (2 pessoas / por encomenda)",
+            "desc": "(2 pessoas) (p/ encomenda)",
+            "price": 15,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Ovos",
+        "items": [
+          {
+            "name": "Omelete Simples",
+            "desc": null,
+            "price": 8,
+            "promo": null
+          },
+          {
+            "name": "Omelete de Queijo ou Fiambre",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "Omelete de Camarão",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Omelete de Atum",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Omelete Mista",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Snacks-Saladas",
+        "items": [
+          {
+            "name": "Salada de Ovas",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "Estupeta de Atum",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "Salada de Atum",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "Salada Mista Tomate e Alface (1 pessoa)",
+            "desc": "(1 pessoa)",
+            "price": 4.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Vinho da Casa",
+        "items": [
+          {
+            "name": "Convento da Vila (Borba) 0,75L",
+            "desc": "(0,75 l)",
+            "price": 8.5,
+            "promo": null
+          },
+          {
+            "name": "Convento da Vila (Borba) 0,37,5L",
+            "desc": "(0,37,5 l)",
+            "price": 5.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Peixe",
+        "items": [
+          {
+            "name": "Bife de Espadarte Grelhado",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "Besugo Grelhado",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "Lulas Fritas ou Grelhadas",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Sardinha Grelhada",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Bacalhau à Pescador",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "Bacalhau Grelhado",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "Peixe Espada Grelhado ou Frito",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Bife de Atum Grelhado",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Filetes de Pescada",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Carne",
+        "items": [
+          {
+            "name": "Bife à Pescador (Vazia)",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "Bife com Cogumelos (Vazia)",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "Febras de Porco na Brasa",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Entrecosto Grelhado",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Frango no Churrasco",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Prego ou Bitoque no Prato",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Hamburguer no Prato",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Costeleta de Porco p/ Fritar ou Grelhar",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Carne Porco à Alentejana",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Peixe ",
+        "items": [
+          {
+            "name": "Bacalhau à Braz",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Capacidade: 30",
+      "Estacionamento: Fácil"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/30073/"
+  },
+  "snack bar serrano": {
+    "bairroId": 80757,
+    "name": "Snack-bar Serrano",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351963693335",
+    "website": null,
+    "instagram": null,
+    "lat": 37.1954071,
+    "lng": -7.416684800000001,
+    "address": "Rua dr. Sousa Martins  99",
+    "category": "Café",
+    "hours": {
+      "Dom": "Fechado",
+      "Seg": "07h00 - 22h00",
+      "Ter": "07h00 - 22h00",
+      "Qua": "07h00 - 22h00",
+      "Qui": "07h00 - 22h00",
+      "Sex": "07h00 - 22h00",
+      "Sab": "07h00 - 22h00",
+      "Fer": "07h00 - 22h00"
+    },
+    "menu": [
+      {
+        "section": "Tapas",
+        "items": [
+          {
+            "name": "Queijo seco - Dry cheese",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Tapa presunto - Smoked ham",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Salada de Ovas - Roe Salad",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Salada de Polvo - Octopus salad",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Salada de Bacalhau com Grão - Cod and chickpea salad",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Pipis - Chicken hearts and liver",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Maionese Delícias - Crab stick mayononaise",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Maionese de Atum - Tuna Mayonaisse",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Estupeta - Tuna in vinegar salad (onion, pepper, tomato)",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Ovas de choco - Cuttlefish Roe salad",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Lulinhas fritas à algarvia - Little Fried squids",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Biqueiros em vinagrete - Anchovy in vinegar",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Camarão cozido - Shrimps",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Ostras - Oysters",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "Conquilhas - Cockles",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Camarão ao alhinho - Fried Shrimp with garlic",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Ameijoas - Clams",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pratos de Peixe | Fish Dishes",
+        "items": [
+          {
+            "name": "Bacalhau à Brás - Crumble cod fish with garlic oil and eggs",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Filetes de peixe panado - Fish and chips",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Salada de polvo - Octopus salad",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Lulinhas fritas à algarvia - Little Fried squids w/ chips",
+            "desc": null,
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "Choco Frito - Fry cuttle fish",
+            "desc": null,
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "Atum de cebola - Fresh tuna and red pepper stew",
+            "desc": null,
+            "price": 11,
+            "promo": null
+          },
+          {
+            "name": "Salmão Grelhado - Grilled Salmon",
+            "desc": null,
+            "price": 13.5,
+            "promo": null
+          },
+          {
+            "name": "Camarão ao alhinho - Fried Shrimp with garlic",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Enguias fritas - Fried eel",
+            "desc": null,
+            "price": 16,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Pratos de Carne | Meat Dishes",
+        "items": [
+          {
+            "name": "Bitoque Porco - Fried Pork Steak with fried egg and chipsc",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "Bitoque Frango - Chicken fillet, fried egg and chips",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Bifês porco com cogumelos - Pork steak with mushrooms and cream",
+            "desc": null,
+            "price": 9.5,
+            "promo": null
+          },
+          {
+            "name": "Hamburguer (queijo, alface, tomate, batata frita e ovo) - Burguer (cheese, lettuce, tomato, chips and fried egg)",
+            "desc": null,
+            "price": 8.5,
+            "promo": null
+          },
+          {
+            "name": "Arroz Pato - Duck rice",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "Bitoque Peru - Turkey fillet, fried egg and chips",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Acompanhamentos | Sides",
+        "items": [
+          {
+            "name": "Batata Frita - Chips",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          },
+          {
+            "name": "Salada - Salad",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Omeletes | Omelet",
+        "items": [
+          {
+            "name": "Queijo - Cheese",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Fiambre - Ham",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Cogumelos - Mushrooms",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "Fiambre e Queijo - Ham and Cheese",
+            "desc": null,
+            "price": 8,
+            "promo": null
+          },
+          {
+            "name": "Atum - Tuna",
+            "desc": null,
+            "price": 8,
+            "promo": null
+          },
+          {
+            "name": "Camarão - Shrimp",
+            "desc": null,
+            "price": 8.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Saladas | Salads",
+        "items": [
+          {
+            "name": "Frango (Frango, alface, tomate, ovo, cebola) - Chicken salad (chicken, lettuce, tomato, onion, egg)",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          },
+          {
+            "name": "Salada Atum - Tuna salad",
+            "desc": null,
+            "price": 9,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Baguettes | Baguettes",
+        "items": [
+          {
+            "name": "Fiambre - Ham or Cheese",
+            "desc": null,
+            "price": 2.2,
+            "promo": null
+          },
+          {
+            "name": "Mista - Cheese and ham",
+            "desc": null,
+            "price": 2.5,
+            "promo": null
+          },
+          {
+            "name": "Pasta: Atum - Tuna / Frango / Delicias - Tuna / Chicken / Crab Stick",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "Cachorro - Hot Dog",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Tostas | Toasts",
+        "items": [
+          {
+            "name": "Tosta mista - Cheese and ham toast",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Tosta de Queijo e Cebola - Cheese and onion toast",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Tosta queijo e tomate - Tomato and cheese toast",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Italiana - Italian (tuna or chicken or crabstick mayo, slice of tomato, oreganos, cheese)",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Tostas com Pasta | Toasts",
+        "items": [
+          {
+            "name": "Frango - Chicken",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Atum - Tuna",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          },
+          {
+            "name": "Delícias do mar - Crab Stick",
+            "desc": null,
+            "price": 5.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Bifana | Pork Steak in Bread",
+        "items": [
+          {
+            "name": "Paposeco - Pork steak in small bread",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          },
+          {
+            "name": "Pão Caseiro - Pork steak in home made bread",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Baguete - Pork steak in Baguette",
+            "desc": null,
+            "price": 4,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Estacionamento: Fácil, Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80757/"
+  },
+  "restaurante 2000": {
+    "bairroId": 80756,
+    "name": "Restaurante 2000",
+    "rating": 3.4,
+    "totalReviews": 5,
+    "phone": "+351966566611",
+    "website": "https://restvrsa.wixsite.com/restaurante2000",
+    "instagram": null,
+    "lat": 37.1942569,
+    "lng": -7.4161236,
+    "address": "Rua Doutor Sousa Martins 70",
+    "category": "Comida Portuguesa",
+    "hours": {
+      "Dom": "12h00 - 14h30",
+      "Seg": "Fechado",
+      "Ter": "12h00 - 14h30",
+      "Qua": "12h00 - 14h30",
+      "Qui": "12h00 - 14h30",
+      "Sex": "12h00 - 14h30",
+      "Sab": "12h00 - 14h30",
+      "Fer": "12h00 - 14h30"
+    },
+    "menu": [
+      {
+        "section": "Couvert",
+        "items": [
+          {
+            "name": "Pão, manteiga, azeitonas",
+            "desc": null,
+            "price": 1.5,
+            "promo": null
+          },
+          {
+            "name": "Pasta de sardinha",
+            "desc": null,
+            "price": 1.45,
+            "promo": null
+          },
+          {
+            "name": "Pasta de atum",
+            "desc": null,
+            "price": 1.45,
+            "promo": null
+          },
+          {
+            "name": "Queijo curado",
+            "desc": null,
+            "price": 2.7,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Entradas",
+        "items": [
+          {
+            "name": "Sopa do dia (legumes)",
+            "desc": null,
+            "price": 1.9,
+            "promo": null
+          },
+          {
+            "name": "Salada mista (pequena)",
+            "desc": null,
+            "price": 3.5,
+            "promo": null
+          },
+          {
+            "name": "Salada mista (grande)",
+            "desc": null,
+            "price": 4.5,
+            "promo": null
+          },
+          {
+            "name": "Gambas \"al ajillo\"",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Camarão cozido ou frito (12uni)",
+            "desc": null,
+            "price": 18,
+            "promo": null
+          },
+          {
+            "name": "Ameijôas à Bolhão Pato",
+            "desc": null,
+            "price": 14.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Peixe",
+        "items": [
+          {
+            "name": "Bife de atum à Algarvia",
+            "desc": null,
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "Bife de atum grelhado",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "Bacalhau à Brás",
+            "desc": null,
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "Bacalhau assado (preparação 30min.)",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "Choquinhos à Algarvia",
+            "desc": null,
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "Choco grelhado",
+            "desc": null,
+            "price": 13.5,
+            "promo": null
+          },
+          {
+            "name": "Lulas grelhadas",
+            "desc": null,
+            "price": 13.5,
+            "promo": null
+          },
+          {
+            "name": "Dourada grelhada",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Robalo grelhado",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Espadarte grelhado",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Salmão grelhado",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "Peixe espada preto grelhado",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Espetada de camarão (preparação 30min.)",
+            "desc": null,
+            "price": 17.5,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Arroz / Cataplanas (2 pessoas / preparação 30min.)",
+        "items": [
+          {
+            "name": "Cataplana de bacalhau",
+            "desc": null,
+            "price": 32.5,
+            "promo": null
+          },
+          {
+            "name": "Cataplana tamboril",
+            "desc": null,
+            "price": 32.5,
+            "promo": null
+          },
+          {
+            "name": "Cataplana de marisco",
+            "desc": null,
+            "price": 37.5,
+            "promo": null
+          },
+          {
+            "name": "Arroz de tamboril",
+            "desc": null,
+            "price": 34,
+            "promo": null
+          },
+          {
+            "name": "Arroz de marisco",
+            "desc": null,
+            "price": 38,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Carne",
+        "items": [
+          {
+            "name": "Bife de vaca grelhado",
+            "desc": null,
+            "price": 12.5,
+            "promo": null
+          },
+          {
+            "name": "Bife da casa (preparação 30min.)",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "Bife com cogumelos (preparação 30min.)",
+            "desc": null,
+            "price": 15,
+            "promo": null
+          },
+          {
+            "name": "Espetada de vitela e camarão (preparação 30min.)",
+            "desc": null,
+            "price": 17,
+            "promo": null
+          },
+          {
+            "name": "Bitoke de vaca",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "Segredos de porco ibérico",
+            "desc": null,
+            "price": 13,
+            "promo": null
+          },
+          {
+            "name": "Presa paleta de porco ibérico",
+            "desc": null,
+            "price": 16.5,
+            "promo": null
+          },
+          {
+            "name": "Plumas de porco ibérico",
+            "desc": null,
+            "price": 16,
+            "promo": null
+          },
+          {
+            "name": "Espetada ibérica e camarão (preparação 30min.)",
+            "desc": null,
+            "price": 17,
+            "promo": null
+          },
+          {
+            "name": "Costeletas grelhadas",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          },
+          {
+            "name": "Febras grelhadas",
+            "desc": null,
+            "price": 10.5,
+            "promo": null
+          },
+          {
+            "name": "Bitoque de porco",
+            "desc": null,
+            "price": 11.5,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80756/"
+  },
+  "taska da vila": {
+    "bairroId": 80746,
+    "name": "Taska da Vila",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351968648737",
+    "website": null,
+    "instagram": null,
+    "lat": 37.1938186,
+    "lng": -7.416456,
+    "address": "Rua Almirante Cândido dos Reis n°67",
+    "category": "Petiscos & Tapas",
+    "hours": {
+      "Dom": "13h00 - 21h30",
+      "Seg": "Fechado",
+      "Ter": "Fechado",
+      "Qua": "13h00 - 21h30",
+      "Qui": "13h00 - 21h30",
+      "Sex": "13h00 - 21h30",
+      "Sab": "13h00 - 21h30",
+      "Fer": "Fechado"
+    },
+    "menu": [
+      {
+        "section": "TAPAS CASEIRAS ",
+        "items": [
+          {
+            "name": "GUACAMOLE FRESCO CASEIRO COM CHIPS TORTILLA",
+            "desc": null,
+            "price": 5,
+            "promo": null
+          },
+          {
+            "name": "AZEITONAS MARINADAS",
+            "desc": null,
+            "price": 2,
+            "promo": null
+          },
+          {
+            "name": "CROSTINIS COM SARDINHAS (conserva) sobre uma tomatada",
+            "desc": null,
+            "price": 6,
+            "promo": null
+          },
+          {
+            "name": "BIQUERONES AU VINAGRE (à Espanhola)",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "MOZZARELLA BUFFALA/TOMATES com molho pesto",
+            "desc": null,
+            "price": 7.5,
+            "promo": null
+          },
+          {
+            "name": "TARTARE DE SALMÃO FRESCO (marinado ao minuto) com pão torrado",
+            "desc": null,
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "CEVICHE DE ROBALO FRESCO (marinado ao minuto)",
+            "desc": "*Com batatas doces, Lima, Especiarias …",
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "BEEF TARTARE FRESCO (cortado ao minuto) com pão torrado",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          },
+          {
+            "name": "TABUA DE QUEIJOS com pão",
+            "desc": "*Manchego Espanha, Queijos da Serra, Alentejo (Queijos semi-curados)",
+            "price": 10,
+            "promo": null
+          },
+          {
+            "name": "TABUA DE PRESUNTO IBERICO com pão",
+            "desc": null,
+            "price": 12,
+            "promo": null
+          },
+          {
+            "name": "TABUA DOS AMIGOS - QUEIJO/ENCHIDOS com pão",
+            "desc": "*Jambón, Lombo Ibérico, Chorizo Iberico, Manchego, Queijos da Serra ...",
+            "price": 20,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Estacionamento: Fácil, Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80746/"
+  },
+  "o coracao da cidade": {
+    "bairroId": 80745,
+    "name": "O Coração da Cidade",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351281543303",
+    "website": "http://www.coracaodacidade.com/",
+    "instagram": null,
+    "lat": 37.1945467,
+    "lng": -7.416737400000001,
+    "address": "Rua Doutor Teófilo Braga 27",
+    "category": "Restaurantes",
+    "hours": {
+      "Dom": "07h00 - 00h00",
+      "Seg": "07h00 - 00h00",
+      "Ter": "07h00 - 00h00",
+      "Qua": "07h00 - 00h00",
+      "Qui": "07h00 - 00h00",
+      "Sex": "07h00 - 00h00",
+      "Sab": "07h00 - 00h00",
+      "Fer": "07h00 - 00h00"
+    },
+    "menu": [],
+    "features": [
+      "Capacidade: 100"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80745/"
+  },
+  "cafetaria entre amigos": {
+    "bairroId": 80741,
+    "name": "Cafetaria Entre amigos",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351914991162",
+    "website": null,
+    "instagram": null,
+    "lat": 37.19368000019437,
+    "lng": -7.418481484932779,
+    "address": "Rua 5 de Outubro lote 2 loja c 52",
+    "category": "Café",
+    "hours": {
+      "Dom": "Fechado",
+      "Seg": "09h00 - 13h00 / 15h00 - 20h00",
+      "Ter": "09h00 - 13h00 / 15h00 - 20h00",
+      "Qua": "09h00 - 13h00 / 15h00 - 20h00",
+      "Qui": "09h00 - 13h00 / 15h00 - 20h00",
+      "Sex": "09h00 - 13h00 / 15h00 - 20h00",
+      "Sab": "09h00 - 13h00",
+      "Fer": "Fechado"
+    },
+    "menu": [],
+    "features": [
+      "Fumadores: Zona Específica",
+      "Estacionamento: Fácil, Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80741/"
+  },
+  "cervejaria lisboeta": {
+    "bairroId": 80729,
+    "name": "Cervejaria Lisboeta",
+    "rating": 5,
+    "totalReviews": 1,
+    "phone": "+351910029075",
+    "website": null,
+    "instagram": null,
+    "lat": 37.19398164029109,
+    "lng": -7.417182938700297,
+    "address": "Rua Doutor António de Passos 72 C",
+    "category": "Petiscos & Tapas",
+    "hours": {
+      "Dom": "16h00 - 00h00",
+      "Seg": "16h00 - 00h00",
+      "Ter": "16h00 - 00h00",
+      "Qua": "16h00 - 00h00",
+      "Qui": "16h00 - 00h00",
+      "Sex": "16h00 - 00h00",
+      "Sab": "16h00 - 00h00",
+      "Fer": "16h00 - 00h00"
+    },
+    "menu": [],
+    "features": [
+      "Capacidade: 50",
+      "Estacionamento: Fácil, Rua Pago"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80729/"
+  },
+  "nucleo sporting de vila real de santo antonio": {
+    "bairroId": 80706,
+    "name": "Núcleo Sporting de Vila Real de Santo António",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351964678540",
+    "website": null,
+    "instagram": null,
+    "lat": 37.1949946,
+    "lng": -7.4160069,
+    "address": "Praça do Marquês de Pombal 4",
+    "category": "Café",
+    "hours": {
+      "Dom": "11h00 - 21h00",
+      "Seg": "Fechado",
+      "Ter": "11h00 - 21h00",
+      "Qua": "11h00 - 21h00",
+      "Qui": "11h00 - 21h00",
+      "Sex": "11h00 - 21h00",
+      "Sab": "11h00 - 21h00",
+      "Fer": "11h00 - 21h00"
+    },
+    "menu": [],
+    "features": [],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/80706/"
+  },
+  "arenilha casa do bacalhau": {
+    "bairroId": 30252,
+    "name": "Arenilha - Casa Do Bacalhau",
+    "rating": null,
+    "totalReviews": 0,
+    "phone": "+351966970771",
+    "website": "https://www.cdcidade.com/pt/",
+    "instagram": null,
+    "lat": 37.19443207473908,
+    "lng": -7.416910215344239,
+    "address": "Rua Dom Pedro V 90",
+    "category": "Restaurantes",
+    "hours": {
+      "Dom": "11h00 - 22h00",
+      "Seg": "11h00 - 22h00",
+      "Ter": "11h00 - 22h00",
+      "Qua": "11h00 - 22h00",
+      "Qui": "11h00 - 22h00",
+      "Sex": "11h00 - 22h00",
+      "Sab": "11h00 - 22h00",
+      "Fer": "11h00 - 22h00"
+    },
+    "menu": [
+      {
+        "section": "SOPAS",
+        "items": [
+          {
+            "name": "Sopa do dia",
+            "desc": null,
+            "price": 3,
+            "promo": null
+          }
+        ]
+      },
+      {
+        "section": "Carnes",
+        "items": [
+          {
+            "name": "Bitoque da Vazia Guarnecido",
+            "desc": null,
+            "price": 14,
+            "promo": null
+          }
+        ]
+      }
+    ],
+    "features": [
+      "Capacidade: 100"
+    ],
+    "booking": "AWAITS_AVAILABILITY",
+    "bairroUrl": "https://bairrodigital.vrsa.pt/pt/loja/30252/"
+  }
+}

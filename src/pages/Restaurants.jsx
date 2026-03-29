@@ -2,7 +2,22 @@ import { useState, useMemo, useEffect } from 'react'
 import { getInitials, getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 import DB from '../data/places-db.json'
+import BAIRRO from '../data/bairro-db.json'
 import { Share } from 'lucide-react'
+
+function normalizeName(n) {
+  return (n || '').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+function getBairro(pinName) {
+  const key = normalizeName(pinName)
+  if (BAIRRO[key]) return BAIRRO[key]
+  // fuzzy: check if bairro key contains or is contained in pin key
+  const found = Object.keys(BAIRRO).find(k => k.includes(key) || key.includes(k))
+  return found ? BAIRRO[found] : null
+}
 
 const CAT_DEFAULTS = {
   restaurante: { rating:4.0, price:'€€', hours:'12:00–15:00 · 19:00–22:30', closedDays:[1],
@@ -19,19 +34,51 @@ const CAT_DEFAULTS = {
     desc:{PT:'Kebab e grelhados. Rápido, saboroso e económico.',EN:'Kebab and grilled meats. Fast, tasty and affordable.',ES:'Kebab y carnes a la brasa. Rápido, sabroso y económico.',FR:'Kebab et grillades. Rapide, savoureux et abordable.',DE:'Kebab und Grillgerichte. Schnell, lecker und günstig.'} },
 }
 
-function getRich(id, cat) {
+// Parses bairro hours "11h30 - 15h00 / 19h00 - 23h00" for today
+function isOpenFromBairro(bdHours) {
+  if (!bdHours) return null
+  const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']
+  const today = days[new Date().getDay()]
+  const todayH = bdHours[today]
+  if (!todayH || todayH === 'Fechado') return false
+  const cur = new Date().getHours() * 60 + new Date().getMinutes()
+  for (const slot of todayH.split('/')) {
+    const m = slot.trim().match(/(\d+)h(\d+)\s*-\s*(\d+)h(\d+)/)
+    if (!m) continue
+    const s = parseInt(m[1]) * 60 + parseInt(m[2])
+    const e = parseInt(m[3]) * 60 + parseInt(m[4])
+    if (cur >= s && cur <= e) return true
+  }
+  return false
+}
+
+function getTodayHoursText(bdHours) {
+  if (!bdHours) return null
+  const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']
+  const today = days[new Date().getDay()]
+  return bdHours[today] || null
+}
+
+function getRich(id, cat, pinName) {
   const def  = CAT_DEFAULTS[cat] || CAT_DEFAULTS.restaurante
   const real = DB[id]
+  const bd   = getBairro(pinName || '')
   const base = {
-    rating: real?.rating || def.rating,
-    reviews: real?.user_ratings_total || (30 + (id * 13 % 170)),
-    phone: real?.phone || null,
-    hours: real?.hours_text || def.hours,
-    price: real?.price_level ? '€'.repeat(real.price_level) : def.price,
+    rating:     real?.rating || bd?.rating || def.rating,
+    reviews:    real?.user_ratings_total || bd?.totalReviews || (30 + (id * 13 % 170)),
+    phone:      real?.phone || bd?.phone || null,
+    hours:      getTodayHoursText(bd?.hours) || real?.hours_text || def.hours,
+    price:      real?.price_level ? '€'.repeat(real.price_level) : def.price,
     closedDays: def.closedDays,
-    desc: def.desc
+    desc:       def.desc,
+    bdHours:    bd?.hours || null,
+    bdCategory: bd?.category || null,
+    bdMenu:     bd?.menu || [],
+    bdFeatures: bd?.features || [],
+    bdInstagram: bd?.instagram || null,
+    bdUrl:      bd?.bairroUrl || null,
   }
-  const open = isOpenNow(base.hours, base.closedDays)
+  const open = bd ? isOpenFromBairro(bd.hours) : isOpenNow(real?.hours_text || def.hours, def.closedDays)
   return { ...base, open: open !== null ? open : true, realReviews: real?.reviews || [] }
 }
 
@@ -110,7 +157,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
       setDetail(focusPin)
       onFocusClear?.()
     }
-  }, [focusPin])
+  }, [focusPin]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const foodPins = useMemo(() => {
     return pins.filter(p => FOOD_CATS.includes(p.cat))
@@ -139,9 +186,12 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
   }
 
   // ── Detail view ──────────────────────────────────────────────
+  const [openMenuSection, setOpenMenuSection] = useState(null)
+  const [showAllHours, setShowAllHours] = useState(false)
+
   if (detail) {
     const r    = detail
-    const rich = getRich(r.id, r.cat)
+    const rich = getRich(r.id, r.cat, r.name)
     const isFav = favs.includes('pin-' + r.id)
 
     return (
@@ -188,6 +238,12 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
           <Stars rating={rich.rating} />
           <span style={{ fontSize:11, color:'var(--ink-20)', marginLeft:6 }}>({rich.reviews} {t.reviews})</span>
 
+          {rich.bdCategory && (
+            <span style={{ display:'inline-block', fontSize:11, fontWeight:700, color:'var(--primary)', background:'var(--primary-lt)', borderRadius:50, padding:'3px 10px', marginBottom:10 }}>
+              {rich.bdCategory}
+            </span>
+          )}
+
           <p style={{ fontSize:13, color:'var(--ink-40)', lineHeight:1.7, margin:'14px 0' }}>
             {(rich.desc[L] || rich.desc.PT)}
           </p>
@@ -231,15 +287,103 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
             )}
           </div>
 
+          {/* Full weekly hours (collapsible) */}
+          {rich.bdHours && (
+            <div style={{ marginBottom:16 }}>
+              <button
+                onClick={() => setShowAllHours(v => !v)}
+                style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', background:'var(--surface)', border:'none', borderRadius:12, padding:'10px 14px', cursor:'pointer', marginBottom: showAllHours ? 0 : 0 }}
+              >
+                <span style={{ fontSize:13, fontWeight:700, color:'var(--ink)' }}>
+                  {L==='EN'?'Weekly hours':L==='FR'?'Horaires':L==='DE'?'Öffnungszeiten':L==='ES'?'Horarios':'Horário semanal'}
+                </span>
+                <span style={{ fontSize:11, color:'var(--ink-40)' }}>{showAllHours ? '▲' : '▼'}</span>
+              </button>
+              {showAllHours && (
+                <div className="card" style={{ borderRadius:'0 0 12px 12px', overflow:'hidden' }}>
+                  {Object.entries(rich.bdHours).map(([day, h]) => (
+                    <div key={day} style={{ display:'flex', justifyContent:'space-between', padding:'8px 14px', borderBottom:'1px solid var(--surface)', fontSize:12 }}>
+                      <span style={{ fontWeight:700, color:'var(--ink)', minWidth:36 }}>{day}</span>
+                      <span style={{ color: h==='Fechado' ? '#B91C1C' : 'var(--ink-40)', fontWeight: h==='Fechado' ? 700 : 400 }}>{h}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Menu */}
+          {rich.bdMenu?.length > 0 && (
+            <div style={{ marginBottom:16 }}>
+              <div style={{ fontSize:15, fontWeight:800, color:'var(--ink)', marginBottom:10 }}>
+                {L==='EN'?'Menu':L==='FR'?'Carte':L==='DE'?'Speisekarte':L==='ES'?'Carta':'Ementa'}
+              </div>
+              {rich.bdMenu.map((sec, si) => (
+                <div key={si} style={{ marginBottom:8 }}>
+                  <button
+                    onClick={() => setOpenMenuSection(openMenuSection === si ? null : si)}
+                    style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'space-between', background: openMenuSection===si ? 'var(--primary)' : 'var(--surface)', border:'none', borderRadius: openMenuSection===si ? '12px 12px 0 0' : 12, padding:'10px 14px', cursor:'pointer' }}
+                  >
+                    <span style={{ fontSize:13, fontWeight:700, color: openMenuSection===si ? '#fff' : 'var(--ink)' }}>{sec.section}</span>
+                    <span style={{ fontSize:11, color: openMenuSection===si ? 'rgba(255,255,255,.7)' : 'var(--ink-40)' }}>{openMenuSection===si ? '▲' : '▼'} {sec.items.length} pratos</span>
+                  </button>
+                  {openMenuSection === si && (
+                    <div className="card" style={{ borderRadius:'0 0 12px 12px', overflow:'hidden', marginTop:0 }}>
+                      {sec.items.map((item, ii) => (
+                        <div key={ii} style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', padding:'9px 14px', borderBottom: ii < sec.items.length-1 ? '1px solid var(--surface)' : 'none', gap:8 }}>
+                          <div style={{ flex:1, minWidth:0 }}>
+                            <div style={{ fontSize:12, fontWeight:700, color:'var(--ink)', textTransform:'capitalize' }}>{item.name.toLowerCase()}</div>
+                            {item.desc && <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:2 }}>{item.desc}</div>}
+                          </div>
+                          {item.price != null && (
+                            <div style={{ flexShrink:0 }}>
+                              {item.promo != null && (
+                                <span style={{ fontSize:10, color:'#B91C1C', textDecoration:'line-through', marginRight:4 }}>{item.price}€</span>
+                              )}
+                              <span style={{ fontSize:13, fontWeight:800, color: item.promo != null ? '#15803D' : 'var(--primary)' }}>
+                                {item.promo != null ? item.promo : item.price}€
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Features */}
+          {rich.bdFeatures?.length > 0 && (
+            <div style={{ display:'flex', flexWrap:'wrap', gap:6, marginBottom:16 }}>
+              {rich.bdFeatures.map((f, i) => (
+                <span key={i} style={{ fontSize:11, fontWeight:600, color:'var(--ink-40)', background:'var(--surface)', borderRadius:50, padding:'4px 10px', border:'1px solid var(--border)' }}>
+                  {f}
+                </span>
+              ))}
+            </div>
+          )}
+
           {/* Action buttons */}
-          <div style={{ display:'flex', gap:8 }}>
+          <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
             <button
               onClick={() => { const c = r.lat+','+r.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c,'_blank','noopener,noreferrer') }}
-              style={{ flex:1, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8, boxShadow:'0 4px 16px rgba(6,21,43,.25)' }}
+              style={{ flex:1, minWidth:120, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8, boxShadow:'0 4px 16px rgba(6,21,43,.25)' }}
             >🧭 {t.navigate}</button>
             {rich.phone && (
               <a href={'tel:' + rich.phone} style={{ textDecoration:'none' }}>
                 <button aria-label={t.call} style={{ width:50, height:50, background:'var(--blue-lt)', border:'none', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>📞</button>
+              </a>
+            )}
+            {rich.bdInstagram && (
+              <a href={rich.bdInstagram} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none' }}>
+                <button aria-label="Instagram" style={{ width:50, height:50, background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)', border:'none', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>📸</button>
+              </a>
+            )}
+            {rich.bdUrl && (
+              <a href={rich.bdUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none' }}>
+                <button aria-label="Bairro Digital" style={{ width:50, height:50, background:'var(--primary-lt)', border:'none', borderRadius:14, fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🏪</button>
               </a>
             )}
             <button
@@ -304,7 +448,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
         ) : (
           <div className="card" style={{ overflow:'hidden' }}>
             {filtered.map((r, i) => {
-              const rich  = getRich(r.id)
+              const rich  = getRich(r.id, r.cat, r.name)
               const isFav = favs.includes('pin-' + r.id)
                       return (
                 <div
