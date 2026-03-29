@@ -560,7 +560,6 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
               {[
                 { label:'📊 Analytics', page:'analytics' },
                 { label:'⚙️ Admin', page:'admin' },
-                { label:'📄 Sobre o Guia', page:'sobre' },
               ].map(item => (
                 <button key={item.page} onClick={() => { setShowDevMenu(false); onNav(item.page) }}
                   style={{ width:'100%', padding:'13px 16px', marginBottom:8, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, fontSize:14, fontWeight:700, color:'var(--ink)', cursor:'pointer', textAlign:'left' }}>
