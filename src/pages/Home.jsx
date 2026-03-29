@@ -160,6 +160,22 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
     try { return JSON.parse(localStorage.getItem('vrsa_routes') || '{}') } catch { return {} }
   })
   const [mode, setMode] = useState(() => localStorage.getItem('vrsa_mode') || 'rio')
+  const [tapCount, setTapCount] = useState(0)
+  const [showDevMenu, setShowDevMenu] = useState(false)
+  const tapTimer = React.useRef(null)
+
+  function handleBrasaoTap() {
+    const next = tapCount + 1
+    setTapCount(next)
+    clearTimeout(tapTimer.current)
+    if (next >= 7) {
+      setTapCount(0)
+      setShowDevMenu(true)
+    } else {
+      tapTimer.current = setTimeout(() => setTapCount(0), 2000)
+    }
+  }
+
 
   // Avisos municipais activos (array)
   const activeAlerts = municipalAlerts.filter(a => a.active)
@@ -376,14 +392,22 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
 
         {/* Top row: brasão + name */}
         <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:14 }}>
-          <div style={{ flexShrink:0, padding:6, background:'rgba(255,255,255,.12)', borderRadius:14, border:'1px solid rgba(255,255,255,.18)', backdropFilter:'blur(8px)' }}>
+          <div
+            onClick={handleBrasaoTap}
+            style={{ flexShrink:0, padding:6, background:'rgba(255,255,255,.12)', borderRadius:14, border:'1px solid rgba(255,255,255,.18)', backdropFilter:'blur(8px)', cursor:'default', userSelect:'none', WebkitUserSelect:'none' }}
+          >
             <img
               src="/brasao-vrsa.webp"
               alt="Brasão VRSA"
               loading="eager"
               decoding="async"
-              style={{ width:52, height:58, objectFit:'contain', display:'block' }}
+              style={{ width:52, height:58, objectFit:'contain', display:'block', pointerEvents:'none' }}
             />
+            {tapCount > 2 && tapCount < 7 && (
+              <div style={{ position:'absolute', fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', marginTop:2, textAlign:'center', width:64 }}>
+                {7 - tapCount}×
+              </div>
+            )}
           </div>
           <div style={{ flex:1, minWidth:0 }}>
             <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:4 }}>Município de VRSA · Algarve</div>
@@ -527,6 +551,26 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
           </div>
           <div style={{ display:'flex', alignItems:'center', paddingRight:12, color:'var(--ink-20)', fontSize:18 }}>›</div>
         </button>
+
+        {/* ── Dev menu (7× toque no brasão) ── */}
+        {showDevMenu && (
+          <div onClick={() => setShowDevMenu(false)} style={{ position:'fixed', inset:0, zIndex:200, background:'rgba(0,0,0,.5)', display:'flex', alignItems:'center', justifyContent:'center', padding:24 }}>
+            <div onClick={e => e.stopPropagation()} style={{ background:'var(--white)', borderRadius:20, padding:'24px 20px', width:'100%', maxWidth:300 }}>
+              <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:16, textAlign:'center' }}>Área Restrita</div>
+              {[
+                { label:'📊 Analytics', page:'analytics' },
+                { label:'⚙️ Admin', page:'admin' },
+                { label:'📄 Sobre o Guia', page:'sobre' },
+              ].map(item => (
+                <button key={item.page} onClick={() => { setShowDevMenu(false); onNav(item.page) }}
+                  style={{ width:'100%', padding:'13px 16px', marginBottom:8, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, fontSize:14, fontWeight:700, color:'var(--ink)', cursor:'pointer', textAlign:'left' }}>
+                  {item.label}
+                </button>
+              ))}
+              <button onClick={() => setShowDevMenu(false)} style={{ width:'100%', padding:'10px', background:'none', border:'none', fontSize:12, color:'var(--ink-20)', cursor:'pointer', marginTop:4 }}>Fechar</button>
+            </div>
+          </div>
+        )}
 
         {/* ── Acesso Principal — 3 botões grandes ── */}
         <div className="sec-label">{t.qa}</div>
