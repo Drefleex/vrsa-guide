@@ -530,7 +530,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   const t = T[lang] || T.PT
   const [activeFilter, setActiveFilter] = useState(null)
   const [_tick, setTick] = useState(0) // null = show picker
-  const [showPicker, setShowPicker]     = useState(false)
+  const [showPicker, setShowPicker]     = useState(!focusPin)
   const [selected, setSelected]         = useState(null)
   const [userPos, setUserPos]           = useState(null)
   const [navDest, setNavDest]           = useState(null)
