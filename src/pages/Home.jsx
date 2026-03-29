@@ -375,90 +375,93 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
       <div className="home-hero" style={mode==='praia' ? {background:'linear-gradient(160deg,#0277BD,#00838F)'} : {}}>
 
         {/* Top row: brasão + name */}
-        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:10 }}>
-          <img
-            src="/brasao-vrsa.webp"
-            alt="Brasão VRSA"
-            loading="eager"
-            decoding="async"
-            style={{ width:52, height:58, objectFit:'contain', flexShrink:0 }}
-          />
+        <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:14 }}>
+          <div style={{ flexShrink:0, padding:6, background:'rgba(255,255,255,.12)', borderRadius:14, border:'1px solid rgba(255,255,255,.18)', backdropFilter:'blur(8px)' }}>
+            <img
+              src="/brasao-vrsa.webp"
+              alt="Brasão VRSA"
+              loading="eager"
+              decoding="async"
+              style={{ width:52, height:58, objectFit:'contain', display:'block' }}
+            />
+          </div>
           <div style={{ flex:1, minWidth:0 }}>
-            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:'1.5px', textTransform:'uppercase', marginBottom:3 }}>Câmara Municipal de VRSA</div>
-            <div style={{ fontSize:'clamp(18px,5vw,23px)', fontWeight:700, color:'#fff', lineHeight:1.15, letterSpacing:'-.3px' }}>Vila Real de<br/>Santo António</div>
-            <div style={{ fontSize:9, color:'rgba(255,255,255,.28)', letterSpacing:1.5, textTransform:'uppercase', marginTop:3 }}>Guia Turístico Oficial</div>
+            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:4 }}>Câmara Municipal de VRSA</div>
+            <div style={{ fontSize:'clamp(20px,5.5vw,26px)', fontWeight:800, color:'#fff', lineHeight:1.1, letterSpacing:'-.5px' }}>Vila Real de<br/>Santo António</div>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:5, marginTop:6, background:'rgba(255,255,255,.15)', border:'1px solid rgba(255,255,255,.2)', borderRadius:50, padding:'3px 10px' }}>
+              <span style={{ width:5, height:5, borderRadius:'50%', background:'#4ADE80', flexShrink:0, boxShadow:'0 0 6px #4ADE80' }} />
+              <span style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.85)', letterSpacing:'1.5px', textTransform:'uppercase' }}>Guia Turístico Oficial</span>
+            </div>
           </div>
         </div>
 
         {/* Mode toggle: Rio/Centro ↔ Praia */}
-        <div style={{ display:'flex', gap:2, background:'rgba(0,0,0,.18)', borderRadius:50, padding:3, marginBottom:12 }}>
+        <div style={{ display:'flex', gap:3, background:'rgba(0,0,0,.22)', borderRadius:50, padding:4, marginBottom:14 }}>
           <button
             onClick={() => setMode('rio')}
-            style={{ flex:1, padding:'6px 0', borderRadius:50, border:'none', background:mode==='rio'?'#fff':'transparent', color:mode==='rio'?'var(--primary)':'rgba(255,255,255,.75)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation' }}
+            style={{ flex:1, padding:'7px 0', borderRadius:50, border:'none', background:mode==='rio'?'rgba(255,255,255,.95)':'transparent', color:mode==='rio'?'var(--primary)':'rgba(255,255,255,.7)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation', letterSpacing:.2 }}
           >⛵ {t.modeRio}</button>
           <button
             onClick={() => setMode('praia')}
-            style={{ flex:1, padding:'6px 0', borderRadius:50, border:'none', background:mode==='praia'?'#fff':'transparent', color:mode==='praia'?'#0277BD':'rgba(255,255,255,.75)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation' }}
+            style={{ flex:1, padding:'7px 0', borderRadius:50, border:'none', background:mode==='praia'?'rgba(255,255,255,.95)':'transparent', color:mode==='praia'?'#0277BD':'rgba(255,255,255,.7)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation', letterSpacing:.2 }}
           >🏖️ {t.modePraia}</button>
         </div>
 
-        {/* Weather + Ferry strip */}
-        <button onClick={() => onNav('info')} style={{ width:'100%', display:'flex', alignItems:'center', gap:0, background:'rgba(255,255,255,.08)', border:'1px solid rgba(255,255,255,.12)', borderRadius:10, overflow:'hidden', cursor:'pointer', marginBottom:0 }}>
+        {/* Weather + Ferry — dois cards lado a lado */}
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, marginBottom:10 }}>
 
-          {/* Temp */}
-          <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 14px', flex:1 }}>
+          {/* Clima */}
+          <button onClick={() => onNav('info')} style={{ background:'rgba(255,255,255,.1)', border:'1px solid rgba(255,255,255,.15)', borderRadius:14, padding:'12px 14px', cursor:'pointer', textAlign:'left', backdropFilter:'blur(6px)' }}>
+            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', letterSpacing:'1.5px', textTransform:'uppercase', marginBottom:6 }}>
+              {L==='EN'?'Weather':L==='FR'?'Météo':L==='DE'?'Wetter':L==='ES'?'Tiempo':'Clima'}
+            </div>
             {wx ? (
-              <>
-                <span style={{ fontSize:24, lineHeight:1 }}>{wIcon(wx.weathercode)}</span>
+              <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+                <span style={{ fontSize:26, lineHeight:1 }}>{wIcon(wx.weathercode)}</span>
                 <div>
-                  <div style={{ fontSize:20, fontWeight:700, color:'#fff', lineHeight:1 }}>{Math.round(wx.temperature_2m)}°C</div>
-                  <div style={{ fontSize:10, color:'rgba(255,255,255,.8)', marginTop:1 }}>{wDesc(wx.weathercode, L)}</div>
+                  <div style={{ fontSize:22, fontWeight:800, color:'#fff', lineHeight:1, letterSpacing:'-1px' }}>{Math.round(wx.temperature_2m)}°</div>
+                  <div style={{ fontSize:10, color:'rgba(255,255,255,.7)', marginTop:2, fontWeight:500 }}>{wDesc(wx.weathercode, L)}</div>
                 </div>
-              </>
+              </div>
             ) : wxError ? (
-              <>
-                <span style={{ fontSize:20, lineHeight:1, opacity:.5 }}>🌡️</span>
-                <div>
-                  <div style={{ fontSize:16, fontWeight:700, color:'rgba(255,255,255,.5)', lineHeight:1 }}>—°C</div>
-                  <div style={{ fontSize:10, color:'rgba(255,255,255,.3)', marginTop:1 }}>{L==='EN'?'No data':L==='FR'?'Sans données':L==='DE'?'Keine Daten':L==='ES'?'Sin datos':'Sem dados'}</div>
-                </div>
-              </>
+              <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+                <span style={{ fontSize:22, opacity:.4 }}>🌡️</span>
+                <div style={{ fontSize:18, fontWeight:700, color:'rgba(255,255,255,.35)' }}>—°</div>
+              </div>
             ) : (
-              <>
-                <div className="skeleton-inv" style={{ width:26, height:26, borderRadius:'50%' }} />
+              <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+                <div className="skeleton-inv" style={{ width:28, height:28, borderRadius:'50%' }} />
                 <div>
-                  <div className="skeleton-inv" style={{ width:52, height:16, marginBottom:5 }} />
-                  <div className="skeleton-inv" style={{ width:38, height:10 }} />
+                  <div className="skeleton-inv" style={{ width:44, height:16, marginBottom:5 }} />
+                  <div className="skeleton-inv" style={{ width:32, height:9 }} />
                 </div>
-              </>
+              </div>
             )}
-          </div>
-
-          {/* Divider */}
-          <div style={{ width:1, height:36, background:'rgba(255,255,255,.12)', flexShrink:0 }} />
+          </button>
 
           {/* Ferry */}
-          <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 14px', flex:1 }}>
-            <span style={{ fontSize:20 }}>⛴️</span>
-            <div>
-              <div style={{ fontSize:9, color:'rgba(255,255,255,.75)', fontWeight:600, textTransform:'uppercase', letterSpacing:.8 }}>{t.ferry}</div>
-              <div style={{ fontSize:16, fontWeight:700, color:'#fff', lineHeight:1, marginTop:1 }}>{ferry || t.noFerry}</div>
-            </div>
-          </div>
-
-          {/* ETA badge */}
-          {ferry && (
-            <div style={{ paddingRight:12, flexShrink:0 }}>
-              <div style={{ background:'rgba(201,168,76,.25)', border:'1px solid rgba(201,168,76,.4)', borderRadius:50, padding:'3px 10px', fontSize:10, fontWeight:800, color:'#E8C96A', whiteSpace:'nowrap' }}>
-                {(() => { const d = toMin(ferry) - (new Date().getHours()*60+new Date().getMinutes()); return d < 60 ? `${d}min` : `${Math.floor(d/60)}h${d%60?` ${d%60}m`:''}` })()}
+          <button onClick={() => onNav('info')} style={{ background:'rgba(255,255,255,.1)', border:'1px solid rgba(255,255,255,.15)', borderRadius:14, padding:'12px 14px', cursor:'pointer', textAlign:'left', backdropFilter:'blur(6px)' }}>
+            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', letterSpacing:'1.5px', textTransform:'uppercase', marginBottom:6 }}>{t.ferry}</div>
+            <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+              <span style={{ fontSize:22, lineHeight:1 }}>⛴️</span>
+              <div>
+                <div style={{ fontSize:18, fontWeight:800, color:'#fff', lineHeight:1, letterSpacing:'-.3px' }}>{ferry || t.noFerry}</div>
+                {ferry && (
+                  <div style={{ marginTop:4 }}>
+                    <span style={{ background:'rgba(201,168,76,.3)', border:'1px solid rgba(201,168,76,.45)', borderRadius:50, padding:'2px 8px', fontSize:10, fontWeight:800, color:'#FCD34D' }}>
+                      {(() => { const d = toMin(ferry) - (new Date().getHours()*60+new Date().getMinutes()); return d < 60 ? `${d}min` : `${Math.floor(d/60)}h${d%60?` ${d%60}m`:''}` })()}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
-          )}
-        </button>
+          </button>
+        </div>
 
         {/* ES timezone hint */}
-        <div style={{ marginTop:8, display:'flex', alignItems:'center', gap:6, padding:'5px 10px', background:'rgba(0,0,0,.15)', borderRadius:8 }}>
-          <span style={{ fontSize:11, color:'rgba(255,255,255,.6)', fontWeight:600, lineHeight:1.4 }}>{esHintText}</span>
+        <div style={{ display:'flex', alignItems:'center', gap:8, padding:'7px 12px', background:'rgba(0,0,0,.2)', borderRadius:10, border:'1px solid rgba(255,255,255,.07)' }}>
+          <span style={{ fontSize:14, lineHeight:1, flexShrink:0 }}>🇪🇸</span>
+          <span style={{ fontSize:11, color:'rgba(255,255,255,.65)', fontWeight:600, lineHeight:1.3 }}>{esHintText.replace('🇪🇸','').trim()}</span>
         </div>
       </div>
 
