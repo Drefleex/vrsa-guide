@@ -33,6 +33,9 @@ self.addEventListener('fetch', e => {
 
   const url = new URL(e.request.url)
 
+  // Cache API não suporta esquemas não-http(s) (ex: chrome-extension://)
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return
+
   // API calls: network first, fall back to cache
   if (
     url.hostname.includes('open-meteo.com') ||

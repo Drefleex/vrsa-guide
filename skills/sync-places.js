@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* global process, URL */
+/* global process */
 /**
  * sync-places.js — Extrai dados do Google Places API para places-db.json
  *
