@@ -95,6 +95,7 @@ const QA = [
   { page:'shopping',    svg:'shopping', color:'#059669', bg:'#ECFDF5', label:{PT:'Compras',   EN:'Shopping',  ES:'Compras',   FR:'Shopping', DE:'Einkaufen' } },
   { page:'favorites',   svg:'heart',    color:'#DC2626', bg:'#FEF2F2', label:{PT:'Favoritos', EN:'Saved',     ES:'Favoritos', FR:'Favoris',  DE:'Favoriten' } },
   { page:'report',      svg:'alert',    color:'#DC2626', bg:'#FEF2F2', label:{PT:'Reportar',  EN:'Report',    ES:'Reportar',  FR:'Signaler', DE:'Melden'    } },
+  { page:'sobre',       svg:'heart',    color:'#0E2B4A', bg:'#EFF6FF', label:{PT:'Sobre o Guia',EN:'About',   ES:'Acerca de', FR:'À propos',  DE:'Über uns'  } },
 ]
 
 const GALLERY = [
@@ -386,11 +387,11 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
             />
           </div>
           <div style={{ flex:1, minWidth:0 }}>
-            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:4 }}>Câmara Municipal de VRSA</div>
+            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:4 }}>Município de VRSA · Algarve</div>
             <div style={{ fontSize:'clamp(20px,5.5vw,26px)', fontWeight:800, color:'#fff', lineHeight:1.1, letterSpacing:'-.5px' }}>Vila Real de<br/>Santo António</div>
             <div style={{ display:'inline-flex', alignItems:'center', gap:5, marginTop:6, background:'rgba(255,255,255,.15)', border:'1px solid rgba(255,255,255,.2)', borderRadius:50, padding:'3px 10px' }}>
               <span style={{ width:5, height:5, borderRadius:'50%', background:'#4ADE80', flexShrink:0, boxShadow:'0 0 6px #4ADE80' }} />
-              <span style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.85)', letterSpacing:'1.5px', textTransform:'uppercase' }}>Guia Turístico Oficial</span>
+              <span style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.85)', letterSpacing:'1.5px', textTransform:'uppercase' }}>Guia Turístico Digital</span>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ const LANGS = [
   { code:'DE', label:'Deutsch',   flag:'🇩🇪' },
 ]
 const CTA  = { PT:'Entrar no Guia', EN:'Enter Guide', ES:'Acceder', FR:'Accéder', DE:'Öffnen' }
-const SUB  = { PT:'Guia Oficial do Município', EN:'Official Municipal Guide', ES:'Guía Oficial del Municipio', FR:'Guide Officiel de la Commune', DE:'Offizielle Stadtführer' }
+const SUB  = { PT:'Guia Turístico Digital', EN:'Digital Tourism Guide', ES:'Guía Turística Digital', FR:'Guide Touristique Numérique', DE:'Digitaler Stadtführer' }
 
 export default function SplashScreen({ lang, setLang, onStart }) {
   const [open, setOpen]   = useState(false)
@@ -28,7 +28,7 @@ export default function SplashScreen({ lang, setLang, onStart }) {
 
       <div style={{ width:88, height:88, borderRadius:16, background:'rgba(255,255,255,.1)', border:'1.5px solid rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:44, marginBottom:24, animation:ready?'inst-logo .6s cubic-bezier(.34,1.56,.64,1) both':'none', opacity:ready?undefined:0 }}><img src="/brasao-vrsa.webp" alt="Brasão VRSA" loading="eager" decoding="async" fetchPriority="high" style={{ width:72, height:72, objectFit:'contain' }} /></div>
 
-      <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.42)', letterSpacing:'3px', textTransform:'uppercase', marginBottom:8, animation:ready?'inst-fade .5s ease both .15s':'none', opacity:ready?undefined:0 }}>Câmara Municipal</div>
+      <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.42)', letterSpacing:'3px', textTransform:'uppercase', marginBottom:8, animation:ready?'inst-fade .5s ease both .15s':'none', opacity:ready?undefined:0 }}>Município de VRSA</div>
 
       <div style={{ fontSize:'clamp(26px,8vw,36px)', fontWeight:700, color:'#fff', lineHeight:1.1, textAlign:'center', letterSpacing:'-.4px', marginBottom:8, animation:ready?'inst-fade .5s ease both .22s':'none', opacity:ready?undefined:0 }}>Vila Real de<br/>Santo António</div>
 

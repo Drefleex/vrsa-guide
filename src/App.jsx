@@ -21,6 +21,7 @@ const Shopping    = lazy(() => import('./pages/Shopping'))
 const Ayamonte    = lazy(() => import('./pages/Ayamonte'))
 const Analytics   = lazy(() => import('./pages/Analytics'))
 const Report      = lazy(() => import('./pages/Report'))
+const Sobre       = lazy(() => import('./pages/Sobre'))
 const Culture     = lazy(() => import('./pages/Culture'))
 const Health      = lazy(() => import('./pages/Health'))
 const Transport   = lazy(() => import('./pages/Transport'))
@@ -251,6 +252,7 @@ export default function App() {
           {page === 'report'      && <Report      lang={lang} />}
           {page === 'info'        && <Info        lang={lang} />}
           {page === 'admin'       && <Admin       lang={lang} onNav={setPage} onAlertChange={setMunicipalAlerts} />}
+          {page === 'sobre'       && <Sobre       lang={lang} />}
         </div>
       </Suspense>
       {/* ── Offline banner ── */}
