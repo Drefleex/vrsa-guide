@@ -51,7 +51,13 @@ const SWIPE_TABS = ['home', 'restaurants', 'events', 'transport']
 
 export default function App() {
   const [lang, setLang]     = useState(() => { try { return localStorage.getItem('vrsa_lang')||'PT' } catch { return 'PT' } })
-  const [page, setPage]     = useState('splash')
+  const [page, setPage]     = useState(() => {
+    // Acesso secreto: ?admin=1 ou ?analytics=1 na URL
+    const p = new URLSearchParams(window.location.search)
+    if (p.get('admin') === '1') return 'admin'
+    if (p.get('analytics') === '1') return 'analytics'
+    return 'splash'
+  })
   const swipeX = useRef(null)
   const swipeY = useRef(null)
   const [pins, setPins]     = useState(DEFAULT_PINS)

@@ -1,3 +1,11 @@
+const PRINT_CSS = `
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; }
+  .page { overflow: visible !important; }
+}
+`
+
 export default function Sobre({ lang }) {
   const L = lang || 'PT'
 
@@ -132,6 +140,18 @@ export default function Sobre({ lang }) {
 
   return (
     <div className="page" style={{ overflowY:'auto' }}>
+      <style>{PRINT_CSS}</style>
+
+      {/* Botão PDF — fixo no topo direito */}
+      <button
+        className="no-print"
+        onClick={() => window.print()}
+        style={{ position:'fixed', top:'calc(14px + env(safe-area-inset-top,0px))', right:16, zIndex:200, display:'flex', alignItems:'center', gap:6, background:'#C9A84C', border:'none', borderRadius:50, padding:'8px 14px', cursor:'pointer', boxShadow:'0 2px 12px rgba(0,0,0,.2)' }}
+      >
+        <span style={{ fontSize:14 }}>📄</span>
+        <span style={{ fontSize:12, fontWeight:700, color:'#fff' }}>PDF</span>
+      </button>
+
       {/* Hero */}
       <div style={{ background:'linear-gradient(160deg,#002D55 0%,#003B6F 55%,#004F96 100%)', padding:'64px 24px 36px', paddingTop:'calc(72px + env(safe-area-inset-top,0px))', textAlign:'center', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', top:0, right:0, width:200, height:200, borderRadius:'0 0 0 100%', background:'rgba(255,255,255,.03)' }} />
