@@ -146,10 +146,9 @@ function getDailyTip() {
   return DAILY_TIPS[dayOfYear % DAILY_TIPS.length]
 }
 
-export default function Home({ lang, pins, loading, favs, onNav, municipalAlert }) {
+export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
   const L = lang || 'PT'
   const t = tr('home', L)
-  const h = new Date().getHours()
   const [wx, setWx]       = useState(null)
   const [wx7, setWx7]     = useState(null)
   const [wxError, setWxError] = useState(false)
@@ -162,19 +161,8 @@ export default function Home({ lang, pins, loading, favs, onNav, municipalAlert 
   })
   const [mode, setMode] = useState(() => localStorage.getItem('vrsa_mode') || 'rio')
 
-  // Alerta municipal — carregado dinamicamente via VITE_ALERT_URL (Google Sheets)
-  // Se não houver URL configurada, pode activar aqui manualmente:
-  const localAlert = municipalAlert ?? {
-    active: false, // ← mudar para true para mostrar alerta sem Google Sheets
-    type: 'warning', // 'warning' | 'danger' | 'info'
-    message: {
-      PT: '',
-      EN: '',
-      ES: '',
-      FR: '',
-      DE: '',
-    }
-  }
+  // Avisos municipais activos (array)
+  const activeAlerts = municipalAlerts.filter(a => a.active)
 
   const DAY ={PT:['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ES:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],FR:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],DE:['So','Mo','Di','Mi','Do','Fr','Sa']}
 
@@ -196,7 +184,7 @@ export default function Home({ lang, pins, loading, favs, onNav, municipalAlert 
         const { ts, current, daily } = JSON.parse(raw)
         if (Date.now() - ts < 30 * 60 * 1000) { setWx(current); setWx7(daily); return () => clearInterval(iv) }
       }
-    } catch {}
+    } catch { /* ignore */ }
 
     const wxTimer = setTimeout(() => setWxError(true), 8000)
     fetch('https://api.open-meteo.com/v1/forecast?latitude=37.1948&longitude=-7.4161&current=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe/Lisbon&forecast_days=7')
@@ -205,7 +193,7 @@ export default function Home({ lang, pins, loading, favs, onNav, municipalAlert 
         clearTimeout(wxTimer)
         if (d?.current) {
           setWx(d.current); setWx7(d.daily)
-          try { localStorage.setItem('vrsa_wx_cache', JSON.stringify({ ts: Date.now(), current: d.current, daily: d.daily })) } catch {}
+          try { localStorage.setItem('vrsa_wx_cache', JSON.stringify({ ts: Date.now(), current: d.current, daily: d.daily })) } catch { /* ignore */ }
         } else { setWxError(true) }
       })
       .catch(() => { clearTimeout(wxTimer); setWxError(true) })
@@ -214,11 +202,11 @@ export default function Home({ lang, pins, loading, favs, onNav, municipalAlert 
   }, [])
 
   // Persist mode
-  useEffect(() => { try { localStorage.setItem('vrsa_mode', mode) } catch {} }, [mode])
+  useEffect(() => { try { localStorage.setItem('vrsa_mode', mode) } catch { /* ignore */ } }, [mode])
 
   // Persist route progress
   useEffect(() => {
-    try { localStorage.setItem('vrsa_routes', JSON.stringify(checked)) } catch {}
+    try { localStorage.setItem('vrsa_routes', JSON.stringify(checked)) } catch { /* ignore */ }
   }, [checked])
 
   // ── Route detail ──────────────────────────────────────────────
@@ -353,8 +341,6 @@ export default function Home({ lang, pins, loading, favs, onNav, municipalAlert 
     )
   }
 
-  const restaurantPins = (pins||[]).filter(p => p.cat === 'restaurante').slice(0,4)
-
   // ── ES timezone helper ────────────────────────────────────────
   function getEsTime() {
     const now = new Date()
@@ -476,25 +462,26 @@ export default function Home({ lang, pins, loading, favs, onNav, municipalAlert 
         </div>
       </div>
 
-      {/* ── Quadro de Avisos Municipais ── */}
-      {localAlert.active && (() => {
+      {/* ── Avisos Municipais ── */}
+      {activeAlerts.length > 0 && (() => {
         const colors = {
           danger:  { bg:'#FEF2F2', color:'#991B1B', border:'#FECACA', icon:'#DC2626' },
           warning: { bg:'#FFF7ED', color:'#9A3412', border:'#FED7AA', icon:'#EA580C' },
           info:    { bg:'#EFF6FF', color:'#1E40AF', border:'#BFDBFE', icon:'#2563EB' },
         }
-        const c = colors[localAlert.type] || colors.info
-        return (
-          <div style={{ margin:'12px 16px 0', padding:'12px 14px', borderRadius:12, background:c.bg, border:`1px solid ${c.border}`, display:'flex', alignItems:'flex-start', gap:10 }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.icon} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink:0, marginTop:1 }}>
-              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-            <p style={{ margin:0, fontSize:13, fontWeight:600, color:c.color, lineHeight:1.45 }}>
-              {localAlert.message[L] || localAlert.message.PT}
-            </p>
-          </div>
-        )
+        return activeAlerts.map(alert => {
+          const c = colors[alert.type] || colors.info
+          const msg = (alert.message[L] || '').trim() || alert.message.PT
+          return (
+            <div key={alert.id} style={{ margin:'8px 16px 0', padding:'12px 14px', borderRadius:12, background:c.bg, border:`1px solid ${c.border}`, display:'flex', alignItems:'flex-start', gap:10 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.icon} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink:0, marginTop:1 }}>
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <p style={{ margin:0, fontSize:13, fontWeight:600, color:c.color, lineHeight:1.45 }}>{msg}</p>
+            </div>
+          )
+        })
       })()}
 
       <div style={{ padding:'16px 16px 40px' }}>
@@ -649,7 +636,7 @@ export default function Home({ lang, pins, loading, favs, onNav, municipalAlert 
               .slice(0,4)
               .map(([k]) => parseInt(k.replace('pin_','')))
             topPins = pinClicks.map(id => pins.find(p => p.id === id)).filter(Boolean)
-          } catch {}
+          } catch { /* ignore */ }
           // Fallback to handpicked popular spots
           if (topPins.length < 4) {
             const fallback = [

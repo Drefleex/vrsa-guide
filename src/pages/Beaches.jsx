@@ -25,7 +25,7 @@ function getConditionLevel(wx) {
   return 0
 }
 
-export default function Beaches({ lang, onNav, focusName, onFocusClear }) {
+export default function Beaches({ lang, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('beaches', L)
   const [marine, setMarine] = useState(null)
@@ -35,6 +35,7 @@ export default function Beaches({ lang, onNav, focusName, onFocusClear }) {
   useEffect(() => {
     if (!focusName) return
     const found = BEACHES.find(b => b.name.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(b.name.toLowerCase()))
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (found) setDetail(found)
     onFocusClear?.()
   }, [focusName])
@@ -64,7 +65,6 @@ export default function Beaches({ lang, onNav, focusName, onFocusClear }) {
   if (detail) {
     const b = detail
     const navLabel = L==='EN'?'Navigate':L==='ES'?'Navegar':L==='FR'?'Naviguer':L==='DE'?'Navigieren':'Navegar'
-    const backLabel = L==='EN'?'Back':L==='ES'?'Volver':L==='FR'?'Retour':L==='DE'?'Zurück':'Voltar'
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
         {/* Photo header */}

@@ -23,7 +23,7 @@ function countdown(month, day) {
 
 
 // ── Collapsible past events ───────────────────────────────────
-function PastEvents({ past, favs, toggleFav, setDetail, MONTHS, L, t }) {
+function PastEvents({ past, favs, toggleFav, setDetail, MONTHS, L }) {
   const [open, setOpen] = React.useState(false)
   return (
     <div>
@@ -59,11 +59,11 @@ function PastEvents({ past, favs, toggleFav, setDetail, MONTHS, L, t }) {
   )
 }
 
-export default function Events({ lang, favs, toggleFav, onNav }) {
+export default function Events({ lang, favs, toggleFav, sheetEvents = [] }) {
   const L = lang || 'PT'
   const t = tr('events', L)
   const [detail, setDetail]  = useState(null)
-  const [tick, setTick]      = useState(0)
+  const [_tick, setTick]     = useState(0)
 
   const calendarText = {
     PT: 'Adicionar ao Calendário',
@@ -142,13 +142,15 @@ export default function Events({ lang, favs, toggleFav, onNav }) {
       url: window.location.href
     }
     if (navigator.share) {
-      try { await navigator.share(shareData) } catch {}
+      try { await navigator.share(shareData) } catch { /* ignore */ }
     } else {
       navigator.clipboard?.writeText(`${shareData.text} ${shareData.url}`)
     }
   }
 
-  const sorted = [...EVENTS].sort((a,b) => a.month !== b.month ? a.month - b.month : a.day - b.day)
+  const customEvents = (() => { try { return JSON.parse(localStorage.getItem('vrsa_admin_events') || '[]') } catch { return [] } })()
+  const allEvents = [...EVENTS, ...customEvents, ...sheetEvents]
+  const sorted = [...allEvents].sort((a,b) => a.month !== b.month ? a.month - b.month : a.day - b.day)
   const featured = sorted.find(e => isUpcoming(e) || isToday(e)) || sorted[0]
 
   // ── Detail view ──────────────────────────────────────────────

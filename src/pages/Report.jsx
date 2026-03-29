@@ -31,6 +31,7 @@ export default function Report({ lang }) {
 
   // Auto-get GPS when component mounts
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setGpsState('loading')
     navigator.geolocation?.getCurrentPosition(
       pos => {
@@ -122,8 +123,6 @@ export default function Report({ lang }) {
       </div>
     )
   }
-
-  const selectedCat = CATEGORIES.find(c => c.id === category)
 
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>

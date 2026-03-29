@@ -23,6 +23,7 @@ const Report      = lazy(() => import('./pages/Report'))
 const Culture     = lazy(() => import('./pages/Culture'))
 const Health      = lazy(() => import('./pages/Health'))
 const Transport   = lazy(() => import('./pages/Transport'))
+const Admin       = lazy(() => import('./pages/Admin'))
 
 import { DEFAULT_PINS } from './data/pins'
 
@@ -38,9 +39,9 @@ function parseCSV(text) {
   }).filter(Boolean)
 }
 
-function loadFavs() { try { return JSON.parse(localStorage.getItem('vrsa_favs')||'[]') } catch { return [] } }
-function saveFavs(a) { try { localStorage.setItem('vrsa_favs', JSON.stringify(a)) } catch {} }
-function loadTheme() { try { return localStorage.getItem('vrsa_theme')||'light' } catch { return 'light' } }
+function loadFavs() { try { return JSON.parse(localStorage.getItem('vrsa_favs')||'[]') } catch { /* ignore */ return [] } }
+function saveFavs(a) { try { localStorage.setItem('vrsa_favs', JSON.stringify(a)) } catch { /* ignore */ } }
+function loadTheme() { try { return localStorage.getItem('vrsa_theme')||'light' } catch { /* ignore */ return 'light' } }
 
 // Tabs that support left/right swipe navigation (map excluded — has its own pan)
 const SWIPE_TABS = ['home', 'restaurants', 'events', 'transport']
@@ -69,11 +70,53 @@ export default function App() {
   const [cultureFocusName, setCultureFocusName]     = useState(null)
   const [shoppingFocusName, setShoppingFocusName]   = useState(null)
   const [healthFocusName, setHealthFocusName]       = useState(null)
-  const [municipalAlert, setMunicipalAlert]         = useState(null)
+  const [sheetEvents, setSheetEvents] = useState([])
 
-  // Load municipal alert from Google Sheets CSV (VITE_ALERT_URL)
-  // Sheet format — row 1: header, row 2: active,type,PT,EN,ES,FR,DE
+  // Load events from Google Sheets (VITE_EVENTS_URL)
   useEffect(() => {
+    const url = import.meta.env.VITE_EVENTS_URL
+    if (!url) return
+    fetch(url)
+      .then(r => r.text())
+      .then(csv => {
+        const rows = csv.trim().split('\n').slice(1) // skip header
+        const evs = rows.map((row, i) => {
+          const cols = row.split(',').map(s => s.trim().replace(/^"|"$/g, ''))
+          const [, emoji, titlePT, loc, day, month, time, price, descPT] = cols
+          if (!titlePT) return null
+          const id = 900000 + i
+          return { id, emoji: emoji||'📅', color:'#003B6F', price: price||'🆓',
+            title:{ PT:titlePT, EN:titlePT, ES:titlePT, FR:titlePT, DE:titlePT },
+            desc:{ PT:descPT||'', EN:descPT||'', ES:descPT||'', FR:descPT||'', DE:descPT||'' },
+            loc: loc||'VRSA', day: parseInt(day)||1, month: parseInt(month)||1, time: time||'', lat:37.1944, lng:-7.4161 }
+        }).filter(Boolean)
+        if (evs.length) setSheetEvents(evs)
+      })
+      .catch(() => {})
+  }, [])
+
+  const [municipalAlerts, setMunicipalAlerts] = useState(() => {
+    try {
+      const saved = localStorage.getItem('vrsa_admin_alert')
+      if (saved) {
+        const raw = JSON.parse(saved)
+        return Array.isArray(raw) ? raw : [{ id: 1, ...raw }]
+      }
+    } catch { /* ignore */ }
+    return []
+  })
+
+  // Load alerts — admin localStorage takes priority over Google Sheets
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('vrsa_admin_alert')
+      if (saved) {
+        const raw = JSON.parse(saved)
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setMunicipalAlerts(Array.isArray(raw) ? raw : [{ id: 1, ...raw }])
+        return
+      }
+    } catch { /* ignore */ }
     const url = import.meta.env.VITE_ALERT_URL
     if (!url) return
     fetch(url)
@@ -83,8 +126,7 @@ export default function App() {
         if (lines.length < 2) return
         const vals = lines[1].split(',').map(s => s.trim().replace(/^"|"$/g, ''))
         const [active, type, PT, EN, ES, FR, DE] = vals
-        if (active === 'true') setMunicipalAlert({ active:true, type:type||'info', message:{PT,EN,ES,FR,DE} })
-        else setMunicipalAlert({ active: false })
+        if (active === 'true') setMunicipalAlerts([{ id: 1, active:true, type:type||'info', message:{PT,EN,ES,FR,DE} }])
       })
       .catch(() => {})
   }, [])
@@ -125,6 +167,7 @@ export default function App() {
   useEffect(() => {
     const SHEET_URL = import.meta.env.VITE_SHEET_URL
     if (!SHEET_URL) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true)
     fetch(SHEET_URL)
       .then(r => r.text())
@@ -137,7 +180,7 @@ export default function App() {
   useEffect(() => { saveFavs(favs) }, [favs])
 
   // Persist lang
-  useEffect(() => { try { localStorage.setItem('vrsa_lang', lang) } catch {} }, [lang])
+  useEffect(() => { try { localStorage.setItem('vrsa_lang', lang) } catch { /* ignore */ } }, [lang])
 
   // Track language changes
   useEffect(() => { if (page !== 'splash') trackEvent('lang', lang) }, [lang])
@@ -190,10 +233,10 @@ export default function App() {
       {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} theme={theme} toggleTheme={toggleTheme} />}
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
         <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
-          {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} municipalAlert={municipalAlert} />}
+          {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} municipalAlerts={municipalAlerts} />}
           {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={setPage} focusPin={mapFocusPin} onFocusClear={() => setMapFocusPin(null)} />}
           {page === 'restaurants' && <Restaurants {...cp} pins={pins} focusPin={restaurantFocusPin} onFocusClear={() => setRestaurantFocusPin(null)} />}
-          {page === 'events'      && <Events      {...cp} />}
+          {page === 'events'      && <Events      {...cp} sheetEvents={sheetEvents} />}
           {page === 'beaches'     && <Beaches     {...cp} focusName={beachFocusName} onFocusClear={() => setBeachFocusName(null)} />}
           {page === 'hotels'      && <Hotels      {...cp} pins={pins} focusPin={hotelFocusPin} onFocusClear={() => setHotelFocusPin(null)} />}
           {page === 'shopping'    && <Shopping    {...cp} pins={pins} focusName={shoppingFocusName} onFocusClear={() => setShoppingFocusName(null)} />}
@@ -205,6 +248,7 @@ export default function App() {
           {page === 'transport'   && <Transport   lang={lang} onNav={setPage} />}
           {page === 'report'      && <Report      lang={lang} />}
           {page === 'info'        && <Info        lang={lang} />}
+          {page === 'admin'       && <Admin       lang={lang} onNav={setPage} onAlertChange={setMunicipalAlerts} />}
         </div>
       </Suspense>
       {/* ── Offline banner ── */}

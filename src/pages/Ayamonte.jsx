@@ -20,7 +20,7 @@ const ESSENTIALS = [
   { icon:'🕐', label:{PT:'Fuso Horário',EN:'Timezone',ES:'Zona Horaria',FR:'Fuseau',DE:'Zeitzone'}, val:{PT:'+1h em relação a Portugal',EN:'+1h ahead of Portugal',ES:'+1h respecto a Portugal',FR:'+1h par rapport au Portugal',DE:'+1h gegenüber Portugal'} },
 ]
 
-export default function Ayamonte({ lang, onNav }) {
+export default function Ayamonte({ lang }) {
   const L = lang || 'PT'
   const t = tr('ayamonte', L)
 

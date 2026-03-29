@@ -52,31 +52,6 @@ function isOpenNow(hours, closedDays) {
   return false
 }
 
-function closesAt(hours, closedDays) {
-  if (!hours) return null
-  const now = new Date()
-  if (closedDays?.includes(now.getDay())) return null
-  const cur = now.getHours() * 60 + now.getMinutes()
-  for (const slot of hours.split(' · ')) {
-    const { s, end } = parseSlot(slot)
-    const open = end < s ? (cur >= s || cur <= end) : (cur >= s && cur <= end)
-    if (open) {
-      const hh = Math.floor(end / 60) % 24, mm = end % 60
-      return `${hh}:${mm.toString().padStart(2,'0')}`
-    }
-  }
-  return null
-}
-
-// Haversine distance in minutes walking (avg 5km/h)
-function walkMins(lat1, lng1, lat2, lng2) {
-  const R = 6371
-  const dLat = (lat2-lat1) * Math.PI/180
-  const dLng = (lng2-lng1) * Math.PI/180
-  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2
-  const km = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-  return Math.round(km / 5 * 60)
-}
 const CENTER = { lat: 37.1944, lng: -7.4155 }
 
 // ─── Translations ─────────────────────────────────────────────
@@ -114,7 +89,7 @@ function Stars({ rating }) {
 }
 
 // ─── Main ─────────────────────────────────────────────────────
-export default function Restaurants({ lang, pins, favs, toggleFav, onNav, focusPin, onFocusClear }) {
+export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onFocusClear }) {
   const L  = lang || 'PT'
   const t  = tr('restaurants', L)
   const [filter, setFilter]   = useState('all')
@@ -122,7 +97,11 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, focusP
   const [detail, setDetail]   = useState(focusPin || null)
 
   useEffect(() => {
-    if (focusPin) { setDetail(focusPin); onFocusClear?.() }
+    if (focusPin) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDetail(focusPin)
+      onFocusClear?.()
+    }
   }, [focusPin])
 
   const foodPins = useMemo(() => {
@@ -145,7 +124,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, onNav, focusP
       url: window.location.href
     }
     if (navigator.share) {
-      try { await navigator.share(shareData) } catch {}
+      try { await navigator.share(shareData) } catch { /* ignore */ }
     } else {
       navigator.clipboard?.writeText(`${shareData.text} ${shareData.url}`)
     }

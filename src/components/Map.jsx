@@ -78,6 +78,12 @@ const CATS = [
   { k:'transporte',  icon:'🚌',  color:'#4A148C', bg:'#F3E5F5', label:{PT:'Transportes',  EN:'Transport',   ES:'Transporte'  } },
   { k:'compras',     icon:'🛍️', color:'#6A1B9A', bg:'#F3E5F5', label:{PT:'Compras',      EN:'Shopping',    ES:'Compras'     } },
   { k:'saude',       icon:'🏥',  color:'#00838F', bg:'#E0F7FA', label:{PT:'Saúde',        EN:'Health',      ES:'Salud'       } },
+  { k:'bar',         icon:'🍺',  color:'#B45309', bg:'#FEF3C7', label:{PT:'Bares',         EN:'Bars',        ES:'Bares'       } },
+  { k:'sushi',       icon:'🍣',  color:'#BE123C', bg:'#FFF1F2', label:{PT:'Sushi',         EN:'Sushi',       ES:'Sushi'       } },
+  { k:'loja',        icon:'🏪',  color:'#7C3AED', bg:'#EDE9FE', label:{PT:'Lojas',         EN:'Shops',       ES:'Tiendas'     } },
+  { k:'carregador',  icon:'⚡',  color:'#16A34A', bg:'#DCFCE7', label:{PT:'Carregadores',  EN:'EV Charging', ES:'Cargadores'  } },
+  { k:'bombeiro',    icon:'🚒',  color:'#DC2626', bg:'#FEF2F2', label:{PT:'Bombeiros',     EN:'Fire Station',ES:'Bomberos'    } },
+  { k:'policia',     icon:'👮',  color:'#1D4ED8', bg:'#EFF6FF', label:{PT:'Polícia',       EN:'Police',      ES:'Policía'     } },
 ]
 
 function getCat(k) {
@@ -399,6 +405,31 @@ function MapController({ activeFilter, visible, locateMeRef, userPos }) {
   return null
 }
 
+// ── Places controller — captures name/coords from Google Maps POI clicks ────
+function PlacesController({ fetchRef }) {
+  const placesLib = useMapsLibrary('places')
+  const map       = useMap()
+
+  useEffect(() => {
+    if (!placesLib || !map) return
+    const svc = new placesLib.PlacesService(map)
+    fetchRef.current = (placeId, latLng, cb) => {
+      svc.getDetails(
+        { placeId, fields: ['name', 'geometry'] },
+        (result, status) => {
+          if (status === 'OK' && result?.name) {
+            cb(result.name, result.geometry.location.lat(), result.geometry.location.lng())
+          } else {
+            cb('', latLng.lat, latLng.lng) // fallback to click position
+          }
+        }
+      )
+    }
+  }, [placesLib, map]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  return null
+}
+
 // ── Routing controller (must be inside GMap to use useMap / useMapsLibrary) ─
 function RoutingController({ activeRoute, onResult }) {
   const map       = useMap()
@@ -409,6 +440,7 @@ function RoutingController({ activeRoute, onResult }) {
   // Init DirectionsService + DirectionsRenderer once the library loads
   useEffect(() => {
     if (!routesLib || !map) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSvc(new routesLib.DirectionsService())
     const dr = new routesLib.DirectionsRenderer({
       suppressMarkers: true,
@@ -497,7 +529,7 @@ function RouteCard({ activeRoute, routeResult, lang, onStop }) {
 function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear }) {
   const t = T[lang] || T.PT
   const [activeFilter, setActiveFilter] = useState(null)
-  const [tick, setTick] = useState(0) // null = show picker
+  const [_tick, setTick] = useState(0) // null = show picker
   const [showPicker, setShowPicker]     = useState(!focusPin)
   const [selected, setSelected]         = useState(null)
   const [userPos, setUserPos]           = useState(null)
@@ -513,8 +545,9 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   const [activeRoute, setActiveRoute]   = useState(null) // {origin, destination}
   const [routeResult, setRouteResult]   = useState(null) // DirectionsResult
   const [quickFilter, setQuickFilter]   = useState('all')
-  const nextId    = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
+  const nextId      = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
   const locateMeRef = useRef(null)
+  const fetchPlaceRef = useRef(null)
 
   useEffect(() => {
     if (!navigator.geolocation) return
@@ -536,7 +569,9 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   // When navigating here from a search result, skip picker and open directions
   useEffect(() => {
     if (!focusPin) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShowPicker(false)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setNavDest(focusPin)
     onFocusClear?.()
   }, [focusPin])
@@ -574,19 +609,27 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   }, [pins, activeFilter, quickFilter])
 
   function handleMapClick(e) {
-    // Em modo edição/adição, bloqueia o InfoWindow nativo para não congelar o mapa.
-    // Em modo normal, deixa o Google Maps abrir o InfoWindow livremente (útil para turistas).
     if (e.detail?.placeId) {
       if (editMode || addingPin) e.stop?.()
+      // In add mode: fetch place details and pre-fill the form
+      if (addingPin && fetchPlaceRef.current) {
+        fetchPlaceRef.current(e.detail.placeId, e.detail.latLng, (name, lat, lng) => {
+          setPendingPos({ lat, lng })
+          setNewName(name)
+          setAddingPin(false)
+          setShowAdd(true)
+        })
+      }
       return
     }
-    if (showAdd || editingPin || navDest) return  // sheet já aberto, ignorar clicks duplos
+    if (showAdd || editingPin || navDest) return
     if (!addingPin) { setSelected(null); return }
     if (!e.detail?.latLng) return
     setPendingPos({ lat:e.detail.latLng.lat, lng:e.detail.latLng.lng })
     setAddingPin(false); setShowAdd(true)
   }
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const handleDragEnd = useCallback((id, lat, lng) => {
     const nl = parseFloat(lat.toFixed(6)), ng = parseFloat(lng.toFixed(6))
     setPins(prev => {
@@ -596,6 +639,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
     })
   }, [])
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const handleDelete = useCallback((id, name) => {
     setPins(prev => prev.filter(p => p.id !== id))
     setChanges(prev => [...prev, {type:'delete', id, name}])
@@ -614,21 +658,43 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
     const info=getCat(pendingCat)
     const pin={id:nextId.current++,name:newName.trim(),emoji:info.icon,cat:pendingCat,color:info.color,lat:parseFloat(pendingPos.lat.toFixed(6)),lng:parseFloat(pendingPos.lng.toFixed(6))}
     setPins(prev=>[...prev,pin])
-    setChanges(prev=>[...prev,{type:'new',name:pin.name,lat:pin.lat,lng:pin.lng,cat:pin.cat}])
+    setChanges(prev=>[...prev,{type:'new', pin}])
     setShowAdd(false); setPendingCat(null); setNewName(''); setPendingPos(null)
   }
 
   function copyChanges() {
-    // Generate JS array ready to paste into src/data/pins.js
-    const jsLines = ['export const DEFAULT_PINS = [']
-    pins.forEach((p, i) => {
-      const comma = i < pins.length - 1 ? ',' : ''
-      jsLines.push(`  {id:${p.id},name:${JSON.stringify(p.name)},emoji:${JSON.stringify(p.emoji)},cat:${JSON.stringify(p.cat)},color:${JSON.stringify(p.color)},lat:${p.lat},lng:${p.lng}}${comma}`)
-    })
-    jsLines.push(']')
-    navigator.clipboard?.writeText(jsLines.join('\n')).then(() => alert(
-      lang === 'EN' ? 'Copied! Send this to Claude: "update src/data/pins.js with this content"'
-      : 'Copiado! Envia ao Claude: "atualiza src/data/pins.js com este conteúdo"'
+    const added   = changes.filter(c => c.type === 'new')
+    const deleted = changes.filter(c => c.type === 'delete')
+    const moved   = changes.filter(c => c.type === 'move')
+    const catChg  = changes.filter(c => c.type === 'cat')
+
+    const lines = []
+
+    if (added.length) {
+      lines.push('// ── ADICIONADOS ──')
+      added.forEach(c => {
+        const p = c.pin
+        lines.push(`  {id:${p.id},name:${JSON.stringify(p.name)},emoji:${JSON.stringify(p.emoji)},cat:${JSON.stringify(p.cat)},color:${JSON.stringify(p.color)},lat:${p.lat},lng:${p.lng}},`)
+      })
+    }
+    if (deleted.length) {
+      lines.push('// ── REMOVIDOS ──')
+      deleted.forEach(c => lines.push(`  // id:${c.id} — "${c.name}"`))
+    }
+    if (moved.length) {
+      lines.push('// ── MOVIDOS ──')
+      moved.forEach(c => lines.push(`  // id:${c.id} "${c.name}" → lat:${c.lat}, lng:${c.lng}`))
+    }
+    if (catChg.length) {
+      lines.push('// ── CATEGORIA ALTERADA ──')
+      catChg.forEach(c => lines.push(`  // id:${c.id} "${c.name}" → cat:"${c.cat}"`))
+    }
+
+    const text = lines.join('\n')
+    navigator.clipboard?.writeText(text).then(() => alert(
+      lang === 'EN'
+        ? `Copied ${changes.length} change(s)! Send to Claude.`
+        : `${changes.length} alteração(ões) copiadas! Envia ao Claude.`
     ))
   }
 
@@ -754,6 +820,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
             locateMeRef={locateMeRef}
             userPos={userPos}
           />
+          <PlacesController fetchRef={fetchPlaceRef} />
           <RoutingController
             activeRoute={activeRoute}
             onResult={setRouteResult}
@@ -889,9 +956,14 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
                 <span style={{ fontSize:22 }}>{getCat(pendingCat).icon}</span>
                 <span style={{ fontSize:14, fontWeight:700, color:getCat(pendingCat).color }}>{getCat(pendingCat).label[lang]}</span>
               </div>
+              {newName ? (
+                <div style={{ fontSize:10, fontWeight:700, color:'#059669', letterSpacing:1, textTransform:'uppercase', marginBottom:5 }}>
+                  📍 {lang==='EN'?'Captured from Google Maps':'Capturado do Google Maps'}
+                </div>
+              ) : null}
               <input autoFocus value={newName} onChange={e=>setNewName(e.target.value)} onKeyDown={e=>e.key==='Enter'&&confirmAdd()}
                 placeholder={t.placeholder}
-                style={{ width:'100%', padding:'12px 14px', marginBottom:12, border:'1.5px solid #E5E7EB', borderRadius:10, fontSize:15, outline:'none', fontFamily:'inherit', color:'#111827' }}
+                style={{ width:'100%', padding:'12px 14px', marginBottom:12, border:`1.5px solid ${newName?'#059669':'#E5E7EB'}`, borderRadius:10, fontSize:15, outline:'none', fontFamily:'inherit', color:'#111827' }}
               />
               <button onClick={confirmAdd} style={{ width:'100%', padding:14, background:'#0A1628', color:'#fff', border:'none', borderRadius:10, fontSize:15, fontWeight:700, cursor:'pointer', marginBottom:8 }}>✅ {t.add}</button>
               <button onClick={()=>setPendingCat(null)} style={{ width:'100%', padding:11, background:'#F9FAFB', color:'#9CA3AF', border:'1px solid #EEEEEE', borderRadius:10, fontSize:13, fontWeight:600, cursor:'pointer' }}>← {lang==='EN'?'Back':'Voltar'}</button>

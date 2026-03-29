@@ -22,7 +22,7 @@ const TIPS = {
   DE:['Speichere die Nummer des Gesundheitszentrums vorab', 'Die Notdienstapotheke wechselt wöchentlich — an jeder Apothekentür angezeigt', 'Mit der Europäischen Krankenversicherungskarte (EHIC) kostenloser Zugang', 'Einfache Medikamente wie Paracetamol rezeptfrei erhältlich'],
 }
 
-export default function Health({ lang, onNav, focusName, onFocusClear }) {
+export default function Health({ lang, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('health', L)
   const tips = TIPS[L] || TIPS.PT
@@ -31,13 +31,13 @@ export default function Health({ lang, onNav, focusName, onFocusClear }) {
   useEffect(() => {
     if (!focusName) return
     const found = PHARMACIES.find(p => p.name.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(p.name.toLowerCase()))
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (found) setDetail(found)
     onFocusClear?.()
   }, [focusName])
 
   if (detail) {
     const p = detail
-    const backLabel = L==='EN'?'Back':L==='ES'?'Volver':L==='FR'?'Retour':L==='DE'?'Zurück':'Voltar'
     const navLabel  = L==='EN'?'Navigate':L==='ES'?'Navegar':L==='FR'?'Naviguer':L==='DE'?'Navigieren':'Navegar'
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>

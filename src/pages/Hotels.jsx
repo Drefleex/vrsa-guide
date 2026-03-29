@@ -33,13 +33,13 @@ function Stars({ n }) {
 }
 
 const FILTERS = [
-  { k:'all',     match: r => true },
+  { k:'all',     match: () => true },
   { k:'luxury',  match: r => r.stars >= 4 },
   { k:'mid',     match: r => r.stars === 3 },
   { k:'budget',  match: r => r.stars <= 2 },
 ]
 
-export default function Hotels({ lang, pins, favs, toggleFav, onNav, focusPin, onFocusClear }) {
+export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('hotels', L)
   const [filter, setFilter] = useState('all')
@@ -47,7 +47,11 @@ export default function Hotels({ lang, pins, favs, toggleFav, onNav, focusPin, o
   const [detail, setDetail] = useState(focusPin || null)
 
   useEffect(() => {
-    if (focusPin) { setDetail(focusPin); onFocusClear?.() }
+    if (focusPin) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDetail(focusPin)
+      onFocusClear?.()
+    }
   }, [focusPin])
   const hotelPins = pins.filter(p => p.cat === 'hotel')
 

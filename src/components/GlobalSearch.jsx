@@ -60,7 +60,7 @@ const CAT_LABELS = {
 const SUGGESTIONS = ['Ferry','Restaurante Cuca','Praia','Ayamonte','Farmácia','Museu','Hotel','Eventos']
 
 function loadRecents() { try { return JSON.parse(localStorage.getItem('vrsa_searches')||'[]') } catch { return [] } }
-function saveRecents(a) { try { localStorage.setItem('vrsa_searches', JSON.stringify(a)) } catch {} }
+function saveRecents(a) { try { localStorage.setItem('vrsa_searches', JSON.stringify(a)) } catch { /* ignore */ } }
 
 function Hl({ text, q }) {
   if (!q) return <>{text}</>

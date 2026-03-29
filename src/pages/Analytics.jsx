@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { tr } from '../utils/i18n'
 
 // ─── Simple analytics tracked in localStorage ────────────────
+// eslint-disable-next-line react-refresh/only-export-components
 export function trackEvent(type, data) {
   try {
     const key   = 'vrsa_analytics'
@@ -24,11 +25,12 @@ export function trackEvent(type, data) {
     if (type === 'lang') store.languages[data]  = (store.languages[data]  || 0) + 1
 
     localStorage.setItem(key, JSON.stringify(store))
-  } catch {}
+  } catch { /* ignore */ }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function getAnalytics() {
-  try { return JSON.parse(localStorage.getItem('vrsa_analytics') || '{}') } catch { return {} }
+  try { return JSON.parse(localStorage.getItem('vrsa_analytics') || '{}') } catch { /* ignore */ return {} }
 }
 
 function Bar({ label, value, max, color }) {
@@ -64,7 +66,7 @@ export default function Analytics({ lang }) {
   const L = lang || 'PT'
   const t = tr('analytics', L)
   const [data, setData]     = useState(getAnalytics())
-  const [tick, setTick]     = useState(0)
+  const [_tick, setTick]    = useState(0)
 
   useEffect(() => {
     const iv = setInterval(() => setData(getAnalytics()), 5000)
@@ -96,7 +98,7 @@ export default function Analytics({ lang }) {
 
   const totalViews  = Object.values(pageViews).reduce((a,b) => a+b, 0)
   const totalClicks = Object.values(pinClicks).reduce((a,b) => a+b, 0)
-  const totalSess   = Object.values(sessions).reduce((a,b) => a+b, 0)
+  const _totalSess  = Object.values(sessions).reduce((a,b) => a+b, 0)
   const today       = new Date().toISOString().slice(0,10)
   const todaySess   = sessions[today] || 0
 

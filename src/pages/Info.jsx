@@ -81,7 +81,7 @@ export default function Info({ lang }) {
   const [wx, setWx]       = useState(null)
   const [wxLoading, setWxLoading] = useState(false)
   const [busOpen, setBusOpen] = useState(null)
-  const [tick, setTick]   = useState(0)
+  const [_tick, setTick]  = useState(0)
 
   const L = lang || 'PT'
   const DAY = {PT:['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ES:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],FR:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],DE:['So','Mo','Di','Mi','Do','Fr','Sa']}
@@ -103,6 +103,7 @@ export default function Info({ lang }) {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchWx()
     const iv = setInterval(()=>setTick(x=>x+1), 60000)
     return () => clearInterval(iv)

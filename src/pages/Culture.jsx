@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { getInitials, getAvatarColor } from '../utils/avatarUtils'
+import { getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 import { MONUMENTS } from '../data/culture'
 import { Share } from 'lucide-react'
 
-export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFocusClear }) {
+export default function Culture({ lang, favs, toggleFav, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('culture', L)
   const [detail, setDetail] = useState(null)
@@ -25,6 +25,7 @@ export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFoc
       const n = (typeof m.name === 'object' ? (m.name[L] || m.name.PT) : m.name) || ''
       return n.toLowerCase().includes(focusName.toLowerCase()) || focusName.toLowerCase().includes(n.toLowerCase())
     })
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (found) setDetail(found)
     onFocusClear?.()
   }, [focusName])
@@ -56,7 +57,7 @@ export default function Culture({ lang, favs, toggleFav, onNav, focusName, onFoc
       url: window.location.href
     }
     if (navigator.share) {
-      try { await navigator.share(shareData) } catch {}
+      try { await navigator.share(shareData) } catch { /* ignore */ }
     } else {
       navigator.clipboard?.writeText(`${shareData.text} ${shareData.url}`)
     }

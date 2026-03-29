@@ -11,11 +11,11 @@ const MODES = [
   { k:'car',    icon:'🚗',  color:'#64748B', bg:'var(--surface)' },
 ]
 
-export default function Transport({ lang, onNav }) {
+export default function Transport({ lang }) {
   const L = lang || 'PT'
   const t = tr('transport', L)
   const [mode, setMode]   = useState('ferry')
-  const [tick, setTick]   = useState(0)
+  const [_tick, setTick]  = useState(0)
   useEffect(() => { const iv = setInterval(()=>setTick(x=>x+1),60000); return ()=>clearInterval(iv) }, [])
 
   const nm       = new Date().getHours()*60 + new Date().getMinutes()

@@ -25,7 +25,7 @@ const FILTERS = [
   { k:'shops',  cats:['compras'] },
 ]
 
-export default function Shopping({ lang, pins, favs, toggleFav, onNav, focusName, onFocusClear }) {
+export default function Shopping({ lang, pins, favs, toggleFav, focusName, onFocusClear }) {
   const L = lang || 'PT'
   const t = tr('shopping', L)
   const [filter, setFilter] = useState('all')

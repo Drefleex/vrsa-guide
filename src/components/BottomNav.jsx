@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   Landmark, Activity, Building2, ShoppingBag,
-  Globe, Waves, Heart, AlertCircle, BarChart2, Info,
+  Globe, Waves, Heart, AlertCircle, BarChart2, Info, Settings,
 } from 'lucide-react'
 
 // ── Nav tab SVGs ──────────────────────────────────────────────
@@ -34,6 +34,7 @@ const MORE_ITEMS = [
   { k:'report',    Icon:AlertCircle, color:'#B91C1C', bg:'#FEF2F2', l:{PT:'Reportar',   EN:'Report',    ES:'Reportar',  FR:'Signaler', DE:'Melden'    } },
   { k:'analytics', Icon:BarChart2,   color:'#1D4ED8', bg:'#EFF6FF', l:{PT:'Analytics',  EN:'Analytics', ES:'Analytics', FR:'Analytics', DE:'Analytics' } },
   { k:'info',       Icon:Info,        color:'#0891B2', bg:'#ECFEFF', l:{PT:'Info',        EN:'Info',       ES:'Info',       FR:'Info',       DE:'Info'       } },
+  { k:'admin',      Icon:Settings,    color:'#374151', bg:'#F3F4F6', l:{PT:'Admin',       EN:'Admin',      ES:'Admin',      FR:'Admin',      DE:'Admin'      } },
 ]
 
 export default function BottomNav({ page, setPage, lang }) {
