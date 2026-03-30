@@ -185,12 +185,12 @@ export default function Transport({ lang }) {
               </div>
 
               {(busDir==='vrsa2faro' ? [
-                {vrsa:'07:00', gordo:'07:07', tavira:'07:45', faro:'08:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {vrsa:'08:15', gordo:'08:22', tavira:'09:00', faro:'10:05', days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
-                {vrsa:'10:00', gordo:'10:07', tavira:'10:45', faro:'11:55', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {vrsa:'16:30', gordo:'16:37', tavira:'17:15', faro:'18:20', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {vrsa:'18:00', gordo:'18:07', tavira:'18:45', faro:'19:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {vrsa:'18:30', gordo:'18:37', tavira:null,    faro:null,    days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+                {vrsa:'07:00', gordo:'07:07', tavira:'07:40', faro:'08:50', days:{PT:'Diário',       EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'08:15', gordo:'08:22', tavira:'08:55', faro:'10:05', days:{PT:'Seg–Sex',      EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+                {vrsa:'10:00', gordo:'10:07', tavira:'10:45', faro:'11:55', days:{PT:'Diário',       EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'16:30', gordo:'16:37', tavira:'17:10', faro:'18:20', days:{PT:'Diário',       EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'18:00', gordo:'18:07', tavira:'18:40', faro:'19:50', days:{PT:'Diário',       EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'18:30', gordo:'18:37', tavira:'19:10', faro:null,    days:{PT:'Seg–Sex ⚠️ termina Tavira', EN:'Mon–Fri ⚠️ ends Tavira', ES:'Lun–Vie ⚠️ termina Tavira', FR:'Lun–Ven ⚠️ fin Tavira', DE:'Mo–Fr ⚠️ endet Tavira'}},
               ] : [
                 {faro:'07:15', tavira:'08:15', gordo:'08:48', vrsa:'08:55', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
                 {faro:'09:30', tavira:'10:30', gordo:'11:03', vrsa:'11:10', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
