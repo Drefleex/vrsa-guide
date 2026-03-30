@@ -104,15 +104,15 @@ export default function InstallBanner({ lang }) {
     const visits = parseInt(localStorage.getItem('vrsa_visits') || '0') + 1
     localStorage.setItem('vrsa_visits', visits.toString())
 
-    if (isIosSafari() && visits >= 2) {
-      setTimeout(() => { setIosMode(true); setVisible(true) }, 5000)
+    if (isIosSafari()) {
+      setTimeout(() => { setIosMode(true); setVisible(true) }, 3000)
       return
     }
     if (isAndroidChrome()) {
       const handler = (e) => {
         e.preventDefault()
         setAndroidPrompt(e)
-        if (visits >= 2) setTimeout(() => setVisible(true), 5000)
+        setTimeout(() => setVisible(true), 3000)
       }
       window.addEventListener('beforeinstallprompt', handler)
       return () => window.removeEventListener('beforeinstallprompt', handler)
