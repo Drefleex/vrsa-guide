@@ -65,8 +65,8 @@ const COLORS      = { primary:'var(--blue)', secondary:'var(--mint)', accent:'va
 export default function Analytics({ lang }) {
   const L = lang || 'PT'
   const t = tr('analytics', L)
-  const [data, setData]     = useState(getAnalytics())
-  const [_tick, setTick]    = useState(0)
+  const [data, setData] = useState(getAnalytics())
+  const [_tick, setTick] = useState(0)
 
   useEffect(() => {
     const iv = setInterval(() => setData(getAnalytics()), 5000)
@@ -188,12 +188,13 @@ export default function Analytics({ lang }) {
               </div>
             )}
 
-            {/* Reset */}
+            {/* Reset — exige PIN */}
             <button onClick={doReset} style={{ width:'100%', padding:'11px', background:'var(--red-lt)', color:'var(--red)', border:'1px solid #FECACA', borderRadius:12, fontSize:13, fontWeight:700, cursor:'pointer' }}>
               🗑️ {t.reset}
             </button>
           </>
         )}
+
       </div>
     </div>
   )

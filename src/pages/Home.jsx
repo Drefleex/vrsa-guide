@@ -586,13 +586,9 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
           <div onClick={() => setShowDevMenu(false)} style={{ position:'fixed', inset:0, zIndex:200, background:'rgba(0,0,0,.5)', display:'flex', alignItems:'center', justifyContent:'center', padding:24 }}>
             <div onClick={e => e.stopPropagation()} style={{ background:'var(--white)', borderRadius:20, padding:'24px 20px', width:'100%', maxWidth:300 }}>
               <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:16, textAlign:'center' }}>Área Restrita</div>
-              <button onClick={() => { setShowDevMenu(false); onNav('analytics') }}
-                style={{ width:'100%', padding:'13px 16px', marginBottom:8, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, fontSize:14, fontWeight:700, color:'var(--ink)', cursor:'pointer', textAlign:'left' }}>
-                📊 Analytics
-              </button>
               <button onClick={handleAdminClick}
                 style={{ width:'100%', padding:'13px 16px', marginBottom:8, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, fontSize:14, fontWeight:700, color:'var(--ink)', cursor:'pointer', textAlign:'left' }}>
-                ⚙️ Admin <span style={{ fontSize:11, fontWeight:500, color:'var(--ink-40)', marginLeft:6 }}>· PIN obrigatório</span>
+                ⚙️ Admin
               </button>
               <button onClick={() => setShowDevMenu(false)} style={{ width:'100%', padding:'10px', background:'none', border:'none', fontSize:12, color:'var(--ink-20)', cursor:'pointer', marginTop:4 }}>Fechar</button>
             </div>
