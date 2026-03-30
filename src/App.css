@@ -67,7 +67,7 @@
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html, body, #root { height:100%; overflow:hidden; font-family:var(--font); background:var(--primary); color:var(--ink); -webkit-font-smoothing:antialiased; }
+html, body, #root { height:100%; overflow:hidden; font-family:var(--font); background:var(--white); color:var(--ink); -webkit-font-smoothing:antialiased; }
 button, input, textarea, select { font-family:var(--font); }
 ::-webkit-scrollbar { display:none; }
 * { scrollbar-width:none; -ms-overflow-style:none; }
