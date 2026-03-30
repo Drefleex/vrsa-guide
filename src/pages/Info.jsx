@@ -127,7 +127,7 @@ export default function Info({ lang }) {
 
       {/* ── Hero with live tiles ── */}
       <div className="info-hero" style={{
-        background: 'url("/images/info_hero_hr.png")',
+        background: 'url("/images/info_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         position: 'relative',

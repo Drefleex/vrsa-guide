@@ -141,7 +141,7 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
       <div style={{
-        background: 'url("/images/hotels_hero_hr.png")',
+        background: 'url("/images/hotels_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 0',

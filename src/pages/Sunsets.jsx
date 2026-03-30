@@ -150,7 +150,7 @@ export default function Sunsets({ lang }) {
     <div className="page" style={{ background: 'var(--bg)' }}>
       {/* Header */}
       <div style={{
-        background: 'url("/images/sunset_hero_hr.png")',
+        background: 'url("/images/sunset_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 28px',

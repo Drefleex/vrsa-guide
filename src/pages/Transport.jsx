@@ -27,7 +27,7 @@ export default function Transport({ lang }) {
 
       {/* Hero */}
       <div style={{
-        background: 'url("/images/transport_hero_hr.png")',
+        background: 'url("/images/transport_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 0',

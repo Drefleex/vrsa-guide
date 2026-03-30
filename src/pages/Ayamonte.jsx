@@ -49,7 +49,7 @@ export default function Ayamonte({ lang }) {
     <div className="page">
       {/* Hero */}
       <div style={{
-        background: 'url("/images/ayamonte_hero_hr.png")',
+        background: 'url("/images/ayamonte_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 24px',

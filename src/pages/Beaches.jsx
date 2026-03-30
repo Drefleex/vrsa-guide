@@ -142,7 +142,7 @@ export default function Beaches({ lang, focusName, onFocusClear }) {
     <div className="page">
       {/* Header */}
       <div style={{
-        background: 'url("/images/beaches_hero_hr.png")',
+        background: 'url("/images/beaches_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 24px',

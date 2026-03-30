@@ -86,7 +86,7 @@ export default function Health({ lang, focusName, onFocusClear }) {
   return (
     <div className="page">
       <div style={{
-        background: 'url("/images/health_hero_hr.png")',
+        background: 'url("/images/health_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 24px',

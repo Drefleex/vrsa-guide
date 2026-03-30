@@ -122,7 +122,7 @@ export default function Culture({ lang, favs, toggleFav, focusName, onFocusClear
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
       <div style={{
-        background: 'url("/images/culture_hero_hr.png")',
+        background: 'url("/images/culture_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 24px',

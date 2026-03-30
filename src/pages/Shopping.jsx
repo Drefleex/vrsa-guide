@@ -82,7 +82,7 @@ export default function Shopping({ lang, pins, favs, toggleFav, focusName, onFoc
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
       <div style={{
-        background: 'url("/images/shopping_hero_hr.png")',
+        background: 'url("/images/shopping_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 0',

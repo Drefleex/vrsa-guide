@@ -390,8 +390,8 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
       {/* ── Hero ── */}
       <div className="home-hero" style={{
         background: mode === 'praia' 
-          ? 'linear-gradient(to bottom, rgba(2,119,189,0.2) 0%, rgba(0,131,143,0.95) 100%), url("/images/praia_hero_hr.png") center/cover'
-          : 'linear-gradient(to bottom, rgba(0,59,111,0.2) 0%, rgba(0,45,85,0.95) 100%), url("/images/marina_hero_hr.png") center/cover',
+          ? 'linear-gradient(to bottom, rgba(2,119,189,0.2) 0%, rgba(0,131,143,0.95) 100%), url("/images/praia_hero_hr.webp") center/cover'
+          : 'linear-gradient(to bottom, rgba(0,59,111,0.2) 0%, rgba(0,45,85,0.95) 100%), url("/images/marina_hero_hr.webp") center/cover',
         transition: 'background 0.5s ease'
       }}>
 

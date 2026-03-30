@@ -402,7 +402,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
 
       {/* Header */}
       <div style={{
-        background: 'url("/images/restaurants_hero_hr.png")',
+        background: 'url("/images/restaurants_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '18px 20px 0',
