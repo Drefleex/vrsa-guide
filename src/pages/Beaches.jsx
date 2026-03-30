@@ -51,6 +51,19 @@ export default function Beaches({ lang, focusName, onFocusClear }) {
 
   const month        = new Date().getMonth() // 0-indexed
   const isSummer     = month >= 5 && month <= 8
+
+  // Tide simulation — ~6h cycle (filling/ebbing alternates every 6h)
+  const hour         = new Date().getHours()
+  const isFilling    = (hour >= 0 && hour < 6) || (hour >= 12 && hour < 18)
+  const tideLabel    = {
+    PT: { up: 'A Encher ⬆️', down: 'A Vazar ⬇️' },
+    EN: { up: 'Filling ⬆️',  down: 'Ebbing ⬇️'  },
+    ES: { up: 'Subiendo ⬆️', down: 'Bajando ⬇️' },
+    FR: { up: 'Montante ⬆️', down: 'Descendante ⬇️' },
+    DE: { up: 'Steigend ⬆️', down: 'Fallend ⬇️' },
+  }
+  const tide         = isFilling ? tideLabel[L]?.up : tideLabel[L]?.down
+  const uvLevel      = uvMax != null ? (uvMax >= 8 ? { label: L==='EN'?'Very High':L==='ES'?'Muy Alto':L==='FR'?'Très élevé':L==='DE'?'Sehr hoch':'Muito Alto', color:'#DC2626' } : uvMax >= 6 ? { label: L==='EN'?'High':L==='ES'?'Alto':L==='FR'?'Élevé':L==='DE'?'Hoch':'Alto', color:'#EA580C' } : uvMax >= 3 ? { label: L==='EN'?'Moderate':L==='ES'?'Moderado':L==='FR'?'Modéré':L==='DE'?'Mäßig':'Moderado', color:'#D97706' } : { label: L==='EN'?'Low':L==='ES'?'Bajo':L==='FR'?'Faible':L==='DE'?'Niedrig':'Baixo', color:'#059669' }) : null
   const seaTemp      = marine?.sea_surface_temperature ? Math.round(marine.sea_surface_temperature) : (isSummer ? '19–22' : '14–17')
   const waveH        = marine?.wave_height ? marine.wave_height.toFixed(1) : '—'
   const windSpd      = wx?.current?.windspeed_10m ? Math.round(wx.current.windspeed_10m) : '—'
@@ -154,36 +167,85 @@ export default function Beaches({ lang, focusName, onFocusClear }) {
           </div>
         </div>
 
-        {/* Stats row */}
-        <div className="card" style={{ marginBottom:12 }}>
-          <div style={{ display:'flex' }}>
-            {[
-              { icon:'🌊', val: waveH !== '—' ? waveH + 'm' : '—', label:t.wave },
-              { icon:'💨', val: windSpd !== '—' ? windSpd + ' km/h' : '—', label:t.wind },
-              { icon:'☀️', val: uvMax != null ? uvMax.toFixed(1) : '—', label:t.uv },
-            ].map((s,i) => (
-              <div key={i} style={{ flex:1, padding:'14px 8px', textAlign:'center', borderRight:i<2?'1px solid var(--surface)':'none' }}>
-                <div style={{ fontSize:20, marginBottom:4 }}>{s.icon}</div>
-                <div style={{ fontSize:16, fontWeight:800, color:'var(--ink)' }}>{s.val}</div>
-                <div style={{ fontSize:9, color:'var(--ink-20)', fontWeight:700, textTransform:'uppercase', letterSpacing:.5, marginTop:2 }}>{s.label}</div>
+        {/* Stats glassmorphism widget */}
+        <div style={{
+          background: 'linear-gradient(160deg, #0369A1 0%, #0C4A6E 100%)',
+          borderRadius: 20, padding: 3, marginBottom: 12,
+          boxShadow: '0 8px 32px rgba(3,105,161,0.25)',
+        }}>
+          <div style={{
+            background: 'rgba(255,255,255,0.12)',
+            backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+            borderRadius: 18,
+            border: '1px solid rgba(255,255,255,0.2)',
+            overflow: 'hidden',
+          }}>
+            {/* UV + Maré hero row */}
+            <div style={{ display:'flex', padding:'18px 16px 14px' }}>
+              {/* UV */}
+              <div style={{ flex:1, textAlign:'center' }}>
+                <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,0.65)', letterSpacing:1.3, textTransform:'uppercase', marginBottom:4 }}>{t.uv}</div>
+                <div style={{ fontSize:44, fontWeight:900, color:'#fff', lineHeight:1, fontVariantNumeric:'tabular-nums' }}>
+                  {uvMax != null ? Math.round(uvMax) : '—'}
+                </div>
+                {uvLevel && (
+                  <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,0.8)', marginTop:5, background:'rgba(255,255,255,0.15)', borderRadius:50, padding:'2px 10px', display:'inline-block' }}>
+                    {uvLevel.label}
+                  </div>
+                )}
               </div>
-            ))}
+              {/* Divider */}
+              <div style={{ width:1, background:'rgba(255,255,255,0.2)', margin:'4px 16px' }} />
+              {/* Maré */}
+              <div style={{ flex:1, textAlign:'center' }}>
+                <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,0.65)', letterSpacing:1.3, textTransform:'uppercase', marginBottom:6 }}>
+                  {L==='EN'?'Tide':L==='ES'?'Marea':L==='FR'?'Marée':L==='DE'?'Gezeiten':'Maré'}
+                </div>
+                <div style={{ fontSize:36, lineHeight:1, marginBottom:4 }}>{isFilling ? '🌊' : '↘️'}</div>
+                <div style={{ fontSize:13, fontWeight:800, color:'#fff' }}>{tide}</div>
+                <div style={{ fontSize:9, color:'rgba(255,255,255,0.5)', marginTop:3 }}>
+                  {L==='EN'?'Approximate':L==='ES'?'Aproximado':L==='FR'?'Approximatif':L==='DE'?'Ungefähr':'Aproximado'}
+                </div>
+              </div>
+            </div>
+            {/* Wave / Wind / SeaTemp bottom strip */}
+            <div style={{ display:'flex', borderTop:'1px solid rgba(255,255,255,0.12)' }}>
+              {[
+                { icon:'🌊', val: waveH !== '—' ? waveH + 'm' : '—', label:t.wave },
+                { icon:'💨', val: windSpd !== '—' ? windSpd + ' km/h' : '—', label:t.wind },
+                { icon:'🌡️', val: typeof seaTemp === 'number' ? seaTemp + '°C' : seaTemp + '°C', label:t.seaTemp },
+              ].map((s,i) => (
+                <div key={i} style={{ flex:1, padding:'12px 6px', textAlign:'center', borderRight:i<2?'1px solid rgba(255,255,255,0.12)':'none' }}>
+                  <div style={{ fontSize:18, marginBottom:2 }}>{s.icon}</div>
+                  <div style={{ fontSize:15, fontWeight:800, color:'#fff' }}>{s.val}</div>
+                  <div style={{ fontSize:9, color:'rgba(255,255,255,0.55)', fontWeight:700, textTransform:'uppercase', letterSpacing:.5, marginTop:2 }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Seasonal temps */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:16 }}>
-          <div style={{ background: isSummer ? '#FFF7ED' : '#F3F4F6', border:`1px solid ${isSummer ? '#FDE68A' : '#E2E8F0'}`, borderRadius:14, padding:'14px', textAlign:'center' }}>
-            <div style={{ fontSize:22, marginBottom:4 }}>☀️</div>
-            <div style={{ fontSize:18, fontWeight:900, color: isSummer ? '#D97706' : '#6B7280' }}>18–22°C</div>
-            <div style={{ fontSize:10, fontWeight:700, color: isSummer ? '#D97706' : '#6B7280', marginTop:2 }}>{t.summer}</div>
-            {isSummer && <div style={{ fontSize:9, background:'#D97706', color:'#fff', borderRadius:50, padding:'1px 8px', marginTop:4, display:'inline-block' }}>✓ AGORA</div>}
+          <div style={{
+            background: isSummer ? 'linear-gradient(135deg,#EA580C,#F97316)' : 'linear-gradient(135deg,#E2E8F0,#CBD5E1)',
+            borderRadius:16, padding:'16px', textAlign:'center',
+            boxShadow: isSummer ? '0 6px 20px rgba(234,88,12,0.35)' : '0 2px 8px rgba(0,0,0,0.06)',
+          }}>
+            <div style={{ fontSize:26, marginBottom:4 }}>☀️</div>
+            <div style={{ fontSize:22, fontWeight:900, color: isSummer ? '#fff' : '#6B7280' }}>18–22°C</div>
+            <div style={{ fontSize:10, fontWeight:700, color: isSummer ? 'rgba(255,255,255,0.85)' : '#6B7280', marginTop:2 }}>{t.summer}</div>
+            {isSummer && <div style={{ fontSize:9, background:'rgba(255,255,255,0.25)', color:'#fff', borderRadius:50, padding:'2px 10px', marginTop:6, display:'inline-block', fontWeight:700 }}>✓ AGORA</div>}
           </div>
-          <div style={{ background: !isSummer ? '#EFF6FF' : '#F3F4F6', border:`1px solid ${!isSummer ? '#BFDBFE' : '#E2E8F0'}`, borderRadius:14, padding:'14px', textAlign:'center' }}>
-            <div style={{ fontSize:22, marginBottom:4 }}>🌧️</div>
-            <div style={{ fontSize:18, fontWeight:900, color: !isSummer ? '#1D4ED8' : '#6B7280' }}>14–17°C</div>
-            <div style={{ fontSize:10, fontWeight:700, color: !isSummer ? '#1D4ED8' : '#6B7280', marginTop:2 }}>{t.winter}</div>
-            {!isSummer && <div style={{ fontSize:9, background:'#1D4ED8', color:'#fff', borderRadius:50, padding:'1px 8px', marginTop:4, display:'inline-block' }}>✓ AGORA</div>}
+          <div style={{
+            background: !isSummer ? 'linear-gradient(135deg,#1D4ED8,#3B82F6)' : 'linear-gradient(135deg,#E2E8F0,#CBD5E1)',
+            borderRadius:16, padding:'16px', textAlign:'center',
+            boxShadow: !isSummer ? '0 6px 20px rgba(29,78,216,0.35)' : '0 2px 8px rgba(0,0,0,0.06)',
+          }}>
+            <div style={{ fontSize:26, marginBottom:4 }}>🌧️</div>
+            <div style={{ fontSize:22, fontWeight:900, color: !isSummer ? '#fff' : '#6B7280' }}>14–17°C</div>
+            <div style={{ fontSize:10, fontWeight:700, color: !isSummer ? 'rgba(255,255,255,0.85)' : '#6B7280', marginTop:2 }}>{t.winter}</div>
+            {!isSummer && <div style={{ fontSize:9, background:'rgba(255,255,255,0.25)', color:'#fff', borderRadius:50, padding:'2px 10px', marginTop:6, display:'inline-block', fontWeight:700 }}>✓ AGORA</div>}
           </div>
         </div>
 

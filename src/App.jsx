@@ -26,6 +26,7 @@ const Culture     = lazy(() => import('./pages/Culture'))
 const Health      = lazy(() => import('./pages/Health'))
 const Transport   = lazy(() => import('./pages/Transport'))
 const Admin       = lazy(() => import('./pages/Admin'))
+const Sunsets     = lazy(() => import('./pages/Sunsets'))
 
 import { DEFAULT_PINS } from './data/pins'
 
@@ -260,6 +261,7 @@ export default function App() {
           {page === 'info'        && <Info        lang={lang} />}
           {page === 'admin'       && <Admin       lang={lang} onNav={setPage} onAlertChange={setMunicipalAlerts} />}
           {page === 'sobre'       && <Sobre       lang={lang} />}
+          {page === 'sunsets'     && <Sunsets     lang={lang} onNav={setPage} />}
         </div>
       </Suspense>
       {/* ── Offline banner ── */}

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   Landmark, Activity, Building2, ShoppingBag,
-  Globe, Waves, Heart, AlertCircle, BarChart2, Info, Settings,
+  Globe, Waves, Heart, AlertCircle, BarChart2, Info, Settings, Sunset, Wine,
 } from 'lucide-react'
 
 // ── Nav tab SVGs ──────────────────────────────────────────────
@@ -30,6 +30,7 @@ const MORE_ITEMS = [
   { k:'shopping',  Icon:ShoppingBag, color:'#059669', bg:'#ECFDF5', l:{PT:'Compras',    EN:'Shopping',  ES:'Compras',   FR:'Shopping', DE:'Einkaufen' } },
   { k:'ayamonte',  Icon:Globe,       color:'#DC2626', bg:'#FEF2F2', l:{PT:'Ayamonte',   EN:'Ayamonte',  ES:'Ayamonte',  FR:'Ayamonte', DE:'Ayamonte'  } },
   { k:'beaches',   Icon:Waves,       color:'#0277BD', bg:'#F0F9FF', l:{PT:'Praias',     EN:'Beaches',   ES:'Playas',    FR:'Plages',   DE:'Strände'   } },
+  { k:'sunsets',   Icon:Sunset,      color:'#EA580C', bg:'#FFF7ED', l:{PT:'Sunsets & Bares', EN:'Sunsets & Bars', ES:'Atardeceres', FR:'Couchers de Soleil', DE:'Sonnenuntergänge'} },
   { k:'favorites', Icon:Heart,       color:'#DC2626', bg:'#FEF2F2', l:{PT:'Favoritos',  EN:'Saved',     ES:'Favoritos', FR:'Favoris',  DE:'Favoriten' } },
   { k:'report',    Icon:AlertCircle, color:'#B91C1C', bg:'#FEF2F2', l:{PT:'Reportar',   EN:'Report',    ES:'Reportar',  FR:'Signaler', DE:'Melden'    } },
   { k:'info',      Icon:Info,        color:'#0891B2', bg:'#ECFEFF', l:{PT:'Info',        EN:'Info',       ES:'Info',       FR:'Info',       DE:'Info'       } },
