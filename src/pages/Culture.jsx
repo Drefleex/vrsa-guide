@@ -67,7 +67,9 @@ export default function Culture({ lang, favs, toggleFav, focusName, onFocusClear
     const isFav = favs.includes('culture-' + detail.id)
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
-        <div style={{ background:getAvatarColor(detail.name), padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+        <div style={{ background:`linear-gradient(160deg, ${getAvatarColor(detail.name)} 0%, ${getAvatarColor(detail.name)}bb 60%, #0F172A 100%)`, padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0, position:'relative', overflow:'hidden' }}>
+          <div style={{ position:'absolute', top:-40, right:-40, width:160, height:160, borderRadius:'50%', background:'rgba(255,255,255,0.06)' }} />
+          <div style={{ position:'absolute', bottom:-30, left:-20, width:110, height:110, borderRadius:'50%', background:'rgba(255,255,255,0.04)' }} />
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
             <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
             <div style={{ display:'flex', gap:8 }}>

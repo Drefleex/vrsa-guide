@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { Sun, Moon } from 'lucide-react'
+import { Sun, Moon, ArrowLeft } from 'lucide-react'
+
+// Pages that are secondary (accessed via "More" menu) — show back button
+const SECONDARY_PAGES = ['culture','health','hotels','shopping','ayamonte','beaches','favorites','report','info','sunsets','analytics','admin','sobre','transport']
 
 const LANGS = ['PT','EN','ES','FR','DE']
 
@@ -18,8 +21,9 @@ const SVG_GLOBE = (
   </svg>
 )
 
-export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) {
+export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme, page, onNav }) {
   const [langOpen, setLangOpen] = useState(false)
+  const isSecondary = SECONDARY_PAGES.includes(page)
 
   return (
     <>
@@ -37,7 +41,20 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) 
         paddingTop: 'env(safe-area-inset-top, 0px)',
         boxSizing: 'border-box',
       }}>
-        <div style={{ height: 44, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '0 6px', gap: 4 }}>
+        <div style={{ height: 44, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 6px', gap: 4 }}>
+          {/* ── Back button (secondary pages only) ── */}
+          {isSecondary ? (
+            <button
+              onClick={() => onNav('home')}
+              aria-label="Voltar"
+              style={{ display:'flex', alignItems:'center', justifyContent:'center', width:38, height:38, borderRadius:10, background: theme === 'dark' ? 'rgba(255,255,255,.12)' : 'rgba(0,0,0,.05)', border:'none', color: theme === 'dark' ? '#fff' : 'var(--ink)', cursor:'pointer' }}
+            >
+              <ArrowLeft size={18} strokeWidth={2} />
+            </button>
+          ) : <div style={{ width:38 }} />}
+
+          {/* Right actions */}
+          <div style={{ display:'flex', alignItems:'center', gap:4 }}>
 
           {/* ── Pesquisa ── */}
           <button
@@ -79,6 +96,7 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme }) 
               </div>
             )}
           </div>
+          </div> {/* end right actions */}
 
         </div>
       </div>

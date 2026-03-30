@@ -251,7 +251,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} theme={theme} toggleTheme={toggleTheme} />}
+      {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} theme={theme} toggleTheme={toggleTheme} page={page} onNav={setPage} />}
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
         <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} municipalAlerts={municipalAlerts} />}
