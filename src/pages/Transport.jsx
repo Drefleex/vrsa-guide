@@ -14,8 +14,9 @@ const MODES = [
 export default function Transport({ lang }) {
   const L = lang || 'PT'
   const t = tr('transport', L)
-  const [mode, setMode]   = useState('ferry')
-  const [_tick, setTick]  = useState(0)
+  const [mode, setMode]     = useState('ferry')
+  const [busDir, setBusDir] = useState('vrsa2faro')
+  const [_tick, setTick]    = useState(0)
   useEffect(() => { const iv = setInterval(()=>setTick(x=>x+1),60000); return ()=>clearInterval(iv) }, [])
 
   const nm        = new Date().getHours()*60 + new Date().getMinutes()
@@ -147,21 +148,43 @@ export default function Transport({ lang }) {
         {/* ── BUS ── */}
         {mode==='bus' && (
           <div id="panel-bus" role="tabpanel">
-            <div style={{ background:'#FFFBEB', border:'1px solid #FDE68A', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#92400E', fontWeight:600 }}>🚌 VAMUS Linha 67 · VRSA Terminal → Faro Terminal · ~1h50 · vamus.pt</div>
-            {/* Linha 67 — horários reais VRSA→Faro */}
-            <div className="card" style={{ marginBottom:10 }}>
-              <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
-                <span style={{ fontSize:20 }}>🚌</span>
-                <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Linha 67 — VRSA → Faro</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>via Monte Gordo · Castro Marim · Tavira</div></div>
-                <a href="https://vamus.pt" target="_blank" rel="noopener noreferrer" style={{ background:'#FFFBEB', color:'#D97706', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>vamus.pt</a>
+
+            {/* Info + link */}
+            <div style={{ background:'#FFFBEB', border:'1px solid #FDE68A', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#92400E', fontWeight:600, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+              <span>🚌 VAMUS Linha 67 · ~1h50</span>
+              <a href="https://vamus.pt" target="_blank" rel="noopener noreferrer" style={{ color:'#D97706', fontWeight:700, textDecoration:'none' }}>vamus.pt ↗</a>
+            </div>
+
+            {/* Toggle direção */}
+            <div style={{ display:'flex', background:'var(--surface)', borderRadius:12, padding:4, marginBottom:14, gap:4 }}>
+              <button onClick={() => setBusDir('vrsa2faro')} style={{ flex:1, padding:'9px 0', borderRadius:9, border:'none', cursor:'pointer', fontSize:12, fontWeight:700, transition:'all .15s', background: busDir==='vrsa2faro' ? '#D97706' : 'transparent', color: busDir==='vrsa2faro' ? '#fff' : 'var(--ink-40)' }}>
+                VRSA → Faro
+              </button>
+              <button onClick={() => setBusDir('faro2vrsa')} style={{ flex:1, padding:'9px 0', borderRadius:9, border:'none', cursor:'pointer', fontSize:12, fontWeight:700, transition:'all .15s', background: busDir==='faro2vrsa' ? '#D97706' : 'transparent', color: busDir==='faro2vrsa' ? '#fff' : 'var(--ink-40)' }}>
+                Faro → VRSA
+              </button>
+            </div>
+
+            <div className="card">
+              <div style={{ padding:'10px 16px', borderBottom:'1px solid var(--surface)', fontSize:11, color:'var(--ink-40)', fontWeight:600 }}>
+                {busDir==='vrsa2faro'
+                  ? '📍 Terminal Rodoviário VRSA · via Monte Gordo · Castro Marim · Tavira'
+                  : '📍 Terminal Rodoviário Faro · via Tavira · Castro Marim · Monte Gordo'}
               </div>
-              {[
-                {dep:'07:00', arr:'08:50', days:{PT:'Diário',          EN:'Daily',       ES:'Diario',    FR:'Quotidien', DE:'Täglich'}},
-                {dep:'08:15', arr:'10:05', days:{PT:'Seg–Sex',         EN:'Mon–Fri',     ES:'Lun–Vie',   FR:'Lun–Ven',   DE:'Mo–Fr'}},
-                {dep:'10:00', arr:'11:55', days:{PT:'Diário',          EN:'Daily',       ES:'Diario',    FR:'Quotidien', DE:'Täglich'}},
-                {dep:'16:30', arr:'18:20', days:{PT:'Diário',          EN:'Daily',       ES:'Diario',    FR:'Quotidien', DE:'Täglich'}},
-                {dep:'18:00', arr:'19:50', days:{PT:'Diário',          EN:'Daily',       ES:'Diario',    FR:'Quotidien', DE:'Täglich'}},
-                {dep:'18:30', arr:null,    days:{PT:'Seg–Sex',         EN:'Mon–Fri',     ES:'Lun–Vie',   FR:'Lun–Ven',   DE:'Mo–Fr'}},
+
+              {busDir==='vrsa2faro' ? [
+                {dep:'07:00', arr:'08:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {dep:'08:15', arr:'10:05', days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+                {dep:'10:00', arr:'11:55', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {dep:'16:30', arr:'18:20', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {dep:'18:00', arr:'19:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {dep:'18:30', arr:null,    days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+              ] : [
+                {dep:'07:15', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {dep:'09:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {dep:'11:30', arr:null, days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+                {dep:'13:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {dep:'18:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
               ].map((b,i,arr) => {
                 const past2=toMin(b.dep)<=nm
                 const isNext2=!past2&&arr.find(x=>toMin(x.dep)>nm)===b
@@ -169,34 +192,11 @@ export default function Transport({ lang }) {
                   <div key={i} className={`sched-row ${past2?'past':''} ${isNext2?'next-dep':''}`} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
                     <span className="sched-time">{b.dep}</span>
                     <span style={{ flex:1, fontSize:12, color:isNext2?'var(--blue)':'var(--ink-40)' }}>
-                      {b.arr ? `Faro ${b.arr}` : 'Faro (sem paragem Terminal)'} · <span style={{ fontSize:11 }}>{b.days[L]||b.days.PT}</span>
+                      {busDir==='vrsa2faro'
+                        ? (b.arr ? `→ Faro ${b.arr}` : '→ Faro')
+                        : '→ VRSA ~1h50'}
+                      {' · '}<span style={{ fontSize:11 }}>{b.days[L]||b.days.PT}</span>
                     </span>
-                    {isNext2 && <span className="badge badge-blue">{t.next}</span>}
-                    {!isNext2 && fmtEta(b.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(b.dep)}</span>}
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* Faro → VRSA */}
-            <div className="card" style={{ marginTop:10 }}>
-              <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
-                <span style={{ fontSize:20 }}>🚌</span>
-                <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Linha 67 — Faro → VRSA</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>via Tavira · Castro Marim · Monte Gordo</div></div>
-              </div>
-              {[
-                {dep:'07:15', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'09:30', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'11:30', days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
-                {dep:'13:30', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'18:30', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-              ].map((b,i,arr) => {
-                const past2=toMin(b.dep)<=nm
-                const isNext2=!past2&&arr.find(x=>toMin(x.dep)>nm)===b
-                return (
-                  <div key={i} className={`sched-row ${past2?'past':''} ${isNext2?'next-dep':''}`} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
-                    <span className="sched-time">{b.dep}</span>
-                    <span style={{ flex:1, fontSize:12, color:isNext2?'var(--blue)':'var(--ink-40)' }}>→ VRSA · <span style={{ fontSize:11 }}>{b.days[L]||b.days.PT}</span></span>
                     {isNext2 && <span className="badge badge-blue">{t.next}</span>}
                     {!isNext2 && fmtEta(b.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(b.dep)}</span>}
                   </div>
