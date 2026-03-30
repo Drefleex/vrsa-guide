@@ -162,7 +162,12 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
   const [mode, setMode] = useState(() => localStorage.getItem('vrsa_mode') || 'rio')
   const [tapCount, setTapCount] = useState(0)
   const [showDevMenu, setShowDevMenu] = useState(false)
+  const [showPinModal, setShowPinModal] = useState(false)
+  const [pin, setPin] = useState('')
+  const [pinError, setPinError] = useState(false)
   const tapTimer = React.useRef(null)
+  // PIN definido via VITE_ADMIN_PIN em .env — fallback para valor de produção
+  const ADMIN_PIN = import.meta.env.VITE_ADMIN_PIN || '7291'
 
   function handleBrasaoTap() {
     const next = tapCount + 1
@@ -172,8 +177,32 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
       setTapCount(0)
       setShowDevMenu(true)
     } else {
+      // Sem indicação visual — não mostrar countdown ao utilizador
       tapTimer.current = setTimeout(() => setTapCount(0), 2000)
     }
+  }
+
+  function handleAdminClick() {
+    setShowDevMenu(false)
+    setPin('')
+    setPinError(false)
+    setShowPinModal(true)
+  }
+
+  function handlePinDigit(d) {
+    setPin(prev => {
+      const next = prev + d
+      if (next.length === 4) {
+        if (next === ADMIN_PIN) {
+          setTimeout(() => { setShowPinModal(false); onNav('admin') }, 150)
+        } else {
+          setPinError(true)
+          setTimeout(() => { setPinError(false); setPin('') }, 800)
+          return next
+        }
+      }
+      return next
+    })
   }
 
 
@@ -408,11 +437,6 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
               decoding="async"
               style={{ width:52, height:58, objectFit:'contain', display:'block', pointerEvents:'none' }}
             />
-            {tapCount > 2 && tapCount < 7 && (
-              <div style={{ position:'absolute', fontSize:9, fontWeight:700, color:'rgba(255,255,255,.8)', marginTop:2, textAlign:'center', width:64 }}>
-                {7 - tapCount}×
-              </div>
-            )}
           </div>
           <div style={{ flex:1, minWidth:0, textShadow:'0 2px 14px rgba(0,0,0,0.5)' }}>
             <div style={{ fontSize:9, fontWeight:800, color:'rgba(255,255,255,.7)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:6 }}>Município de VRSA · Algarve</div>
@@ -562,16 +586,57 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
           <div onClick={() => setShowDevMenu(false)} style={{ position:'fixed', inset:0, zIndex:200, background:'rgba(0,0,0,.5)', display:'flex', alignItems:'center', justifyContent:'center', padding:24 }}>
             <div onClick={e => e.stopPropagation()} style={{ background:'var(--white)', borderRadius:20, padding:'24px 20px', width:'100%', maxWidth:300 }}>
               <div style={{ fontSize:11, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:16, textAlign:'center' }}>Área Restrita</div>
-              {[
-                { label:'📊 Analytics', page:'analytics' },
-                { label:'⚙️ Admin', page:'admin' },
-              ].map(item => (
-                <button key={item.page} onClick={() => { setShowDevMenu(false); onNav(item.page) }}
-                  style={{ width:'100%', padding:'13px 16px', marginBottom:8, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, fontSize:14, fontWeight:700, color:'var(--ink)', cursor:'pointer', textAlign:'left' }}>
-                  {item.label}
-                </button>
-              ))}
+              <button onClick={() => { setShowDevMenu(false); onNav('analytics') }}
+                style={{ width:'100%', padding:'13px 16px', marginBottom:8, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, fontSize:14, fontWeight:700, color:'var(--ink)', cursor:'pointer', textAlign:'left' }}>
+                📊 Analytics
+              </button>
+              <button onClick={handleAdminClick}
+                style={{ width:'100%', padding:'13px 16px', marginBottom:8, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, fontSize:14, fontWeight:700, color:'var(--ink)', cursor:'pointer', textAlign:'left' }}>
+                ⚙️ Admin <span style={{ fontSize:11, fontWeight:500, color:'var(--ink-40)', marginLeft:6 }}>· PIN obrigatório</span>
+              </button>
               <button onClick={() => setShowDevMenu(false)} style={{ width:'100%', padding:'10px', background:'none', border:'none', fontSize:12, color:'var(--ink-20)', cursor:'pointer', marginTop:4 }}>Fechar</button>
+            </div>
+          </div>
+        )}
+
+        {/* ── PIN modal para Admin ── */}
+        {showPinModal && (
+          <div onClick={() => setShowPinModal(false)} style={{ position:'fixed', inset:0, zIndex:201, background:'rgba(0,0,0,.6)', display:'flex', alignItems:'center', justifyContent:'center', padding:24 }}>
+            <div onClick={e => e.stopPropagation()} style={{ background:'var(--white)', borderRadius:20, padding:'28px 24px', width:'100%', maxWidth:280, textAlign:'center' }}>
+              <div style={{ fontSize:22, marginBottom:6 }}>🔐</div>
+              <div style={{ fontSize:14, fontWeight:700, color:'var(--ink)', marginBottom:4 }}>Admin</div>
+              <div style={{ fontSize:12, color:'var(--ink-40)', marginBottom:20 }}>Introduza o PIN de 4 dígitos</div>
+
+              {/* Indicadores */}
+              <div style={{ display:'flex', justifyContent:'center', gap:12, marginBottom:24 }}>
+                {[0,1,2,3].map(i => (
+                  <div key={i} style={{
+                    width:14, height:14, borderRadius:'50%',
+                    background: pinError ? '#EF4444' : pin.length > i ? 'var(--primary)' : 'var(--border)',
+                    transition:'background .15s',
+                  }} />
+                ))}
+              </div>
+
+              {/* Numpad */}
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:10, marginBottom:10 }}>
+                {['1','2','3','4','5','6','7','8','9'].map(d => (
+                  <button key={d} onClick={() => pin.length < 4 && handlePinDigit(d)}
+                    style={{ padding:'14px 0', fontSize:20, fontWeight:600, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, cursor:'pointer', color:'var(--ink)' }}>
+                    {d}
+                  </button>
+                ))}
+                <div />
+                <button onClick={() => pin.length < 4 && handlePinDigit('0')}
+                  style={{ padding:'14px 0', fontSize:20, fontWeight:600, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, cursor:'pointer', color:'var(--ink)' }}>
+                  0
+                </button>
+                <button onClick={() => setPin(p => p.slice(0,-1))}
+                  style={{ padding:'14px 0', fontSize:18, background:'var(--surface)', border:'1px solid var(--border)', borderRadius:12, cursor:'pointer', color:'var(--ink)' }}>
+                  ⌫
+                </button>
+              </div>
+              <button onClick={() => setShowPinModal(false)} style={{ background:'none', border:'none', fontSize:12, color:'var(--ink-20)', cursor:'pointer', marginTop:4, padding:'8px 16px' }}>Cancelar</button>
             </div>
           </div>
         )}
