@@ -17,9 +17,20 @@ export const CP_TRAINS = [
   {dep:'20:44', faro:'22:05', train:'R 5726'},
 ]
 
-// Comboio Turístico VRSA — Fonte: touristtrainvrsa.com
-// Diário 09h–20h, a cada 30 min; pausa almoço 13h–14h | €1.00 bilhete
-// 6 paragens: Bombeiros → Jardim → Lidl → Estrada da Mata → Praia Sto António → Farol
+// Comboio Turístico VRSA — Fonte: touristtrainvrsa.com (tabela oficial de horários)
+// Sazonal: 15 Jun → 15 Set | €1,30 bilhete | Grátis -4 anos
+// Época normal (15 Jun–15 Jul e 1 Set–15 Set): 09:00–12:30, pausa, 14:00–18:30
+// Época alta (15 Jul–31 Ago): estende até 19:30 (marcado peak:true)
+// Circuito completo ~25 min | Partidas de 30 em 30 min da Paragem 1
+export const TOURIST_TRAIN_STOPS = [
+  { n:1, name:'Bombeiros',   addr:'Rua Francisco Sá Carneiro',               offset:0  },
+  { n:2, name:'Jardim',      addr:'Av. dos Bombeiros Portugueses',            offset:0  },
+  { n:3, name:'Lidl',        addr:'Rua das Comunidades Portuguesas',          offset:5  },
+  { n:4, name:'Mata',        addr:'Início Cam. 3 Pauzinhos / Estr. da Mata', offset:10 },
+  { n:5, name:'Praia',       addr:'Praia de Sto António – 3 Pauzinhos',      offset:15 },
+  { n:6, name:'Farol',       addr:'Av. Min. Duarte Pacheco',                  offset:25 },
+]
+
 export const TRAIN_TIMES = [
   {dep:'09:00'},{dep:'09:30'},
   {dep:'10:00'},{dep:'10:30'},
@@ -31,8 +42,8 @@ export const TRAIN_TIMES = [
   {dep:'16:00'},{dep:'16:30'},
   {dep:'17:00'},{dep:'17:30'},
   {dep:'18:00'},{dep:'18:30'},
-  {dep:'19:00'},{dep:'19:30'},
-  {dep:'20:00'},
+  {dep:'19:00', peak:true},   // só 15 Jul–31 Ago
+  {dep:'19:30', peak:true},   // só 15 Jul–31 Ago
 ]
 
 export const toMin = t => { const [h,m]=t.split(':').map(Number); return h*60+m }

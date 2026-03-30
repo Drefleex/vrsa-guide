@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { tr } from '../utils/i18n'
-import { FERRY_TIMES, TRAIN_TIMES, CP_TRAINS, toMin, fmtEta } from '../data/transport'
+import { FERRY_TIMES, TRAIN_TIMES, TOURIST_TRAIN_STOPS, CP_TRAINS, toMin, fmtEta } from '../data/transport'
 
 const MODES = [
   { k:'ferry',  icon:'⛴️',  color:'#1D4ED8', bg:'#EFF6FF' },
@@ -130,25 +130,51 @@ export default function Transport({ lang }) {
               })}
             </div>
 
-            {/* Comboio Turístico */}
-            <div style={{ background:'#F0FDF4', border:'1px solid #BBF7D0', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#14532D', fontWeight:600 }}>🚂 €1,00 · Cada 30 min · Pausa almoço 13h–14h · touristtrainvrsa.com</div>
-            <div className="card">
+            {/* Comboio Turístico — aviso sazonal */}
+            <div style={{ background:'#FEF9C3', border:'1px solid #FDE047', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#713F12', fontWeight:600 }}>
+              🗓️ Sazonal · <strong>15 Jun – 15 Set</strong> · €1,30/pessoa · Grátis –4 anos · Cada 30 min
+            </div>
+
+            {/* Paragens */}
+            <div className="card" style={{ marginBottom:12 }}>
               <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
                 <span style={{ fontSize:22 }}>🚂</span>
-                <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Comboio Turístico VRSA</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>Bombeiros → Praia → Farol · 6 paragens</div></div>
-                <a href="https://touristtrainvrsa.com" target="_blank" rel="noopener noreferrer" style={{ background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>🌐</a>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Comboio Turístico VRSA</div>
+                  <div style={{ fontSize:11, color:'var(--ink-40)' }}>Circuito completo ~25 min · 6 paragens</div>
+                </div>
+                <a href="https://touristtrainvrsa.com" target="_blank" rel="noopener noreferrer" style={{ background:'#DCFCE7', color:'#16A34A', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>🌐</a>
               </div>
-              {TRAIN_TIMES.map((tr,i,arr) => {
-                const past=toMin(tr.dep)<=nm, isNext=tr===nextTrain
-                const isBreak = tr.dep === '14:00'
+              {TOURIST_TRAIN_STOPS.map((s, i, arr) => (
+                <div key={s.n} style={{ display:'flex', alignItems:'center', gap:10, padding:'10px 16px', borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none' }}>
+                  <div style={{ width:22, height:22, borderRadius:'50%', background:'#16A34A', display:'flex', alignItems:'center', justifyContent:'center', fontSize:11, fontWeight:800, color:'#fff', flexShrink:0 }}>{s.n}</div>
+                  <div style={{ flex:1 }}>
+                    <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)' }}>{s.name}</div>
+                    <div style={{ fontSize:10, color:'var(--ink-40)' }}>{s.addr}</div>
+                  </div>
+                  {s.offset > 0 && <div style={{ fontSize:11, fontWeight:600, color:'var(--ink-40)' }}>+{s.offset}min</div>}
+                </div>
+              ))}
+            </div>
+
+            {/* Horários */}
+            <div className="card">
+              <div style={{ padding:'10px 16px', borderBottom:'1px solid var(--surface)', fontSize:11, color:'var(--ink-40)', fontWeight:700, textTransform:'uppercase', letterSpacing:.5 }}>
+                Partidas da Paragem 1 (Bombeiros)
+              </div>
+              {TRAIN_TIMES.map((entry, i, arr) => {
+                const past = toMin(entry.dep) <= nm, isNext = entry === nextTrain
+                const isBreak = entry.dep === '14:00'
                 return (
                   <div key={i}>
                     {isBreak && <div style={{ padding:'6px 16px', fontSize:11, color:'var(--ink-40)', fontWeight:600, background:'var(--surface)', textAlign:'center' }}>⏸ Pausa almoço 13:00–14:00</div>}
-                    <div className={`sched-row ${past?'past':''} ${isNext?'next-dep':''}`} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
-                      <span className="sched-time">{tr.dep}</span>
-                      <span style={{ flex:1, fontSize:12, color: isNext?'var(--blue)':'var(--ink-40)' }}>→ Farol (circuito completo)</span>
+                    <div className={`sched-row ${past?'past':''} ${isNext?'next-dep':''}`} style={{ borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none' }}>
+                      <span className="sched-time">{entry.dep}</span>
+                      <span style={{ flex:1, fontSize:12, color: isNext ? 'var(--blue)' : 'var(--ink-40)' }}>
+                        → Farol {entry.peak && <span style={{ fontSize:10, color:'#D97706', fontWeight:700 }}>★ Jul/Ago</span>}
+                      </span>
                       {isNext && <span className="badge badge-blue">{t.next}</span>}
-                      {!isNext && fmtEta(tr.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(tr.dep)}</span>}
+                      {!isNext && fmtEta(entry.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(entry.dep)}</span>}
                     </div>
                   </div>
                 )
