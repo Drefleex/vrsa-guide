@@ -11,6 +11,18 @@ const MODES = [
   { k:'car',    icon:'🚗',  color:'#64748B', bg:'var(--surface)' },
 ]
 
+function StopPill({ time, label, bold, isNext }) {
+  return (
+    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', minWidth:52 }}>
+      <span style={{ fontSize: bold ? 14 : 12, fontWeight: bold ? 800 : 700, color: isNext ? '#1D4ED8' : 'var(--ink)', fontVariantNumeric:'tabular-nums' }}>{time}</span>
+      <span style={{ fontSize:9, color:'var(--ink-40)', fontWeight:600, marginTop:1 }}>{label}</span>
+    </div>
+  )
+}
+function Arrow() {
+  return <div style={{ flex:1, height:1, background:'var(--border)', margin:'0 2px', marginBottom:10 }} />
+}
+
 export default function Transport({ lang }) {
   const L = lang || 'PT'
   const t = tr('transport', L)
@@ -173,32 +185,45 @@ export default function Transport({ lang }) {
               </div>
 
               {(busDir==='vrsa2faro' ? [
-                {dep:'07:00', arr:'08:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'08:15', arr:'10:05', days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
-                {dep:'10:00', arr:'11:55', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'16:30', arr:'18:20', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'18:00', arr:'19:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'18:30', arr:null,    days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+                {vrsa:'07:00', gordo:'07:07', faro:'08:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'08:15', gordo:'08:22', faro:'10:05', days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+                {vrsa:'10:00', gordo:'10:07', faro:'11:55', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'16:30', gordo:'16:37', faro:'18:20', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'18:00', gordo:'18:07', faro:'19:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'18:30', gordo:'18:37', faro:null,    days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
               ] : [
-                {dep:'07:15', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'09:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'11:30', arr:null, days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
-                {dep:'13:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-                {dep:'18:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'07:15', gordo:null, faro:'07:15', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'09:30', gordo:null, faro:'09:30', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'11:30', gordo:null, faro:'11:30', days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
+                {vrsa:'13:30', gordo:null, faro:'13:30', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
+                {vrsa:'18:30', gordo:null, faro:'18:30', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
               ]).map((b,i,arr) => {
-                const past2=toMin(b.dep)<=nm
-                const isNext2=!past2&&arr.find(x=>toMin(x.dep)>nm)===b
+                const depTime = busDir==='vrsa2faro' ? b.vrsa : b.faro
+                const past2   = toMin(depTime) <= nm
+                const isNext2 = !past2 && arr.find(x => toMin(busDir==='vrsa2faro' ? x.vrsa : x.faro) > nm) === b
                 return (
-                  <div key={i} className={`sched-row ${past2?'past':''} ${isNext2?'next-dep':''}`} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
-                    <span className="sched-time">{b.dep}</span>
-                    <span style={{ flex:1, fontSize:12, color:isNext2?'var(--blue)':'var(--ink-40)' }}>
-                      {busDir==='vrsa2faro'
-                        ? (b.arr ? `→ Faro ${b.arr}` : '→ Faro')
-                        : '→ VRSA ~1h50'}
-                      {' · '}<span style={{ fontSize:11 }}>{b.days[L]||b.days.PT}</span>
-                    </span>
-                    {isNext2 && <span className="badge badge-blue">{t.next}</span>}
-                    {!isNext2 && fmtEta(b.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(b.dep)}</span>}
+                  <div key={i} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', padding:'10px 14px', background: isNext2 ? '#EFF6FF' : past2 ? 'transparent' : 'transparent', opacity: past2 ? 0.4 : 1 }}>
+                    {/* Linha de stops */}
+                    <div style={{ display:'flex', alignItems:'center', gap:0, marginBottom:4 }}>
+                      {busDir==='vrsa2faro' ? <>
+                        <StopPill time={b.vrsa} label="VRSA" bold isNext={isNext2} />
+                        <Arrow />
+                        <StopPill time={b.gordo} label="M. Gordo" isNext={isNext2} />
+                        <Arrow />
+                        <StopPill time={b.faro||'—'} label="Faro" isNext={isNext2} />
+                      </> : <>
+                        <StopPill time={b.faro} label="Faro" bold isNext={isNext2} />
+                        <Arrow />
+                        <StopPill time="~+20m" label="M. Gordo" isNext={isNext2} />
+                        <Arrow />
+                        <StopPill time="~+1h50" label="VRSA" isNext={isNext2} />
+                      </>}
+                    </div>
+                    <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                      <span style={{ fontSize:11, color:'var(--ink-40)' }}>{b.days[L]||b.days.PT}</span>
+                      {isNext2 && <span className="badge badge-blue">{t.next}</span>}
+                      {!isNext2 && !past2 && fmtEta(depTime) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(depTime)}</span>}
+                    </div>
                   </div>
                 )
               })}
