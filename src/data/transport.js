@@ -1,7 +1,6 @@
-// Ferry VRSA → Ayamonte — temporada Inverno (15 Set–28 Fev)
-// Fonte: rioguadiana.com via ayamonte.info (hora portuguesa UTC+0)
-// Seg–Sáb: de hora a hora 09h–17h | €2.50 adulto, €1.50 criança (4–10 anos)
-export const FERRY_TIMES = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00']
+// Ferry VRSA → Ayamonte — Partidas de Portugal (hora portuguesa UTC+0)
+// Fonte: painel do cais de VRSA | €2.50 adulto, €1.50 criança (4–10 anos) | ~10 min travessia
+export const FERRY_TIMES = ['10:30','11:30','12:30','13:30','14:30','15:30','16:30','18:00']
 
 // CP Comboios Regionais VRSA → Lagos (via Faro) — Fonte: horário CP oficial
 // Linha do Algarve · ~1h10 VRSA→Faro · ~2h30 VRSA→Lagos
