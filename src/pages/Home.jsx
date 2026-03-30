@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Sun, Users, UtensilsCrossed, Landmark, Sunset, Leaf, MapPin as MapPinIcon } from 'lucide-react'
 import { tr } from '../utils/i18n'
-import { FERRY_TIMES, TRAIN_TIMES, toMin } from '../data/transport'
+import { FERRY_TIMES, CP_TRAINS, toMin } from '../data/transport'
 
 const ROUTES = [
   { id:1, Icon:Sun, color:'#1D4ED8',
@@ -187,7 +187,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
       const nm  = new Date().getHours()*60 + new Date().getMinutes()
       const nxt = FERRY_TIMES.find(f => toMin(f) > nm)
       setFerry(nxt || null)
-      const nxtTrain = TRAIN_TIMES.find(f => toMin(f.dep) > nm)
+      const nxtTrain = CP_TRAINS.find(f => toMin(f.dep) > nm)
       setTrain(nxtTrain || null)
     }
     update()
@@ -542,9 +542,9 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
             <div style={{ width:1, background:'var(--border-lt)', margin:'0 4px', alignSelf:'stretch' }} />
             {/* Train */}
             <div style={{ flex:1, display:'flex', alignItems:'center', gap:10, paddingLeft:10 }}>
-              <span style={{ fontSize:22 }}>🚂</span>
+              <span style={{ fontSize:22 }}>🚆</span>
               <div>
-                <div style={{ fontSize:9, fontWeight:700, color:'var(--ink-20)', textTransform:'uppercase', letterSpacing:.8 }}>Comboio Turístico</div>
+                <div style={{ fontSize:9, fontWeight:700, color:'var(--ink-20)', textTransform:'uppercase', letterSpacing:.8 }}>CP → Faro</div>
                 <div style={{ fontSize:16, fontWeight:800, color:'var(--ink)', lineHeight:1.1 }}>{train?.dep || '—'}</div>
                 {train && (
                   <div style={{ fontSize:10, fontWeight:700, color:'#059669', marginTop:1 }}>

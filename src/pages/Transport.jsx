@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { tr } from '../utils/i18n'
-import { FERRY_TIMES, TRAIN_TIMES, toMin, fmtEta } from '../data/transport'
+import { FERRY_TIMES, TRAIN_TIMES, CP_TRAINS, toMin, fmtEta } from '../data/transport'
 
 const MODES = [
   { k:'ferry',  icon:'⛴️',  color:'#1D4ED8', bg:'#EFF6FF' },
@@ -18,9 +18,10 @@ export default function Transport({ lang }) {
   const [_tick, setTick]  = useState(0)
   useEffect(() => { const iv = setInterval(()=>setTick(x=>x+1),60000); return ()=>clearInterval(iv) }, [])
 
-  const nm       = new Date().getHours()*60 + new Date().getMinutes()
+  const nm        = new Date().getHours()*60 + new Date().getMinutes()
   const nextFerry = FERRY_TIMES.find(f => toMin(f) > nm)
   const nextTrain = TRAIN_TIMES.find(f => toMin(f.dep) > nm)
+  const nextCP    = CP_TRAINS.find(f => toMin(f.dep) > nm)
 
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
@@ -49,8 +50,8 @@ export default function Transport({ lang }) {
             {nextFerry ? <><div style={{ fontSize:22, fontWeight:900, color:'#fff' }}>{nextFerry}</div><div style={{ fontSize:11, color:'#93C5FD', fontWeight:700, marginTop:2 }}>{fmtEta(nextFerry)}</div></> : <div style={{ fontSize:12, color:'rgba(255,255,255,.35)' }}>{t.noMore}</div>}
           </div>
           <div onClick={() => setMode('train')} style={{ background:'rgba(5,150,105,.3)', border:'1px solid rgba(5,150,105,.5)', borderRadius:14, padding:'12px 14px', cursor:'pointer' }}>
-            <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:1, textTransform:'uppercase', marginBottom:6 }}>🚂 {t.train} · VRSA</div>
-            {nextTrain ? <><div style={{ fontSize:22, fontWeight:900, color:'#fff' }}>{nextTrain.dep}</div><div style={{ fontSize:11, color:'#6EE7B7', fontWeight:700, marginTop:2 }}>{fmtEta(nextTrain.dep)}</div></> : <div style={{ fontSize:12, color:'rgba(255,255,255,.35)' }}>{t.noMore}</div>}
+            <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:1, textTransform:'uppercase', marginBottom:6 }}>🚆 CP → Faro</div>
+            {nextCP ? <><div style={{ fontSize:22, fontWeight:900, color:'#fff' }}>{nextCP.dep}</div><div style={{ fontSize:11, color:'#6EE7B7', fontWeight:700, marginTop:2 }}>{fmtEta(nextCP.dep)}</div></> : <div style={{ fontSize:12, color:'rgba(255,255,255,.35)' }}>{t.noMore}</div>}
           </div>
         </div>
 
@@ -94,12 +95,35 @@ export default function Transport({ lang }) {
         {/* ── TRAIN ── */}
         {mode==='train' && (
           <div id="panel-train" role="tabpanel">
-            <div style={{ background:'#ECFDF5', border:'1px solid #A7F3D0', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#065F46', fontWeight:600 }}>🎫 €1,00 · Cada 30 min · Pausa almoço 13h–14h · touristtrainvrsa.com</div>
+
+            {/* CP Regional */}
+            <div style={{ background:'#ECFDF5', border:'1px solid #A7F3D0', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#065F46', fontWeight:600 }}>🚆 CP Linha do Algarve · VRSA → Faro ~1h10 · VRSA → Lagos ~2h30 · cp.pt</div>
+            <div className="card" style={{ marginBottom:16 }}>
+              <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
+                <span style={{ fontSize:22 }}>🚆</span>
+                <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>CP Regional — VRSA → Lagos</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>via Tavira · Faro · Loulé · Albufeira · Portimão</div></div>
+                <a href="https://www.cp.pt" target="_blank" rel="noopener noreferrer" style={{ background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>cp.pt</a>
+              </div>
+              {CP_TRAINS.map((tr,i,arr) => {
+                const past=toMin(tr.dep)<=nm, isNext=tr===nextCP
+                return (
+                  <div key={i} className={`sched-row ${past?'past':''} ${isNext?'next-dep':''}`} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
+                    <span className="sched-time">{tr.dep}</span>
+                    <span style={{ flex:1, fontSize:12, color: isNext?'var(--blue)':'var(--ink-40)' }}>Faro {tr.faro} · {tr.train}</span>
+                    {isNext && <span className="badge badge-blue">{t.next}</span>}
+                    {!isNext && fmtEta(tr.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(tr.dep)}</span>}
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Comboio Turístico */}
+            <div style={{ background:'#F0FDF4', border:'1px solid #BBF7D0', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#14532D', fontWeight:600 }}>🚂 €1,00 · Cada 30 min · Pausa almoço 13h–14h · touristtrainvrsa.com</div>
             <div className="card">
               <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
                 <span style={{ fontSize:22 }}>🚂</span>
-                <div><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Comboio Turístico VRSA</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>Bombeiros → Praia → Farol · 6 paragens</div></div>
-                <a href="https://touristtrainvrsa.com" target="_blank" rel="noopener noreferrer" style={{ marginLeft:'auto', background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>🌐</a>
+                <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Comboio Turístico VRSA</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>Bombeiros → Praia → Farol · 6 paragens</div></div>
+                <a href="https://touristtrainvrsa.com" target="_blank" rel="noopener noreferrer" style={{ background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>🌐</a>
               </div>
               {TRAIN_TIMES.map((tr,i,arr) => {
                 const past=toMin(tr.dep)<=nm, isNext=tr===nextTrain
