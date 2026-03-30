@@ -216,6 +216,16 @@ export default function App() {
   }, [])
 
   const onSwipeStart = useCallback((e) => {
+    // Don't hijack swipe if touch starts inside a horizontally scrollable element
+    let el = e.target
+    while (el && el !== e.currentTarget) {
+      const style = window.getComputedStyle(el)
+      if ((style.overflowX === 'auto' || style.overflowX === 'scroll') && el.scrollWidth > el.clientWidth) {
+        swipeX.current = null
+        return
+      }
+      el = el.parentElement
+    }
     swipeX.current = e.touches[0].clientX
     swipeY.current = e.touches[0].clientY
   }, [])
