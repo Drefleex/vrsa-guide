@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getAvatarColor } from '../utils/avatarUtils'
 import { tr } from '../utils/i18n'
 import { MONUMENTS } from '../data/culture'
