@@ -172,7 +172,7 @@ export default function Transport({ lang }) {
                   : '📍 Terminal Rodoviário Faro · via Tavira · Castro Marim · Monte Gordo'}
               </div>
 
-              {busDir==='vrsa2faro' ? [
+              {(busDir==='vrsa2faro' ? [
                 {dep:'07:00', arr:'08:50', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
                 {dep:'08:15', arr:'10:05', days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
                 {dep:'10:00', arr:'11:55', days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
@@ -185,7 +185,7 @@ export default function Transport({ lang }) {
                 {dep:'11:30', arr:null, days:{PT:'Seg–Sex', EN:'Mon–Fri', ES:'Lun–Vie', FR:'Lun–Ven',   DE:'Mo–Fr'}},
                 {dep:'13:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
                 {dep:'18:30', arr:null, days:{PT:'Diário',  EN:'Daily',   ES:'Diario',  FR:'Quotidien', DE:'Täglich'}},
-              ].map((b,i,arr) => {
+              ]).map((b,i,arr) => {
                 const past2=toMin(b.dep)<=nm
                 const isNext2=!past2&&arr.find(x=>toMin(x.dep)>nm)===b
                 return (
