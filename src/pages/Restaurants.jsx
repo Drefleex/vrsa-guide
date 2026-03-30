@@ -197,7 +197,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
         {/* Avatar header */}
-        <div style={{ background:`linear-gradient(160deg, ${getAvatarColor(r.name)} 0%, ${getAvatarColor(r.name)}bb 60%, #0F172A 100%)`, padding:'20px 18px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0, position:'relative', overflow:'hidden' }}>
+        <div style={{ background:`linear-gradient(160deg, ${getAvatarColor(r.name)} 0%, ${getAvatarColor(r.name)}bb 60%, #0F172A 100%)`, paddingTop:'calc(64px + env(safe-area-inset-top,0px))', paddingRight:'18px', paddingBottom:'24px', paddingLeft:'18px', flexShrink:0, position:'relative', overflow:'hidden' }}>
           <div style={{ position:'absolute', top:-40, right:-40, width:160, height:160, borderRadius:'50%', background:'rgba(255,255,255,0.06)' }} />
           <div style={{ position:'absolute', bottom:-30, left:-20, width:110, height:110, borderRadius:'50%', background:'rgba(255,255,255,0.04)' }} />
           <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:16 }}>
@@ -404,8 +404,10 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
         background: 'url("/images/restaurants_hero_hr.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        padding: '18px 20px 0',
         paddingTop: 'calc(64px + env(safe-area-inset-top,0px))',
+        paddingRight: '20px',
+        paddingBottom: 0,
+        paddingLeft: '20px',
         position: 'relative',
         overflow: 'hidden',
         flexShrink: 0

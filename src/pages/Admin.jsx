@@ -189,7 +189,7 @@ export default function Admin({ onNav, onAlertChange }) {
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
       {/* Header */}
-      <div style={{ background:'var(--primary)', padding:'16px 18px 0', paddingTop:'calc(58px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+      <div style={{ background:'var(--primary)', paddingRight:'18px', paddingBottom:'0', paddingLeft:'18px', paddingTop:'calc(58px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
         <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:14 }}>
           <button onClick={() => onNav('home')} style={{ width:34, height:34, borderRadius:'50%', background:'rgba(255,255,255,.15)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
           <div>

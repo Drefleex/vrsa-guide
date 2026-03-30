@@ -153,7 +153,7 @@ export default function Sobre({ lang }) {
       </button>
 
       {/* Hero */}
-      <div style={{ background:'linear-gradient(160deg,#002D55 0%,#003B6F 55%,#004F96 100%)', padding:'64px 24px 36px', paddingTop:'calc(72px + env(safe-area-inset-top,0px))', textAlign:'center', position:'relative', overflow:'hidden' }}>
+      <div style={{ background:'linear-gradient(160deg,#002D55 0%,#003B6F 55%,#004F96 100%)', paddingRight:'24px', paddingBottom:'36px', paddingLeft:'24px', paddingTop:'calc(72px + env(safe-area-inset-top,0px))', textAlign:'center', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', top:0, right:0, width:200, height:200, borderRadius:'0 0 0 100%', background:'rgba(255,255,255,.03)' }} />
         <div style={{ position:'absolute', bottom:0, left:0, width:140, height:140, borderRadius:'0 100% 0 0', background:'rgba(255,255,255,.03)' }} />
 

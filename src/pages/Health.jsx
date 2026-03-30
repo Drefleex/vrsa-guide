@@ -41,7 +41,7 @@ export default function Health({ lang, focusName, onFocusClear }) {
     const navLabel  = L==='EN'?'Navigate':L==='ES'?'Navegar':L==='FR'?'Naviguer':L==='DE'?'Navigieren':'Navegar'
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
-        <div style={{ background:'linear-gradient(160deg,#065F46 0%,#047857 100%)', padding:'18px 20px 24px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
+        <div style={{ background:'linear-gradient(160deg,#065F46 0%,#047857 100%)', paddingRight:'20px', paddingBottom:'24px', paddingLeft:'20px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
           <button onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:14 }}>←</button>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
             <div style={{ width:56, height:56, borderRadius:16, background:'rgba(255,255,255,.15)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:28, flexShrink:0 }}>💊</div>

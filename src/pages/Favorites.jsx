@@ -18,7 +18,7 @@ export default function Favorites({ lang, favs, toggleFav, pins, onNav }) {
   if (total === 0) {
     return (
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
-        <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
+        <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', paddingRight:'20px', paddingBottom:'18px', paddingLeft:'20px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
           <div style={{ fontSize:22, fontWeight:800, color:'#fff' }}>{t.title}</div>
         </div>
         <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'32px 24px', textAlign:'center' }}>
@@ -36,7 +36,7 @@ export default function Favorites({ lang, favs, toggleFav, pins, onNav }) {
 
   return (
     <div className="page">
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
+      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', paddingRight:'20px', paddingBottom:'18px', paddingLeft:'20px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
         <div style={{ fontSize:22, fontWeight:800, color:'#fff' }}>{t.title}</div>
         <div style={{ fontSize:12, color:'rgba(255,255,255,.38)', marginTop:2 }}>{total} {L === 'EN' ? 'saved' : L === 'FR' ? 'sauvegardés' : L === 'DE' ? 'gespeichert' : 'guardados'}</div>
       </div>

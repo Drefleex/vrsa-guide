@@ -251,7 +251,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
       <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
         {/* Hero */}
-        <div style={{ background:`linear-gradient(135deg,${route.color},${route.color}bb)`, padding:'20px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0, position:'relative' }}>
+        <div style={{ background:`linear-gradient(135deg,${route.color},${route.color}bb)`, paddingRight:'20px', paddingBottom:'20px', paddingLeft:'20px', paddingTop:'calc(64px + env(safe-area-inset-top,0px))', flexShrink:0, position:'relative' }}>
           <button onClick={() => setRoute(null)} style={{ position:'absolute', top:'calc(58px + env(safe-area-inset-top,0px))', left:14, width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.25)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
 
           <div style={{ textAlign:'center', paddingTop:8 }}>
