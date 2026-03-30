@@ -295,16 +295,19 @@ export default function Transport({ lang }) {
             <div className="sec-label">{t.parkings}</div>
             <div className="card" style={{ marginBottom:14 }}>
               {[
-                { name:'Parque Estacionamento Central', dist:'0 m', free:true, lat:37.174825, lng:-7.421436 },
-                { name:'Parque Autocaravanas',          dist:'500 m', free:true, lat:37.199407, lng:-7.415085 },
+                { name:{PT:'Parque da Praça Marquês de Pombal', EN:'Marquês de Pombal Square Car Park', ES:'Aparcamiento Plaza Marqués de Pombal', FR:'Parking Place Marquês de Pombal', DE:'Parkplatz Praça Marquês de Pombal'}, info:{PT:'Centro histórico · zona azul pago', EN:'Historic centre · paid blue zone', ES:'Centro histórico · zona azul de pago', FR:'Centre historique · zone bleue payante', DE:'Historisches Zentrum · kostenpflichtige Zone'}, free:false, lat:37.1938, lng:-7.4150 },
+                { name:{PT:'Parque junto ao Ferry/Rio', EN:'Ferry/River Car Park', ES:'Aparcamiento Ferry/Río', FR:'Parking Ferry/Rivière', DE:'Parkplatz Fähre/Fluss'}, info:{PT:'Junto ao cais do ferry · gratuito', EN:'Next to ferry pier · free', ES:'Junto al muelle del ferry · gratis', FR:'Près de l\'embarcadère · gratuit', DE:'Am Fähranleger · kostenlos'}, free:true, lat:37.1978, lng:-7.4133 },
+                { name:{PT:'Parque do Terminal Rodoviário', EN:'Bus Terminal Car Park', ES:'Aparcamiento Terminal de Autobuses', FR:'Parking Terminal Routier', DE:'Parkplatz Busbahnhof'}, info:{PT:'Junto ao terminal de autocarros · gratuito', EN:'Next to bus station · free', ES:'Junto a la estación de autobuses · gratis', FR:'Près de la gare routière · gratuit', DE:'Am Busbahnhof · kostenlos'}, free:true, lat:37.1945, lng:-7.4188 },
+                { name:{PT:'Parque Avenida da República', EN:'Avenida da República Car Park', ES:'Aparcamiento Avenida da República', FR:'Parking Avenida da República', DE:'Parkplatz Avenida da República'}, info:{PT:'Avenida principal · zona azul pago', EN:'Main avenue · paid blue zone', ES:'Avenida principal · zona azul de pago', FR:'Avenue principale · zone bleue payante', DE:'Hauptstraße · kostenpflichtige Zone'}, free:false, lat:37.1932, lng:-7.4165 },
+                { name:{PT:'Parque Autocaravanas (Monte Gordo)', EN:'Motorhome Park (Monte Gordo)', ES:'Área Autocaravanas (Monte Gordo)', FR:'Aire Camping-Cars (Monte Gordo)', DE:'Wohnmobilstellplatz (Monte Gordo)'}, info:{PT:'Monte Gordo · gratuito · 24h', EN:'Monte Gordo · free · 24h', ES:'Monte Gordo · gratis · 24h', FR:'Monte Gordo · gratuit · 24h', DE:'Monte Gordo · kostenlos · 24h'}, free:true, lat:37.1775, lng:-7.4290 },
               ].map((p,i,arr) => (
                 <div key={i} style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
                   <span style={{ fontSize:22 }}>🅿️</span>
                   <div style={{ flex:1 }}>
-                    <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)' }}>{p.name}</div>
-                    <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{p.dist}</div>
+                    <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)' }}>{p.name[L]||p.name.PT}</div>
+                    <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{p.info[L]||p.info.PT}</div>
                   </div>
-                  <span style={{ background:'#DCFCE7', color:'#15803D', fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:50 }}>{L==='EN'?'Free':L==='FR'?'Gratuit':L==='DE'?'Kostenlos':L==='ES'?'Gratis':'Grátis'}</span>
+                  <span style={{ background: p.free ? '#DCFCE7' : '#FEF9C3', color: p.free ? '#15803D' : '#854D0E', fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:50, flexShrink:0 }}>{p.free ? (L==='EN'?'Free':L==='FR'?'Gratuit':L==='DE'?'Kostenlos':L==='ES'?'Gratis':'Grátis') : (L==='EN'?'Paid':L==='FR'?'Payant':L==='DE'?'Kostenpfl.':L==='ES'?'Pago':'Pago')}</span>
                   <button onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`,'_blank','noopener,noreferrer')} style={{ width:32, height:32, background:'var(--blue-lt)', border:'none', borderRadius:8, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>🧭</button>
                 </div>
               ))}
