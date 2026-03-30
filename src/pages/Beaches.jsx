@@ -63,11 +63,11 @@ export default function Beaches({ lang, focusName, onFocusClear }) {
     DE: { up: 'Steigend ⬆️', down: 'Fallend ⬇️' },
   }
   const tide         = isFilling ? tideLabel[L]?.up : tideLabel[L]?.down
-  const uvLevel      = uvMax != null ? (uvMax >= 8 ? { label: L==='EN'?'Very High':L==='ES'?'Muy Alto':L==='FR'?'Très élevé':L==='DE'?'Sehr hoch':'Muito Alto', color:'#DC2626' } : uvMax >= 6 ? { label: L==='EN'?'High':L==='ES'?'Alto':L==='FR'?'Élevé':L==='DE'?'Hoch':'Alto', color:'#EA580C' } : uvMax >= 3 ? { label: L==='EN'?'Moderate':L==='ES'?'Moderado':L==='FR'?'Modéré':L==='DE'?'Mäßig':'Moderado', color:'#D97706' } : { label: L==='EN'?'Low':L==='ES'?'Bajo':L==='FR'?'Faible':L==='DE'?'Niedrig':'Baixo', color:'#059669' }) : null
   const seaTemp      = marine?.sea_surface_temperature ? Math.round(marine.sea_surface_temperature) : (isSummer ? '19–22' : '14–17')
   const waveH        = marine?.wave_height ? marine.wave_height.toFixed(1) : '—'
   const windSpd      = wx?.current?.windspeed_10m ? Math.round(wx.current.windspeed_10m) : '—'
   const uvMax        = wx?.daily?.uv_index_max?.[0]
+  const uvLevel      = uvMax != null ? (uvMax >= 8 ? { label: L==='EN'?'Very High':L==='ES'?'Muy Alto':L==='FR'?'Très élevé':L==='DE'?'Sehr hoch':'Muito Alto', color:'#DC2626' } : uvMax >= 6 ? { label: L==='EN'?'High':L==='ES'?'Alto':L==='FR'?'Élevé':L==='DE'?'Hoch':'Alto', color:'#EA580C' } : uvMax >= 3 ? { label: L==='EN'?'Moderate':L==='ES'?'Moderado':L==='FR'?'Modéré':L==='DE'?'Mäßig':'Moderado', color:'#D97706' } : { label: L==='EN'?'Low':L==='ES'?'Bajo':L==='FR'?'Faible':L==='DE'?'Niedrig':'Baixo', color:'#059669' }) : null
   const condLevel    = getConditionLevel(wx?.current)
   const condLabel    = t.conditions[condLevel]
 
