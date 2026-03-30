@@ -85,9 +85,22 @@ export default function Health({ lang, focusName, onFocusClear }) {
 
   return (
     <div className="page">
-      <div style={{ background:'linear-gradient(160deg,#065F46 0%,#047857 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))' }}>
-        <div style={{ fontSize:22, fontWeight:800, color:'#fff' }}>{t.title}</div>
-        <div style={{ fontSize:12, color:'rgba(255,255,255,.4)', marginTop:2 }}>Vila Real de Santo António</div>
+      <div style={{
+        background: 'url("/images/health_hero_hr.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '18px 20px 24px',
+        paddingTop: 'calc(64px + env(safe-area-inset-top,0px))',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Cinematic gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0.95) 100%)' }} />
+        
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ fontSize:26, fontWeight:900, color:'#fff', letterSpacing:'-.5px', textShadow: '0 2px 14px rgba(0,0,0,0.5)', marginBottom:4 }}>{t.title}</div>
+          <div style={{ fontSize:12, fontWeight:700, color:'rgba(255,255,255,.8)', textShadow: '0 2px 8px rgba(0,0,0,0.5)', letterSpacing: '.5px' }}>Vila Real de Santo António</div>
+        </div>
       </div>
 
       <div style={{ padding:'14px 16px 40px' }}>

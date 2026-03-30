@@ -140,13 +140,25 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
 
   return (
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
-        <div style={{ fontSize:22, fontWeight:800, color:'#fff', marginBottom:12 }}>{t.title}</div>
-        <div style={{ position:'relative', marginBottom:12 }}>
+      <div style={{
+        background: 'url("/images/hotels_hero_hr.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '18px 20px 0',
+        paddingTop: 'calc(64px + env(safe-area-inset-top,0px))',
+        flexShrink: 0,
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Cinematic gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0.95) 100%)' }} />
+        
+        <div style={{ position:'relative', zIndex:1, fontSize:26, fontWeight:900, color:'#fff', letterSpacing:'-.5px', textShadow: '0 2px 14px rgba(0,0,0,0.5)', marginBottom:16 }}>{t.title}</div>
+        <div style={{ position:'relative', zIndex:1, marginBottom:12, backdropFilter:'blur(10px)', WebkitBackdropFilter:'blur(10px)' }}>
           <span style={{ position:'absolute', left:14, top:'50%', transform:'translateY(-50%)', fontSize:15, pointerEvents:'none' }}>🔍</span>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t.search} style={{ width:'100%', padding:'10px 14px 10px 40px', border:'1px solid rgba(255,255,255,.15)', borderRadius:50, background:'rgba(255,255,255,.1)', color:'#fff', fontSize:13, outline:'none', fontFamily:'var(--font)' }} />
         </div>
-        <div style={{ display:'flex', gap:6, paddingBottom:14 }}>
+        <div style={{ position:'relative', zIndex:1, display:'flex', gap:6, paddingBottom:14 }}>
           {FILTERS.map(f => (
             <button key={f.k} onClick={() => setFilter(f.k)} style={{ flexShrink:0, padding:'6px 14px', borderRadius:50, border:'none', cursor:'pointer', fontSize:11, fontWeight:700, background: filter === f.k ? '#fff' : 'rgba(255,255,255,.1)', color: filter === f.k ? 'var(--navy)' : 'rgba(255,255,255,.6)', transition:'all .15s' }}>{t[f.k]}</button>
           ))}

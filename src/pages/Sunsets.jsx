@@ -150,32 +150,39 @@ export default function Sunsets({ lang }) {
     <div className="page" style={{ background: 'var(--bg)' }}>
       {/* Header */}
       <div style={{
-        background: 'linear-gradient(160deg, #EA580C 0%, #9F1239 100%)',
-        padding: '18px 20px 24px',
-        paddingTop: 'calc(62px + env(safe-area-inset-top,0px))',
+        background: 'url("/images/sunset_hero_hr.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '18px 20px 28px',
+        paddingTop: 'calc(64px + env(safe-area-inset-top,0px))',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* decorative circles */}
-        <div style={{ position:'absolute', top:-40, right:-40, width:180, height:180, borderRadius:'50%', background:'rgba(255,255,255,0.07)' }} />
-        <div style={{ position:'absolute', bottom:-60, left:-20, width:140, height:140, borderRadius:'50%', background:'rgba(255,255,255,0.05)' }} />
+        {/* Cinematic gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.1) 0%, rgba(15,23,42,0.95) 100%)' }} />
 
-        <div style={{ fontSize: 24, fontWeight: 800, color: '#fff', letterSpacing: '-.3px', position:'relative' }}>{t.title}</div>
-        <div style={{ fontSize: 12, color: 'rgba(255,255,255,.55)', marginTop: 2, position:'relative' }}>{t.sub}</div>
+        {/* Text */}
+        <div style={{ position:'relative', display:'flex', flexDirection:'column', gap:4 }}>
+          <div style={{ fontSize: 28, fontWeight: 800, color: '#fff', letterSpacing: '-.5px', textShadow: '0 2px 12px rgba(0,0,0,0.3)' }}>{t.title}</div>
+          <div style={{ fontSize: 14, fontWeight: 500, color: 'rgba(255,255,255,.7)', letterSpacing: '.2px' }}>{t.sub}</div>
+        </div>
 
-        {/* Golden Hour pill */}
+        {/* Premium Golden Hour Card */}
         <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          marginTop: 14, background: 'rgba(255,255,255,0.15)',
-          backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255,255,255,0.25)',
-          borderRadius: 50, padding: '7px 14px',
+          display: 'inline-flex', alignItems: 'center', gap: 14,
+          marginTop: 24, background: 'rgba(20,20,30,0.5)',
+          backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: 16, padding: '12px 18px',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
           position: 'relative',
         }}>
-          <span style={{ fontSize: 16 }}>🌇</span>
+          <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg, #F59E0B, #DC2626)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, boxShadow: '0 4px 12px rgba(220,38,38,0.3)' }}>
+            🌅
+          </div>
           <div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.7)', letterSpacing: 1.2, textTransform: 'uppercase' }}>{t.goldenHour}</div>
-            <div style={{ fontSize: 15, fontWeight: 900, color: '#fff' }}>{sunsetTime}</div>
+            <div style={{ fontSize: 10, fontWeight: 800, color: 'rgba(255,255,255,0.5)', letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 2 }}>{t.goldenHour}</div>
+            <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: '-.5px', lineHeight: 1 }}>{sunsetTime}</div>
           </div>
         </div>
       </div>

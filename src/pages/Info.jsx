@@ -126,11 +126,20 @@ export default function Info({ lang }) {
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
       {/* ── Hero with live tiles ── */}
-      <div className="info-hero">
-        <h1 style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-.3px', marginBottom:14 }}>{t.title}</h1>
+      <div className="info-hero" style={{
+        background: 'url("/images/info_hero_hr.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Cinematic gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0.95) 100%)', zIndex: 0 }} />
+        
+        <h1 style={{ position:'relative', zIndex:1, fontSize:28, fontWeight:900, color:'#fff', letterSpacing:'-.5px', textShadow: '0 2px 14px rgba(0,0,0,0.5)', marginBottom:18 }}>{t.title}</h1>
 
         {/* Live tiles */}
-        <div className="info-tiles">
+        <div className="info-tiles" style={{ position:'relative', zIndex:1 }}>
 
           {/* Weather tile */}
           <div className="info-tile" onClick={()=>setTab('weather')}>
@@ -163,7 +172,7 @@ export default function Info({ lang }) {
         </div>
 
         {/* Tab strip */}
-        <div className="info-tabs">
+        <div className="info-tabs" style={{ position:'relative', zIndex:1 }}>
           {TABS.map(tb => (
             <button
               key={tb.k}

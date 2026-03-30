@@ -26,12 +26,24 @@ export default function Transport({ lang }) {
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
       {/* Hero */}
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
-        <div style={{ fontSize:22, fontWeight:800, color:'#fff', marginBottom:4 }}>{t.title}</div>
-        <div style={{ fontSize:12, color:'rgba(255,255,255,.38)', marginBottom:14 }}>{t.sub}</div>
+      <div style={{
+        background: 'url("/images/transport_hero_hr.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '18px 20px 0',
+        paddingTop: 'calc(64px + env(safe-area-inset-top,0px))',
+        position: 'relative',
+        overflow: 'hidden',
+        flexShrink: 0
+      }}>
+        {/* Cinematic gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0.95) 100%)' }} />
+        
+        <div style={{ position:'relative', zIndex:1, fontSize:26, fontWeight:900, color:'#fff', letterSpacing:'-.5px', textShadow: '0 2px 14px rgba(0,0,0,0.5)', marginBottom:4 }}>{t.title}</div>
+        <div style={{ position:'relative', zIndex:1, fontSize:12, fontWeight:700, color:'rgba(255,255,255,.8)', textShadow: '0 2px 8px rgba(0,0,0,0.5)', letterSpacing: '.5px', marginBottom:18 }}>{t.sub}</div>
 
         {/* Next departures mini tiles */}
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:16 }}>
+        <div style={{ position:'relative', zIndex:1, display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginBottom:16 }}>
           <div onClick={() => setMode('ferry')} style={{ background:'rgba(29,78,216,.35)', border:'1px solid rgba(29,78,216,.5)', borderRadius:14, padding:'12px 14px', cursor:'pointer' }}>
             <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:1, textTransform:'uppercase', marginBottom:6 }}>⛴️ {t.ferry} · {t.toAyamonte}</div>
             {nextFerry ? <><div style={{ fontSize:22, fontWeight:900, color:'#fff' }}>{nextFerry}</div><div style={{ fontSize:11, color:'#93C5FD', fontWeight:700, marginTop:2 }}>{fmtEta(nextFerry)}</div></> : <div style={{ fontSize:12, color:'rgba(255,255,255,.35)' }}>{t.noMore}</div>}
@@ -43,7 +55,7 @@ export default function Transport({ lang }) {
         </div>
 
         {/* Mode tabs */}
-        <div role="tablist" aria-label={t.title} style={{ display:'flex', gap:6, overflowX:'auto', paddingBottom:16 }}>
+        <div role="tablist" aria-label={t.title} style={{ position:'relative', zIndex:1, display:'flex', gap:6, overflowX:'auto', paddingBottom:16 }}>
           {MODES.map(m => (
             <button key={m.k} role="tab" aria-selected={mode===m.k} aria-controls={`panel-${m.k}`} onClick={() => setMode(m.k)} style={{ flexShrink:0, display:'flex', alignItems:'center', gap:5, padding:'6px 14px', borderRadius:50, border:'none', cursor:'pointer', fontSize:11, fontWeight:700, transition:'all .15s', background: mode===m.k ? '#fff' : 'rgba(255,255,255,.1)', color: mode===m.k ? 'var(--navy)' : 'rgba(255,255,255,.6)' }}>
               <span style={{ fontSize:14 }}>{m.icon}</span>{t[m.k]}

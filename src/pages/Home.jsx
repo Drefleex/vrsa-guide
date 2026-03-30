@@ -388,13 +388,18 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
     <div className="page">
 
       {/* ── Hero ── */}
-      <div className="home-hero" style={mode==='praia' ? {background:'linear-gradient(160deg,#0277BD,#00838F)'} : {}}>
+      <div className="home-hero" style={{
+        background: mode === 'praia' 
+          ? 'linear-gradient(to bottom, rgba(2,119,189,0.2) 0%, rgba(0,131,143,0.95) 100%), url("/images/praia_hero_hr.png") center/cover'
+          : 'linear-gradient(to bottom, rgba(0,59,111,0.2) 0%, rgba(0,45,85,0.95) 100%), url("/images/marina_hero_hr.png") center/cover',
+        transition: 'background 0.5s ease'
+      }}>
 
         {/* Top row: brasão + name */}
-        <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:14 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:16 }}>
           <div
             onClick={handleBrasaoTap}
-            style={{ flexShrink:0, padding:6, background:'rgba(255,255,255,.12)', borderRadius:14, border:'1px solid rgba(255,255,255,.18)', backdropFilter:'blur(8px)', cursor:'default', userSelect:'none', WebkitUserSelect:'none' }}
+            style={{ flexShrink:0, padding:6, background:'rgba(255,255,255,.15)', borderRadius:14, border:'1px solid rgba(255,255,255,.25)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)', cursor:'default', userSelect:'none', WebkitUserSelect:'none', boxShadow:'0 4px 16px rgba(0,0,0,0.2)' }}
           >
             <img
               src="/brasao-vrsa.webp"
@@ -404,30 +409,30 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
               style={{ width:52, height:58, objectFit:'contain', display:'block', pointerEvents:'none' }}
             />
             {tapCount > 2 && tapCount < 7 && (
-              <div style={{ position:'absolute', fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', marginTop:2, textAlign:'center', width:64 }}>
+              <div style={{ position:'absolute', fontSize:9, fontWeight:700, color:'rgba(255,255,255,.8)', marginTop:2, textAlign:'center', width:64 }}>
                 {7 - tapCount}×
               </div>
             )}
           </div>
-          <div style={{ flex:1, minWidth:0 }}>
-            <div style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.5)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:4 }}>Município de VRSA · Algarve</div>
-            <div style={{ fontSize:'clamp(20px,5.5vw,26px)', fontWeight:800, color:'#fff', lineHeight:1.1, letterSpacing:'-.5px' }}>Vila Real de<br/>Santo António</div>
-            <div style={{ display:'inline-flex', alignItems:'center', gap:5, marginTop:6, background:'rgba(255,255,255,.15)', border:'1px solid rgba(255,255,255,.2)', borderRadius:50, padding:'3px 10px' }}>
-              <span style={{ width:5, height:5, borderRadius:'50%', background:'#4ADE80', flexShrink:0, boxShadow:'0 0 6px #4ADE80' }} />
-              <span style={{ fontSize:9, fontWeight:700, color:'rgba(255,255,255,.85)', letterSpacing:'1.5px', textTransform:'uppercase' }}>Guia Turístico Digital</span>
+          <div style={{ flex:1, minWidth:0, textShadow:'0 2px 14px rgba(0,0,0,0.5)' }}>
+            <div style={{ fontSize:9, fontWeight:800, color:'rgba(255,255,255,.7)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:6 }}>Município de VRSA · Algarve</div>
+            <div style={{ fontSize:'clamp(20px,5.5vw,26px)', fontWeight:900, color:'#fff', lineHeight:1.1, letterSpacing:'-.5px' }}>Vila Real de<br/>Santo António</div>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:5, marginTop:8, background:'rgba(0,0,0,.35)', backdropFilter:'blur(10px)', WebkitBackdropFilter:'blur(10px)', border:'1px solid rgba(255,255,255,.2)', borderRadius:50, padding:'5px 12px', boxShadow:'0 4px 12px rgba(0,0,0,0.2)', textShadow:'none' }}>
+              <span style={{ width:6, height:6, borderRadius:'50%', background:'#4ADE80', flexShrink:0, boxShadow:'0 0 8px #4ADE80' }} />
+              <span style={{ fontSize:9, fontWeight:800, color:'rgba(255,255,255,.9)', letterSpacing:'1.5px', textTransform:'uppercase' }}>Guia Turístico Digital</span>
             </div>
           </div>
         </div>
 
         {/* Mode toggle: Rio/Centro ↔ Praia */}
-        <div style={{ display:'flex', gap:3, background:'rgba(0,0,0,.22)', borderRadius:50, padding:4, marginBottom:14 }}>
+        <div style={{ display:'flex', gap:4, background:'rgba(0,0,0,.3)', backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:50, padding:5, marginBottom:18, boxShadow:'0 4px 20px rgba(0,0,0,0.25)' }}>
           <button
             onClick={() => setMode('rio')}
-            style={{ flex:1, padding:'7px 0', borderRadius:50, border:'none', background:mode==='rio'?'rgba(255,255,255,.95)':'transparent', color:mode==='rio'?'var(--primary)':'rgba(255,255,255,.7)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation', letterSpacing:.2 }}
+            style={{ flex:1, padding:'8px 0', borderRadius:50, border:'none', background:mode==='rio'?'rgba(255,255,255,.95)':'transparent', color:mode==='rio'?'var(--primary)':'rgba(255,255,255,.8)', fontSize:12, fontWeight:800, cursor:'pointer', transition:'all .3s ease', touchAction:'manipulation', letterSpacing:.2, boxShadow:mode==='rio'?'0 2px 8px rgba(0,0,0,0.2)':'none' }}
           >⛵ {t.modeRio}</button>
           <button
             onClick={() => setMode('praia')}
-            style={{ flex:1, padding:'7px 0', borderRadius:50, border:'none', background:mode==='praia'?'rgba(255,255,255,.95)':'transparent', color:mode==='praia'?'#0277BD':'rgba(255,255,255,.7)', fontSize:12, fontWeight:700, cursor:'pointer', transition:'all .2s', touchAction:'manipulation', letterSpacing:.2 }}
+            style={{ flex:1, padding:'8px 0', borderRadius:50, border:'none', background:mode==='praia'?'rgba(255,255,255,.95)':'transparent', color:mode==='praia'?'#0277BD':'rgba(255,255,255,.8)', fontSize:12, fontWeight:800, cursor:'pointer', transition:'all .3s ease', touchAction:'manipulation', letterSpacing:.2, boxShadow:mode==='praia'?'0 2px 8px rgba(0,0,0,0.2)':'none' }}
           >🏖️ {t.modePraia}</button>
         </div>
 

@@ -401,10 +401,22 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
     <div className="page" style={{ display:'flex', flexDirection:'column' }}>
 
       {/* Header */}
-      <div style={{ background:'linear-gradient(160deg,var(--navy) 0%,#162844 100%)', padding:'18px 20px 0', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0 }}>
-        <div style={{ fontSize:22, fontWeight:800, color:'#fff', letterSpacing:'-.3px', marginBottom:12 }}>{t.title}</div>
+      <div style={{
+        background: 'url("/images/restaurants_hero_hr.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '18px 20px 0',
+        paddingTop: 'calc(64px + env(safe-area-inset-top,0px))',
+        position: 'relative',
+        overflow: 'hidden',
+        flexShrink: 0
+      }}>
+        {/* Cinematic gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0.95) 100%)' }} />
+        
+        <div style={{ position:'relative', zIndex:1, fontSize:26, fontWeight:900, color:'#fff', letterSpacing:'-.5px', textShadow: '0 2px 14px rgba(0,0,0,0.5)', marginBottom:16 }}>{t.title}</div>
         {/* Search */}
-        <div style={{ position:'relative', marginBottom:12 }}>
+        <div style={{ position:'relative', zIndex:1, marginBottom:12, backdropFilter:'blur(10px)', WebkitBackdropFilter:'blur(10px)' }}>
           <span style={{ position:'absolute', left:14, top:'50%', transform:'translateY(-50%)', fontSize:15, pointerEvents:'none' }}>🔍</span>
           <input
             value={search}

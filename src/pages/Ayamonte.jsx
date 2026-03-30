@@ -48,13 +48,26 @@ export default function Ayamonte({ lang }) {
   return (
     <div className="page">
       {/* Hero */}
-      <div style={{ background:'linear-gradient(160deg,var(--primary-dark) 0%,var(--primary) 100%)', padding:'18px 20px 18px', paddingTop:'calc(62px + env(safe-area-inset-top,0px))', flexShrink:0, position:'relative', overflow:'hidden' }}>
-        <div style={{ position:'absolute', top:-40, right:-40, width:180, height:180, borderRadius:'50%', background:'rgba(255,255,255,.05)', pointerEvents:'none' }} />
-        <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
-          <span style={{ fontSize:16 }}>🇪🇸</span>
-          <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:'2px', textTransform:'uppercase' }}>{t.sub}</div>
+      <div style={{
+        background: 'url("/images/ayamonte_hero_hr.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '18px 20px 24px',
+        paddingTop: 'calc(64px + env(safe-area-inset-top,0px))',
+        flexShrink: 0,
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Cinematic gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0.95) 100%)' }} />
+        
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
+            <span style={{ fontSize:18 }}>🇪🇸</span>
+            <div style={{ fontSize:11, fontWeight:700, color:'rgba(255,255,255,.8)', letterSpacing:'2px', textTransform:'uppercase', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>{t.sub}</div>
+          </div>
+          <div style={{ fontSize:32, fontWeight:900, color:'#fff', letterSpacing:'-.5px', textShadow: '0 2px 14px rgba(0,0,0,0.5)' }}>{t.title}</div>
         </div>
-        <div style={{ fontSize:28, fontWeight:700, color:'#fff', letterSpacing:'-.3px' }}>{t.title}</div>
       </div>
 
       <div style={{ padding:'14px 16px 40px' }}>
