@@ -9,6 +9,10 @@ export default function Culture({ lang, favs, toggleFav, focusName, onFocusClear
   const t = tr('culture', L)
   const [detail, setDetail] = useState(null)
   const [playingId, setPlayingId] = useState(null)
+  const listRef     = React.useRef(null)
+  const savedScroll = React.useRef(0)
+  function openDetail(m) { savedScroll.current = listRef.current?.scrollTop || 0; setDetail(m) }
+  function closeDetail()  { setDetail(null); requestAnimationFrame(() => { if (listRef.current) listRef.current.scrollTop = savedScroll.current }) }
 
   const voiceLangs = { PT:'pt-PT', EN:'en-US', ES:'es-ES', FR:'fr-FR', DE:'de-DE' }
 
@@ -71,7 +75,7 @@ export default function Culture({ lang, favs, toggleFav, focusName, onFocusClear
           <div style={{ position:'absolute', top:-40, right:-40, width:160, height:160, borderRadius:'50%', background:'rgba(255,255,255,0.06)' }} />
           <div style={{ position:'absolute', bottom:-30, left:-20, width:110, height:110, borderRadius:'50%', background:'rgba(255,255,255,0.04)' }} />
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
-            <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
+            <button aria-label={t.back} onClick={closeDetail} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
             <div style={{ display:'flex', gap:8 }}>
               <button onClick={() => handleShare(detail.name)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}><Share size={18} color="#fff" /></button>
               <button aria-label={t.fav} onClick={() => toggleFav('culture-' + detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
@@ -142,12 +146,12 @@ export default function Culture({ lang, favs, toggleFav, focusName, onFocusClear
         </div>
       </div>
 
-      <div style={{ flex:1, overflowY:'auto', padding:'14px 16px 40px' }}>
+      <div ref={listRef} style={{ flex:1, overflowY:'auto', padding:'14px 16px 40px' }}>
         <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
           {MONUMENTS.map(m => {
             const isFav = favs.includes('culture-' + m.id)
                     return (
-              <div key={m.id} onClick={() => setDetail(m)} className="card" style={{ cursor:'pointer', overflow:'hidden' }}>
+              <div key={m.id} onClick={() => openDetail(m)} className="card" style={{ cursor:'pointer', overflow:'hidden' }}>
                 <div style={{ height:90, background:getAvatarColor(m.name), display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 16px' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:12 }}>
                     <span style={{ fontSize:32 }}>{m.emoji}</span>

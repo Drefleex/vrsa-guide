@@ -58,6 +58,10 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
   const [detail, setDetail] = useState(focusPin || null)
+  const listRef     = React.useRef(null)
+  const savedScroll = React.useRef(0)
+  function openDetail(p) { savedScroll.current = listRef.current?.scrollTop || 0; setDetail(p) }
+  function closeDetail()  { setDetail(null); requestAnimationFrame(() => { if (listRef.current) listRef.current.scrollTop = savedScroll.current }) }
 
   useEffect(() => {
     if (focusPin) {
@@ -85,7 +89,7 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
           <div style={{ position:'absolute', top:-40, right:-40, width:160, height:160, borderRadius:'50%', background:'rgba(255,255,255,0.06)' }} />
           <div style={{ position:'absolute', bottom:-30, left:-20, width:110, height:110, borderRadius:'50%', background:'rgba(255,255,255,0.04)' }} />
           <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16 }}>
-            <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
+            <button aria-label={t.back} onClick={closeDetail} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
             <button aria-label={t.fav} onClick={() => toggleFav('pin-' + detail.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
@@ -167,7 +171,7 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
         </div>
       </div>
 
-      <div style={{ flex:1, overflowY:'auto', padding:'14px 16px 32px' }}>
+      <div ref={listRef} style={{ flex:1, overflowY:'auto', padding:'14px 16px 32px' }}>
         {filtered.length === 0 ? (
           <div style={{ textAlign:'center', padding:'40px 20px', color:'var(--ink-20)' }}>
             <div style={{ fontSize:36, marginBottom:10 }}>🏨</div>
@@ -179,7 +183,7 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
               const r    = getRich(p.id)
               const isFav = favs.includes('pin-' + p.id)
               return (
-                <div key={p.id} onClick={() => setDetail(p)} className="card" style={{ cursor:'pointer', overflow:'hidden' }}>
+                <div key={p.id} onClick={() => openDetail(p)} className="card" style={{ cursor:'pointer', overflow:'hidden' }}>
                   <div style={{ height:100, background:getAvatarColor(p.name), display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 16px', position:'relative' }}>
                     <div style={{ display:'flex', alignItems:'center', gap:12 }}>
                       <div style={{ width:52, height:52, borderRadius:12, background:'rgba(255,255,255,.18)', display:'flex', alignItems:'center', justifyContent:'center' }}>

@@ -150,6 +150,20 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
   const [filter, setFilter]   = useState('all')
   const [search, setSearch]   = useState('')
   const [detail, setDetail]   = useState(focusPin || null)
+  const listRef     = React.useRef(null)
+  const savedScroll = React.useRef(0)
+
+  function openDetail(r) {
+    savedScroll.current = listRef.current?.scrollTop || 0
+    setDetail(r)
+  }
+
+  function closeDetail() {
+    setDetail(null)
+    requestAnimationFrame(() => {
+      if (listRef.current) listRef.current.scrollTop = savedScroll.current
+    })
+  }
 
   useEffect(() => {
     if (focusPin) {
@@ -201,7 +215,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
           <div style={{ position:'absolute', top:-40, right:-40, width:160, height:160, borderRadius:'50%', background:'rgba(255,255,255,0.06)' }} />
           <div style={{ position:'absolute', bottom:-30, left:-20, width:110, height:110, borderRadius:'50%', background:'rgba(255,255,255,0.04)' }} />
           <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:16 }}>
-            <button aria-label={t.back} onClick={() => setDetail(null)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
+            <button aria-label={t.back} onClick={closeDetail} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', color:'#fff', fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>←</button>
             <button aria-label={t.fav} onClick={() => toggleFav('pin-' + r.id)} style={{ width:36, height:36, borderRadius:'50%', background:'rgba(0,0,0,.2)', border:'none', fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>{isFav ? '❤️' : '🤍'}</button>
           </div>
           <div style={{ display:'flex', alignItems:'center', gap:14 }}>
@@ -452,7 +466,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
       </div>
 
       {/* List */}
-      <div style={{ flex:1, overflowY:'auto', padding:'0 16px 24px' }}>
+      <div ref={listRef} style={{ flex:1, overflowY:'auto', padding:'0 16px 24px' }}>
         {filtered.length === 0 ? (
           <div style={{ textAlign:'center', padding:'40px 20px', color:'var(--ink-20)' }}>
             <div style={{ fontSize:36, marginBottom:10 }}>🍽️</div>
@@ -466,7 +480,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
                       return (
                 <div
                   key={r.id}
-                  onClick={() => setDetail(r)}
+                  onClick={() => openDetail(r)}
                   style={{ display:'flex', alignItems:'center', gap:12, padding:'13px 16px', borderBottom: i < filtered.length-1 ? '1px solid var(--surface)' : 'none', cursor:'pointer', transition:'background .1s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
