@@ -82,6 +82,29 @@ export default function App() {
   const [shoppingFocusName, setShoppingFocusName]   = useState(null)
   const [healthFocusName, setHealthFocusName]       = useState(null)
   const [sheetEvents, setSheetEvents] = useState([])
+  const [pageHistory, setPageHistory] = useState([])
+
+  // Navigate to a new page, pushing current page to history
+  const navigateTo = useCallback((newPage) => {
+    if (newPage === 'home') {
+      setPageHistory([]) // clear history when going home
+    } else {
+      setPageHistory(h => [...h, page])
+    }
+    setPage(newPage)
+  }, [page])
+
+  // Go back to previous page (or Home if no history)
+  const goBack = useCallback(() => {
+    if (pageHistory.length > 0) {
+      const prev = pageHistory[pageHistory.length - 1]
+      setPageHistory(h => h.slice(0, -1))
+      setPage(prev)
+    } else {
+      setPageHistory([])
+      setPage('home')
+    }
+  }, [pageHistory])
 
   // Load events from Google Sheets (VITE_EVENTS_URL)
   useEffect(() => {
@@ -247,11 +270,11 @@ export default function App() {
     return <SplashScreen lang={lang} setLang={setLang} onStart={() => setPage('home')} />
   }
 
-  const cp = { lang, favs, toggleFav, onNav: setPage }
+  const cp = { lang, favs, toggleFav, onNav: navigateTo }
 
   return (
     <div className="app-shell">
-      {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} theme={theme} toggleTheme={toggleTheme} page={page} onNav={setPage} />}
+      {page !== 'map' && <TopBar lang={lang} setLang={setLang} onSearch={() => setSearch(true)} theme={theme} toggleTheme={toggleTheme} page={page} goBack={goBack} hasHistory={pageHistory.length > 0} />}
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
         <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} municipalAlerts={municipalAlerts} />}
