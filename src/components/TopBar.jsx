@@ -21,7 +21,7 @@ const SVG_GLOBE = (
   </svg>
 )
 
-export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme, page, goBack, hasHistory }) {
+export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme, page, goBack }) {
   const [langOpen, setLangOpen] = useState(false)
   const showBack = !ROOT_PAGES.includes(page)
 

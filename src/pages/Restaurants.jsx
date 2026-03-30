@@ -150,8 +150,8 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
   const [filter, setFilter]   = useState('all')
   const [search, setSearch]   = useState('')
   const [detail, setDetail]   = useState(focusPin || null)
-  const listRef     = React.useRef(null)
-  const savedScroll = React.useRef(0)
+  const listRef     = useRef(null)
+  const savedScroll = useRef(0)
 
   function openDetail(r) {
     savedScroll.current = listRef.current?.scrollTop || 0

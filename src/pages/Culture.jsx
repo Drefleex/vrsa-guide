@@ -9,8 +9,8 @@ export default function Culture({ lang, favs, toggleFav, focusName, onFocusClear
   const t = tr('culture', L)
   const [detail, setDetail] = useState(null)
   const [playingId, setPlayingId] = useState(null)
-  const listRef     = React.useRef(null)
-  const savedScroll = React.useRef(0)
+  const listRef     = useRef(null)
+  const savedScroll = useRef(0)
   function openDetail(m) { savedScroll.current = listRef.current?.scrollTop || 0; setDetail(m) }
   function closeDetail()  { setDetail(null); requestAnimationFrame(() => { if (listRef.current) listRef.current.scrollTop = savedScroll.current }) }
 

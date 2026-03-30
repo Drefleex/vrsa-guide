@@ -49,7 +49,7 @@ export default function Transport({ lang }) {
             {nextFerry ? <><div style={{ fontSize:22, fontWeight:900, color:'#fff' }}>{nextFerry}</div><div style={{ fontSize:11, color:'#93C5FD', fontWeight:700, marginTop:2 }}>{fmtEta(nextFerry)}</div></> : <div style={{ fontSize:12, color:'rgba(255,255,255,.35)' }}>{t.noMore}</div>}
           </div>
           <div onClick={() => setMode('train')} style={{ background:'rgba(5,150,105,.3)', border:'1px solid rgba(5,150,105,.5)', borderRadius:14, padding:'12px 14px', cursor:'pointer' }}>
-            <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:1, textTransform:'uppercase', marginBottom:6 }}>🚂 {t.train} · {t.toFaro}</div>
+            <div style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,.45)', letterSpacing:1, textTransform:'uppercase', marginBottom:6 }}>🚂 {t.train} · VRSA</div>
             {nextTrain ? <><div style={{ fontSize:22, fontWeight:900, color:'#fff' }}>{nextTrain.dep}</div><div style={{ fontSize:11, color:'#6EE7B7', fontWeight:700, marginTop:2 }}>{fmtEta(nextTrain.dep)}</div></> : <div style={{ fontSize:12, color:'rgba(255,255,255,.35)' }}>{t.noMore}</div>}
           </div>
         </div>
@@ -94,21 +94,25 @@ export default function Transport({ lang }) {
         {/* ── TRAIN ── */}
         {mode==='train' && (
           <div id="panel-train" role="tabpanel">
-            <div style={{ background:'#ECFDF5', border:'1px solid #A7F3D0', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#065F46', fontWeight:600 }}>🎫 {t.trainNote} · cp.pt</div>
+            <div style={{ background:'#ECFDF5', border:'1px solid #A7F3D0', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#065F46', fontWeight:600 }}>🎫 €1,00 · Cada 30 min · Pausa almoço 13h–14h · touristtrainvrsa.com</div>
             <div className="card">
               <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
                 <span style={{ fontSize:22 }}>🚂</span>
-                <div><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>VRSA → Faro</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>~1h10 min</div></div>
-                <a href="https://www.cp.pt" target="_blank" rel="noopener noreferrer" style={{ marginLeft:'auto', background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>cp.pt</a>
+                <div><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Comboio Turístico VRSA</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>Bombeiros → Praia → Farol · 6 paragens</div></div>
+                <a href="https://touristtrainvrsa.com" target="_blank" rel="noopener noreferrer" style={{ marginLeft:'auto', background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>🌐</a>
               </div>
               {TRAIN_TIMES.map((tr,i,arr) => {
                 const past=toMin(tr.dep)<=nm, isNext=tr===nextTrain
+                const isBreak = tr.dep === '14:00'
                 return (
-                  <div key={i} className={`sched-row ${past?'past':''} ${isNext?'next-dep':''}`} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
-                    <span className="sched-time">{tr.dep}</span>
-                    <span style={{ flex:1, fontSize:12, color: isNext?'var(--blue)':'var(--ink-40)' }}>Chega Faro {tr.arr}</span>
-                    {isNext && <span className="badge badge-blue">{t.next}</span>}
-                    {!isNext && fmtEta(tr.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(tr.dep)}</span>}
+                  <div key={i}>
+                    {isBreak && <div style={{ padding:'6px 16px', fontSize:11, color:'var(--ink-40)', fontWeight:600, background:'var(--surface)', textAlign:'center' }}>⏸ Pausa almoço 13:00–14:00</div>}
+                    <div className={`sched-row ${past?'past':''} ${isNext?'next-dep':''}`} style={{ borderBottom:i<arr.length-1?'1px solid var(--surface)':'none' }}>
+                      <span className="sched-time">{tr.dep}</span>
+                      <span style={{ flex:1, fontSize:12, color: isNext?'var(--blue)':'var(--ink-40)' }}>→ Farol (circuito completo)</span>
+                      {isNext && <span className="badge badge-blue">{t.next}</span>}
+                      {!isNext && fmtEta(tr.dep) && <span style={{ fontSize:11, fontWeight:700, color:'var(--mint)' }}>{fmtEta(tr.dep)}</span>}
+                    </div>
                   </div>
                 )
               })}

@@ -544,7 +544,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
             <div style={{ flex:1, display:'flex', alignItems:'center', gap:10, paddingLeft:10 }}>
               <span style={{ fontSize:22 }}>🚂</span>
               <div>
-                <div style={{ fontSize:9, fontWeight:700, color:'var(--ink-20)', textTransform:'uppercase', letterSpacing:.8 }}>Comboio → Faro</div>
+                <div style={{ fontSize:9, fontWeight:700, color:'var(--ink-20)', textTransform:'uppercase', letterSpacing:.8 }}>Comboio Turístico</div>
                 <div style={{ fontSize:16, fontWeight:800, color:'var(--ink)', lineHeight:1.1 }}>{train?.dep || '—'}</div>
                 {train && (
                   <div style={{ fontSize:10, fontWeight:700, color:'#059669', marginTop:1 }}>
