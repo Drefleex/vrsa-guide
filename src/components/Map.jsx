@@ -790,7 +790,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
       <div style={{ flex:1, minHeight:0, position:'relative' }}>
 
         {/* Quick filter bar */}
-        {!showPicker && !navDest && !activeRoute && (
+        {(!showPicker || isDesktop) && !navDest && !activeRoute && (
           <div style={{
             position:'absolute', top:8, left:0, right:0, zIndex:10,
             display:'flex', overflowX:'auto', gap:6, padding:'0 10px',
@@ -851,7 +851,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
             </AdvancedMarker>
           )}
 
-          {!showPicker && visible.map(pin => {
+          {(!showPicker || isDesktop) && visible.map(pin => {
             const destId = navDest?.id ?? activeRoute?.destination?.id
             const shouldShow = destId ? destId === pin.id : true
             if (!shouldShow) return null
@@ -907,7 +907,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
         )}
 
         {/* ── Locate Me button ── */}
-        {userPos && !showPicker && (
+        {userPos && (!showPicker || isDesktop) && (
           <button
             onClick={() => locateMeRef.current?.()}
             aria-label="Locate me"
