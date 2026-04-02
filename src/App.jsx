@@ -211,25 +211,24 @@ export default function App() {
       .finally(() => setLoading(false))
   }, [])
 
-  // Fix iOS Safari blank screen ao voltar de link externo (BFCache / page freeze)
-  // pageshow persisted=true → restauração do BFCache
-  // visibilitychange       → app volta do background (standalone PWA)
+  // Fix iOS PWA blank screen ao voltar de link externo
+  // O iOS mata o processo WebKit do PWA instalado quando vai para background.
+  // Repaint não chega — é preciso reload. Só recarrega se esteve em background
+  // mais de 20s para não interromper ausências curtas (notificações, etc).
   useEffect(() => {
-    const repaint = () => {
-      // documentElement mais fiável que body para reiniciar o pipeline de render
-      const el = document.documentElement
-      el.style.display = 'none'
-      // eslint-disable-next-line no-unused-expressions
-      el.offsetHeight // reflow síncrono
-      el.style.display = ''
+    if (!navigator.standalone) return // só afecta PWA instalado no iOS
+    let hiddenAt = 0
+    const onHide = () => { if (document.visibilityState === 'hidden') hiddenAt = Date.now() }
+    const onShow = () => {
+      if (document.visibilityState === 'visible' && hiddenAt && Date.now() - hiddenAt > 20_000) {
+        window.location.reload()
+      }
     }
-    const onPageShow   = (e) => { if (e.persisted) repaint() }
-    const onVisibility = ()  => { if (document.visibilityState === 'visible') repaint() }
-    window.addEventListener('pageshow', onPageShow)
-    document.addEventListener('visibilitychange', onVisibility)
+    document.addEventListener('visibilitychange', onHide)
+    document.addEventListener('visibilitychange', onShow)
     return () => {
-      window.removeEventListener('pageshow', onPageShow)
-      document.removeEventListener('visibilitychange', onVisibility)
+      document.removeEventListener('visibilitychange', onHide)
+      document.removeEventListener('visibilitychange', onShow)
     }
   }, [])
 
