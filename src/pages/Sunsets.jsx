@@ -269,7 +269,7 @@ export default function Sunsets({ lang }) {
                     {spot.desc[L] || spot.desc.PT}
                   </p>
                   <button
-                    onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}`)}
+                    onClick={() => window.location.assign(`https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}`)}
                     style={{
                       width: '100%', padding: '12px', borderRadius: 12, border: 'none', cursor: 'pointer',
                       background: spot.accentColor, color: '#fff',

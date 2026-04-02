@@ -170,7 +170,7 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
     <>
       <div onClick={onClose} style={{ position:'fixed', inset:0, background:'rgba(0,0,0,.4)', zIndex:350 }} />
       <style>{`@keyframes srch-dn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}`}</style>
-      <div style={{ position:'fixed', top:0, left:'50%', transform:'translateX(-50%)', width:'100%', maxWidth:430, zIndex:351, background:'var(--white)', borderRadius:'0 0 16px 16px', boxShadow:'0 8px 32px rgba(0,0,0,.15)', animation:'srch-dn .2s ease', paddingTop:'env(safe-area-inset-top,0px)', maxHeight:'85vh', display:'flex', flexDirection:'column' }}>
+      <div style={{ position:'fixed', top:0, left:'50%', transform:'translateX(-50%)', width:'100%', maxWidth: '100%', zIndex:351, background:'var(--white)', borderRadius:'0 0 16px 16px', boxShadow:'0 8px 32px rgba(0,0,0,.15)', animation:'srch-dn .2s ease', paddingTop:'env(safe-area-inset-top,0px)', maxHeight:'85vh', display:'flex', flexDirection:'column' }}>
 
         {/* Search bar */}
         <div style={{ display:'flex', alignItems:'center', gap:10, padding:'12px 14px', borderBottom:'1px solid var(--border-lt)' }}>
@@ -268,3 +268,4 @@ export default function GlobalSearch({ lang, pins, onNav, onClose }) {
     </>
   )
 }
+

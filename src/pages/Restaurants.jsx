@@ -381,7 +381,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
           {/* Action buttons */}
           <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
             <button
-              onClick={() => { const c = r.lat+','+r.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c) }}
+              onClick={() => { const c = r.lat+','+r.lng; window.location.assign('https://www.google.com/maps/search/?api=1&query='+c) }}
               style={{ flex:1, minWidth:120, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8, boxShadow:'0 4px 16px rgba(6,21,43,.25)' }}
             >🧭 {t.navigate}</button>
             {rich.phone && (

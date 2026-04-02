@@ -334,7 +334,7 @@ export default function Transport({ lang }) {
                     <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{p.info[L]||p.info.PT}</div>
                   </div>
                   <span style={{ background: p.free ? '#DCFCE7' : '#FEF9C3', color: p.free ? '#15803D' : '#854D0E', fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:50, flexShrink:0 }}>{p.free ? (L==='EN'?'Free':L==='FR'?'Gratuit':L==='DE'?'Kostenlos':L==='ES'?'Gratis':'Grátis') : (L==='EN'?'Paid':L==='FR'?'Payant':L==='DE'?'Kostenpfl.':L==='ES'?'Pago':'Pago')}</span>
-                  <button onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`)} style={{ width:32, height:32, background:'var(--blue-lt)', border:'none', borderRadius:8, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>🧭</button>
+                  <button onClick={() => window.location.assign(`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`)} style={{ width:32, height:32, background:'var(--blue-lt)', border:'none', borderRadius:8, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>🧭</button>
                 </div>
               ))}
             </div>

@@ -134,7 +134,7 @@ export default function SplashScreen({ lang, setLang, onStart }) {
       {/* Sheet de idiomas */}
       {open && (
         <div onClick={() => setOpen(false)} style={{ position:'fixed', inset:0, zIndex:100, background:'rgba(0,0,0,.6)', display:'flex', alignItems:'flex-end', justifyContent:'center' }}>
-          <div onClick={e => e.stopPropagation()} style={{ width:'100%', maxWidth:430, background:'var(--white)', borderRadius:'18px 18px 0 0', padding:'14px 20px 48px', animation:'sht-up .25s cubic-bezier(.22,.68,0,1.1)' }}>
+          <div onClick={e => e.stopPropagation()} style={{ width:'100%', maxWidth: '100%', background:'var(--white)', borderRadius:'18px 18px 0 0', padding:'14px 20px 48px', animation:'sht-up .25s cubic-bezier(.22,.68,0,1.1)' }}>
             <div style={{ width:36, height:3, borderRadius:2, background:'var(--border)', margin:'0 auto 20px' }} />
             <div style={{ fontSize:10, fontWeight:700, color:'var(--ink-20)', letterSpacing:1.5, textTransform:'uppercase', marginBottom:14, textAlign:'center' }}>{CHOOSE[lang]||CHOOSE.PT}</div>
             {LANGS.map(l => {
@@ -155,3 +155,4 @@ export default function SplashScreen({ lang, setLang, onStart }) {
     </div>
   )
 }
+

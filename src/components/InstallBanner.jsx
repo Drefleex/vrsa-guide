@@ -152,7 +152,7 @@ export default function InstallBanner({ lang }) {
       <div style={{
         position: 'fixed',
         bottom: 0, left: '50%', transform: 'translateX(-50%)',
-        width: '100%', maxWidth: 430,
+        width: '100%', maxWidth: '100%',
         zIndex: 400,
         background: 'var(--white)',
         borderRadius: '24px 24px 0 0',
@@ -251,3 +251,4 @@ export default function InstallBanner({ lang }) {
     </>
   )
 }
+

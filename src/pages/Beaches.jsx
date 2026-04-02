@@ -124,7 +124,7 @@ export default function Beaches({ lang, focusName, onFocusClear }) {
             { icon:'🍎', label:'Apple Maps',  sub:'Apple Inc.',  url:`https://maps.apple.com/?daddr=${b.lat},${b.lng}&dirflg=d` },
             { icon:'🔵', label:'Waze',        sub:'Google LLC',  url:`https://waze.com/ul?ll=${b.lat},${b.lng}&navigate=yes` },
           ].map(({ icon, label, sub, url }) => (
-            <button key={label} onClick={() => window.open(url)} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
+            <button key={label} onClick={() => window.location.assign(url)} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
               <span style={{ fontSize:28 }}>{icon}</span>
               <div style={{ flex:1 }}>
                 <div style={{ fontSize:14, fontWeight:700, color:'var(--ink)' }}>{label}</div>

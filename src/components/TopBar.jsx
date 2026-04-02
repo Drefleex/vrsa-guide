@@ -34,7 +34,7 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme, pa
         left: '50%',
         transform: 'translateX(-50%)',
         width: '100%',
-        maxWidth: 430,
+        maxWidth: '100%',
         zIndex: 199,
         background: theme === 'dark' ? '#0D2D4A' : '#EBF4FF',
         borderBottom: theme === 'dark' ? '1px solid #1A3D5C' : '1px solid #C9DEFA',
@@ -103,3 +103,4 @@ export default function TopBar({ lang, setLang, onSearch, theme, toggleTheme, pa
     </>
   )
 }
+

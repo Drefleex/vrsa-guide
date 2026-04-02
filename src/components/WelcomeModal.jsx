@@ -31,7 +31,7 @@ export default function WelcomeModal({ lang, visible, onClose }) {
       <div
         style={{
           position:'fixed', bottom:0, left:'50%', transform:'translateX(-50%)',
-          width:'100%', maxWidth:430, zIndex:401,
+          width:'100%', maxWidth: '100%', zIndex:401,
           background:'var(--white)',
           borderRadius:'24px 24px 0 0',
           padding:'20px 24px calc(30px + env(safe-area-inset-bottom,0px))',
@@ -96,3 +96,4 @@ export default function WelcomeModal({ lang, visible, onClose }) {
     </>
   )
 }
+
