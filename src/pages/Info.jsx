@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react'
 
-// ─── Data ────────────────────────────────────────────────────
-const FERRY_TIMES = ['09:00','09:45','10:30','11:15','12:00','12:45','13:30','14:15','15:00','15:45','16:30','17:15','18:00','18:45','19:30']
+import { FERRY_TIMES, CP_TRAINS } from '../data/transport'
 
-const TRAINS = [
-  {dep:'06:12',arr:'07:19'},{dep:'07:45',arr:'08:52'},{dep:'09:10',arr:'10:17'},
-  {dep:'10:40',arr:'11:47'},{dep:'12:05',arr:'13:12'},{dep:'13:35',arr:'14:42'},
-  {dep:'15:00',arr:'16:07'},{dep:'16:30',arr:'17:37'},{dep:'18:00',arr:'19:07'},
-  {dep:'19:45',arr:'20:52'},{dep:'21:10',arr:'22:17'},
-]
+const TRAINS = CP_TRAINS.map(t => ({ dep: t.dep, arr: t.faro }))
 
 const BUSES = [
   { id:1, op:'EVA / Rede Expressos', dest:{PT:'Faro (Aeroporto)',EN:'Faro (Airport)',ES:'Faro (Aeropuerto)'}, price:'€6', dur:'50min', color:'#1D4ED8', times:['07:30','09:15','11:00','13:30','15:45','17:30','19:00'] },
