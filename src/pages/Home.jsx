@@ -346,7 +346,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
                     <div style={{ display:'flex', gap:8, marginTop:6, flexWrap:'wrap' }}>
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}`}
-                        target="_blank" rel="noopener noreferrer"
+                       
                         onClick={e => e.stopPropagation()}
                         style={{ display:'inline-flex', alignItems:'center', gap:4, background:`${route.color}15`, color:route.color, border:`1px solid ${route.color}25`, borderRadius:50, padding:'3px 10px', fontSize:11, fontWeight:700, textDecoration:'none' }}
                       >
@@ -369,7 +369,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
 
           {/* Action buttons */}
           <div style={{ display:'flex', gap:8, marginBottom:12 }}>
-            <a href={mapUrl} target="_blank" rel="noopener noreferrer" style={{ flex:1, textDecoration:'none' }}>
+            <a href={mapUrl} style={{ flex:1, textDecoration:'none' }}>
               <button style={{ width:'100%', padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>
                 🗺️ {L==='EN'?'Open full route':L==='FR'?'Ouvrir l\'itinéraire':L==='DE'?'Route öffnen':L==='ES'?'Abrir ruta completa':'Abrir rota completa'}
               </button>
@@ -676,7 +676,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
               {suggestedPins.map(p => (
                 <a key={p.id}
                   href={`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`}
-                  target="_blank" rel="noopener noreferrer"
+                 
                   style={{ flexShrink:0, display:'flex', alignItems:'center', gap:10, padding:'10px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:14, boxShadow:'var(--sh-xs)', textDecoration:'none', minWidth:160, maxWidth:200 }}
                 >
                   <span style={{ fontSize:22, flexShrink:0 }}>{p.emoji}</span>
@@ -802,7 +802,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
                       <div style={{ fontSize:13, fontWeight:700, color:'var(--ink)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{p.name}</div>
                       <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{(CAT_L[p.cat]||{})[L] || p.cat}</div>
                     </div>
-                    <a href={`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`} target="_blank" rel="noopener noreferrer"
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`}
                       onClick={e=>e.stopPropagation()}
                       style={{ fontSize:11, fontWeight:700, color:'var(--primary)', background:'var(--primary-lt)', padding:'4px 10px', borderRadius:50, textDecoration:'none', flexShrink:0 }}>
                       📍 {L==='EN'?'Map':L==='FR'?'Carte':L==='DE'?'Karte':L==='ES'?'Mapa':'Mapa'}

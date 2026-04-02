@@ -72,7 +72,7 @@ export default function Health({ lang, focusName, onFocusClear }) {
             { icon:'🍎', label:'Apple Maps',  url:`https://maps.apple.com/?daddr=${p.lat},${p.lng}` },
             { icon:'🔵', label:'Waze',        url:`https://waze.com/ul?ll=${p.lat},${p.lng}&navigate=yes` },
           ].map(({ icon, label, url }) => (
-            <button key={label} onClick={() => window.open(url,'_blank','noopener,noreferrer')} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
+            <button key={label} onClick={() => window.open(url)} style={{ display:'flex', alignItems:'center', gap:14, padding:'13px 14px', background:'var(--white)', border:'1px solid var(--border-lt)', borderRadius:12, width:'100%', textAlign:'left', marginBottom:8, cursor:'pointer' }}>
               <span style={{ fontSize:26 }}>{icon}</span>
               <span style={{ flex:1, fontSize:14, fontWeight:700, color:'var(--ink)' }}>{label}</span>
               <span style={{ color:'var(--ink-20)', fontSize:18 }}>›</span>
@@ -135,7 +135,7 @@ export default function Health({ lang, focusName, onFocusClear }) {
                   <button style={{ width:'100%', padding:'7px 0', background:h.color, color:'#fff', border:'none', borderRadius:9, fontSize:12, fontWeight:700, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:5 }}>📞 {h.phone}</button>
                 </a>
                 {h.lat !== 0 && (
-                  <button onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${h.lat},${h.lng}`,'_blank','noopener,noreferrer')} style={{ padding:'7px 12px', background:'var(--surface)', border:'1px solid var(--border)', borderRadius:9, fontSize:12, fontWeight:700, color:'var(--ink-40)', cursor:'pointer' }}>🧭</button>
+                  <button onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${h.lat},${h.lng}`)} style={{ padding:'7px 12px', background:'var(--surface)', border:'1px solid var(--border)', borderRadius:9, fontSize:12, fontWeight:700, color:'var(--ink-40)', cursor:'pointer' }}>🧭</button>
                 )}
               </div>
             </div>

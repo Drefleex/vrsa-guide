@@ -116,7 +116,7 @@ export default function Ayamonte({ lang }) {
               <div style={{ display:'flex', gap:8, alignItems:'center', marginLeft:56 }}>
                 <span style={{ fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:50, background: s.free ? '#DCFCE7' : '#FEF3C7', color: s.free ? '#15803D' : '#B45309' }}>{s.free ? t.free : t.paid}</span>
                 <span style={{ fontSize:10, color:'var(--ink-40)' }}>🚶 {s.walk} {t.walkTime}</span>
-                <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/search/?api=1&query='+s.lat+','+s.lng,'_blank','noopener,noreferrer')} style={{ marginLeft:'auto', padding:'3px 10px', background:'var(--surface)', border:'1px solid var(--border)', borderRadius:50, fontSize:10, fontWeight:700, color:'var(--ink-40)', cursor:'pointer' }}>📍 {t.navigate}</button>
+                <button aria-label={t.navigate} onClick={() => window.open('https://www.google.com/maps/search/?api=1&query='+s.lat+','+s.lng)} style={{ marginLeft:'auto', padding:'3px 10px', background:'var(--surface)', border:'1px solid var(--border)', borderRadius:50, fontSize:10, fontWeight:700, color:'var(--ink-40)', cursor:'pointer' }}>📍 {t.navigate}</button>
               </div>
             </div>
           ))}

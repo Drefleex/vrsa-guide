@@ -381,7 +381,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
           {/* Action buttons */}
           <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
             <button
-              onClick={() => { const c = r.lat+','+r.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c,'_blank','noopener,noreferrer') }}
+              onClick={() => { const c = r.lat+','+r.lng; window.open('https://www.google.com/maps/search/?api=1&query='+c) }}
               style={{ flex:1, minWidth:120, padding:'13px 0', background:'var(--navy)', color:'#fff', border:'none', borderRadius:14, fontSize:14, fontWeight:800, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:8, boxShadow:'0 4px 16px rgba(6,21,43,.25)' }}
             >🧭 {t.navigate}</button>
             {rich.phone && (
@@ -390,12 +390,12 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
               </a>
             )}
             {rich.bdInstagram && (
-              <a href={rich.bdInstagram} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none' }}>
+              <a href={rich.bdInstagram} style={{ textDecoration:'none' }}>
                 <button aria-label="Instagram" style={{ width:50, height:50, background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)', border:'none', borderRadius:14, fontSize:20, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>📸</button>
               </a>
             )}
             {rich.bdUrl && (
-              <a href={rich.bdUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none' }}>
+              <a href={rich.bdUrl} style={{ textDecoration:'none' }}>
                 <button aria-label="Bairro Digital" style={{ width:50, height:50, background:'var(--primary-lt)', border:'none', borderRadius:14, fontSize:18, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' }}>🏪</button>
               </a>
             )}

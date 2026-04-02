@@ -88,7 +88,7 @@ export default function Transport({ lang }) {
               <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
                 <span style={{ fontSize:22 }}>⛴️</span>
                 <div><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>VRSA → Ayamonte</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>Cais de Embarque Transguadiana</div></div>
-                <a href="https://maps.google.com/?q=37.1970,-7.4132" target="_blank" rel="noopener noreferrer" style={{ marginLeft:'auto', background:'var(--blue-lt)', color:'var(--blue)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>📍</a>
+                <a href="https://maps.google.com/?q=37.1970,-7.4132" style={{ marginLeft:'auto', background:'var(--blue-lt)', color:'var(--blue)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>📍</a>
               </div>
               {FERRY_TIMES.map((f,i,arr) => {
                 const past=toMin(f)<=nm, isNext=f===nextFerry, e=fmtEta(f)
@@ -115,7 +115,7 @@ export default function Transport({ lang }) {
               <div style={{ padding:'12px 16px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:10 }}>
                 <span style={{ fontSize:22 }}>🚆</span>
                 <div style={{ flex:1 }}><div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>CP Regional — VRSA → Lagos</div><div style={{ fontSize:11, color:'var(--ink-40)' }}>via Tavira · Faro · Loulé · Albufeira · Portimão</div></div>
-                <a href="https://www.cp.pt" target="_blank" rel="noopener noreferrer" style={{ background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>cp.pt</a>
+                <a href="https://www.cp.pt" style={{ background:'var(--mint-lt)', color:'var(--mint)', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>cp.pt</a>
               </div>
               {CP_TRAINS.map((tr,i,arr) => {
                 const past=toMin(tr.dep)<=nm, isNext=tr===nextCP
@@ -143,7 +143,7 @@ export default function Transport({ lang }) {
                   <div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>Comboio Turístico VRSA</div>
                   <div style={{ fontSize:11, color:'var(--ink-40)' }}>Circuito completo ~25 min · 6 paragens</div>
                 </div>
-                <a href="https://touristtrainvrsa.com" target="_blank" rel="noopener noreferrer" style={{ background:'#DCFCE7', color:'#16A34A', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>🌐</a>
+                <a href="https://touristtrainvrsa.com" style={{ background:'#DCFCE7', color:'#16A34A', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:8, textDecoration:'none' }}>🌐</a>
               </div>
               {TOURIST_TRAIN_STOPS.map((s, i, arr) => (
                 <div key={s.n} style={{ display:'flex', alignItems:'center', gap:10, padding:'10px 16px', borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none' }}>
@@ -190,7 +190,7 @@ export default function Transport({ lang }) {
             {/* Info + link */}
             <div style={{ background:'#FFFBEB', border:'1px solid #FDE68A', borderRadius:12, padding:'11px 14px', marginBottom:12, fontSize:12, color:'#92400E', fontWeight:600, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
               <span>🚌 VAMUS Linha 67 · ~1h50</span>
-              <a href="https://vamus.pt" target="_blank" rel="noopener noreferrer" style={{ color:'#D97706', fontWeight:700, textDecoration:'none' }}>vamus.pt ↗</a>
+              <a href="https://vamus.pt" style={{ color:'#D97706', fontWeight:700, textDecoration:'none' }}>vamus.pt ↗</a>
             </div>
 
             {/* Toggle direção */}
@@ -334,7 +334,7 @@ export default function Transport({ lang }) {
                     <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{p.info[L]||p.info.PT}</div>
                   </div>
                   <span style={{ background: p.free ? '#DCFCE7' : '#FEF9C3', color: p.free ? '#15803D' : '#854D0E', fontSize:10, fontWeight:700, padding:'2px 8px', borderRadius:50, flexShrink:0 }}>{p.free ? (L==='EN'?'Free':L==='FR'?'Gratuit':L==='DE'?'Kostenlos':L==='ES'?'Gratis':'Grátis') : (L==='EN'?'Paid':L==='FR'?'Payant':L==='DE'?'Kostenpfl.':L==='ES'?'Pago':'Pago')}</span>
-                  <button onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`,'_blank','noopener,noreferrer')} style={{ width:32, height:32, background:'var(--blue-lt)', border:'none', borderRadius:8, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>🧭</button>
+                  <button onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`)} style={{ width:32, height:32, background:'var(--blue-lt)', border:'none', borderRadius:8, fontSize:16, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>🧭</button>
                 </div>
               ))}
             </div>

@@ -419,7 +419,7 @@ export default function Info({ lang }) {
                 </div>
                 <a
                   href="https://maps.google.com/?q=37.1973,-7.4131"
-                  target="_blank"
+                 
                   rel="noopener noreferrer"
                   style={{ marginLeft:'auto', background:'var(--blue-lt)', color:'var(--blue)', border:'none', borderRadius:8, padding:'5px 10px', fontSize:11, fontWeight:700, cursor:'pointer', textDecoration:'none' }}
                 >
@@ -467,7 +467,7 @@ export default function Info({ lang }) {
                 </div>
                 <a
                   href="https://www.cp.pt"
-                  target="_blank"
+                 
                   rel="noopener noreferrer"
                   style={{ background:'var(--mint-lt)', color:'var(--mint)', border:'none', borderRadius:8, padding:'5px 10px', fontSize:11, fontWeight:700, cursor:'pointer', textDecoration:'none' }}
                 >

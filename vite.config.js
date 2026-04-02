@@ -10,6 +10,7 @@ export default defineConfig({
       injectRegister: 'script',
       // Precache all built assets automatically (JS, CSS, HTML, images)
       workbox: {
+        importScripts: ['/sw-bypass.js'],
         // Precache only app shell (JS/CSS/HTML/icons) — NOT the heavy /images/ folder
         globPatterns: ['**/*.{js,css,html,ico,woff2}', '*.png', '*.svg'],
         globIgnores: ['**/images/**'],
@@ -24,29 +25,8 @@ export default defineConfig({
               expiration: { maxAgeSeconds: 300 },
             },
           },
-          // Google Maps — NUNCA interceptar. googleapis.com usa streaming RPC
-          // ($rpc/google) que não pode ser clonado para cache. Interceptar causa
-          // "no-response" error que crasha o Maps JS API → ecrã branco no iOS.
-          // Sem regra aqui = SW deixa passar diretamente para a rede.
-
-          // Google Fonts stylesheets (fonts.googleapis.com — seguro cachear, não é streaming)
-          {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-css',
-              expiration: { maxAgeSeconds: 31536000, maxEntries: 10 },
-            },
-          },
-          // Google Fonts files
-          {
-            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-files',
-              expiration: { maxAgeSeconds: 31536000, maxEntries: 30 },
-            },
-          },
+          // Google Maps — Bypassed via sw-bypass.js
+          // Google Fonts — Bypassed via sw-bypass.js
           // Local /images/ — CacheFirst, cached on first view, kept 30 days
           {
             urlPattern: /\/images\/.+\.webp$/i,
