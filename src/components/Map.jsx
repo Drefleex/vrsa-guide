@@ -700,7 +700,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   }
 
   return (
-    <div className="map-shell" style={{ height:'100%', display:'flex', flexDirection:'column', position:'relative' }}>
+    <div className="map-shell" style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column' }}>
 
       {/* ── Ferry pill — only when next departure ≤ 30 min ── */}
       {showFerryPill && (
@@ -723,7 +723,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
       <div className="map-right" style={{ flex:1, minHeight:0, display:'flex', flexDirection:'column', overflow:'hidden' }}>
       {/* Top bar — oculto no mobile quando picker está aberto */}
       {!showPicker && (
-        <div style={{ background:'#fff', borderBottom:'1px solid #F3F4F6', padding:'8px 12px', flexShrink:0, boxShadow:'0 1px 4px rgba(0,0,0,.05)' }}>
+        <div style={{ background:'#fff', borderBottom:'1px solid #F3F4F6', padding:'8px 12px', paddingTop:'calc(8px + env(safe-area-inset-top, 0px))', flexShrink:0, boxShadow:'0 1px 4px rgba(0,0,0,.05)' }}>
           <div style={{ display:'flex', alignItems:'center', gap:8 }}>
             {/* Back to picker — oculto no desktop (picker fica sempre visível) */}
             <button onClick={()=>{ setShowPicker(true); setActiveFilter(null); setEditMode(false); setSelected(null) }} style={{ width:34, height:34, borderRadius:50, background:'#F3F4F6', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16, flexShrink:0 }}>
