@@ -246,6 +246,11 @@ mark { background:#FDE68A; border-radius:2px; padding:0 1px; }
   .page { padding-bottom:0; }
   /* More sheet: offset da largura da sidebar */
   .more-sheet { left:calc(50% + 36px) !important; transform:translateX(-50%) !important; }
+  /* ── Home: hero mais alto, conteúdo com mais respiro ── */
+  .home-hero { padding:24px 32px 28px; padding-top:calc(52px + env(safe-area-inset-top,0px)); }
+  /* Routes e sugestões: de h-scroll para grid */
+  .home-routes, .home-suggestions { display:grid !important; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)) !important; overflow-x:visible !important; gap:12px !important; padding-right:0 !important; }
+  .home-routes .route-card  { width:auto !important; flex-shrink:unset !important; }
   /* ── Mapa split-screen ── */
   .map-shell { flex-direction:row !important; }
   .map-picker-overlay { order:-1; width:35%; min-width:260px; max-width:380px; flex-shrink:0; overflow:hidden; border-right:1px solid var(--border-lt); }
@@ -275,4 +280,19 @@ mark { background:#FDE68A; border-radius:2px; padding:0 1px; }
   .restaurants-list-wrap > .card { display:contents; }
   .restaurants-empty { grid-column:1/-1; display:block !important; }
   .restaurant-row { background:var(--white); border:1px solid var(--border-lt) !important; border-radius:var(--r-l) !important; box-shadow:var(--sh); border-bottom:none !important; overflow:hidden; }
+  /* ── Home desktop ── */
+  /* Hero: duas colunas (info à esq, clima/ferry à dir) */
+  .home-hero { padding:32px 48px 40px; padding-top:calc(56px + env(safe-area-inset-top,0px)); }
+  .home-hero-content { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  /* Serviços secundários: vertical list → icon grid */
+  .qa-services-card { display:grid !important; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)) !important; gap:4px !important; padding:8px !important; }
+  .qa-service-item { border-bottom:none !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; text-align:center !important; padding:14px 8px !important; gap:6px !important; border-radius:10px !important; width:100% !important; }
+  .qa-service-item:hover { background:var(--surface) !important; }
+  .qa-service-chevron { display:none !important; }
+  /* Popular: 2 colunas */
+  .home-popular { display:grid !important; grid-template-columns:1fr 1fr !important; }
+  .popular-item { border-right:1px solid var(--surface); }
+  .popular-item:nth-child(even) { border-right:none !important; }
+  /* Gallery: mais alto e mais impactante */
+  .home-gallery { grid-template-rows:220px 220px !important; border-radius:20px !important; }
 }

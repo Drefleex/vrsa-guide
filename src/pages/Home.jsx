@@ -422,6 +422,8 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
         transition: 'background 0.5s ease'
       }}>
 
+        <div className="home-hero-content">
+        <div className="hero-left">
         {/* Top row: brasão + name */}
         <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:16 }}>
           <div
@@ -458,6 +460,8 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
           >🏖️ {t.modePraia}</button>
         </div>
 
+        </div>{/* /hero-left */}
+        <div className="hero-right">
         {/* Weather + Ferry — dois cards lado a lado */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, marginBottom:10 }}>
 
@@ -514,6 +518,8 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
           <span style={{ fontSize:14, lineHeight:1, flexShrink:0 }}>🇪🇸</span>
           <span style={{ fontSize:11, color:'rgba(255,255,255,.65)', fontWeight:600, lineHeight:1.3 }}>{esHintText.replace('🇪🇸','').trim()}</span>
         </div>
+        </div>{/* /hero-right */}
+        </div>{/* /home-hero-content */}
       </div>
 
       {/* ── Avisos Municipais ── */}
@@ -647,16 +653,17 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
         </div>
 
         {/* ── Serviços secundários — lista compacta ── */}
-        <div className="card" style={{ marginBottom:24 }}>
+        <div className="card qa-services-card" style={{ marginBottom:24 }}>
           {QA.slice(3).map((q, i, arr) => (
             <button
               key={i}
               onClick={() => onNav(q.page)}
+              className="qa-service-item"
               style={{ width:'100%', display:'flex', alignItems:'center', gap:12, padding:'11px 14px', background:'none', border:'none', borderBottom: i < arr.length-1 ? '1px solid var(--surface)' : 'none', cursor:'pointer', textAlign:'left', touchAction:'manipulation' }}
             >
               <div style={{ width:34, height:34, borderRadius:8, background:q.bg, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, color:q.color, padding:7 }}>{React.cloneElement(SVGS[q.svg], { width:'100%', height:'100%' })}</div>
               <span style={{ fontSize:13, fontWeight:600, color:'var(--ink-70)', flex:1 }}>{q.label[L]}</span>
-              <span style={{ fontSize:16, color:'var(--ink-20)' }}>›</span>
+              <span className="qa-service-chevron" style={{ fontSize:16, color:'var(--ink-20)' }}>›</span>
             </button>
           ))}
         </div>
@@ -665,7 +672,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
         {suggestedPins.length > 0 && (
           <>
             <div className="sec-label" style={{ marginBottom:10 }}>{t.suggested}</div>
-            <div className="h-scroll" style={{ marginBottom:20 }}>
+            <div className="h-scroll home-suggestions" style={{ marginBottom:20 }}>
               {suggestedPins.map(p => (
                 <a key={p.id}
                   href={`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`}
@@ -710,7 +717,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
 
         {/* ── Roteiros ── */}
         <div className="sec-label" style={{ marginBottom:12 }}>{t.routes}</div>
-        <div className="h-scroll" style={{ marginBottom:24 }}>
+        <div className="h-scroll home-routes" style={{ marginBottom:24 }}>
           {ROUTES.map(r => {
             const done = (checked[r.id] || []).length
             const pct  = Math.round((done / r.steps.length) * 100)
@@ -782,10 +789,11 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
                 <div className="sec-label" style={{ marginBottom:0 }}>{L==='EN'?'POPULAR':L==='FR'?'POPULAIRES':L==='DE'?'BELIEBT':L==='ES'?'POPULARES':'POPULARES'}</div>
                 <button onClick={() => onNav('map')} style={{ background:'none', border:'none', fontSize:12, fontWeight:700, color:'var(--blue)', cursor:'pointer' }}>{t.seeAll}</button>
               </div>
-              <div className="card" style={{ marginBottom:24 }}>
+              <div className="card home-popular" style={{ marginBottom:24 }}>
                 {topPins.map((p,i,arr) => (
                   <div key={p.id} onClick={() => onNav('map')} role="button" tabIndex={0}
                     onKeyDown={e => e.key === 'Enter' && onNav('map')}
+                    className="popular-item"
                     style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', borderBottom:i<arr.length-1?'1px solid var(--surface)':'none', cursor:'pointer' }}>
                     <div style={{ width:42, height:42, borderRadius:12, background:avc(p.name), display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                       <span style={{ fontSize:15, fontWeight:700, color:'#fff' }}>{avi(p.name)}</span>
@@ -808,7 +816,7 @@ export default function Home({ lang, pins, onNav, municipalAlerts = [] }) {
 
         {/* ── Gallery premium ── */}
         <div className="sec-label" style={{ marginBottom:12 }}>{t.gallery}</div>
-        <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gridTemplateRows:'140px 140px', gap:5, marginBottom:24, borderRadius:16, overflow:'hidden' }}>
+        <div className="home-gallery" style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gridTemplateRows:'140px 140px', gap:5, marginBottom:24, borderRadius:16, overflow:'hidden' }}>
           {/* Grande à esquerda */}
           <button onClick={() => setLb(0)} aria-label={GALLERY[0].cap} style={{ gridRow:'1 / 3', position:'relative', cursor:'pointer', overflow:'hidden', background:'var(--surface)', border:'none', padding:0 }}>
             <img src={GALLERY[0].url} alt={GALLERY[0].cap} className="gallery-img"
