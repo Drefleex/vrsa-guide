@@ -731,7 +731,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
         </div>
       )}
 
-      <div className="map-right">
+      <div className="map-right" style={{ flex:1, minHeight:0, display:'flex', flexDirection:'column', overflow:'hidden' }}>
       {/* Top bar — oculto no mobile quando picker está aberto */}
       {(!showPicker || isDesktop) && (
         <div style={{ background:'#fff', borderBottom:'1px solid #F3F4F6', padding:'8px 12px', flexShrink:0, boxShadow:'0 1px 4px rgba(0,0,0,.05)' }}>
