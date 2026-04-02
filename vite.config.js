@@ -24,16 +24,12 @@ export default defineConfig({
               expiration: { maxAgeSeconds: 300 },
             },
           },
-          // Google Maps tiles & API — network first, 1 day cache
-          {
-            urlPattern: /^https:\/\/.*googleapis\.com\/.*/i,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'gmaps-api',
-              expiration: { maxAgeSeconds: 86400 },
-            },
-          },
-          // Google Fonts stylesheets
+          // Google Maps — NUNCA interceptar. googleapis.com usa streaming RPC
+          // ($rpc/google) que não pode ser clonado para cache. Interceptar causa
+          // "no-response" error que crasha o Maps JS API → ecrã branco no iOS.
+          // Sem regra aqui = SW deixa passar diretamente para a rede.
+
+          // Google Fonts stylesheets (fonts.googleapis.com — seguro cachear, não é streaming)
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
