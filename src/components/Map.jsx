@@ -300,12 +300,12 @@ function CategoryPicker({ lang, pins, onSelect, onShowAll, onEdit }) {
   const activeCats = CATS.filter(c => counts[c.k] > 0)
 
   return (
-    <div style={{
+    <div className="cp-overlay" style={{
       position:'absolute', inset:0, background:'rgba(10,22,40,.55)',
       backdropFilter:'blur(2px)', zIndex:10,
       display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-end',
     }}>
-      <div style={{
+      <div className="cp-panel" style={{
         width:'100%', maxWidth:430, background:'var(--white)',
         borderRadius:'20px 20px 0 0',
         maxHeight:'78vh', display:'flex', flexDirection:'column',
@@ -530,7 +530,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   const t = T[lang] || T.PT
   const [activeFilter, setActiveFilter] = useState(null)
   const [_tick, setTick] = useState(0) // null = show picker
-  const [showPicker, setShowPicker]     = useState(!focusPin)
+  const [showPicker, setShowPicker]     = useState(!focusPin || window.matchMedia('(min-width:768px)').matches)
   const [selected, setSelected]         = useState(null)
   const [userPos, setUserPos]           = useState(null)
   const [navDest, setNavDest]           = useState(null)
@@ -545,6 +545,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   const [activeRoute, setActiveRoute]   = useState(null) // {origin, destination}
   const [routeResult, setRouteResult]   = useState(null) // DirectionsResult
   const [quickFilter, setQuickFilter]   = useState('all')
+  const [isDesktop, setIsDesktop]       = useState(() => window.matchMedia('(min-width:768px)').matches)
   const nextId      = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
   const locateMeRef = useRef(null)
   const fetchPlaceRef = useRef(null)
@@ -566,6 +567,14 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
 
   useEffect(() => { const iv = setInterval(() => setTick(x => x+1), 60000); return () => clearInterval(iv) }, [])
 
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width:768px)')
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    const handler = e => { setIsDesktop(e.matches); if (e.matches) setShowPicker(true) }
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   // When navigating here from a search result, skip picker and open directions
   useEffect(() => {
     if (!focusPin) return
@@ -585,15 +594,15 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   // When filter changes, hide picker
   function selectCategory(cat) {
     setActiveFilter(cat)
-    setShowPicker(false)
+    if (!isDesktop) setShowPicker(false)
   }
   function showAllPins() {
     setActiveFilter('todas')
-    setShowPicker(false)
+    if (!isDesktop) setShowPicker(false)
   }
   function openEditMode() {
     setActiveFilter('todas')
-    setShowPicker(false)
+    if (!isDesktop) setShowPicker(false)
     setEditMode(true)
   }
 
@@ -699,7 +708,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   }
 
   return (
-    <div style={{ height:'100%', display:'flex', flexDirection:'column' }}>
+    <div className="map-shell" style={{ height:'100%', display:'flex', flexDirection:'column', position:'relative' }}>
 
       {/* ── Ferry pill — only when next departure ≤ 30 min ── */}
       {showFerryPill && (
@@ -715,12 +724,20 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
         </button>
       )}
 
-      {/* Top bar — only when NOT showing picker */}
-      {!showPicker && (
+      {/* CategoryPicker: overlay no mobile / sidebar no desktop */}
+      {(showPicker || isDesktop) && (
+        <div className="map-picker-overlay">
+          <CategoryPicker lang={lang} pins={pins} onSelect={selectCategory} onShowAll={showAllPins} onEdit={openEditMode} />
+        </div>
+      )}
+
+      <div className="map-right">
+      {/* Top bar — oculto no mobile quando picker está aberto */}
+      {(!showPicker || isDesktop) && (
         <div style={{ background:'#fff', borderBottom:'1px solid #F3F4F6', padding:'8px 12px', flexShrink:0, boxShadow:'0 1px 4px rgba(0,0,0,.05)' }}>
           <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-            {/* Back to picker */}
-            <button onClick={()=>{ setShowPicker(true); setActiveFilter(null); setEditMode(false); setSelected(null) }} style={{ width:34, height:34, borderRadius:50, background:'#F3F4F6', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16, flexShrink:0 }}>
+            {/* Back to picker — oculto no desktop (picker fica sempre visível) */}
+            <button onClick={()=>{ setShowPicker(true); setActiveFilter(null); setEditMode(false); setSelected(null) }} style={{ width:34, height:34, borderRadius:50, background:'#F3F4F6', border:'none', cursor:'pointer', display: isDesktop ? 'none' : 'flex', alignItems:'center', justifyContent:'center', fontSize:16, flexShrink:0 }}>
               ☰
             </button>
 
@@ -879,11 +896,6 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
           />
         )}
 
-        {/* Category picker overlay */}
-        {showPicker && (
-          <CategoryPicker lang={lang} pins={pins} onSelect={selectCategory} onShowAll={showAllPins} onEdit={openEditMode} />
-        )}
-
         {addingPin && (
           <div style={{ position:'absolute', inset:0, pointerEvents:'none', display:'flex', alignItems:'center', justifyContent:'center' }}>
             <div style={{ position:'relative', width:40, height:40 }}>
@@ -915,6 +927,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
           >🎯</button>
         )}
       </div>
+      </div>{/* /map-right */}
 
       {/* Change cat sheet */}
       {editingPin && (

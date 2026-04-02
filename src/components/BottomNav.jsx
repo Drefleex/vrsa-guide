@@ -47,7 +47,7 @@ export default function BottomNav({ page, setPage, lang }) {
       {moreOpen && (
         <>
           <div onClick={() => setMoreOpen(false)} style={{ position:'fixed', inset:0, zIndex:90, background:'rgba(0,0,0,.35)', animation:'fade-in .18s ease' }} />
-          <div style={{ position:'fixed', bottom:0, left:'50%', transform:'translateX(-50%)', width:'100%', maxWidth:430, zIndex:100, background:'var(--white)', borderRadius:'18px 18px 0 0', padding:'14px 16px calc(76px + env(safe-area-inset-bottom,0px))', boxShadow:'0 -4px 32px rgba(0,0,0,.13)', animation:'slide-up .25s cubic-bezier(.22,.68,0,1.1)' }}>
+          <div className="more-sheet" style={{ position:'fixed', bottom:0, left:'50%', transform:'translateX(-50%)', width:'100%', maxWidth:430, zIndex:100, background:'var(--white)', borderRadius:'18px 18px 0 0', padding:'14px 16px calc(76px + env(safe-area-inset-bottom,0px))', boxShadow:'0 -4px 32px rgba(0,0,0,.13)', animation:'slide-up .25s cubic-bezier(.22,.68,0,1.1)' }}>
             {/* Handle */}
             <div style={{ width:32, height:3, borderRadius:2, background:'var(--border)', margin:'0 auto 14px' }} />
 

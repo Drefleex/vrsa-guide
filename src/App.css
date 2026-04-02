@@ -220,3 +220,59 @@ mark { background:#FDE68A; border-radius:2px; padding:0 1px; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet ≥768px e Desktop ≥1024px
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet: sidebar compacta (ícones) ── */
+@media (min-width: 768px) {
+  /* Shell ocupa a tela toda, deslocada pela sidebar */
+  .app-shell { max-width:none; margin:0 0 0 72px; box-shadow:none; border-left:1px solid var(--border-lt); }
+
+  /* Bottom Nav → Sidebar de 72px */
+  .bottom-nav {
+    position:fixed; left:0; top:0; width:72px; height:100%;
+    flex-direction:column; align-items:center;
+    border-top:none; border-right:1px solid var(--border-lt);
+    box-shadow:2px 0 12px rgba(0,0,0,.05);
+    padding:8px 0 0; overflow-y:auto; overflow-x:hidden; z-index:50;
+  }
+  .nav-btn { width:100%; height:60px; flex-direction:column; justify-content:center; padding:0 4px; flex:none; border-radius:0; margin:0; }
+  /* Barra ativa: esquerda em vez de topo */
+  .nav-btn .nav-active-bar { top:50%; left:0; width:3px; height:24px; transform:translateY(-50%) scaleY(0); transform-origin:center; border-radius:0 4px 4px 0; }
+  .nav-btn.active .nav-active-bar { transform:translateY(-50%) scaleY(1); }
+  /* Page: sem padding-bottom (nav já não é inferior) */
+  .page { padding-bottom:0; }
+  /* More sheet: offset da largura da sidebar */
+  .more-sheet { left:calc(50% + 36px) !important; transform:translateX(-50%) !important; }
+  /* ── Mapa split-screen ── */
+  .map-shell { flex-direction:row !important; }
+  .map-picker-overlay { order:-1; width:35%; min-width:260px; max-width:380px; flex-shrink:0; overflow:hidden; border-right:1px solid var(--border-lt); }
+  .cp-overlay { position:relative !important; inset:auto !important; height:100%; background:var(--white) !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; z-index:1 !important; align-items:stretch !important; justify-content:flex-start !important; }
+  .cp-panel { border-radius:0 !important; max-width:100% !important; max-height:100% !important; height:100% !important; box-shadow:none !important; padding-bottom:0 !important; }
+  .map-right { flex:1; min-width:0; display:flex; flex-direction:column; overflow:hidden; }
+}
+
+/* ── Desktop: sidebar larga (ícones + labels) ── */
+@media (min-width: 1024px) {
+  .app-shell { margin-left:200px; }
+  .bottom-nav { width:200px; align-items:stretch; padding:12px 10px 0; }
+  .nav-btn { width:auto; height:44px; flex-direction:row; justify-content:flex-start; gap:10px; padding:0 14px; margin:0 0 2px; border-radius:10px; flex:none; }
+  .nav-btn .nav-icon { font-size:18px !important; }
+  .nav-btn .nav-label { font-size:13px; text-transform:none; letter-spacing:0; }
+  /* Active: background em vez de barra */
+  .nav-btn .nav-active-bar { display:none; }
+  .nav-btn.active { background:var(--primary-lt) !important; }
+  .nav-btn.active .nav-icon,
+  .nav-btn.active .nav-label { color:var(--primary) !important; }
+  /* More sheet: floating card lateral */
+  .more-sheet { left:220px !important; bottom:auto !important; top:50% !important; transform:translateY(-50%) !important; border-radius:18px !important; max-width:360px !important; padding-bottom:20px !important; }
+  /* Cards grid para listas (Hotéis, etc.) */
+  .cards-grid { display:grid !important; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)) !important; gap:20px !important; flex-direction:unset !important; }
+  /* Restaurantes: lista compacta → grid de cards individuais */
+  .restaurants-list-wrap { display:grid !important; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; align-content:start; }
+  .restaurants-list-wrap > .card { display:contents; }
+  .restaurants-empty { grid-column:1/-1; display:block !important; }
+  .restaurant-row { background:var(--white); border:1px solid var(--border-lt) !important; border-radius:var(--r-l) !important; box-shadow:var(--sh); border-bottom:none !important; overflow:hidden; }
+}

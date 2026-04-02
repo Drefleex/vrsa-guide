@@ -178,7 +178,7 @@ export default function Hotels({ lang, pins, favs, toggleFav, focusPin, onFocusC
             <div style={{ fontSize:13 }}>{t.noResults}</div>
           </div>
         ) : (
-          <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+          <div className="cards-grid" style={{ display:'flex', flexDirection:'column', gap:12 }}>
             {filtered.map(p => {
               const r    = getRich(p.id)
               const isFav = favs.includes('pin-' + p.id)

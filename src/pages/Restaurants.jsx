@@ -466,9 +466,9 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
       </div>
 
       {/* List */}
-      <div ref={listRef} style={{ flex:1, overflowY:'auto', padding:'0 16px 24px' }}>
+      <div ref={listRef} className="restaurants-list-wrap" style={{ flex:1, overflowY:'auto', padding:'0 16px 24px' }}>
         {filtered.length === 0 ? (
-          <div style={{ textAlign:'center', padding:'40px 20px', color:'var(--ink-20)' }}>
+          <div className="restaurants-empty" style={{ textAlign:'center', padding:'40px 20px', color:'var(--ink-20)' }}>
             <div style={{ fontSize:36, marginBottom:10 }}>🍽️</div>
             <div style={{ fontSize:13 }}>{t.noResults}</div>
           </div>
@@ -480,6 +480,7 @@ export default function Restaurants({ lang, pins, favs, toggleFav, focusPin, onF
                       return (
                 <div
                   key={r.id}
+                  className="restaurant-row"
                   onClick={() => openDetail(r)}
                   style={{ display:'flex', alignItems:'center', gap:12, padding:'13px 16px', borderBottom: i < filtered.length-1 ? '1px solid var(--surface)' : 'none', cursor:'pointer', transition:'background .1s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--surface)'}
