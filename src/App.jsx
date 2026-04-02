@@ -211,6 +211,22 @@ export default function App() {
       .finally(() => setLoading(false))
   }, [])
 
+  // Fix iOS Safari blank screen ao voltar de link externo (BFCache / page freeze)
+  useEffect(() => {
+    const repaint = () => {
+      document.body.style.display = 'none'
+      // eslint-disable-next-line no-unused-expressions
+      document.body.offsetHeight // força reflow
+      document.body.style.display = ''
+    }
+    window.addEventListener('focus', repaint)
+    window.addEventListener('pageshow', repaint)
+    return () => {
+      window.removeEventListener('focus', repaint)
+      window.removeEventListener('pageshow', repaint)
+    }
+  }, [])
+
   // Persist favs
   useEffect(() => { saveFavs(favs) }, [favs])
 
