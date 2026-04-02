@@ -212,18 +212,24 @@ export default function App() {
   }, [])
 
   // Fix iOS Safari blank screen ao voltar de link externo (BFCache / page freeze)
+  // pageshow persisted=true → restauração do BFCache
+  // visibilitychange       → app volta do background (standalone PWA)
   useEffect(() => {
     const repaint = () => {
-      document.body.style.display = 'none'
+      // documentElement mais fiável que body para reiniciar o pipeline de render
+      const el = document.documentElement
+      el.style.display = 'none'
       // eslint-disable-next-line no-unused-expressions
-      document.body.offsetHeight // força reflow
-      document.body.style.display = ''
+      el.offsetHeight // reflow síncrono
+      el.style.display = ''
     }
-    window.addEventListener('focus', repaint)
-    window.addEventListener('pageshow', repaint)
+    const onPageShow   = (e) => { if (e.persisted) repaint() }
+    const onVisibility = ()  => { if (document.visibilityState === 'visible') repaint() }
+    window.addEventListener('pageshow', onPageShow)
+    document.addEventListener('visibilitychange', onVisibility)
     return () => {
-      window.removeEventListener('focus', repaint)
-      window.removeEventListener('pageshow', repaint)
+      window.removeEventListener('pageshow', onPageShow)
+      document.removeEventListener('visibilitychange', onVisibility)
     }
   }, [])
 
