@@ -39,11 +39,18 @@ self.addEventListener('fetch', e => {
   // Probes de CSP/telemetria do Google Maps — deixar o browser lidar (falham intencionalmente)
   if (url.pathname.includes('gen_204') || url.pathname.includes('QuotaService')) return
 
+  // Google Maps — nunca cachear, deixar passar diretamente
+  if (
+    url.hostname.includes('googleapis.com') ||
+    url.hostname.includes('gstatic.com')
+  ) {
+    return
+  }
+
   // API calls: network first, fall back to cache
   if (
     url.hostname.includes('open-meteo.com') ||
-    url.hostname.includes('marine-api.open-meteo.com') ||
-    url.hostname.includes('googleapis.com')
+    url.hostname.includes('marine-api.open-meteo.com')
   ) {
     e.respondWith(
       fetch(e.request)
@@ -62,8 +69,6 @@ self.addEventListener('fetch', e => {
 
   // Static assets: cache first
   if (
-    url.hostname.includes('fonts.googleapis.com') ||
-    url.hostname.includes('fonts.gstatic.com') ||
     url.hostname.includes('unpkg.com') ||
     url.hostname.includes('images.unsplash.com')
   ) {
