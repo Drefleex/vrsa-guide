@@ -36,12 +36,14 @@ self.addEventListener('fetch', e => {
   // Cache API não suporta esquemas não-http(s) (ex: chrome-extension://)
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return
 
+  // Probes de CSP/telemetria do Google Maps — deixar o browser lidar (falham intencionalmente)
+  if (url.pathname.includes('gen_204') || url.pathname.includes('QuotaService')) return
+
   // API calls: network first, fall back to cache
   if (
     url.hostname.includes('open-meteo.com') ||
     url.hostname.includes('marine-api.open-meteo.com') ||
-    url.hostname.includes('googleapis.com') ||
-    url.hostname.includes('maps.googleapis.com')
+    url.hostname.includes('googleapis.com')
   ) {
     e.respondWith(
       fetch(e.request)
@@ -52,7 +54,8 @@ self.addEventListener('fetch', e => {
           }
           return res
         })
-        .catch(() => caches.match(e.request))
+        // caches.match pode resolver undefined — fallback para Response.error() em vez de rejeitar
+        .catch(() => caches.match(e.request).then(r => r || Response.error()))
     )
     return
   }
@@ -90,7 +93,11 @@ self.addEventListener('fetch', e => {
         return res
       })
       .catch(() =>
-        caches.match(e.request).then(cached => cached || (e.request.mode === 'navigate' ? caches.match('/offline.html') : caches.match('/index.html')))
+        caches.match(e.request).then(cached => {
+          if (cached) return cached
+          if (e.request.mode === 'navigate') return caches.match('/offline.html').then(r => r || Response.error())
+          return Response.error()
+        })
       )
   )
 })
