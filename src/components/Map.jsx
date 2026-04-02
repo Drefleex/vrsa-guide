@@ -530,7 +530,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   const t = T[lang] || T.PT
   const [activeFilter, setActiveFilter] = useState(null)
   const [_tick, setTick] = useState(0) // null = show picker
-  const [showPicker, setShowPicker]     = useState(!focusPin || window.matchMedia('(min-width:768px)').matches)
+  const [showPicker, setShowPicker]     = useState(!focusPin)
   const [selected, setSelected]         = useState(null)
   const [userPos, setUserPos]           = useState(null)
   const [navDest, setNavDest]           = useState(null)
@@ -545,7 +545,6 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   const [activeRoute, setActiveRoute]   = useState(null) // {origin, destination}
   const [routeResult, setRouteResult]   = useState(null) // DirectionsResult
   const [quickFilter, setQuickFilter]   = useState('all')
-  const [isDesktop, setIsDesktop]       = useState(() => window.matchMedia('(min-width:768px)').matches)
   const nextId      = useRef(Math.max(0, ...pins.map(p => p.id)) + 1)
   const locateMeRef = useRef(null)
   const fetchPlaceRef = useRef(null)
@@ -567,13 +566,6 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
 
   useEffect(() => { const iv = setInterval(() => setTick(x => x+1), 60000); return () => clearInterval(iv) }, [])
 
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width:768px)')
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    const handler = e => { setIsDesktop(e.matches); if (e.matches) setShowPicker(true) }
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
 
   // When navigating here from a search result, skip picker and open directions
   useEffect(() => {
@@ -594,15 +586,15 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
   // When filter changes, hide picker
   function selectCategory(cat) {
     setActiveFilter(cat)
-    if (!isDesktop) setShowPicker(false)
+    setShowPicker(false)
   }
   function showAllPins() {
     setActiveFilter('todas')
-    if (!isDesktop) setShowPicker(false)
+    setShowPicker(false)
   }
   function openEditMode() {
     setActiveFilter('todas')
-    if (!isDesktop) setShowPicker(false)
+    setShowPicker(false)
     setEditMode(true)
   }
 
@@ -724,20 +716,17 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
         </button>
       )}
 
-      {/* CategoryPicker: overlay no mobile / sidebar no desktop */}
-      {(showPicker || isDesktop) && (
-        <div className="map-picker-overlay">
-          <CategoryPicker lang={lang} pins={pins} onSelect={selectCategory} onShowAll={showAllPins} onEdit={openEditMode} />
-        </div>
+      {showPicker && (
+        <CategoryPicker lang={lang} pins={pins} onSelect={selectCategory} onShowAll={showAllPins} onEdit={openEditMode} />
       )}
 
       <div className="map-right" style={{ flex:1, minHeight:0, display:'flex', flexDirection:'column', overflow:'hidden' }}>
       {/* Top bar — oculto no mobile quando picker está aberto */}
-      {(!showPicker || isDesktop) && (
+      {!showPicker && (
         <div style={{ background:'#fff', borderBottom:'1px solid #F3F4F6', padding:'8px 12px', flexShrink:0, boxShadow:'0 1px 4px rgba(0,0,0,.05)' }}>
           <div style={{ display:'flex', alignItems:'center', gap:8 }}>
             {/* Back to picker — oculto no desktop (picker fica sempre visível) */}
-            <button onClick={()=>{ setShowPicker(true); setActiveFilter(null); setEditMode(false); setSelected(null) }} style={{ width:34, height:34, borderRadius:50, background:'#F3F4F6', border:'none', cursor:'pointer', display: isDesktop ? 'none' : 'flex', alignItems:'center', justifyContent:'center', fontSize:16, flexShrink:0 }}>
+            <button onClick={()=>{ setShowPicker(true); setActiveFilter(null); setEditMode(false); setSelected(null) }} style={{ width:34, height:34, borderRadius:50, background:'#F3F4F6', border:'none', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16, flexShrink:0 }}>
               ☰
             </button>
 
@@ -790,7 +779,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
       <div style={{ flex:1, minHeight:0, position:'relative' }}>
 
         {/* Quick filter bar */}
-        {(!showPicker || isDesktop) && !navDest && !activeRoute && (
+        {!showPicker && !navDest && !activeRoute && (
           <div style={{
             position:'absolute', top:8, left:0, right:0, zIndex:10,
             display:'flex', overflowX:'auto', gap:6, padding:'0 10px',
@@ -851,7 +840,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
             </AdvancedMarker>
           )}
 
-          {(!showPicker || isDesktop) && visible.map(pin => {
+          {!showPicker && visible.map(pin => {
             const destId = navDest?.id ?? activeRoute?.destination?.id
             const shouldShow = destId ? destId === pin.id : true
             if (!shouldShow) return null
@@ -907,7 +896,7 @@ function MapContent({ lang, pins, setPins, theme, onNav, focusPin, onFocusClear 
         )}
 
         {/* ── Locate Me button ── */}
-        {userPos && (!showPicker || isDesktop) && (
+        {userPos && !showPicker && (
           <button
             onClick={() => locateMeRef.current?.()}
             aria-label="Locate me"
