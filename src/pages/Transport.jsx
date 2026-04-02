@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react'
 import { tr } from '../utils/i18n'
 import { FERRY_TIMES, TRAIN_TIMES, TOURIST_TRAIN_STOPS, CP_TRAINS, toMin, fmtEta } from '../data/transport'
 
+const LOCAL_BUSES = [
+  { id:1, op:'EVA / Rede Expressos', dest:{PT:'Faro (Aeroporto)',EN:'Faro (Airport)',ES:'Faro (Aeropuerto)'}, price:'€6', dur:'50min', color:'#1D4ED8', times:['07:30','09:15','11:00','13:30','15:45','17:30','19:00'] },
+  { id:2, op:'Frota Azul',           dest:{PT:'Tavira',EN:'Tavira',ES:'Tavira'},                             price:'€3', dur:'30min', color:'#059669', times:['08:00','10:30','12:00','14:30','16:00','18:30'] },
+  { id:3, op:'Local VRSA',           dest:{PT:'↔ Monte Gordo',EN:'↔ Monte Gordo',ES:'↔ Monte Gordo'},        price:'€1.50',dur:'15min',color:'#D97706', times:['08:30','09:30','10:30','11:30','13:00','14:30','16:00','17:30','19:00'] },
+  { id:4, op:'Local VRSA',           dest:{PT:'↔ Castro Marim',EN:'↔ Castro Marim',ES:'↔ Castro Marim'},     price:'€2', dur:'20min', color:'#7C3AED', times:['08:00','10:00','12:00','14:00','16:30','18:30'] },
+]
+
 const MODES = [
   { k:'ferry',  icon:'⛴️',  color:'#1D4ED8', bg:'#EFF6FF' },
   { k:'train',  icon:'🚂',  color:'#059669', bg:'#ECFDF5' },
@@ -258,6 +265,47 @@ export default function Transport({ lang }) {
                 )
               })}
             </div>
+
+            {/* Outros Autocarros Locais */}
+            <div className="sec-label" style={{ marginTop:24 }}>
+              {L==='EN'?'Other Local Buses':L==='ES'?'Otros Autobuses Locales':L==='FR'?'Autres Bus Locaux':L==='DE'?'Weitere Lokale Busse':'Outros Autocarros Locais'}
+            </div>
+            
+            {LOCAL_BUSES.map((line, li) => {
+              const nm2 = nm
+              return (
+                <div key={li} className="card card-sm" style={{ marginBottom:10 }}>
+                  <div style={{ padding:'13px 18px', display:'flex', alignItems:'center', gap:12 }}>
+                    <div style={{ width:10, height:10, borderRadius:'50%', background:line.color, flexShrink:0 }} />
+                    <div style={{ flex:1 }}>
+                      <div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>{line.op}</div>
+                      <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{line.dest[L]||line.dest.PT}</div>
+                    </div>
+                    <div style={{ textAlign:'right', marginRight:8 }}>
+                      <div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>{line.price}</div>
+                      <div style={{ fontSize:10, color:'var(--ink-20)', marginTop:1 }}>{line.dur}</div>
+                    </div>
+                  </div>
+                  <div style={{ padding:'4px 18px 14px', borderTop:'1px solid var(--surface)' }}>
+                    <div style={{ display:'flex', flexWrap:'wrap', gap:6, paddingTop:10 }}>
+                      {line.times.map((t2, i) => {
+                        const past   = toMin(t2) <= nm2
+                        const isNext = !past && line.times.find(x=>toMin(x)>nm2) === t2
+                        return (
+                          <span key={i} style={{
+                            padding:'5px 11px', borderRadius:8,
+                            fontVariantNumeric:'tabular-nums', fontSize:13, fontWeight:700,
+                            background: isNext?line.color : past?'var(--surface)':'var(--border-lt)',
+                            color: isNext?'#fff' : past?'var(--ink-20)':'var(--ink)',
+                          }}>{t2}</span>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+
           </div>
         )}
 

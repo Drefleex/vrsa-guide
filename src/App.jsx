@@ -300,7 +300,7 @@ export default function App() {
           {page === 'health'      && <Health      lang={lang} onNav={setPage} focusName={healthFocusName} onFocusClear={() => setHealthFocusName(null)} />}
           {page === 'transport'   && <Transport   lang={lang} onNav={setPage} />}
           {page === 'report'      && <Report      lang={lang} />}
-          {page === 'info'        && <Info        lang={lang} />}
+          {page === 'info'        && <Info        lang={lang} onNav={setPage} />}
           {page === 'admin'       && <Admin       lang={lang} onNav={setPage} onAlertChange={setMunicipalAlerts} />}
           {page === 'sobre'       && <Sobre       lang={lang} />}
           {page === 'sunsets'     && <Sunsets     lang={lang} onNav={setPage} />}

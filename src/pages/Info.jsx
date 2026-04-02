@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { FERRY_TIMES, CP_TRAINS } from '../data/transport'
-
-const TRAINS = CP_TRAINS.map(t => ({ dep: t.dep, arr: t.faro }))
-
-const BUSES = [
-  { id:1, op:'EVA / Rede Expressos', dest:{PT:'Faro (Aeroporto)',EN:'Faro (Airport)',ES:'Faro (Aeropuerto)'}, price:'€6', dur:'50min', color:'#1D4ED8', times:['07:30','09:15','11:00','13:30','15:45','17:30','19:00'] },
-  { id:2, op:'Frota Azul',           dest:{PT:'Tavira',EN:'Tavira',ES:'Tavira'},                             price:'€3', dur:'30min', color:'#059669', times:['08:00','10:30','12:00','14:30','16:00','18:30'] },
-  { id:3, op:'Local VRSA',           dest:{PT:'↔ Monte Gordo',EN:'↔ Monte Gordo',ES:'↔ Monte Gordo'},        price:'€1.50',dur:'15min',color:'#D97706', times:['08:30','09:30','10:30','11:30','13:00','14:30','16:00','17:30','19:00'] },
-  { id:4, op:'Local VRSA',           dest:{PT:'↔ Castro Marim',EN:'↔ Castro Marim',ES:'↔ Castro Marim'},     price:'€2', dur:'20min', color:'#7C3AED', times:['08:00','10:00','12:00','14:00','16:30','18:30'] },
-]
+import { FERRY_TIMES, toMin, fmtEta } from '../data/transport'
 
 const EMERGENCY = [
   { e:'🚨', num:'112',               label:{PT:'Emergência Geral',EN:'General Emergency',ES:'Emergencia General'}, big:true },
@@ -70,11 +61,10 @@ function InfoBanner({ icon, children, color='#1D4ED8' }) {
 }
 
 // ─── Main ─────────────────────────────────────────────────────
-export default function Info({ lang }) {
+export default function Info({ lang, onNav }) {
   const [tab, setTab]     = useState('weather')
   const [wx, setWx]       = useState(null)
   const [wxLoading, setWxLoading] = useState(false)
-  const [busOpen, setBusOpen] = useState(null)
   const [_tick, setTick]  = useState(0)
 
   const L = lang || 'PT'
@@ -105,13 +95,9 @@ export default function Info({ lang }) {
 
   const nm = nowMin()
   const ferryNext = FERRY_TIMES.find(f => toMin(f) > nm) || null
-  const trainNext = TRAINS.find(f => toMin(f.dep) > nm) || null
 
   const TABS = [
     { k:'weather', icon:'🌤️', label:t.weather },
-    { k:'ferry',   icon:'⛴️', label:t.ferry   },
-    { k:'train',   icon:'🚂', label:t.train   },
-    { k:'bus',     icon:'🚌', label:t.bus     },
     { k:'sea',     icon:'🏖️', label:t.sea     },
     { k:'sos',     icon:'🚨', label:t.sos     },
   ]
@@ -152,7 +138,7 @@ export default function Info({ lang }) {
           </div>
 
           {/* Ferry tile */}
-          <div className={`info-tile${ferryNext?' next-up':''}`} onClick={()=>setTab('ferry')}>
+          <div className={`info-tile${ferryNext?' next-up':''}`} onClick={()=>onNav('transport')}>
             <div className="info-tile-label">⛴️ Ferry</div>
             {ferryNext ? (
               <>
@@ -396,172 +382,7 @@ export default function Info({ lang }) {
           </div>
         )}
 
-        {/* ══════════ FERRY ══════════ */}
-        {tab === 'ferry' && (
-          <div>
-            <InfoBanner icon="ℹ️" color="#1D4ED8">
-              {t.ferryInfo} — {t.ferryReturn}
-            </InfoBanner>
 
-            <InfoCard>
-              {/* Header */}
-              <div style={{ padding:'14px 18px 12px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:12 }}>
-                <div style={{ width:38, height:38, borderRadius:10, background:'#EFF6FF', display:'flex', alignItems:'center', justifyContent:'center', fontSize:20, flexShrink:0 }}>⛴️</div>
-                <div>
-                  <div style={{ fontSize:14, fontWeight:800, color:'var(--ink)' }}>VRSA → Ayamonte</div>
-                  <div style={{ fontSize:11, color:'var(--ink-20)', marginTop:1 }}>Cais de Embarque Transguadiana</div>
-                </div>
-                <a
-                  href="https://maps.google.com/?q=37.1973,-7.4131"
-                 
-                  rel="noopener noreferrer"
-                  style={{ marginLeft:'auto', background:'var(--blue-lt)', color:'var(--blue)', border:'none', borderRadius:8, padding:'5px 10px', fontSize:11, fontWeight:700, cursor:'pointer', textDecoration:'none' }}
-                >
-                  📍 Mapa
-                </a>
-              </div>
-
-              {/* Schedule */}
-              {FERRY_TIMES.map((f, i) => {
-                const past   = toMin(f) <= nm
-                const isNext = f === ferryNext
-                const e      = fmtEta(f)
-                return (
-                  <SchedRow
-                    key={i}
-                    time={f}
-                    sub="VRSA → Ayamonte (15 min)"
-                    past={past}
-                    isNext={isNext}
-                    eta={e}
-                  />
-                )
-              })}
-
-              {/* Footer note */}
-              <div style={{ padding:'10px 18px', background:'var(--gold-lt)', borderTop:'1px solid #FDE68A', display:'flex', alignItems:'center', gap:8 }}>
-                <span>💡</span>
-                <span style={{ fontSize:11, color:'#92400E', fontWeight:600 }}>{t.ferryReturn}</span>
-              </div>
-            </InfoCard>
-          </div>
-        )}
-
-        {/* ══════════ TRAIN ══════════ */}
-        {tab === 'train' && (
-          <div>
-            <InfoBanner icon="🎫" color="#059669">{t.trainInfo}</InfoBanner>
-
-            <InfoCard>
-              <div style={{ padding:'14px 18px 12px', borderBottom:'1px solid var(--surface)', display:'flex', alignItems:'center', gap:12 }}>
-                <div style={{ width:38, height:38, borderRadius:10, background:'var(--mint-lt)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:20, flexShrink:0 }}>🚂</div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontSize:14, fontWeight:800, color:'var(--ink)' }}>VRSA → Faro</div>
-                  <div style={{ fontSize:11, color:'var(--ink-20)', marginTop:1 }}>Via Monte Gordo · Tavira · Olhão</div>
-                </div>
-                <a
-                  href="https://www.cp.pt"
-                 
-                  rel="noopener noreferrer"
-                  style={{ background:'var(--mint-lt)', color:'var(--mint)', border:'none', borderRadius:8, padding:'5px 10px', fontSize:11, fontWeight:700, cursor:'pointer', textDecoration:'none' }}
-                >
-                  cp.pt
-                </a>
-              </div>
-
-              {TRAINS.map((tr, i) => {
-                const past   = toMin(tr.dep) <= nm
-                const isNext = tr === trainNext
-                return (
-                  <SchedRow
-                    key={i}
-                    time={tr.dep}
-                    sub={`${t.arrive} Faro ${tr.arr}`}
-                    past={past}
-                    isNext={isNext}
-                    eta={fmtEta(tr.dep)}
-                  />
-                )
-              })}
-            </InfoCard>
-
-            {/* Tourist train */}
-            <div style={{ background:'var(--mint-lt)', border:'1px solid #A7F3D0', borderRadius:20, padding:'16px 18px' }}>
-              <div style={{ fontSize:13, fontWeight:800, color:'#065F46', marginBottom:6 }}>{t.touristTrain}</div>
-              <div style={{ fontSize:11, color:'#059669', marginBottom:12 }}>{t.touristNote}</div>
-              <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
-                {['10:00','12:00','15:00','17:00','19:00'].map((t2,i)=>(
-                  <span key={i} style={{ background:'#059669', color:'#fff', fontSize:12, fontWeight:800, padding:'5px 12px', borderRadius:8, fontVariantNumeric:'tabular-nums' }}>{t2}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ══════════ BUS ══════════ */}
-        {tab === 'bus' && (
-          <div>
-            <InfoBanner icon="ℹ️" color="#1D4ED8">{t.busInfo}</InfoBanner>
-
-            {/* Taxi shortcut */}
-            <a href="tel:+351963847520" style={{ textDecoration:'none', display:'block', marginBottom:12 }}>
-              <div className="card card-sm" style={{ padding:'14px 18px', display:'flex', alignItems:'center', gap:14, background:'var(--gold-lt)', border:'1px solid #FDE68A' }}>
-                <div style={{ width:44, height:44, borderRadius:12, background:'#FEF3C7', display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, flexShrink:0 }}>🚖</div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>{L==='EN'?'Taxi Pinho':L==='DE'?'Taxi Pinho':'Táxi Pinho'} — {t.taxiAvail}</div>
-                  <div style={{ fontSize:13, color:'#1D4ED8', fontWeight:700, marginTop:2 }}>+351 963 847 520</div>
-                </div>
-                <span style={{ fontSize:22 }}>📞</span>
-              </div>
-            </a>
-
-            {/* Bus lines */}
-            {BUSES.map((line, li) => {
-              const isOpen = busOpen === li
-              const nm2    = nm
-              return (
-                <div key={li} className="card card-sm" style={{ marginBottom:10 }}>
-                  {/* Header row */}
-                  <div
-                    onClick={() => setBusOpen(isOpen ? null : li)}
-                    style={{ padding:'13px 18px', display:'flex', alignItems:'center', gap:12, cursor:'pointer' }}
-                  >
-                    <div style={{ width:10, height:10, borderRadius:'50%', background:line.color, flexShrink:0 }} />
-                    <div style={{ flex:1 }}>
-                      <div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>{line.op}</div>
-                      <div style={{ fontSize:11, color:'var(--ink-40)', marginTop:1 }}>{line.dest[L]}</div>
-                    </div>
-                    <div style={{ textAlign:'right', marginRight:8 }}>
-                      <div style={{ fontSize:13, fontWeight:800, color:'var(--ink)' }}>{line.price}</div>
-                      <div style={{ fontSize:10, color:'var(--ink-20)', marginTop:1 }}>{line.dur}</div>
-                    </div>
-                    <span style={{ color:'var(--ink-20)', fontSize:14, transform:isOpen?'rotate(90deg)':'none', transition:'transform .2s' }}>›</span>
-                  </div>
-
-                  {/* Expanded times */}
-                  {isOpen && (
-                    <div style={{ padding:'4px 18px 14px', borderTop:'1px solid var(--surface)' }}>
-                      <div style={{ display:'flex', flexWrap:'wrap', gap:6, paddingTop:10 }}>
-                        {line.times.map((t2, i) => {
-                          const past   = toMin(t2) <= nm2
-                          const isNext = !past && line.times.find(x=>toMin(x)>nm2) === t2
-                          return (
-                            <span key={i} style={{
-                              padding:'5px 11px', borderRadius:8,
-                              fontVariantNumeric:'tabular-nums', fontSize:13, fontWeight:700,
-                              background: isNext?line.color : past?'var(--surface)':'var(--border-lt)',
-                              color: isNext?'#fff' : past?'var(--ink-20)':'var(--ink)',
-                            }}>{t2}</span>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        )}
 
         {/* ══════════ SEA / BEACHES ══════════ */}
         {tab === 'sea' && (
