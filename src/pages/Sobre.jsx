@@ -47,7 +47,7 @@ export default function Sobre({ lang }) {
       contactTitle: 'Contacto',
       contactDesc: 'Para discussão de parceria ou demonstração ao vivo:',
       builtBy: 'Desenvolvido como iniciativa independente de valorização digital de VRSA',
-      version: 'Versão 1.0 · Março 2026',
+      version: 'Versão 1.1 (iOS PWA Fixes) · Abril 2026',
     },
     EN: {
       hero:       'Digital Tourism Guide',
@@ -86,7 +86,7 @@ export default function Sobre({ lang }) {
       contactTitle: 'Contact',
       contactDesc: 'For partnership discussion or live demo:',
       builtBy: 'Developed as an independent initiative to digitally promote VRSA',
-      version: 'Version 1.0 · March 2026',
+      version: 'Version 1.1 (iOS PWA Fixes) · April 2026',
     },
     ES: {
       hero:       'Guía Turística Digital',
@@ -125,7 +125,7 @@ export default function Sobre({ lang }) {
       contactTitle: 'Contacto',
       contactDesc: 'Para discusión de colaboración o demostración en vivo:',
       builtBy: 'Desarrollado como iniciativa independiente de promoción digital de VRSA',
-      version: 'Versión 1.0 · Marzo 2026',
+      version: 'Versión 1.1 (iOS PWA Fixes) · Abril 2026',
     },
   }
 
