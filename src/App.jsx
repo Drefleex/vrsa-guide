@@ -4,6 +4,7 @@ import BottomNav    from './components/BottomNav'
 import TopBar      from './components/TopBar'
 import SplashScreen from './components/SplashScreen'
 import WelcomeModal    from './components/WelcomeModal'
+import MapErrorBoundary from './components/MapErrorBoundary'
 import InstallBanner  from './components/InstallBanner'
 import { trackEvent } from './pages/Analytics'
 import './App.css'
@@ -278,7 +279,7 @@ export default function App() {
       <Suspense fallback={<div style={{ flex:1, background:'var(--bg)' }} />}>
         <div style={{ flex:1, minHeight:0, position:'relative', overflow:'hidden' }} onTouchStart={onSwipeStart} onTouchEnd={onSwipeEnd}>
           {page === 'home'        && <Home        {...cp} pins={pins} loading={loading} theme={theme} toggleTheme={toggleTheme} municipalAlerts={municipalAlerts} />}
-          {page === 'map'         && <Map         lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={setPage} focusPin={mapFocusPin} onFocusClear={() => setMapFocusPin(null)} />}
+          {page === 'map'         && <MapErrorBoundary lang={lang}><Map lang={lang} pins={pins} setPins={setPins} theme={theme} onNav={setPage} focusPin={mapFocusPin} onFocusClear={() => setMapFocusPin(null)} /></MapErrorBoundary>}
           {page === 'restaurants' && <Restaurants {...cp} pins={pins} focusPin={restaurantFocusPin} onFocusClear={() => setRestaurantFocusPin(null)} />}
           {page === 'events'      && <Events      {...cp} sheetEvents={sheetEvents} />}
           {page === 'beaches'     && <Beaches     {...cp} focusName={beachFocusName} onFocusClear={() => setBeachFocusName(null)} />}

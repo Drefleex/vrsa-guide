@@ -98,7 +98,6 @@ const QA = [
 ]
 
 const GALLERY = [
-  { url:'/images/marina_guadiana.webp',                   cap:'Marina do Guadiana' },
   { url:'/images/praa_marques_de_pombal.webp',            cap:'Praça Marquês de Pombal' },
   { url:'/images/praia_vila_real_santo_antonio.webp',     cap:'Praia de VRSA' },
   { url:'/images/farolvrsa.webp',                         cap:'Farol de VRSA' },
@@ -110,7 +109,6 @@ const GALLERY = [
   { url:'/images/castelo_castro_marim.webp',              cap:'Castelo de Castro Marim' },
   { url:'/images/sapal.webp',                             cap:'Sapal de Castro Marim' },
   { url:'/images/caminha_dos_3_pauzinhos.webp',           cap:'Caminho dos 3 Pauzinhos' },
-  { url:'/images/marina_guadiana2.webp',                  cap:'Marina · Rio Guadiana' },
   { url:'/images/estatua_marques_pombal.webp',            cap:'Estátua Marquês de Pombal' },
   { url:'/images/camara_municipal.webp',                  cap:'Câmara Municipal de VRSA' },
   { url:'/images/praia_do_cabeo.webp',                    cap:'Praia do Cabeço' },
