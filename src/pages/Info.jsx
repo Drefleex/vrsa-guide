@@ -20,9 +20,7 @@ const PRACTICAL = [
 ]
 
 // ─── Helpers ─────────────────────────────────────────────────
-const toMin = t => { const [h,m]=t.split(':').map(Number); return h*60+m }
 const nowMin = () => { const n=new Date(); return n.getHours()*60+n.getMinutes() }
-const fmtEta = t => { const d=toMin(t)-nowMin(); if(d<=0)return null; return d<60?`${d}min`:`${Math.floor(d/60)}h${d%60?` ${d%60}min`:''}` }
 const wIcon = c => c===0?'☀️':c<=3?'⛅':c<=48?'🌫️':c<=67?'🌧️':c<=82?'🌦️':'⛈️'
 const wDesc = (c,l) => {
   const m = {
