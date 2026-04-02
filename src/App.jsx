@@ -212,24 +212,24 @@ export default function App() {
   }, [])
 
   // Fix iOS PWA blank screen ao voltar de link externo
-  // O iOS mata o processo WebKit do PWA instalado quando vai para background.
-  // Repaint não chega — é preciso reload. Só recarrega se esteve em background
-  // mais de 20s para não interromper ausências curtas (notificações, etc).
+  // O iOS mata o processo WebKit em <5s quando o PWA vai para background.
+  // Threshold: 4s — ignora pull da central de notificações (~1-2s)
+  //             mas apanha qualquer abertura real de link externo.
+  // Um único handler partilha o mesmo hiddenAt sem ambiguidades de ordem.
   useEffect(() => {
     if (!navigator.standalone) return // só afecta PWA instalado no iOS
     let hiddenAt = 0
-    const onHide = () => { if (document.visibilityState === 'hidden') hiddenAt = Date.now() }
-    const onShow = () => {
-      if (document.visibilityState === 'visible' && hiddenAt && Date.now() - hiddenAt > 20_000) {
-        window.location.reload()
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') {
+        hiddenAt = Date.now()
+      } else if (document.visibilityState === 'visible' && hiddenAt > 0) {
+        const elapsed = Date.now() - hiddenAt
+        hiddenAt = 0
+        if (elapsed > 4_000) window.location.reload() // 4s threshold
       }
     }
-    document.addEventListener('visibilitychange', onHide)
-    document.addEventListener('visibilitychange', onShow)
-    return () => {
-      document.removeEventListener('visibilitychange', onHide)
-      document.removeEventListener('visibilitychange', onShow)
-    }
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => document.removeEventListener('visibilitychange', handleVisibility)
   }, [])
 
   // Persist favs
